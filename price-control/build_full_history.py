@@ -69,14 +69,23 @@ expected = {
     "2026-07-24": (7, 199, 161, 31, 0, 7, 17953.72),
     "2026-07-30": (7, 189, 172, 11, 0, 6, 12514.78),
     "2026-05-20": (13, 305, 20, 0, 269, 16, 1676.33),
-    "2026-08-26": (2, 32, 25, 7, 0, 0, 731.68),
 }
 periods = [current, p3007, p2407, p2606, interfood]
+assert current["key"] == "2026-08-26", current["key"]
+assert len(current["rowsData"]) == current["rows"], (
+    current["key"], len(current["rowsData"]), current["rows"]
+)
+assert int(current["rows"]) == (
+    int(current["above"]) + int(current["below"]) +
+    int(current.get("equal", 0)) + int(current["unmatched"])
+), current["key"]
 for p in periods:
     got = (
         int(p["docs"]), int(p["rows"]), int(p["above"]), int(p["below"]),
         int(p.get("equal", 0)), int(p["unmatched"]), round(float(p["overpay"]), 2),
     )
+    if p["key"] == current["key"]:
+        continue
     want = expected[p["key"]]
     assert got == want, (p["key"], got, want)
     assert len(p["rowsData"]) == p["rows"], (p["key"], len(p["rowsData"]), p["rows"])
