@@ -79,6 +79,9 @@ h1{margin:0;font-size:24px;line-height:1.1}
   gap:10px;
   margin:12px 0;
 }
+.kpis.has-invoice{grid-template-columns:repeat(7,1fr)}
+.invoice-kpi{display:none}
+.kpis.has-invoice .invoice-kpi{display:block}
 .card{
   background:linear-gradient(180deg,#111d2b,#0d1825);
   border:1px solid var(--line2);
@@ -175,7 +178,7 @@ tbody tr:hover{background:#ffffff05}
   .actions{width:100%}
   .filters{overflow-x:auto;flex-wrap:nowrap;width:100%}
   .filters input{min-width:180px}
-  .kpis{grid-template-columns:repeat(2,1fr)}
+  .kpis,.kpis.has-invoice{grid-template-columns:repeat(2,1fr)}
   .index-grid{grid-template-columns:1fr}
   .table-wrap{max-height:480px}
 }
@@ -214,6 +217,7 @@ tbody tr:hover{background:#ffffff05}
     <div class="card kpi"><div class="label">Ниже прайса</div><div class="value green" id="belowKpi">0</div></div>
     <div class="card kpi"><div class="label">Не сопоставлено</div><div class="value amber" id="unmatchedKpi">0</div></div>
     <div class="card kpi"><div class="label">Переплата по красным</div><div class="value red" id="overpayKpi">0 ₽</div></div>
+    <div class="card kpi invoice-kpi" id="invoiceOverpayCard"><div class="label" id="invoiceOverpayLabel">Переплата по накладной</div><div class="value red" id="invoiceOverpayKpi">—</div></div>
   </div>
 
   <section class="card table-card">
@@ -297,6 +301,25 @@ tbody tr:hover{background:#ffffff05}
     if(vals.includes(prev))sel.value=prev;
   }
 
+  function renderInvoiceOverpay(w){
+    const inv=id('invoiceFilter').value;
+    const kpis=document.querySelector('.kpis');
+    if(!inv){
+      kpis.classList.remove('has-invoice');
+      id('invoiceOverpayLabel').textContent='Переплата по накладной';
+      id('invoiceOverpayKpi').textContent='—';
+      return;
+    }
+    let total=0;
+    for(const r of (w.rowsData||[])){
+      if(r[2]===inv&&r[9]==='ABOVE')total+=Number(r[8]||0);
+    }
+    total=Math.round((total+Number.EPSILON)*100)/100;
+    kpis.classList.add('has-invoice');
+    id('invoiceOverpayLabel').textContent='Переплата · '+inv;
+    id('invoiceOverpayKpi').textContent=money(total);
+  }
+
   function renderRows(){
     const w=period();if(!w)return;
     const inv=id('invoiceFilter').value,st=id('statusFilter').value,q=id('searchFilter').value.trim().toLowerCase();
@@ -306,6 +329,7 @@ tbody tr:hover{background:#ffffff05}
       '<td>'+fmt(r[3])+'</td><td>'+esc(r[4])+'</td><td>'+fmt(r[5])+'</td>'+
       '<td>'+fmt(r[6])+'</td><td>'+signed(r[7])+'</td><td>'+signed(r[8])+'</td><td>'+badge(r[9])+'</td></tr>').join('');
     id('shownCount').textContent='Показано: '+rows.length;
+    renderInvoiceOverpay(w);
   }
 
   function renderIndex(w){
