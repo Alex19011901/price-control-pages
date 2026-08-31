@@ -265,6 +265,7 @@ tbody tr:hover{background:#ffffff05}
   const WORKFLOW='price-control-public.yml';
   const REF='main';
   const API='https://api.github.com/repos/'+OWNER+'/'+REPO;
+  const TOKEN_PLACEHOLDER='__PUBLIC_'+'REFRESH_TOKEN__';
   const TIMEOUT_MS=20*60*1000;
   let model=null,currentKey='',inFlight=false;
 
@@ -373,7 +374,7 @@ tbody tr:hover{background:#ffffff05}
   }
   function sleep(ms){return new Promise(r=>setTimeout(r,ms))}
   async function gh(path,options){
-    if(!PUBLIC_REFRESH_TOKEN||PUBLIC_REFRESH_TOKEN==='__PUBLIC_REFRESH_TOKEN__'){
+    if(!PUBLIC_REFRESH_TOKEN||PUBLIC_REFRESH_TOKEN===TOKEN_PLACEHOLDER){
       const e=new Error('refresh_token_missing');e.code='refresh_token_missing';throw e;
     }
     options=options||{};
