@@ -259,8 +259,14 @@ tbody tr:hover{background:#ffffff05}
 <script>
 (function(){
   const FULL_URL='https://alex19011901.github.io/price-control-pages/full.json';
-  const TRIGGER='https://alex19011901.github.io/price-control-pages/price-control-trigger.html';
-  let model=null,currentKey='',inFlight=false,triggerWindow=null;
+  const PUBLIC_REFRESH_TOKEN='__PUBLIC_REFRESH_TOKEN__';
+  const OWNER='Alex19011901';
+  const REPO='price-control-pages';
+  const WORKFLOW='price-control-public.yml';
+  const REF='main';
+  const API='https://api.github.com/repos/'+OWNER+'/'+REPO;
+  const TIMEOUT_MS=20*60*1000;
+  let model=null,currentKey='',inFlight=false;
 
   function id(x){return document.getElementById(x)}
   function esc(v){return String(v==null?'':v).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
@@ -345,54 +351,145 @@ tbody tr:hover{background:#ffffff05}
   }
 
   async function loadFull(){
-    const r=await fetch(FULL_URL+'?cb='+Date.now(),{cache:'no-store'});
-    if(!r.ok)throw new Error('load_'+r.status);
-    return r.json();
+    try{
+      const r=await fetch(FULL_URL+'?cb='+Date.now(),{cache:'no-store'});
+      if(!r.ok){
+        const e=new Error('load_'+r.status);
+        e.code='load_failed';
+        e.status=r.status;
+        throw e;
+      }
+      return r.json();
+    }catch(e){
+      if(e&&e.code)throw e;
+      const err=new Error('network');
+      err.code='network';
+      throw err;
+    }
   }
   async function load(){
     model=await loadFull();
     populatePeriods();render();
   }
+  function sleep(ms){return new Promise(r=>setTimeout(r,ms))}
+  async function gh(path,options){
+    if(!PUBLIC_REFRESH_TOKEN||PUBLIC_REFRESH_TOKEN==='__PUBLIC_REFRESH_TOKEN__'){
+      const e=new Error('refresh_token_missing');e.code='refresh_token_missing';throw e;
+    }
+    options=options||{};
+    options.headers=Object.assign({
+      'Authorization':'Bearer '+PUBLIC_REFRESH_TOKEN,
+      'Accept':'application/vnd.github+json',
+      'X-GitHub-Api-Version':'2022-11-28'
+    },options.headers||{});
+    options.cache='no-store';
+    let r;
+    try{
+      r=await fetch(API+path,options);
+    }catch(e){
+      const err=new Error('network');err.code='network';throw err;
+    }
+    if(!r.ok){
+      const e=new Error('github_'+r.status);
+      e.code='github';
+      e.status=r.status;
+      throw e;
+    }
+    return r.status===204?null:r.json();
+  }
+  async function workflowRuns(){
+    const d=await gh('/actions/workflows/'+encodeURIComponent(WORKFLOW)+'/runs?branch='+encodeURIComponent(REF)+'&event=workflow_dispatch&per_page=20&cb='+Date.now());
+    return d.workflow_runs||[];
+  }
+  async function waitForNewRun(beforeIds,deadline){
+    setState('Подготовка…');
+    while(Date.now()<deadline){
+      const run=(await workflowRuns()).find(r=>!beforeIds.has(String(r.id)));
+      if(run)return run;
+      await sleep(3000);
+    }
+    const e=new Error('workflow_timeout');e.code='workflow_timeout';throw e;
+  }
+  async function waitForWorkflow(runId,deadline){
+    while(Date.now()<deadline){
+      const run=await gh('/actions/runs/'+encodeURIComponent(runId)+'?cb='+Date.now());
+      if(run.status==='queued'||run.status==='requested'||run.status==='waiting'||run.status==='pending'){
+        setState('Подготовка…');
+      }else if(run.status==='in_progress'){
+        setState('Получение данных из DocsInBox…');
+      }
+      if(run.status==='completed'){
+        if(run.conclusion==='success')return run;
+        const e=new Error(run.conclusion||'failure');
+        e.code='workflow_conclusion';
+        e.conclusion=run.conclusion||'failure';
+        throw e;
+      }
+      await sleep(5000);
+    }
+    const e=new Error('workflow_timeout');e.code='workflow_timeout';throw e;
+  }
+  async function waitForFreshFull(beforeGeneratedAt,deadline){
+    let lastLoadError=null;
+    while(Date.now()<deadline){
+      let fresh;
+      try{
+        fresh=await loadFull();
+      }catch(e){
+        lastLoadError=e;
+        await sleep(3000);
+        continue;
+      }
+      lastLoadError=null;
+      const generatedAt=String(fresh.generatedAt||'');
+      if(generatedAt&&generatedAt!==beforeGeneratedAt)return fresh;
+      await sleep(3000);
+    }
+    if(lastLoadError&&lastLoadError.code==='load_failed')throw lastLoadError;
+    const e=new Error('data_not_updated');e.code='data_not_updated';throw e;
+  }
+  function errorText(e){
+    if(e&&e.status===403)return 'Ошибка обновления: нет доступа к GitHub (403)';
+    if(e&&e.status===401)return 'Ошибка обновления: ошибка авторизации GitHub (401)';
+    if(e&&e.code==='workflow_timeout')return 'Ошибка обновления: превышено время ожидания';
+    if(e&&e.code==='workflow_conclusion'&&e.conclusion==='cancelled')return 'Ошибка обновления: обновление отменено';
+    if(e&&e.code==='workflow_conclusion')return 'Ошибка обновления: обработка данных завершилась с ошибкой';
+    if(e&&e.code==='data_not_updated')return 'Ошибка обновления: новые данные не появились';
+    if(e&&e.code==='load_failed')return 'Ошибка обновления: не удалось загрузить новые данные';
+    if(e&&e.code==='network')return 'Ошибка обновления: ошибка соединения';
+    return 'Ошибка обновления: '+String(e&&e.message||e||'неизвестная ошибка');
+  }
 
   function setState(s,error){id('refreshState').textContent=s||'';id('refreshState').style.color=error?'#b42318':'#667085'}
   function finish(s,error){
     inFlight=false;id('refreshBtn').disabled=false;id('refreshBtn').textContent='Обновить данные';setState(s,error);
-    if(triggerWindow && !triggerWindow.closed){try{triggerWindow.close()}catch(e){}}triggerWindow=null
   }
-  function refresh(){
+  async function refresh(){
     if(inFlight)return;
-    inFlight=true;id('refreshBtn').disabled=true;id('refreshBtn').textContent='Обновление…';setState('Подготовка…');
-    triggerWindow=window.open(
-      TRIGGER+'?popup=1&cb='+Date.now(),
-      'priceControlRefresh',
-      'popup=yes,width=420,height=260'
-    );
-    if(!triggerWindow){
-      finish('Разрешите всплывающее окно',true);
+    inFlight=true;id('refreshBtn').disabled=true;id('refreshBtn').textContent='Обновление…';setState('Запуск обновления…');
+    const deadline=Date.now()+TIMEOUT_MS;
+    const beforeGeneratedAt=String(model&&model.generatedAt||'');
+    try{
+      const beforeIds=new Set((await workflowRuns()).map(r=>String(r.id)));
+      await gh('/actions/workflows/'+encodeURIComponent(WORKFLOW)+'/dispatches',{
+        method:'POST',
+        headers:{'Content-Type':'application/json'},
+        body:JSON.stringify({ref:REF})
+      });
+      setState('Подготовка…');
+      const run=await waitForNewRun(beforeIds,deadline);
+      await waitForWorkflow(run.id,deadline);
+      setState('Сохранение новых данных…');
+      model=await waitForFreshFull(beforeGeneratedAt,deadline);
+      currentKey=model.currentKey||((model.periods||[])[0]||{}).key||'';
+      populatePeriods();id('weekFilter').value=currentKey;render();
+      const ts=new Date(model.generatedAt||Date.now()).toLocaleTimeString('ru-RU',{timeZone:'Europe/Moscow',hour:'2-digit',minute:'2-digit'});
+      finish('Обновлено '+ts,false);
+      document.body.dataset.lastAppliedGeneratedAt=String(model.generatedAt||'');
+    }catch(e){
+      finish(errorText(e),true);
     }
   }
-
-  window.addEventListener('message',e=>{
-    const d=e.data||{};if(d.source!=='price-control-refresh')return;
-    if(d.status==='dispatched'){setState('Workflow запущен…');return}
-    if(d.status==='running'){setState('Workflow выполняется…');return}
-    if(d.status==='saving'){setState('Загрузка новых данных…');return}
-    if(d.status==='completed'){
-      if(!d.payload||!d.payload.week||!model){finish('Ошибка данных',true);return}
-      const w=d.payload.week;
-      const i=model.periods.findIndex(p=>p.key===w.key);
-      if(i>=0)model.periods[i]=w;else model.periods.unshift(w);
-      model.generatedAt=d.payload.generatedAt||model.generatedAt;
-      model.currentKey=w.key;
-      currentKey=w.key;
-      populatePeriods();id('weekFilter').value=currentKey;render();
-      const ts=new Date(d.payload.generatedAt||Date.now()).toLocaleTimeString('ru-RU',{timeZone:'Europe/Moscow',hour:'2-digit',minute:'2-digit'});
-      finish('Обновлено '+ts,false);
-      document.body.dataset.lastAppliedGeneratedAt=String(d.payload.generatedAt||'');
-      return;
-    }
-    if(d.status==='error')finish('Ошибка обновления',true);
-  });
 
   id('weekFilter').addEventListener('change',function(){currentKey=this.value;id('invoiceFilter').value='';id('statusFilter').value='';id('searchFilter').value='';render()});
   id('invoiceFilter').addEventListener('change',renderRows);
