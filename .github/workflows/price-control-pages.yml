@@ -8,6 +8,11 @@ on:
       - "price-control/trigger.html"
       - "price-control/current.json"
       - "price-control/full.json"
+  workflow_run:
+    workflows:
+      - Price Control Public Refresh
+    types:
+      - completed
   workflow_dispatch:
 
 permissions:
@@ -21,6 +26,7 @@ concurrency:
 
 jobs:
   deploy:
+    if: github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success'
     runs-on: ubuntu-latest
     environment:
       name: github-pages
