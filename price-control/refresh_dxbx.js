@@ -9,9 +9,7 @@ const PRICE_FILE = path.join(ROOT, 'price_20260902.json');
 const SUPPLIER = 'парадис экзотика';
 const WEEK_KEY = '2026-09-03';
 const START_ISO = '2026-09-03';
-const END_ISO = '2026-09-09';
 const START_RU = '03.09.2026';
-const END_RU = '09.09.2026';
 
 function round2(v) {
   if (!Number.isFinite(v)) return null;
@@ -77,7 +75,7 @@ function buildPriceMap(priceDoc) {
   const page = await context.newPage();
   await page.goto('https://dxbx.ru/fe/supplies?offset=0', { waitUntil: 'domcontentloaded', timeout: 60000 });
 
-  const selection = await page.evaluate(async ({supplierNeedle, startIso, endIso}) => {
+  const selection = await page.evaluate(async ({supplierNeedle, startIso}) => {
     const ruToIso = s => {
       const m = String(s || '').match(/^(\d{2})\.(\d{2})\.(\d{4})$/);
       return m ? `${m[3]}-${m[2]}-${m[1]}` : '';
@@ -100,7 +98,7 @@ function buildPriceMap(priceDoc) {
     const selected = all
       .filter(s => {
         const iso = ruToIso(s.date);
-        return iso >= startIso && iso <= endIso &&
+        return iso >= startIso &&
           String(s.supplier?.name || '').toLowerCase().includes(supplierNeedle);
       })
       .map(s => ({
@@ -113,7 +111,7 @@ function buildPriceMap(priceDoc) {
       sample: all.slice(0, 5).map(s => ({ date: s.date, supplier: s.supplier?.name || '', invoices: (s.invoices || []).length })),
       selected
     };
-  }, {supplierNeedle: SUPPLIER, startIso: START_ISO, endIso: END_ISO});
+  }, {supplierNeedle: SUPPLIER, startIso: START_ISO});
 
   const selected = selection.selected || [];
   const docs = [];
@@ -233,10 +231,10 @@ function buildPriceMap(priceDoc) {
     generatedAt: new Date().toISOString(),
     week: {
       key: WEEK_KEY,
-      label: 'Прайс 03.09 → 09.09',
+      label: 'Прайс с 03.09',
       supplier: 'Парадис Экзотика',
       start: START_RU,
-      end: END_RU,
+      end: null,
       docs: docs.length,
       rows: rowsData.length,
       above, below, equal, unmatched, overpay,
