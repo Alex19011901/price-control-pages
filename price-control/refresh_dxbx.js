@@ -1,18 +1,17 @@
 const { chromium } = require('playwright');
 const fs = require('fs');
 const path = require('path');
-const { execFileSync } = require('child_process');
 
 const ROOT = __dirname;
 const AUTH = process.env.DOCSINBOX_STORAGE_STATE;
 const OUT = process.argv[2] || path.join(ROOT, 'current.json');
-const PRICE_FILE = path.join(ROOT, 'price_20260826.json');
+const PRICE_FILE = path.join(ROOT, 'price_20260902.json');
 const SUPPLIER = 'парадис экзотика';
-const WEEK_KEY = '2026-08-26';
-const START_ISO = '2026-08-26';
-const END_ISO = '2026-09-01';
-const START_RU = '26.08.2026';
-const END_RU = '01.09.2026';
+const WEEK_KEY = '2026-09-03';
+const START_ISO = '2026-09-03';
+const END_ISO = '2026-09-09';
+const START_RU = '03.09.2026';
+const END_RU = '09.09.2026';
 
 function round2(v) {
   if (!Number.isFinite(v)) return null;
@@ -58,22 +57,19 @@ function buildPriceMap(priceDoc) {
 }
 
 (async () => {
+  const todayMoscow = new Date(Date.now() + 3 * 60 * 60 * 1000).toISOString().slice(0, 10);
+  if (todayMoscow < START_ISO) {
+    console.log(`PRICE_NOT_ACTIVE: new price starts ${START_ISO}; Moscow date is ${todayMoscow}`);
+    return;
+  }
+
   if (!AUTH) throw new Error('DOCSINBOX_AUTH_PATH_MISSING');
   if (!fs.existsSync(AUTH)) throw new Error('DOCSINBOX_AUTH_MISSING');
-  let priceDoc = JSON.parse(fs.readFileSync(PRICE_FILE, 'utf8'));
-  if (!Array.isArray(priceDoc.rows) || !priceDoc.rows.length) {
-    const partFiles = [
-      'price_bz2_part_01a.txt',
-      'price_bz2_part_01b.txt',
-      'price_bz2_part_02.txt',
-      'price_bz2_part_03.txt'
-    ];
-    const encoded = partFiles.map(name => fs.readFileSync(path.join(ROOT, name), 'utf8').trim()).join('');
-    const compressed = Buffer.from(encoded, 'base64');
-    const raw = execFileSync('bzip2', ['-dc'], { input: compressed, maxBuffer: 10 * 1024 * 1024 });
-    priceDoc = JSON.parse(raw.toString('utf8'));
-  }
+  const priceDoc = JSON.parse(fs.readFileSync(PRICE_FILE, 'utf8'));
   if (!Array.isArray(priceDoc.rows) || !priceDoc.rows.length) throw new Error('PRICE_PAYLOAD_EMPTY');
+  if (priceDoc.documentDate !== '02.09.2026' || priceDoc.validFrom !== '03.09.2026') {
+    throw new Error('PRICE_DATE_MISMATCH');
+  }
   const priceMap = buildPriceMap(priceDoc);
 
   const browser = await chromium.launch({ headless: true });
@@ -237,14 +233,14 @@ function buildPriceMap(priceDoc) {
     generatedAt: new Date().toISOString(),
     week: {
       key: WEEK_KEY,
-      label: 'Прайс 26.08 → 01.09',
+      label: 'Прайс 03.09 → 09.09',
       supplier: 'Парадис Экзотика',
       start: START_RU,
       end: END_RU,
       docs: docs.length,
       rows: rowsData.length,
       above, below, equal, unmatched, overpay,
-      priceDocumentDate: '26.08.2026',
+      priceDocumentDate: '02.09.2026',
       indexGroup: 'paradis',
       rowsData
     }
