@@ -1,7 +1,24 @@
 {
-  "generatedAt": "2026-09-02T18:27:27.707Z",
-  "currentKey": "2026-08-26",
+  "generatedAt": "2026-09-02T21:11:13.107Z",
+  "currentKey": "2026-09-03",
   "periods": [
+    {
+      "key": "2026-09-03",
+      "label": "Прайс с 03.09",
+      "supplier": "Парадис Экзотика",
+      "start": "03.09.2026",
+      "end": null,
+      "docs": 0,
+      "rows": 0,
+      "above": 0,
+      "below": 0,
+      "equal": 0,
+      "unmatched": 0,
+      "overpay": 0,
+      "priceDocumentDate": "02.09.2026",
+      "indexGroup": "paradis",
+      "rowsData": []
+    },
     {
       "key": "2026-08-26",
       "label": "Прайс 26.08 → 02.09",
@@ -12504,9 +12521,9 @@
           "value": 108.9
         }
       ],
-      "current": 108.9,
-      "prevChange": 7.6,
-      "periodChange": 8.9
+      "current": null,
+      "prevChange": null,
+      "periodChange": null
     },
     "interfood": {
       "supplier": "Интерфуд",
