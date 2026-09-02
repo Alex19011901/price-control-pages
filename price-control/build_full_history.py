@@ -43,6 +43,62 @@ def normalize_hist(src, *, key, label, start, end, price_date):
     return out
 
 
+
+def _norm(v):
+    import re
+    s = str(v or "").replace("\u00a0", " ").replace("ё", "е").lower()
+    s = re.sub(r"^[!/*+\\s]+", "", s)
+    s = re.sub(r"\\s+([,.;:])", r"\\1", s)
+    s = re.sub(r"\\s+", " ", s).strip()
+    return s
+
+
+def _core_name(display_name, unit):
+    import re
+    s = str(display_name or "").replace("\u00a0", " ")
+    s = re.sub(r"\\s+", " ", s).strip()
+    eu = re.escape(str(unit or ""))
+    if eu:
+        s = re.sub(r",\\s*" + eu + r"\\s*\\([^)]*\\)\\s*$", "", s, flags=re.I)
+        s = re.sub(r",\\s*" + eu + r"\\s*$", "", s, flags=re.I)
+    return s.strip()
+
+
+def _period_price_qty_map(period):
+    out = {}
+    for row in period.get("rowsData", []):
+        try:
+            price = float(row[5]) if row[5] is not None else None
+            qty = float(row[3]) if row[3] is not None else 0.0
+        except (TypeError, ValueError):
+            continue
+        if price is None or price <= 0 or qty <= 0:
+            continue
+        key = _norm(_core_name(row[0], row[4])) + "\\0" + _norm(row[4])
+        item = out.setdefault(key, {"price": price, "qty": 0.0})
+        if round(item["price"], 2) != round(price, 2):
+            continue
+        item["qty"] += qty
+    return out
+
+
+def _weighted_index_change(prev_period, curr_period):
+    prev = _period_price_qty_map(prev_period)
+    curr = _period_price_qty_map(curr_period)
+    num = den = 0.0
+    common = 0
+    for key, cur in curr.items():
+        old = prev.get(key)
+        if not old:
+            continue
+        w = cur["qty"]
+        num += cur["price"] * w
+        den += old["price"] * w
+        common += 1
+    if common == 0 or den <= 0:
+        return None, 0
+    return num / den, common
+
 def validate_period(p):
     assert len(p["rowsData"]) == int(p["rows"]), (p["key"], len(p["rowsData"]), p["rows"])
     assert int(p["rows"]) == (
@@ -126,10 +182,22 @@ paradis_index = {
     "periodChange": 8.9,
 }
 if current["key"] == "2026-09-03":
-    # Новый индекс считаем отдельно после появления периода; старое значение не выдаём за текущее.
-    paradis_index["current"] = None
-    paradis_index["prevChange"] = None
-    paradis_index["periodChange"] = None
+    factor, common_count = _weighted_index_change(p2608, current)
+    if factor is None:
+        paradis_index["current"] = None
+        paradis_index["prevChange"] = None
+        paradis_index["periodChange"] = None
+    else:
+        new_index = round(108.9 * factor, 1)
+        paradis_index["points"].append({
+            "key": "2026-09-03",
+            "label": "с 03.09",
+            "value": new_index,
+        })
+        paradis_index["current"] = new_index
+        paradis_index["prevChange"] = round((new_index / 108.9 - 1.0) * 100.0, 1)
+        paradis_index["periodChange"] = round(new_index - 100.0, 1)
+        paradis_index["commonProducts"] = common_count
 
 full = {
     "generatedAt": current_payload["generatedAt"],
