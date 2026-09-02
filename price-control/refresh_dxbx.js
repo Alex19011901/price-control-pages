@@ -5,11 +5,10 @@ const path = require('path');
 const ROOT = __dirname;
 const AUTH = process.env.DOCSINBOX_STORAGE_STATE;
 const OUT = process.argv[2] || path.join(ROOT, 'current.json');
-const PRICE_FILE = path.join(ROOT, 'price_20260902.json');
+const OLD_PRICE_FILE = path.join(ROOT, 'price_20260826.json');
+const NEW_PRICE_FILE = path.join(ROOT, 'price_20260902.json');
 const SUPPLIER = 'парадис экзотика';
-const WEEK_KEY = '2026-09-03';
-const START_ISO = '2026-09-03';
-const START_RU = '03.09.2026';
+const SWITCH_ISO = '2026-09-03';
 
 function round2(v) {
   if (!Number.isFinite(v)) return null;
@@ -56,17 +55,38 @@ function buildPriceMap(priceDoc) {
 
 (async () => {
   const todayMoscow = new Date(Date.now() + 3 * 60 * 60 * 1000).toISOString().slice(0, 10);
-  if (todayMoscow < START_ISO) {
-    console.log(`PRICE_NOT_ACTIVE: new price starts ${START_ISO}; Moscow date is ${todayMoscow}`);
-    return;
-  }
+  const useNewPrice = todayMoscow >= SWITCH_ISO;
+  const cfg = useNewPrice ? {
+    priceFile: NEW_PRICE_FILE,
+    weekKey: '2026-09-03',
+    startIso: '2026-09-03',
+    endIso: null,
+    startRu: '03.09.2026',
+    endRu: null,
+    label: 'Прайс с 03.09',
+    priceDocumentDate: '02.09.2026'
+  } : {
+    priceFile: OLD_PRICE_FILE,
+    weekKey: '2026-08-26',
+    startIso: '2026-08-26',
+    endIso: '2026-09-02',
+    startRu: '26.08.2026',
+    endRu: '02.09.2026',
+    label: 'Прайс 26.08 → 02.09',
+    priceDocumentDate: '26.08.2026'
+  };
 
   if (!AUTH) throw new Error('DOCSINBOX_AUTH_PATH_MISSING');
   if (!fs.existsSync(AUTH)) throw new Error('DOCSINBOX_AUTH_MISSING');
-  const priceDoc = JSON.parse(fs.readFileSync(PRICE_FILE, 'utf8'));
+  if (!fs.existsSync(cfg.priceFile)) throw new Error('PRICE_PAYLOAD_MISSING:' + cfg.priceFile);
+  const priceDoc = JSON.parse(fs.readFileSync(cfg.priceFile, 'utf8'));
   if (!Array.isArray(priceDoc.rows) || !priceDoc.rows.length) throw new Error('PRICE_PAYLOAD_EMPTY');
-  if (priceDoc.documentDate !== '02.09.2026' || priceDoc.validFrom !== '03.09.2026') {
-    throw new Error('PRICE_DATE_MISMATCH');
+  if (useNewPrice) {
+    if (priceDoc.documentDate !== '02.09.2026' || priceDoc.validFrom !== '03.09.2026') {
+      throw new Error('PRICE_DATE_MISMATCH');
+    }
+  } else if (priceDoc.valid_on !== '2026-08-26') {
+    throw new Error('OLD_PRICE_DATE_MISMATCH');
   }
   const priceMap = buildPriceMap(priceDoc);
 
@@ -75,7 +95,7 @@ function buildPriceMap(priceDoc) {
   const page = await context.newPage();
   await page.goto('https://dxbx.ru/fe/supplies?offset=0', { waitUntil: 'domcontentloaded', timeout: 60000 });
 
-  const selection = await page.evaluate(async ({supplierNeedle, startIso}) => {
+  const selection = await page.evaluate(async ({supplierNeedle, startIso, endIso}) => {
     const ruToIso = s => {
       const m = String(s || '').match(/^(\d{2})\.(\d{2})\.(\d{4})$/);
       return m ? `${m[3]}-${m[2]}-${m[1]}` : '';
@@ -98,7 +118,7 @@ function buildPriceMap(priceDoc) {
     const selected = all
       .filter(s => {
         const iso = ruToIso(s.date);
-        return iso >= startIso &&
+        return iso >= startIso && (!endIso || iso <= endIso) &&
           String(s.supplier?.name || '').toLowerCase().includes(supplierNeedle);
       })
       .map(s => ({
@@ -111,7 +131,7 @@ function buildPriceMap(priceDoc) {
       sample: all.slice(0, 5).map(s => ({ date: s.date, supplier: s.supplier?.name || '', invoices: (s.invoices || []).length })),
       selected
     };
-  }, {supplierNeedle: SUPPLIER, startIso: START_ISO});
+  }, {supplierNeedle: SUPPLIER, startIso: cfg.startIso, endIso: cfg.endIso});
 
   const selected = selection.selected || [];
   const docs = [];
@@ -230,15 +250,15 @@ function buildPriceMap(priceDoc) {
   const payload = {
     generatedAt: new Date().toISOString(),
     week: {
-      key: WEEK_KEY,
-      label: 'Прайс с 03.09',
+      key: cfg.weekKey,
+      label: cfg.label,
       supplier: 'Парадис Экзотика',
-      start: START_RU,
-      end: null,
+      start: cfg.startRu,
+      end: cfg.endRu,
       docs: docs.length,
       rows: rowsData.length,
       above, below, equal, unmatched, overpay,
-      priceDocumentDate: '02.09.2026',
+      priceDocumentDate: cfg.priceDocumentDate,
       indexGroup: 'paradis',
       rowsData
     }
