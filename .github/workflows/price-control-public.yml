@@ -2,6 +2,10 @@ name: Price Control Public Refresh
 
 on:
   workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/price-control-public.yml'
 
 permissions:
   contents: write
