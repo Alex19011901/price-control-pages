@@ -9,13 +9,16 @@ PC = ROOT / "price-control"
 HISTORY = PC / "history"
 PARTS = PC / "history-parts"
 
+
 def load_json(path):
     return json.loads(path.read_text(encoding="utf-8"))
+
 
 def load_gzip_b64(paths):
     text = "".join(Path(p).read_text(encoding="utf-8").strip() for p in paths)
     raw = gzip.decompress(base64.b64decode(text))
     return json.loads(raw.decode("utf-8"))
+
 
 def normalize_hist(src, *, key, label, start, end, price_date):
     rows_data = src["rowsData"]
@@ -38,6 +41,15 @@ def normalize_hist(src, *, key, label, start, end, price_date):
     }
     assert out["rows"] == out["above"] + out["below"] + out["equal"] + out["unmatched"]
     return out
+
+
+def validate_period(p):
+    assert len(p["rowsData"]) == int(p["rows"]), (p["key"], len(p["rowsData"]), p["rows"])
+    assert int(p["rows"]) == (
+        int(p["above"]) + int(p["below"]) +
+        int(p.get("equal", 0)) + int(p["unmatched"])
+    ), p["key"]
+
 
 p2606 = load_gzip_b64([
     PARTS / "hist_2606_0207.v2.b64.00",
@@ -70,45 +82,61 @@ expected = {
     "2026-07-30": (7, 189, 172, 11, 0, 6, 12514.78),
     "2026-05-20": (13, 305, 20, 0, 269, 16, 1676.33),
 }
-periods = [current, p3007, p2407, p2606, interfood]
-assert current["key"] == "2026-08-26", current["key"]
-assert len(current["rowsData"]) == current["rows"], (
-    current["key"], len(current["rowsData"]), current["rows"]
-)
-assert int(current["rows"]) == (
-    int(current["above"]) + int(current["below"]) +
-    int(current.get("equal", 0)) + int(current["unmatched"])
-), current["key"]
+
+assert current["key"] in {"2026-08-26", "2026-09-03"}, current["key"]
+validate_period(current)
+
+p2608 = None
+full_path = PC / "full.json"
+if full_path.exists():
+    previous_full = load_json(full_path)
+    p2608 = next((p for p in previous_full.get("periods", []) if p.get("key") == "2026-08-26"), None)
+
+if current["key"] == "2026-08-26":
+    periods = [current, p3007, p2407, p2606, interfood]
+else:
+    assert p2608 is not None, "Previous 2026-08-26 period is missing from full.json"
+    validate_period(p2608)
+    periods = [current, p2608, p3007, p2407, p2606, interfood]
+
 for p in periods:
+    if p["key"] in {current["key"], "2026-08-26"}:
+        validate_period(p)
+        continue
     got = (
         int(p["docs"]), int(p["rows"]), int(p["above"]), int(p["below"]),
         int(p.get("equal", 0)), int(p["unmatched"]), round(float(p["overpay"]), 2),
     )
-    if p["key"] == current["key"]:
-        continue
     want = expected[p["key"]]
     assert got == want, (p["key"], got, want)
-    assert len(p["rowsData"]) == p["rows"], (p["key"], len(p["rowsData"]), p["rows"])
+    validate_period(p)
+
+paradis_index = {
+    "supplier": "Парадис Экзотика",
+    "baseKey": "2026-06-26",
+    "baseLabel": "26.06–02.07",
+    "points": [
+        {"key": "2026-06-26", "label": "26.06–02.07", "value": 100.0},
+        {"key": "2026-07-24", "label": "24.07–29.07", "value": 98.5},
+        {"key": "2026-07-30", "label": "30.07–05.08", "value": 101.2},
+        {"key": "2026-08-26", "label": "26.08–01.09", "value": 108.9},
+    ],
+    "current": 108.9,
+    "prevChange": 7.6,
+    "periodChange": 8.9,
+}
+if current["key"] == "2026-09-03":
+    # Новый индекс считаем отдельно после появления периода; старое значение не выдаём за текущее.
+    paradis_index["current"] = None
+    paradis_index["prevChange"] = None
+    paradis_index["periodChange"] = None
 
 full = {
     "generatedAt": current_payload["generatedAt"],
     "currentKey": current["key"],
     "periods": periods,
     "indexGroups": {
-        "paradis": {
-            "supplier": "Парадис Экзотика",
-            "baseKey": "2026-06-26",
-            "baseLabel": "26.06–02.07",
-            "points": [
-                {"key": "2026-06-26", "label": "26.06–02.07", "value": 100.0},
-                {"key": "2026-07-24", "label": "24.07–29.07", "value": 98.5},
-                {"key": "2026-07-30", "label": "30.07–05.08", "value": 101.2},
-                {"key": "2026-08-26", "label": "26.08–01.09", "value": 108.9},
-            ],
-            "current": 108.9,
-            "prevChange": 7.6,
-            "periodChange": 8.9,
-        },
+        "paradis": paradis_index,
         "interfood": {
             "supplier": "Интерфуд",
             "baseKey": "2026-05-20",
