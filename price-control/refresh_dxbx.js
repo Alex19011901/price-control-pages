@@ -135,10 +135,6 @@ function buildPriceMap(priceDoc) {
 
   const selected = selection.selected || [];
   const docs = [];
-  const parseNum = v => {
-    const z = Number(String(v ?? '').replace(/\s/g, '').replace(',', '.').replace(/[^\d.-]/g, ''));
-    return Number.isFinite(z) ? z : null;
-  };
 
   for (const supply of selected) {
     for (const inv of (supply.invoices || [])) {
@@ -203,18 +199,31 @@ function buildPriceMap(priceDoc) {
 
   await browser.close();
 
-  const numberCounts = new Map();
-  for (const d of docs) numberCounts.set(d.number, (numberCounts.get(d.number) || 0) + 1);
+  // For the same invoice number, only the latest numeric DocsInBox version participates.
+  // This prevents older document versions from duplicating rows and cluttering the filter.
+  const latestByNumber = new Map();
+  for (const d of docs) {
+    const versionNum = d.version == null ? null : Number(d.version);
+    const prev = latestByNumber.get(d.number);
+    if (!prev) {
+      latestByNumber.set(d.number, { doc: d, versionNum });
+      continue;
+    }
+    const prevNum = prev.versionNum;
+    if (versionNum !== null && Number.isFinite(versionNum) &&
+        (prevNum === null || !Number.isFinite(prevNum) || versionNum > prevNum)) {
+      latestByNumber.set(d.number, { doc: d, versionNum });
+    }
+  }
+  const activeDocs = [...latestByNumber.values()].map(x => x.doc);
+  const droppedVersions = docs.length - activeDocs.length;
+  if (droppedVersions > 0) console.log('Older invoice versions skipped:', droppedVersions);
+
   const rowsData = [];
   let overpayRaw = 0;
 
-  for (const d of docs.sort((a,b) => ruToIso(b.date).localeCompare(ruToIso(a.date)))) {
-    const count = numberCounts.get(d.number) || 1;
-    let invoiceLabel = d.number;
-    if (count > 1) {
-      if (d.version) invoiceLabel += ` (вер.${d.version})`;
-      else invoiceLabel += ` · ${String(d.publicId || '').slice(0,8)}`;
-    }
+  for (const d of activeDocs.sort((a,b) => ruToIso(b.date).localeCompare(ruToIso(a.date)))) {
+    const invoiceLabel = d.number;
     for (const it of (d.items || []).sort((a,b) => (a.line || 0) - (b.line || 0))) {
       const qty = Number(it.count);
       const fact = qty && Number.isFinite(Number(it.sum)) ? round2(Number(it.sum) / qty) : null;
@@ -245,7 +254,7 @@ function buildPriceMap(priceDoc) {
   const equal = rowsData.filter(r => r[9] === 'EQUAL').length;
   const unmatched = rowsData.filter(r => r[9] === 'UNMATCHED').length;
   const overpay = round2(overpayRaw);
-  if (docs.length && rowsData.length === 0) throw new Error('NO_INVOICE_ROWS');
+  if (activeDocs.length && rowsData.length === 0) throw new Error('NO_INVOICE_ROWS');
 
   const payload = {
     generatedAt: new Date().toISOString(),
@@ -255,7 +264,7 @@ function buildPriceMap(priceDoc) {
       supplier: 'Парадис Экзотика',
       start: cfg.startRu,
       end: cfg.endRu,
-      docs: docs.length,
+      docs: activeDocs.length,
       rows: rowsData.length,
       above, below, equal, unmatched, overpay,
       priceDocumentDate: cfg.priceDocumentDate,
@@ -264,7 +273,7 @@ function buildPriceMap(priceDoc) {
     }
   };
   fs.writeFileSync(OUT, JSON.stringify(payload, null, 2), 'utf8');
-  console.log(JSON.stringify({docs:docs.length,rows:rowsData.length,above,below,equal,unmatched,overpay,generatedAt:payload.generatedAt}));
+  console.log(JSON.stringify({docs:activeDocs.length,rows:rowsData.length,above,below,equal,unmatched,overpay,generatedAt:payload.generatedAt}));
 })().catch(err => {
   console.error(err && (err.stack || err.message) || err);
   process.exit(1);
