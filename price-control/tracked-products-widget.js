@@ -121,12 +121,11 @@
     if(!box||!state.data)return;
     box.innerHTML=(state.data.products||[]).map(p=>{
       const last=latestPoint(p);
-      const base=p.base||null;
       return '<div class="tracked-summary-item">'+
         '<div class="tracked-summary-name"><span class="tracked-swatch" style="background:'+esc(p.color)+'"></span>'+esc(p.label)+'</div>'+
         '<div class="tracked-summary-value">'+(last?fmt(last.index,1):'—')+'</div>'+
-        '<div class="tracked-summary-hint">'+(last?esc(last.date)+' · '+esc(last.invoice):'Нет поставок')+'</div>'+
-        '<div class="tracked-summary-hint">База: '+(base?esc(base.date)+' · '+money(base.fact):'—')+'</div>'+
+        '<div class="tracked-summary-hint">Последняя поставка: '+(last?esc(last.date):'—')+'</div>'+
+        '<div class="tracked-summary-hint">Последняя цена: '+(last?money(last.fact):'—')+'</div>'+
       '</div>';
     }).join('');
   }
