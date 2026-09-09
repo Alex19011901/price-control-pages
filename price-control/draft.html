@@ -502,10 +502,23 @@ tbody tr:hover{background:#ffffff05}
         body:JSON.stringify({ref:REF})
       });
       setState('Подготовка…');
-      const run=await waitForNewRun(beforeIds,deadline);
-      await waitForWorkflow(run.id,deadline);
+      let monitorError=null;
+      try{
+        const monitorDeadline=Math.min(deadline,Date.now()+90000);
+        const run=await waitForNewRun(beforeIds,monitorDeadline);
+        await waitForWorkflow(run.id,deadline);
+      }catch(e){
+        monitorError=e;
+        if(e&&e.code==='workflow_conclusion')throw e;
+        setState('Обновление запущено · ожидаю публикацию данных…');
+      }
       setState('Сохранение новых данных…');
-      model=await waitForFreshFull(beforeGeneratedAt,deadline);
+      try{
+        model=await waitForFreshFull(beforeGeneratedAt,deadline);
+      }catch(e){
+        if(monitorError&&e&&e.code==='data_not_updated')throw monitorError;
+        throw e;
+      }
       currentKey=model.currentKey||((model.periods||[])[0]||{}).key||'';
       populatePeriods();id('weekFilter').value=currentKey;render();
       const ts=new Date(model.generatedAt||Date.now()).toLocaleTimeString('ru-RU',{timeZone:'Europe/Moscow',hour:'2-digit',minute:'2-digit'});
