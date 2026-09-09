@@ -12,9 +12,9 @@
     if(v===null||v===undefined||!Number.isFinite(Number(v)))return '—';
     return Number(v).toLocaleString('ru-RU',{minimumFractionDigits:digits||0,maximumFractionDigits:digits==null?2:digits});
   }
-  function money(v){
+  function money(v,unit){
     if(v===null||v===undefined||!Number.isFinite(Number(v)))return '—';
-    return Number(v).toLocaleString('ru-RU',{minimumFractionDigits:2,maximumFractionDigits:2})+' ₽/кг';
+    return Number(v).toLocaleString('ru-RU',{minimumFractionDigits:2,maximumFractionDigits:2})+' ₽/'+(unit||'кг');
   }
   function svg(tag,attrs,text){
     const el=document.createElementNS(NS,tag);
@@ -125,7 +125,7 @@
         '<div class="tracked-summary-name"><span class="tracked-swatch" style="background:'+esc(p.color)+'"></span>'+esc(p.label)+'</div>'+
         '<div class="tracked-summary-value">'+(last?fmt(last.index,1):'—')+'</div>'+
         '<div class="tracked-summary-hint">Последняя поставка: '+(last?esc(last.date):'—')+'</div>'+
-        '<div class="tracked-summary-hint">Последняя цена: '+(last?money(last.fact):'—')+'</div>'+
+        '<div class="tracked-summary-hint">Последняя цена: '+(last?money(last.fact,p.unit):'—')+'</div>'+
       '</div>';
     }).join('');
   }
@@ -189,7 +189,7 @@
       chart.appendChild(poly);
       for(const x of pts){
         const circle=svg('circle',{class:'tracked-point',cx:X(x.t).toFixed(1),cy:Y(Number(x.pt.index)).toFixed(1),r:4,stroke:p.color});
-        const title=svg('title',{},p.label+' · '+x.pt.date+' · индекс '+fmt(x.pt.index,1)+' · '+money(x.pt.fact)+' · '+x.pt.supplier+' · '+x.pt.invoice);
+        const title=svg('title',{},p.label+' · '+x.pt.date+' · индекс '+fmt(x.pt.index,1)+' · '+money(x.pt.fact,p.unit)+' · '+x.pt.supplier+' · '+x.pt.invoice);
         circle.appendChild(title);
         chart.appendChild(circle);
       }
