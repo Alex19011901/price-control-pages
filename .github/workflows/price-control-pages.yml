@@ -1,4 +1,5 @@
 name: Price Control Pages
+# Publishes tracked-product data including Courage cucumbers.
 
 on:
   push:
