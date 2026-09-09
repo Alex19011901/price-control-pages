@@ -4,8 +4,8 @@ on:
   workflow_dispatch:
   push:
     paths:
-      - '.github/workflows/price-control-courage.yml'
       - 'price-control/courage_scan.js'
+      - 'price-control/merge_courage_product.js'
 
 permissions:
   contents: write
@@ -44,15 +44,18 @@ jobs:
           DOCSINBOX_STORAGE_STATE: /tmp/price-control-dxbx-state.json
         run: node price-control/courage_scan.js price-control/courage_audit.json
 
-      - name: Save Courage audit result
+      - name: Merge Courage into tracked product index
+        run: node price-control/merge_courage_product.js price-control/tracked_products.json price-control/courage_audit.json
+
+      - name: Save Courage data
         run: |
           rm -f /tmp/price-control-dxbx-state.json
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add price-control/courage_audit.json
+          git add price-control/courage_audit.json price-control/tracked_products.json
           if git diff --cached --quiet; then
-            echo "No Courage audit changes"
+            echo "No Courage changes"
           else
-            git commit -m "Update Courage cucumber audit"
+            git commit -m "Update Courage cucumber data"
             git push origin main
           fi
