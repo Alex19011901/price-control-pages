@@ -49,6 +49,12 @@ jobs:
       - name: Build tracked product index
         run: node price-control/build_tracked_products.js price-control/tracked_products_audit.json price-control/tracked_products.json
 
+      - name: Preserve Courage product
+        run: |
+          if [ -f price-control/courage_audit.json ] && [ -f price-control/merge_courage_product.js ]; then
+            node price-control/merge_courage_product.js price-control/tracked_products.json price-control/courage_audit.json
+          fi
+
       - name: Save tracked product data
         run: |
           rm -f /tmp/price-control-dxbx-state.json
