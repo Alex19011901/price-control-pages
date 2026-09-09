@@ -1,5 +1,5 @@
 name: Price Control Pages
-# Publishes tracked-product data including Courage cucumbers.
+# Publishes the unified nine-product DocsInBox price-index widget.
 
 on:
   push:
