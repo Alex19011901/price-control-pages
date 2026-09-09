@@ -1,5 +1,5 @@
 name: Price Control Pages
-# Publishes the unified nine-product DocsInBox price-index widget.
+# Publishes the dashboard and unified nine-product DocsInBox price-index widget.
 
 on:
   push:
