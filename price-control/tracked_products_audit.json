@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-09T10:14:47.837Z",
+  "generatedAt": "2026-09-09T11:00:53.217Z",
   "start": "01.01.2026",
   "suppliesScanned": 720,
   "invoicesScanned": 812,
@@ -72,9 +72,166 @@
       ],
       "firstDate": "11.01.2026",
       "lastDate": "06.09.2026"
+    },
+    "courage_cucumber": {
+      "label": "Огурцы Кураж",
+      "rows": 110,
+      "invoices": 110,
+      "exactNames": [
+        "!Огурцы Кураж,кг (2087874) | кг",
+        "Огурцы Кураж ,кг (00-00000168) | кг",
+        "Огурцы Кураж выс/кат ,кг (00-00000074) | кг",
+        "Огурцы Кураж короткоплодные Стандарт,кг (00-00009388) | кг",
+        "Огурцы Кураж Тепличные,кг (00-00001354) | кг",
+        "Огурцы Кураж,кг (00-00000168) | кг",
+        "Огурцы Кураж,кг (2087874) | кг",
+        "Огурцы Кураж,кг (УТ000007874) | кг"
+      ],
+      "suppliers": [
+        "ООО \"АМД КОМПАНИ\"",
+        "ООО \"ИНТЕРФУД\"",
+        "ООО \"Парадис Экзотика\" "
+      ],
+      "firstDate": "11.01.2026",
+      "lastDate": "06.09.2026"
+    },
+    "sea_bass_400_600": {
+      "label": "Сибас 400–600",
+      "rows": 6,
+      "invoices": 6,
+      "exactNames": [
+        "Сибас, с/г не потр., 400-600 гр/шт., охл.,кг (00-00000040) | кг"
+      ],
+      "suppliers": [
+        "ИП Носова Юлия Евгеньевна"
+      ],
+      "firstDate": "06.05.2026",
+      "lastDate": "26.08.2026"
+    },
+    "gorgonzola_cheese": {
+      "label": "Сыр Горгонзола",
+      "rows": 7,
+      "invoices": 7,
+      "exactNames": [
+        "Сыр Горгонзола с голубой плесенью 50% ~1кг фольга из цельного молока БЗМЖ Шангал Россия (ПУ) (КОД 74540) (0°С),кг (74540) | кг",
+        "Сыр Горгонзола с голубой плесенью 50% ~1кг фольга из цельного молока БЗМЖ Шангал Россия (ПУ),кг (74540) | кг",
+        "Сыр Горгонзола с голубой плесенью 50% ~2,5кг/круг фольга Monblu™ БЗМЖ Бобровский СЗ (КОД 48248) (0°С),кг (48248) | кг",
+        "Сыр с голубой плесенью Горгонзола ТМ АРТАРИ с 53% \"АЛЬДИНИ\",кг (УН-00000807) | кг"
+      ],
+      "suppliers": [
+        "ООО \"АРТАРИ\"",
+        "ООО \"ТД \"ГЛОБАЛ ФУДС\"",
+        "ООО \"Торговый дом \"Глобал Фудс\" ***"
+      ],
+      "firstDate": "12.02.2026",
+      "lastDate": "21.08.2026"
+    },
+    "pineapple": {
+      "label": "Ананас",
+      "rows": 74,
+      "invoices": 74,
+      "exactNames": [
+        "1Л СОК НАП SANTAL АНАНАСОВЫЙ ТЕТ,ШТ (213686) | ШТ",
+        "1Л СОК RICH АНАНАСОВЫЙ,ШТ (457319) | ШТ",
+        "2Х6 ТП ДОБРЫЙ АНАНАС ЯБЛОКО НЕКТ,упак () | упак",
+        "Ананас Голд ,кг (00-00000326) | кг",
+        "Ананас Голд Стандарт,кг (00-00009305) | кг",
+        "Ананас Голд,кг (00-00000326) | кг",
+        "Ананас Дель Монте спелые (5-6) ,кг (00-00000009) | кг",
+        "Ананас Дель Монте спелые (5-6) Премиум,кг (00-00000009) | кг",
+        "Ананас Дель-Монте,кг (4056392) | кг",
+        "Ананас Del Monte ,кг (ЦБ-00002009) | кг",
+        "Ананас Del Monte,кг (ЦБ-00002009) | кг"
+      ],
+      "suppliers": [
+        "ООО \"АМД КОМПАНИ\"",
+        "ООО \"ИНТЕРФУД\"",
+        "ООО \"МЕТРО Кэш энд Керри\" ",
+        "ООО \"Мултон Партнерс\"",
+        "ООО \"Парадис Экзотика\" "
+      ],
+      "firstDate": "15.01.2026",
+      "lastDate": "06.09.2026"
+    },
+    "spinach_standard": {
+      "label": "Шпинат Стандарт",
+      "rows": 108,
+      "invoices": 108,
+      "exactNames": [
+        "Шпинат ,кг (00-00000226) | кг",
+        "Шпинат выс/кат ,кг (00-00000125) | кг",
+        "Шпинат мини 125 г стандарт,шт (00-00009487) | шт",
+        "Шпинат стандарт,кг (00-00009486) | кг",
+        "Шпинат,кг (00-00000226) | кг",
+        "Шпинат,кг (00000000097) | кг",
+        "Шпинат,кг (3030097) | кг"
+      ],
+      "suppliers": [
+        "ООО \"АМД КОМПАНИ\"",
+        "ООО \"ИНТЕРФУД\"",
+        "ООО \"Парадис Экзотика\" "
+      ],
+      "firstDate": "11.01.2026",
+      "lastDate": "05.09.2026"
+    },
+    "mozzarella_125": {
+      "label": "Сыр Моцарелла 125 г",
+      "rows": 28,
+      "invoices": 28,
+      "exactNames": [
+        "/Сыр Моцарелла Galbani 125 г. 45%,шт (00-00001991) | шт",
+        "125Г СЫР МОЦАРЕЛЛА 45% METRO CHEF ФИОРДИЛАТТ БЗМЖ,ШТ (116706) | ШТ",
+        "Сыр Моцарелла \"Galbani\"125 г,Штука (08000430133035) | Штука",
+        "Сыр Моцарелла 125 г (Mozzarella) уп.3кг,шт (УН-00000249) | шт",
+        "Сыр Моцарелла 125г (Mozzarella) уп.3кг БОН ЛАТТЕ,шт (УН-00000249) | шт",
+        "Сыр Моцарелла Гальбани 125г 45% ,шт (00-00001150) | шт",
+        "Сыр Моцарелла Гальбани 125г 45%,шт (00-00001150) | шт"
+      ],
+      "suppliers": [
+        "ООО \"АМД КОМПАНИ\"",
+        "ООО \"АРТАРИ\"",
+        "ООО \"ИНТЕРФУД\"",
+        "ООО \"КАРТАРИ\"",
+        "ООО \"МЕТРО Кэш энд Керри\" ",
+        "ООО \"Парадис Экзотика\" "
+      ],
+      "firstDate": "22.01.2026",
+      "lastDate": "27.08.2026"
     }
   },
   "matches": [
+    {
+      "productKeys": [
+        "courage_cucumber"
+      ],
+      "date": "11.01.2026",
+      "supplier": "ООО \"АМД КОМПАНИ\"",
+      "invoice": "АМД00001146",
+      "publicId": "371471f4-f6bf-4fe1-a1e6-bba979dc0e8e",
+      "version": 1,
+      "line": 4,
+      "name": "Огурцы Кураж,кг (2087874)",
+      "unit": "кг",
+      "qty": 3.7,
+      "sum": 2237.76,
+      "fact": 604.8
+    },
+    {
+      "productKeys": [
+        "spinach_standard"
+      ],
+      "date": "11.01.2026",
+      "supplier": "ООО \"АМД КОМПАНИ\"",
+      "invoice": "АМД00001146",
+      "publicId": "371471f4-f6bf-4fe1-a1e6-bba979dc0e8e",
+      "version": 1,
+      "line": 13,
+      "name": "Шпинат,кг (3030097)",
+      "unit": "кг",
+      "qty": 0.5,
+      "sum": 327.6,
+      "fact": 655.2
+    },
     {
       "productKeys": [
         "eggplant"
@@ -109,6 +266,22 @@
     },
     {
       "productKeys": [
+        "courage_cucumber"
+      ],
+      "date": "14.01.2026",
+      "supplier": "ООО \"АМД КОМПАНИ\"",
+      "invoice": "АМД00001611",
+      "publicId": "43dd1bca-9688-40a1-ac21-c2065cda5b51",
+      "version": 1,
+      "line": 16,
+      "name": "Огурцы Кураж,кг (2087874)",
+      "unit": "кг",
+      "qty": 7.7,
+      "sum": 2393.16,
+      "fact": 310.8
+    },
+    {
+      "productKeys": [
         "eye_muscle"
       ],
       "date": "14.01.2026",
@@ -122,6 +295,86 @@
       "qty": 15.975,
       "sum": 17300.93,
       "fact": 1083
+    },
+    {
+      "productKeys": [
+        "pineapple"
+      ],
+      "date": "15.01.2026",
+      "supplier": "ООО \"АМД КОМПАНИ\"",
+      "invoice": "АМД00001695",
+      "publicId": "ea53ab03-6f4c-4409-88f8-7e4a03c1c902",
+      "version": 1,
+      "line": 2,
+      "name": "Ананас Дель-Монте,кг (4056392)",
+      "unit": "кг",
+      "qty": 3.5,
+      "sum": 1999.2,
+      "fact": 571.2
+    },
+    {
+      "productKeys": [
+        "pineapple"
+      ],
+      "date": "16.01.2026",
+      "supplier": "ООО \"АМД КОМПАНИ\"",
+      "invoice": "АМД00001928",
+      "publicId": "55a9b900-6d1a-4578-ba44-51eeb7a98eaa",
+      "version": 1,
+      "line": 4,
+      "name": "Ананас Дель-Монте,кг (4056392)",
+      "unit": "кг",
+      "qty": 9.9,
+      "sum": 5654.88,
+      "fact": 571.2
+    },
+    {
+      "productKeys": [
+        "courage_cucumber"
+      ],
+      "date": "16.01.2026",
+      "supplier": "ООО \"АМД КОМПАНИ\"",
+      "invoice": "АМД00001928",
+      "publicId": "55a9b900-6d1a-4578-ba44-51eeb7a98eaa",
+      "version": 1,
+      "line": 9,
+      "name": "Огурцы Кураж,кг (2087874)",
+      "unit": "кг",
+      "qty": 7.8,
+      "sum": 2424.24,
+      "fact": 310.8
+    },
+    {
+      "productKeys": [
+        "spinach_standard"
+      ],
+      "date": "19.01.2026",
+      "supplier": "ООО \"АМД КОМПАНИ\"",
+      "invoice": "АМД00002228",
+      "publicId": "bd33ceb7-2d0e-498c-bef0-1a0e45adaf36",
+      "version": 1,
+      "line": 10,
+      "name": "Шпинат,кг (3030097)",
+      "unit": "кг",
+      "qty": 2,
+      "sum": 1512,
+      "fact": 756
+    },
+    {
+      "productKeys": [
+        "spinach_standard"
+      ],
+      "date": "19.01.2026",
+      "supplier": "ООО \"АМД КОМПАНИ\"",
+      "invoice": "АМД00002336",
+      "publicId": "5df6f1a9-2f81-47c1-a4c6-54ed222c1764",
+      "version": 1,
+      "line": 9,
+      "name": "Шпинат,кг (00000000097)",
+      "unit": "кг",
+      "qty": 2,
+      "sum": 1512,
+      "fact": 756
     },
     {
       "productKeys": [
@@ -141,6 +394,22 @@
     },
     {
       "productKeys": [
+        "spinach_standard"
+      ],
+      "date": "21.01.2026",
+      "supplier": "ООО \"АМД КОМПАНИ\"",
+      "invoice": "АМД00002551",
+      "publicId": "4a0d640d-9239-4a4b-8675-338f5e2c8833",
+      "version": 1,
+      "line": 12,
+      "name": "Шпинат,кг (00000000097)",
+      "unit": "кг",
+      "qty": 2,
+      "sum": 1411.2,
+      "fact": 705.6
+    },
+    {
+      "productKeys": [
         "eggplant"
       ],
       "date": "22.01.2026",
@@ -154,6 +423,38 @@
       "qty": 10.2,
       "sum": 2056.32,
       "fact": 201.6
+    },
+    {
+      "productKeys": [
+        "courage_cucumber"
+      ],
+      "date": "22.01.2026",
+      "supplier": "ООО \"АМД КОМПАНИ\"",
+      "invoice": "АМД00002698",
+      "publicId": "16494a02-9196-4f9b-a03a-48d0de06756d",
+      "version": 1,
+      "line": 10,
+      "name": "Огурцы Кураж,кг (2087874)",
+      "unit": "кг",
+      "qty": 7.7,
+      "sum": 1875.72,
+      "fact": 243.6
+    },
+    {
+      "productKeys": [
+        "mozzarella_125"
+      ],
+      "date": "22.01.2026",
+      "supplier": "ООО \"АМД КОМПАНИ\"",
+      "invoice": "АМД00002698",
+      "publicId": "16494a02-9196-4f9b-a03a-48d0de06756d",
+      "version": 1,
+      "line": 23,
+      "name": "Сыр Моцарелла \"Galbani\"125 г,Штука (08000430133035)",
+      "unit": "Штука",
+      "qty": 26,
+      "sum": 3993.6,
+      "fact": 153.6
     },
     {
       "productKeys": [
@@ -173,6 +474,54 @@
     },
     {
       "productKeys": [
+        "pineapple"
+      ],
+      "date": "23.01.2026",
+      "supplier": "ООО \"АМД КОМПАНИ\"",
+      "invoice": "АМД00002821",
+      "publicId": "293e6980-b3e3-4134-891e-0d50c08bb989",
+      "version": 2,
+      "line": 1,
+      "name": "Ананас Дель-Монте,кг (4056392)",
+      "unit": "кг",
+      "qty": 6.4,
+      "sum": 3225.6,
+      "fact": 504
+    },
+    {
+      "productKeys": [
+        "courage_cucumber"
+      ],
+      "date": "23.01.2026",
+      "supplier": "ООО \"АМД КОМПАНИ\"",
+      "invoice": "АМД00002821",
+      "publicId": "293e6980-b3e3-4134-891e-0d50c08bb989",
+      "version": 2,
+      "line": 9,
+      "name": "!Огурцы Кураж,кг (2087874)",
+      "unit": "кг",
+      "qty": 5.3,
+      "sum": 1291.08,
+      "fact": 243.6
+    },
+    {
+      "productKeys": [
+        "mozzarella_125"
+      ],
+      "date": "23.01.2026",
+      "supplier": "ООО \"АМД КОМПАНИ\"",
+      "invoice": "АМД00002821",
+      "publicId": "293e6980-b3e3-4134-891e-0d50c08bb989",
+      "version": 2,
+      "line": 21,
+      "name": "Сыр Моцарелла \"Galbani\"125 г,Штука (08000430133035)",
+      "unit": "Штука",
+      "qty": 5,
+      "sum": 768,
+      "fact": 153.6
+    },
+    {
+      "productKeys": [
         "eye_muscle"
       ],
       "date": "23.01.2026",
@@ -189,6 +538,54 @@
     },
     {
       "productKeys": [
+        "pineapple"
+      ],
+      "date": "24.01.2026",
+      "supplier": "ООО \"АМД КОМПАНИ\"",
+      "invoice": "АМД00003005",
+      "publicId": "c2d87971-722d-41cf-9aeb-6845a5685125",
+      "version": 1,
+      "line": 4,
+      "name": "Ананас Дель-Монте,кг (4056392)",
+      "unit": "кг",
+      "qty": 4,
+      "sum": 2016,
+      "fact": 504
+    },
+    {
+      "productKeys": [
+        "spinach_standard"
+      ],
+      "date": "24.01.2026",
+      "supplier": "ООО \"АМД КОМПАНИ\"",
+      "invoice": "АМД00003005",
+      "publicId": "c2d87971-722d-41cf-9aeb-6845a5685125",
+      "version": 1,
+      "line": 14,
+      "name": "Шпинат,кг (3030097)",
+      "unit": "кг",
+      "qty": 2.1,
+      "sum": 1481.76,
+      "fact": 705.6
+    },
+    {
+      "productKeys": [
+        "mozzarella_125"
+      ],
+      "date": "24.01.2026",
+      "supplier": "ООО \"АМД КОМПАНИ\"",
+      "invoice": "АМД00003005",
+      "publicId": "c2d87971-722d-41cf-9aeb-6845a5685125",
+      "version": 1,
+      "line": 21,
+      "name": "Сыр Моцарелла \"Galbani\"125 г,Штука (08000430133035)",
+      "unit": "Штука",
+      "qty": 20,
+      "sum": 3072,
+      "fact": 153.6
+    },
+    {
+      "productKeys": [
         "eggplant"
       ],
       "date": "25.01.2026",
@@ -202,6 +599,86 @@
       "qty": 10.8,
       "sum": 2177.28,
       "fact": 201.6
+    },
+    {
+      "productKeys": [
+        "spinach_standard"
+      ],
+      "date": "25.01.2026",
+      "supplier": "ООО \"АМД КОМПАНИ\"",
+      "invoice": "АМД00003138",
+      "publicId": "c5144b66-0c7d-490b-8523-93294d879b1a",
+      "version": 1,
+      "line": 8,
+      "name": "Шпинат,кг (3030097)",
+      "unit": "кг",
+      "qty": 2,
+      "sum": 1411.2,
+      "fact": 705.6
+    },
+    {
+      "productKeys": [
+        "mozzarella_125"
+      ],
+      "date": "25.01.2026",
+      "supplier": "ООО \"АМД КОМПАНИ\"",
+      "invoice": "АМД00003138",
+      "publicId": "c5144b66-0c7d-490b-8523-93294d879b1a",
+      "version": 1,
+      "line": 13,
+      "name": "Сыр Моцарелла \"Galbani\"125 г,Штука (08000430133035)",
+      "unit": "Штука",
+      "qty": 24,
+      "sum": 3686.4,
+      "fact": 153.6
+    },
+    {
+      "productKeys": [
+        "pineapple"
+      ],
+      "date": "29.01.2026",
+      "supplier": "ООО \"АМД КОМПАНИ\"",
+      "invoice": "АМД00003720",
+      "publicId": "3062857d-593e-42b4-9661-da2426d19fdb",
+      "version": 1,
+      "line": 2,
+      "name": "Ананас Дель-Монте,кг (4056392)",
+      "unit": "кг",
+      "qty": 3.7,
+      "sum": 1740.48,
+      "fact": 470.4
+    },
+    {
+      "productKeys": [
+        "courage_cucumber"
+      ],
+      "date": "29.01.2026",
+      "supplier": "ООО \"АМД КОМПАНИ\"",
+      "invoice": "АМД00003720",
+      "publicId": "3062857d-593e-42b4-9661-da2426d19fdb",
+      "version": 1,
+      "line": 15,
+      "name": "Огурцы Кураж,кг (2087874)",
+      "unit": "кг",
+      "qty": 5,
+      "sum": 1848,
+      "fact": 369.6
+    },
+    {
+      "productKeys": [
+        "mozzarella_125"
+      ],
+      "date": "29.01.2026",
+      "supplier": "ООО \"АМД КОМПАНИ\"",
+      "invoice": "АМД00003720",
+      "publicId": "3062857d-593e-42b4-9661-da2426d19fdb",
+      "version": 1,
+      "line": 26,
+      "name": "Сыр Моцарелла \"Galbani\"125 г,Штука (08000430133035)",
+      "unit": "Штука",
+      "qty": 15,
+      "sum": 2304,
+      "fact": 153.6
     },
     {
       "productKeys": [
@@ -237,6 +714,54 @@
     },
     {
       "productKeys": [
+        "spinach_standard"
+      ],
+      "date": "30.01.2026",
+      "supplier": "ООО \"АМД КОМПАНИ\"",
+      "invoice": "АМД00003891",
+      "publicId": "f76d8f2c-5fef-44cb-85a1-046f6e11b569",
+      "version": 1,
+      "line": 12,
+      "name": "Шпинат,кг (3030097)",
+      "unit": "кг",
+      "qty": 2,
+      "sum": 1411.2,
+      "fact": 705.6
+    },
+    {
+      "productKeys": [
+        "pineapple"
+      ],
+      "date": "01.02.2026",
+      "supplier": "ООО \"АМД КОМПАНИ\"",
+      "invoice": "АМД00004098",
+      "publicId": "afe8b8f2-6d5c-48ce-9660-42f379694159",
+      "version": 1,
+      "line": 1,
+      "name": "Ананас Дель-Монте,кг (4056392)",
+      "unit": "кг",
+      "qty": 4.2,
+      "sum": 1975.68,
+      "fact": 470.4
+    },
+    {
+      "productKeys": [
+        "courage_cucumber"
+      ],
+      "date": "06.02.2026",
+      "supplier": "ООО \"ИНТЕРФУД\"",
+      "invoice": "ЦБ-1391",
+      "publicId": "de99cfcf-1e04-428e-b2b4-f1331480fec0",
+      "version": 1,
+      "line": 15,
+      "name": "Огурцы Кураж Тепличные,кг (00-00001354)",
+      "unit": "кг",
+      "qty": 5,
+      "sum": 2128,
+      "fact": 425.6
+    },
+    {
+      "productKeys": [
         "eggplant"
       ],
       "date": "06.02.2026",
@@ -250,6 +775,86 @@
       "qty": 9.4,
       "sum": 1631.84,
       "fact": 173.6
+    },
+    {
+      "productKeys": [
+        "pineapple"
+      ],
+      "date": "06.02.2026",
+      "supplier": "ООО \"ИНТЕРФУД\"",
+      "invoice": "ЦБ-1391",
+      "publicId": "de99cfcf-1e04-428e-b2b4-f1331480fec0",
+      "version": 1,
+      "line": 33,
+      "name": "Ананас Del Monte,кг (ЦБ-00002009)",
+      "unit": "кг",
+      "qty": 4.65,
+      "sum": 1979.04,
+      "fact": 425.6
+    },
+    {
+      "productKeys": [
+        "mozzarella_125"
+      ],
+      "date": "12.02.2026",
+      "supplier": "ООО \"АРТАРИ\"",
+      "invoice": "АРУН-000373",
+      "publicId": "3978a1aa-2e87-4cc2-b237-5b42cba4d17f",
+      "version": 1,
+      "line": 1,
+      "name": "Сыр Моцарелла 125г (Mozzarella) уп.3кг БОН ЛАТТЕ,шт (УН-00000249)",
+      "unit": "шт",
+      "qty": 2,
+      "sum": 5610,
+      "fact": 2805
+    },
+    {
+      "productKeys": [
+        "gorgonzola_cheese"
+      ],
+      "date": "12.02.2026",
+      "supplier": "ООО \"АРТАРИ\"",
+      "invoice": "АРУН-000373",
+      "publicId": "3978a1aa-2e87-4cc2-b237-5b42cba4d17f",
+      "version": 1,
+      "line": 2,
+      "name": "Сыр с голубой плесенью Горгонзола ТМ АРТАРИ с 53% \"АЛЬДИНИ\",кг (УН-00000807)",
+      "unit": "кг",
+      "qty": 4.168,
+      "sum": 6668.8,
+      "fact": 1600
+    },
+    {
+      "productKeys": [
+        "spinach_standard"
+      ],
+      "date": "13.02.2026",
+      "supplier": "ООО \"ИНТЕРФУД\"",
+      "invoice": "ИФЦБ-001839",
+      "publicId": "381ce7ac-1ee2-4cb4-8ac6-5d26b0a3b377",
+      "version": 1,
+      "line": 5,
+      "name": "Шпинат ,кг (00-00000226)",
+      "unit": "кг",
+      "qty": 2.17,
+      "sum": 1992.93,
+      "fact": 918.4
+    },
+    {
+      "productKeys": [
+        "pineapple"
+      ],
+      "date": "13.02.2026",
+      "supplier": "ООО \"ИНТЕРФУД\"",
+      "invoice": "ИФЦБ-001839",
+      "publicId": "381ce7ac-1ee2-4cb4-8ac6-5d26b0a3b377",
+      "version": 1,
+      "line": 14,
+      "name": "Ананас Del Monte ,кг (ЦБ-00002009)",
+      "unit": "кг",
+      "qty": 5.57,
+      "sum": 2495.36,
+      "fact": 448
     },
     {
       "productKeys": [
@@ -269,6 +874,22 @@
     },
     {
       "productKeys": [
+        "courage_cucumber"
+      ],
+      "date": "13.02.2026",
+      "supplier": "ООО \"ИНТЕРФУД\"",
+      "invoice": "ИФЦБ-001839",
+      "publicId": "381ce7ac-1ee2-4cb4-8ac6-5d26b0a3b377",
+      "version": 1,
+      "line": 26,
+      "name": "Огурцы Кураж Тепличные,кг (00-00001354)",
+      "unit": "кг",
+      "qty": 3.5,
+      "sum": 1489.6,
+      "fact": 425.6
+    },
+    {
+      "productKeys": [
         "eggplant"
       ],
       "date": "14.02.2026",
@@ -282,6 +903,134 @@
       "qty": 12,
       "sum": 2721.6,
       "fact": 226.8
+    },
+    {
+      "productKeys": [
+        "courage_cucumber"
+      ],
+      "date": "14.02.2026",
+      "supplier": "ООО \"АМД КОМПАНИ\"",
+      "invoice": "АМД00005647",
+      "publicId": "d77241d0-c0d2-4dfa-b70c-35dec4e150dd",
+      "version": 1,
+      "line": 7,
+      "name": "Огурцы Кураж,кг (УТ000007874)",
+      "unit": "кг",
+      "qty": 4,
+      "sum": 1209.6,
+      "fact": 302.4
+    },
+    {
+      "productKeys": [
+        "spinach_standard"
+      ],
+      "date": "14.02.2026",
+      "supplier": "ООО \"АМД КОМПАНИ\"",
+      "invoice": "АМД00005647",
+      "publicId": "d77241d0-c0d2-4dfa-b70c-35dec4e150dd",
+      "version": 1,
+      "line": 11,
+      "name": "Шпинат,кг (00000000097)",
+      "unit": "кг",
+      "qty": 2,
+      "sum": 1780.8,
+      "fact": 890.4
+    },
+    {
+      "productKeys": [
+        "spinach_standard"
+      ],
+      "date": "16.02.2026",
+      "supplier": "ООО \"ИНТЕРФУД\"",
+      "invoice": "ИФЦБ-001941",
+      "publicId": "2dd69f9c-0239-49bf-a6f0-774c5d250b47",
+      "version": 1,
+      "line": 22,
+      "name": "Шпинат ,кг (00-00000226)",
+      "unit": "кг",
+      "qty": 1,
+      "sum": 918.4,
+      "fact": 918.4
+    },
+    {
+      "productKeys": [
+        "spinach_standard"
+      ],
+      "date": "16.02.2026",
+      "supplier": "ООО \"ИНТЕРФУД\"",
+      "invoice": "ЦБ-1816",
+      "publicId": "2c79605c-d861-4bc3-9356-83df3c702b5a",
+      "version": 1,
+      "line": 21,
+      "name": "Шпинат,кг (00-00000226)",
+      "unit": "кг",
+      "qty": 1,
+      "sum": 918.4,
+      "fact": 918.4
+    },
+    {
+      "productKeys": [
+        "spinach_standard"
+      ],
+      "date": "22.02.2026",
+      "supplier": "ООО \"ИНТЕРФУД\"",
+      "invoice": "ИФЦБ-002200",
+      "publicId": "db285f01-6010-40ed-8f47-d82eb4fb82c5",
+      "version": 1,
+      "line": 20,
+      "name": "Шпинат ,кг (00-00000226)",
+      "unit": "кг",
+      "qty": 2,
+      "sum": 1803.2,
+      "fact": 901.6
+    },
+    {
+      "productKeys": [
+        "spinach_standard"
+      ],
+      "date": "22.02.2026",
+      "supplier": "ООО \"ИНТЕРФУД\"",
+      "invoice": "ЦБ-2062",
+      "publicId": "05e231ff-260d-44ba-abe8-b7e63306746d",
+      "version": 1,
+      "line": 20,
+      "name": "Шпинат,кг (00-00000226)",
+      "unit": "кг",
+      "qty": 2,
+      "sum": 1803.2,
+      "fact": 901.6
+    },
+    {
+      "productKeys": [
+        "mozzarella_125"
+      ],
+      "date": "25.02.2026",
+      "supplier": "ООО \"МЕТРО Кэш энд Керри\" ",
+      "invoice": "61 012244 / 011",
+      "publicId": "cac9a925-cffa-42f5-b050-aad0187991e5",
+      "version": 1,
+      "line": 7,
+      "name": "125Г СЫР МОЦАРЕЛЛА 45% METRO CHEF ФИОРДИЛАТТ БЗМЖ,ШТ (116706)",
+      "unit": "ШТ",
+      "qty": 20,
+      "sum": 2580,
+      "fact": 129
+    },
+    {
+      "productKeys": [
+        "pineapple"
+      ],
+      "date": "25.02.2026",
+      "supplier": "ООО \"ИНТЕРФУД\"",
+      "invoice": "ИФЦБ-002342",
+      "publicId": "b4fd9999-b65f-4376-8dcd-55f9b507a5dd",
+      "version": 1,
+      "line": 7,
+      "name": "Ананас Del Monte ,кг (ЦБ-00002009)",
+      "unit": "кг",
+      "qty": 6.9,
+      "sum": 3091.2,
+      "fact": 448
     },
     {
       "productKeys": [
@@ -301,6 +1050,54 @@
     },
     {
       "productKeys": [
+        "spinach_standard"
+      ],
+      "date": "25.02.2026",
+      "supplier": "ООО \"ИНТЕРФУД\"",
+      "invoice": "ИФЦБ-002342",
+      "publicId": "b4fd9999-b65f-4376-8dcd-55f9b507a5dd",
+      "version": 1,
+      "line": 34,
+      "name": "Шпинат ,кг (00-00000226)",
+      "unit": "кг",
+      "qty": 2.03,
+      "sum": 1705.2,
+      "fact": 840
+    },
+    {
+      "productKeys": [
+        "courage_cucumber"
+      ],
+      "date": "25.02.2026",
+      "supplier": "ООО \"ИНТЕРФУД\"",
+      "invoice": "ИФЦБ-002342",
+      "publicId": "b4fd9999-b65f-4376-8dcd-55f9b507a5dd",
+      "version": 1,
+      "line": 45,
+      "name": "Огурцы Кураж Тепличные,кг (00-00001354)",
+      "unit": "кг",
+      "qty": 8,
+      "sum": 3225.6,
+      "fact": 403.2
+    },
+    {
+      "productKeys": [
+        "pineapple"
+      ],
+      "date": "25.02.2026",
+      "supplier": "ООО \"ИНТЕРФУД\"",
+      "invoice": "ЦБ-2190",
+      "publicId": "d165fbde-6d82-4fc9-bb4a-2aee5b15f9e5",
+      "version": 1,
+      "line": 7,
+      "name": "Ананас Del Monte,кг (ЦБ-00002009)",
+      "unit": "кг",
+      "qty": 6.9,
+      "sum": 3091.2,
+      "fact": 448
+    },
+    {
+      "productKeys": [
         "eggplant"
       ],
       "date": "25.02.2026",
@@ -314,6 +1111,38 @@
       "qty": 6.2,
       "sum": 1041.6,
       "fact": 168
+    },
+    {
+      "productKeys": [
+        "spinach_standard"
+      ],
+      "date": "25.02.2026",
+      "supplier": "ООО \"ИНТЕРФУД\"",
+      "invoice": "ЦБ-2190",
+      "publicId": "d165fbde-6d82-4fc9-bb4a-2aee5b15f9e5",
+      "version": 1,
+      "line": 34,
+      "name": "Шпинат,кг (00-00000226)",
+      "unit": "кг",
+      "qty": 2.03,
+      "sum": 1705.2,
+      "fact": 840
+    },
+    {
+      "productKeys": [
+        "courage_cucumber"
+      ],
+      "date": "25.02.2026",
+      "supplier": "ООО \"ИНТЕРФУД\"",
+      "invoice": "ЦБ-2190",
+      "publicId": "d165fbde-6d82-4fc9-bb4a-2aee5b15f9e5",
+      "version": 1,
+      "line": 45,
+      "name": "Огурцы Кураж Тепличные,кг (00-00001354)",
+      "unit": "кг",
+      "qty": 8,
+      "sum": 3225.6,
+      "fact": 403.2
     },
     {
       "productKeys": [
@@ -333,6 +1162,22 @@
     },
     {
       "productKeys": [
+        "spinach_standard"
+      ],
+      "date": "26.02.2026",
+      "supplier": "ООО \"ИНТЕРФУД\"",
+      "invoice": "ИФЦБ-002380",
+      "publicId": "84cb4bb2-d348-4cd3-a103-7e31e6250b87",
+      "version": 1,
+      "line": 5,
+      "name": "Шпинат ,кг (00-00000226)",
+      "unit": "кг",
+      "qty": 2.17,
+      "sum": 1822.8,
+      "fact": 840
+    },
+    {
+      "productKeys": [
         "eggplant"
       ],
       "date": "26.02.2026",
@@ -346,6 +1191,22 @@
       "qty": 6,
       "sum": 1008,
       "fact": 168
+    },
+    {
+      "productKeys": [
+        "spinach_standard"
+      ],
+      "date": "26.02.2026",
+      "supplier": "ООО \"ИНТЕРФУД\"",
+      "invoice": "ЦБ-2224",
+      "publicId": "85564f52-20dd-474e-bcd1-1966d2aff1e6",
+      "version": 1,
+      "line": 5,
+      "name": "Шпинат,кг (00-00000226)",
+      "unit": "кг",
+      "qty": 2.17,
+      "sum": 1822.8,
+      "fact": 840
     },
     {
       "productKeys": [
@@ -365,6 +1226,54 @@
     },
     {
       "productKeys": [
+        "mozzarella_125"
+      ],
+      "date": "27.02.2026",
+      "supplier": "ООО \"АРТАРИ\"",
+      "invoice": "АРУН-000535",
+      "publicId": "3322b26c-9434-4641-aed5-e4d2c6875428",
+      "version": 1,
+      "line": 1,
+      "name": "Сыр Моцарелла 125г (Mozzarella) уп.3кг БОН ЛАТТЕ,шт (УН-00000249)",
+      "unit": "шт",
+      "qty": 3,
+      "sum": 8415,
+      "fact": 2805
+    },
+    {
+      "productKeys": [
+        "gorgonzola_cheese"
+      ],
+      "date": "27.02.2026",
+      "supplier": "ООО \"АРТАРИ\"",
+      "invoice": "АРУН-000535",
+      "publicId": "3322b26c-9434-4641-aed5-e4d2c6875428",
+      "version": 1,
+      "line": 2,
+      "name": "Сыр с голубой плесенью Горгонзола ТМ АРТАРИ с 53% \"АЛЬДИНИ\",кг (УН-00000807)",
+      "unit": "кг",
+      "qty": 4.256,
+      "sum": 6809.6,
+      "fact": 1600
+    },
+    {
+      "productKeys": [
+        "courage_cucumber"
+      ],
+      "date": "27.02.2026",
+      "supplier": "ООО \"ИНТЕРФУД\"",
+      "invoice": "ИФЦБ-002431",
+      "publicId": "0a156f0c-c8fd-4129-be97-3c5faa91c9e3",
+      "version": 1,
+      "line": 1,
+      "name": "Огурцы Кураж Тепличные,кг (00-00001354)",
+      "unit": "кг",
+      "qty": 7.05,
+      "sum": 2842.56,
+      "fact": 403.2
+    },
+    {
+      "productKeys": [
         "eggplant"
       ],
       "date": "27.02.2026",
@@ -378,6 +1287,38 @@
       "qty": 12.5,
       "sum": 2100,
       "fact": 168
+    },
+    {
+      "productKeys": [
+        "pineapple"
+      ],
+      "date": "27.02.2026",
+      "supplier": "ООО \"ИНТЕРФУД\"",
+      "invoice": "ИФЦБ-002431",
+      "publicId": "0a156f0c-c8fd-4129-be97-3c5faa91c9e3",
+      "version": 1,
+      "line": 18,
+      "name": "Ананас Del Monte ,кг (ЦБ-00002009)",
+      "unit": "кг",
+      "qty": 6.8,
+      "sum": 3046.4,
+      "fact": 448
+    },
+    {
+      "productKeys": [
+        "courage_cucumber"
+      ],
+      "date": "27.02.2026",
+      "supplier": "ООО \"ИНТЕРФУД\"",
+      "invoice": "ЦБ-2274",
+      "publicId": "6b1a8648-7e2a-4e3f-8d9c-c3ca42c317dc",
+      "version": 1,
+      "line": 1,
+      "name": "Огурцы Кураж Тепличные,кг (00-00001354)",
+      "unit": "кг",
+      "qty": 7.05,
+      "sum": 2842.56,
+      "fact": 403.2
     },
     {
       "productKeys": [
@@ -397,6 +1338,54 @@
     },
     {
       "productKeys": [
+        "pineapple"
+      ],
+      "date": "27.02.2026",
+      "supplier": "ООО \"ИНТЕРФУД\"",
+      "invoice": "ЦБ-2274",
+      "publicId": "6b1a8648-7e2a-4e3f-8d9c-c3ca42c317dc",
+      "version": 1,
+      "line": 18,
+      "name": "Ананас Del Monte,кг (ЦБ-00002009)",
+      "unit": "кг",
+      "qty": 6.8,
+      "sum": 3046.4,
+      "fact": 448
+    },
+    {
+      "productKeys": [
+        "pineapple"
+      ],
+      "date": "02.03.2026",
+      "supplier": "ООО \"МЕТРО Кэш энд Керри\" ",
+      "invoice": "61 013423 / 011",
+      "publicId": "8a877ad8-5404-48fd-9f45-6a3e50409a5b",
+      "version": 1,
+      "line": 3,
+      "name": "1Л СОК НАП SANTAL АНАНАСОВЫЙ ТЕТ,ШТ (213686)",
+      "unit": "ШТ",
+      "qty": 3,
+      "sum": 597,
+      "fact": 199
+    },
+    {
+      "productKeys": [
+        "spinach_standard"
+      ],
+      "date": "03.03.2026",
+      "supplier": "ООО \"ИНТЕРФУД\"",
+      "invoice": "ИФЦБ-002610",
+      "publicId": "9e36996f-fdb2-4a6b-98d0-33c27b2bbca0",
+      "version": 2,
+      "line": 6,
+      "name": "Шпинат ,кг (00-00000226)",
+      "unit": "кг",
+      "qty": 2.052,
+      "sum": 1723.68,
+      "fact": 840
+    },
+    {
+      "productKeys": [
         "eggplant"
       ],
       "date": "03.03.2026",
@@ -410,6 +1399,22 @@
       "qty": 8.157,
       "sum": 1370.38,
       "fact": 168
+    },
+    {
+      "productKeys": [
+        "spinach_standard"
+      ],
+      "date": "03.03.2026",
+      "supplier": "ООО \"ИНТЕРФУД\"",
+      "invoice": "ЦБ-2441",
+      "publicId": "d3ab7d65-b181-4ee4-8d7d-305892c3211b",
+      "version": 1,
+      "line": 6,
+      "name": "Шпинат,кг (00-00000226)",
+      "unit": "кг",
+      "qty": 2.052,
+      "sum": 1723.68,
+      "fact": 840
     },
     {
       "productKeys": [
@@ -429,6 +1434,86 @@
     },
     {
       "productKeys": [
+        "courage_cucumber"
+      ],
+      "date": "06.03.2026",
+      "supplier": "ООО \"ИНТЕРФУД\"",
+      "invoice": "ИФЦБ-002757",
+      "publicId": "7ff5fecc-5555-4f30-a613-8edb0225c448",
+      "version": 1,
+      "line": 6,
+      "name": "Огурцы Кураж Тепличные,кг (00-00001354)",
+      "unit": "кг",
+      "qty": 3.1,
+      "sum": 1180.48,
+      "fact": 380.8
+    },
+    {
+      "productKeys": [
+        "spinach_standard"
+      ],
+      "date": "06.03.2026",
+      "supplier": "ООО \"ИНТЕРФУД\"",
+      "invoice": "ИФЦБ-002757",
+      "publicId": "7ff5fecc-5555-4f30-a613-8edb0225c448",
+      "version": 1,
+      "line": 14,
+      "name": "Шпинат ,кг (00-00000226)",
+      "unit": "кг",
+      "qty": 1.5,
+      "sum": 1260,
+      "fact": 840
+    },
+    {
+      "productKeys": [
+        "courage_cucumber"
+      ],
+      "date": "06.03.2026",
+      "supplier": "ООО \"ИНТЕРФУД\"",
+      "invoice": "ЦБ-2580",
+      "publicId": "09460a06-e20f-409e-9ae8-4834a61aebbb",
+      "version": 1,
+      "line": 6,
+      "name": "Огурцы Кураж Тепличные,кг (00-00001354)",
+      "unit": "кг",
+      "qty": 3.1,
+      "sum": 1180.48,
+      "fact": 380.8
+    },
+    {
+      "productKeys": [
+        "spinach_standard"
+      ],
+      "date": "06.03.2026",
+      "supplier": "ООО \"ИНТЕРФУД\"",
+      "invoice": "ЦБ-2580",
+      "publicId": "09460a06-e20f-409e-9ae8-4834a61aebbb",
+      "version": 1,
+      "line": 14,
+      "name": "Шпинат,кг (00-00000226)",
+      "unit": "кг",
+      "qty": 1.5,
+      "sum": 1260,
+      "fact": 840
+    },
+    {
+      "productKeys": [
+        "courage_cucumber"
+      ],
+      "date": "07.03.2026",
+      "supplier": "ООО \"ИНТЕРФУД\"",
+      "invoice": "ИФЦБ-002809",
+      "publicId": "ed514eef-842a-44ec-ba16-40fadaaca48e",
+      "version": 1,
+      "line": 10,
+      "name": "Огурцы Кураж Тепличные,кг (00-00001354)",
+      "unit": "кг",
+      "qty": 7,
+      "sum": 2665.6,
+      "fact": 380.8
+    },
+    {
+      "productKeys": [
         "eggplant"
       ],
       "date": "07.03.2026",
@@ -442,6 +1527,22 @@
       "qty": 4.8,
       "sum": 1854.72,
       "fact": 386.4
+    },
+    {
+      "productKeys": [
+        "courage_cucumber"
+      ],
+      "date": "07.03.2026",
+      "supplier": "ООО \"ИНТЕРФУД\"",
+      "invoice": "ЦБ-2629",
+      "publicId": "ca4643cf-edac-47be-abf2-de8af790027c",
+      "version": 1,
+      "line": 10,
+      "name": "Огурцы Кураж Тепличные,кг (00-00001354)",
+      "unit": "кг",
+      "qty": 7,
+      "sum": 2665.6,
+      "fact": 380.8
     },
     {
       "productKeys": [
@@ -461,6 +1562,54 @@
     },
     {
       "productKeys": [
+        "pineapple"
+      ],
+      "date": "09.03.2026",
+      "supplier": "ООО \"ИНТЕРФУД\"",
+      "invoice": "ИФЦБ-002870",
+      "publicId": "ab9b801b-3632-4ac9-b4f5-c69ec510d50c",
+      "version": 1,
+      "line": 17,
+      "name": "Ананас Del Monte ,кг (ЦБ-00002009)",
+      "unit": "кг",
+      "qty": 4.56,
+      "sum": 2042.88,
+      "fact": 448
+    },
+    {
+      "productKeys": [
+        "pineapple"
+      ],
+      "date": "09.03.2026",
+      "supplier": "ООО \"ИНТЕРФУД\"",
+      "invoice": "ЦБ-2682",
+      "publicId": "58782d92-b1ca-4b01-aec5-78ced02905dc",
+      "version": 1,
+      "line": 17,
+      "name": "Ананас Del Monte,кг (ЦБ-00002009)",
+      "unit": "кг",
+      "qty": 4.56,
+      "sum": 2042.88,
+      "fact": 448
+    },
+    {
+      "productKeys": [
+        "courage_cucumber"
+      ],
+      "date": "11.03.2026",
+      "supplier": "ООО \"ИНТЕРФУД\"",
+      "invoice": "ИФЦБ-002929",
+      "publicId": "b1762fc7-66e1-487b-b80d-d5405033a8b9",
+      "version": 1,
+      "line": 4,
+      "name": "Огурцы Кураж Тепличные,кг (00-00001354)",
+      "unit": "кг",
+      "qty": 8.7,
+      "sum": 3020.64,
+      "fact": 347.2
+    },
+    {
+      "productKeys": [
         "eggplant"
       ],
       "date": "11.03.2026",
@@ -474,6 +1623,38 @@
       "qty": 8.8,
       "sum": 2562.56,
       "fact": 291.2
+    },
+    {
+      "productKeys": [
+        "spinach_standard"
+      ],
+      "date": "11.03.2026",
+      "supplier": "ООО \"ИНТЕРФУД\"",
+      "invoice": "ИФЦБ-002929",
+      "publicId": "b1762fc7-66e1-487b-b80d-d5405033a8b9",
+      "version": 1,
+      "line": 26,
+      "name": "Шпинат ,кг (00-00000226)",
+      "unit": "кг",
+      "qty": 2.118,
+      "sum": 1779.12,
+      "fact": 840
+    },
+    {
+      "productKeys": [
+        "courage_cucumber"
+      ],
+      "date": "11.03.2026",
+      "supplier": "ООО \"ИНТЕРФУД\"",
+      "invoice": "ЦБ-2738",
+      "publicId": "0c14cb7d-daa3-4633-b4dc-3648d399772b",
+      "version": 1,
+      "line": 4,
+      "name": "Огурцы Кураж Тепличные,кг (00-00001354)",
+      "unit": "кг",
+      "qty": 8.7,
+      "sum": 3020.64,
+      "fact": 347.2
     },
     {
       "productKeys": [
@@ -493,6 +1674,86 @@
     },
     {
       "productKeys": [
+        "spinach_standard"
+      ],
+      "date": "11.03.2026",
+      "supplier": "ООО \"ИНТЕРФУД\"",
+      "invoice": "ЦБ-2738",
+      "publicId": "0c14cb7d-daa3-4633-b4dc-3648d399772b",
+      "version": 1,
+      "line": 26,
+      "name": "Шпинат,кг (00-00000226)",
+      "unit": "кг",
+      "qty": 2.118,
+      "sum": 1779.12,
+      "fact": 840
+    },
+    {
+      "productKeys": [
+        "pineapple"
+      ],
+      "date": "12.03.2026",
+      "supplier": "ООО \"ИНТЕРФУД\"",
+      "invoice": "ИФЦБ-002952",
+      "publicId": "04d816c4-d424-47b2-aae2-346b4b4b0a77",
+      "version": 2,
+      "line": 2,
+      "name": "Ананас Голд ,кг (00-00000326)",
+      "unit": "кг",
+      "qty": 8.4,
+      "sum": 2116.8,
+      "fact": 252
+    },
+    {
+      "productKeys": [
+        "pineapple"
+      ],
+      "date": "12.03.2026",
+      "supplier": "ООО \"ИНТЕРФУД\"",
+      "invoice": "ЦБ-2758",
+      "publicId": "d7b2ba04-bdd9-4b80-93cb-9fde7bbeb26b",
+      "version": 1,
+      "line": 2,
+      "name": "Ананас Голд,кг (00-00000326)",
+      "unit": "кг",
+      "qty": 8.4,
+      "sum": 2116.8,
+      "fact": 252
+    },
+    {
+      "productKeys": [
+        "spinach_standard"
+      ],
+      "date": "13.03.2026",
+      "supplier": "ООО \"ИНТЕРФУД\"",
+      "invoice": "ИФЦБ-003008",
+      "publicId": "8d8fde76-e1ba-424c-a56f-b6528218c4ae",
+      "version": 1,
+      "line": 12,
+      "name": "Шпинат ,кг (00-00000226)",
+      "unit": "кг",
+      "qty": 2.37,
+      "sum": 1990.8,
+      "fact": 840
+    },
+    {
+      "productKeys": [
+        "spinach_standard"
+      ],
+      "date": "13.03.2026",
+      "supplier": "ООО \"ИНТЕРФУД\"",
+      "invoice": "ЦБ-2813",
+      "publicId": "ae1f4d35-f65d-4383-a64c-880d6a849071",
+      "version": 1,
+      "line": 12,
+      "name": "Шпинат,кг (00-00000226)",
+      "unit": "кг",
+      "qty": 2.37,
+      "sum": 1990.8,
+      "fact": 840
+    },
+    {
+      "productKeys": [
         "eggplant"
       ],
       "date": "14.03.2026",
@@ -509,6 +1770,22 @@
     },
     {
       "productKeys": [
+        "pineapple"
+      ],
+      "date": "14.03.2026",
+      "supplier": "ООО \"ИНТЕРФУД\"",
+      "invoice": "ИФЦБ-003045",
+      "publicId": "fa4bc670-f2a4-44d7-a386-86f8f6717c40",
+      "version": 1,
+      "line": 9,
+      "name": "Ананас Del Monte ,кг (ЦБ-00002009)",
+      "unit": "кг",
+      "qty": 6,
+      "sum": 3037.44,
+      "fact": 506.24
+    },
+    {
+      "productKeys": [
         "eggplant"
       ],
       "date": "14.03.2026",
@@ -522,6 +1799,54 @@
       "qty": 6.2,
       "sum": 1805.44,
       "fact": 291.2
+    },
+    {
+      "productKeys": [
+        "pineapple"
+      ],
+      "date": "14.03.2026",
+      "supplier": "ООО \"ИНТЕРФУД\"",
+      "invoice": "ЦБ-2848",
+      "publicId": "617a80f6-c68e-4a6e-b2fe-a4d42f66e6a4",
+      "version": 1,
+      "line": 9,
+      "name": "Ананас Del Monte,кг (ЦБ-00002009)",
+      "unit": "кг",
+      "qty": 6,
+      "sum": 3037.44,
+      "fact": 506.24
+    },
+    {
+      "productKeys": [
+        "spinach_standard"
+      ],
+      "date": "19.03.2026",
+      "supplier": "ООО \"ИНТЕРФУД\"",
+      "invoice": "ИФЦБ-003226",
+      "publicId": "9f2bd9a1-b8a6-4d82-91aa-468641bd9362",
+      "version": 2,
+      "line": 22,
+      "name": "Шпинат ,кг (00-00000226)",
+      "unit": "кг",
+      "qty": 1.85,
+      "sum": 1243.2,
+      "fact": 672
+    },
+    {
+      "productKeys": [
+        "spinach_standard"
+      ],
+      "date": "19.03.2026",
+      "supplier": "ООО \"ИНТЕРФУД\"",
+      "invoice": "ЦБ-3016",
+      "publicId": "70b41b08-5878-4bd9-aa58-c9b2da2a7d22",
+      "version": 1,
+      "line": 22,
+      "name": "Шпинат,кг (00-00000226)",
+      "unit": "кг",
+      "qty": 1.85,
+      "sum": 1243.2,
+      "fact": 672
     },
     {
       "productKeys": [
@@ -557,6 +1882,38 @@
     },
     {
       "productKeys": [
+        "spinach_standard"
+      ],
+      "date": "22.03.2026",
+      "supplier": "ООО \"ИНТЕРФУД\"",
+      "invoice": "ИФЦБ-003331",
+      "publicId": "b774e301-5591-497e-86c6-654359009684",
+      "version": 1,
+      "line": 5,
+      "name": "Шпинат ,кг (00-00000226)",
+      "unit": "кг",
+      "qty": 2,
+      "sum": 1344,
+      "fact": 672
+    },
+    {
+      "productKeys": [
+        "courage_cucumber"
+      ],
+      "date": "22.03.2026",
+      "supplier": "ООО \"ИНТЕРФУД\"",
+      "invoice": "ИФЦБ-003331",
+      "publicId": "b774e301-5591-497e-86c6-654359009684",
+      "version": 1,
+      "line": 9,
+      "name": "Огурцы Кураж Тепличные,кг (00-00001354)",
+      "unit": "кг",
+      "qty": 6.4,
+      "sum": 1648.64,
+      "fact": 257.6
+    },
+    {
+      "productKeys": [
         "eggplant"
       ],
       "date": "22.03.2026",
@@ -570,6 +1927,38 @@
       "qty": 5.3,
       "sum": 2077.6,
       "fact": 392
+    },
+    {
+      "productKeys": [
+        "spinach_standard"
+      ],
+      "date": "22.03.2026",
+      "supplier": "ООО \"ИНТЕРФУД\"",
+      "invoice": "ЦБ-3113",
+      "publicId": "9ae506f6-2d9a-4267-a2b5-eb9e7791b1c8",
+      "version": 1,
+      "line": 5,
+      "name": "Шпинат,кг (00-00000226)",
+      "unit": "кг",
+      "qty": 2,
+      "sum": 1344,
+      "fact": 672
+    },
+    {
+      "productKeys": [
+        "courage_cucumber"
+      ],
+      "date": "22.03.2026",
+      "supplier": "ООО \"ИНТЕРФУД\"",
+      "invoice": "ЦБ-3113",
+      "publicId": "9ae506f6-2d9a-4267-a2b5-eb9e7791b1c8",
+      "version": 1,
+      "line": 9,
+      "name": "Огурцы Кураж Тепличные,кг (00-00001354)",
+      "unit": "кг",
+      "qty": 6.4,
+      "sum": 1648.64,
+      "fact": 257.6
     },
     {
       "productKeys": [
@@ -589,6 +1978,54 @@
     },
     {
       "productKeys": [
+        "pineapple"
+      ],
+      "date": "23.03.2026",
+      "supplier": "ООО \"ИНТЕРФУД\"",
+      "invoice": "ИФЦБ-003361",
+      "publicId": "2811c267-1667-40c3-a53e-04f846e4754b",
+      "version": 1,
+      "line": 10,
+      "name": "Ананас Del Monte ,кг (ЦБ-00002009)",
+      "unit": "кг",
+      "qty": 4.4,
+      "sum": 2227.46,
+      "fact": 506.24
+    },
+    {
+      "productKeys": [
+        "pineapple"
+      ],
+      "date": "23.03.2026",
+      "supplier": "ООО \"ИНТЕРФУД\"",
+      "invoice": "ЦБ-3138",
+      "publicId": "e274bf49-fad0-428f-b926-96619072fd86",
+      "version": 1,
+      "line": 10,
+      "name": "Ананас Del Monte,кг (ЦБ-00002009)",
+      "unit": "кг",
+      "qty": 4.4,
+      "sum": 2227.46,
+      "fact": 506.24
+    },
+    {
+      "productKeys": [
+        "spinach_standard"
+      ],
+      "date": "24.03.2026",
+      "supplier": "ООО \"ИНТЕРФУД\"",
+      "invoice": "ИФЦБ-003431",
+      "publicId": "40cd3827-6bf4-4c90-9bb2-13b044419613",
+      "version": 2,
+      "line": 6,
+      "name": "Шпинат ,кг (00-00000226)",
+      "unit": "кг",
+      "qty": 2.3,
+      "sum": 1545.6,
+      "fact": 672
+    },
+    {
+      "productKeys": [
         "eye_muscle"
       ],
       "date": "24.03.2026",
@@ -602,6 +2039,22 @@
       "qty": 27.73,
       "sum": 23293.31,
       "fact": 840
+    },
+    {
+      "productKeys": [
+        "spinach_standard"
+      ],
+      "date": "24.03.2026",
+      "supplier": "ООО \"ИНТЕРФУД\"",
+      "invoice": "ЦБ-3203",
+      "publicId": "be66c152-0b1c-4ccf-9d45-c8d0a6019632",
+      "version": 1,
+      "line": 6,
+      "name": "Шпинат,кг (00-00000226)",
+      "unit": "кг",
+      "qty": 2.3,
+      "sum": 1545.6,
+      "fact": 672
     },
     {
       "productKeys": [
@@ -653,6 +2106,22 @@
     },
     {
       "productKeys": [
+        "pineapple"
+      ],
+      "date": "26.03.2026",
+      "supplier": "ООО \"ИНТЕРФУД\"",
+      "invoice": "ИФЦБ-003490",
+      "publicId": "bec9124b-0b47-44a9-a5ef-d836aa24fd26",
+      "version": 2,
+      "line": 14,
+      "name": "Ананас Del Monte ,кг (ЦБ-00002009)",
+      "unit": "кг",
+      "qty": 7.7,
+      "sum": 3898.05,
+      "fact": 506.24
+    },
+    {
+      "productKeys": [
         "eggplant"
       ],
       "date": "26.03.2026",
@@ -666,6 +2135,54 @@
       "qty": 11,
       "sum": 4065.6,
       "fact": 369.6
+    },
+    {
+      "productKeys": [
+        "pineapple"
+      ],
+      "date": "26.03.2026",
+      "supplier": "ООО \"ИНТЕРФУД\"",
+      "invoice": "ЦБ-3257",
+      "publicId": "104afbbb-db13-460d-83b1-96cf3fe32761",
+      "version": 1,
+      "line": 14,
+      "name": "Ананас Del Monte,кг (ЦБ-00002009)",
+      "unit": "кг",
+      "qty": 7.7,
+      "sum": 3898.05,
+      "fact": 506.24
+    },
+    {
+      "productKeys": [
+        "courage_cucumber"
+      ],
+      "date": "27.03.2026",
+      "supplier": "ООО \"ИНТЕРФУД\"",
+      "invoice": "ИФЦБ-003523",
+      "publicId": "22a35e12-882c-4ad3-8d24-554142a7fd53",
+      "version": 1,
+      "line": 8,
+      "name": "Огурцы Кураж Тепличные,кг (00-00001354)",
+      "unit": "кг",
+      "qty": 8,
+      "sum": 1971.2,
+      "fact": 246.4
+    },
+    {
+      "productKeys": [
+        "courage_cucumber"
+      ],
+      "date": "27.03.2026",
+      "supplier": "ООО \"ИНТЕРФУД\"",
+      "invoice": "ЦБ-3288",
+      "publicId": "78e2fe4f-f961-46e9-badb-954e6325c6ac",
+      "version": 1,
+      "line": 8,
+      "name": "Огурцы Кураж Тепличные,кг (00-00001354)",
+      "unit": "кг",
+      "qty": 8,
+      "sum": 1971.2,
+      "fact": 246.4
     },
     {
       "productKeys": [
@@ -701,6 +2218,54 @@
     },
     {
       "productKeys": [
+        "pineapple"
+      ],
+      "date": "31.03.2026",
+      "supplier": "ООО \"ИНТЕРФУД\"",
+      "invoice": "ИФЦБ-003698",
+      "publicId": "e1f19f42-ebe6-49a3-8d49-11039d4431a9",
+      "version": 1,
+      "line": 28,
+      "name": "Ананас Голд ,кг (00-00000326)",
+      "unit": "кг",
+      "qty": 8.5,
+      "sum": 1951.6,
+      "fact": 229.6
+    },
+    {
+      "productKeys": [
+        "pineapple"
+      ],
+      "date": "31.03.2026",
+      "supplier": "ООО \"ИНТЕРФУД\"",
+      "invoice": "ЦБ-3449",
+      "publicId": "bc134b54-9330-493f-8cd1-effa3679bf09",
+      "version": 1,
+      "line": 28,
+      "name": "Ананас Голд,кг (00-00000326)",
+      "unit": "кг",
+      "qty": 8.5,
+      "sum": 1951.6,
+      "fact": 229.6
+    },
+    {
+      "productKeys": [
+        "mozzarella_125"
+      ],
+      "date": "03.04.2026",
+      "supplier": "ООО \"МЕТРО Кэш энд Керри\" ",
+      "invoice": "61 022036 / 011",
+      "publicId": "29694274-63f3-4dd0-9b3b-43534b3f4a11",
+      "version": 1,
+      "line": 1,
+      "name": "125Г СЫР МОЦАРЕЛЛА 45% METRO CHEF ФИОРДИЛАТТ БЗМЖ,ШТ (116706)",
+      "unit": "ШТ",
+      "qty": 30,
+      "sum": 3870,
+      "fact": 129
+    },
+    {
+      "productKeys": [
         "eggplant"
       ],
       "date": "03.04.2026",
@@ -717,6 +2282,38 @@
     },
     {
       "productKeys": [
+        "courage_cucumber"
+      ],
+      "date": "03.04.2026",
+      "supplier": "ООО \"ИНТЕРФУД\"",
+      "invoice": "ИФЦБ-003780",
+      "publicId": "147f6db1-76a8-4001-b28b-3f1e3b3acbec",
+      "version": 1,
+      "line": 13,
+      "name": "Огурцы Кураж Тепличные,кг (00-00001354)",
+      "unit": "кг",
+      "qty": 6,
+      "sum": 1545.6,
+      "fact": 257.6
+    },
+    {
+      "productKeys": [
+        "spinach_standard"
+      ],
+      "date": "03.04.2026",
+      "supplier": "ООО \"ИНТЕРФУД\"",
+      "invoice": "ИФЦБ-003780",
+      "publicId": "147f6db1-76a8-4001-b28b-3f1e3b3acbec",
+      "version": 1,
+      "line": 36,
+      "name": "Шпинат ,кг (00-00000226)",
+      "unit": "кг",
+      "qty": 1.8,
+      "sum": 1330.56,
+      "fact": 739.2
+    },
+    {
+      "productKeys": [
         "eggplant"
       ],
       "date": "03.04.2026",
@@ -730,6 +2327,70 @@
       "qty": 9.4,
       "sum": 2210.88,
       "fact": 235.2
+    },
+    {
+      "productKeys": [
+        "courage_cucumber"
+      ],
+      "date": "03.04.2026",
+      "supplier": "ООО \"ИНТЕРФУД\"",
+      "invoice": "ЦБ-3521",
+      "publicId": "a0fa4aeb-41af-4955-bb0f-1364da22864f",
+      "version": 1,
+      "line": 13,
+      "name": "Огурцы Кураж Тепличные,кг (00-00001354)",
+      "unit": "кг",
+      "qty": 6,
+      "sum": 1545.6,
+      "fact": 257.6
+    },
+    {
+      "productKeys": [
+        "spinach_standard"
+      ],
+      "date": "03.04.2026",
+      "supplier": "ООО \"ИНТЕРФУД\"",
+      "invoice": "ЦБ-3521",
+      "publicId": "a0fa4aeb-41af-4955-bb0f-1364da22864f",
+      "version": 1,
+      "line": 36,
+      "name": "Шпинат,кг (00-00000226)",
+      "unit": "кг",
+      "qty": 1.8,
+      "sum": 1330.56,
+      "fact": 739.2
+    },
+    {
+      "productKeys": [
+        "spinach_standard"
+      ],
+      "date": "05.04.2026",
+      "supplier": "ООО \"ИНТЕРФУД\"",
+      "invoice": "ИФЦБ-003809",
+      "publicId": "7a5910b7-ef5e-44e2-b325-cd4f40315028",
+      "version": 1,
+      "line": 12,
+      "name": "Шпинат ,кг (00-00000226)",
+      "unit": "кг",
+      "qty": 2.07,
+      "sum": 1530.14,
+      "fact": 739.2
+    },
+    {
+      "productKeys": [
+        "spinach_standard"
+      ],
+      "date": "05.04.2026",
+      "supplier": "ООО \"ИНТЕРФУД\"",
+      "invoice": "ЦБ-3549",
+      "publicId": "c1584357-e30c-40a0-b82d-330d3c6c6ade",
+      "version": 1,
+      "line": 12,
+      "name": "Шпинат,кг (00-00000226)",
+      "unit": "кг",
+      "qty": 2.07,
+      "sum": 1530.14,
+      "fact": 739.2
     },
     {
       "productKeys": [
@@ -765,6 +2426,118 @@
     },
     {
       "productKeys": [
+        "spinach_standard"
+      ],
+      "date": "12.04.2026",
+      "supplier": "ООО \"ИНТЕРФУД\"",
+      "invoice": "ИФЦБ-003949",
+      "publicId": "9de585bf-48c2-4b19-b84e-04596db5c67a",
+      "version": 2,
+      "line": 2,
+      "name": "Шпинат ,кг (00-00000226)",
+      "unit": "кг",
+      "qty": 2,
+      "sum": 1321.6,
+      "fact": 660.8
+    },
+    {
+      "productKeys": [
+        "pineapple"
+      ],
+      "date": "12.04.2026",
+      "supplier": "ООО \"ИНТЕРФУД\"",
+      "invoice": "ИФЦБ-003949",
+      "publicId": "9de585bf-48c2-4b19-b84e-04596db5c67a",
+      "version": 2,
+      "line": 29,
+      "name": "Ананас Del Monte ,кг (ЦБ-00002009)",
+      "unit": "кг",
+      "qty": 3.9,
+      "sum": 1703.52,
+      "fact": 436.8
+    },
+    {
+      "productKeys": [
+        "spinach_standard"
+      ],
+      "date": "12.04.2026",
+      "supplier": "ООО \"ИНТЕРФУД\"",
+      "invoice": "ЦБ-3676",
+      "publicId": "2a746b94-723f-4fe7-8f05-c15daa7ba753",
+      "version": 1,
+      "line": 2,
+      "name": "Шпинат,кг (00-00000226)",
+      "unit": "кг",
+      "qty": 2,
+      "sum": 1321.6,
+      "fact": 660.8
+    },
+    {
+      "productKeys": [
+        "pineapple"
+      ],
+      "date": "12.04.2026",
+      "supplier": "ООО \"ИНТЕРФУД\"",
+      "invoice": "ЦБ-3676",
+      "publicId": "2a746b94-723f-4fe7-8f05-c15daa7ba753",
+      "version": 1,
+      "line": 29,
+      "name": "Ананас Del Monte,кг (ЦБ-00002009)",
+      "unit": "кг",
+      "qty": 3.9,
+      "sum": 1703.52,
+      "fact": 436.8
+    },
+    {
+      "productKeys": [
+        "mozzarella_125"
+      ],
+      "date": "14.04.2026",
+      "supplier": "ООО \"МЕТРО Кэш энд Керри\" ",
+      "invoice": "61 024786 / 011",
+      "publicId": "326ea47e-4082-4330-841e-4e6723710b2e",
+      "version": 1,
+      "line": 23,
+      "name": "125Г СЫР МОЦАРЕЛЛА 45% METRO CHEF ФИОРДИЛАТТ БЗМЖ,ШТ (116706)",
+      "unit": "ШТ",
+      "qty": 20,
+      "sum": 2580,
+      "fact": 129
+    },
+    {
+      "productKeys": [
+        "spinach_standard"
+      ],
+      "date": "14.04.2026",
+      "supplier": "ООО \"ИНТЕРФУД\"",
+      "invoice": "ИФЦБ-003986",
+      "publicId": "ab9a9b4a-b2e6-4b07-b1eb-16e5c4b3d582",
+      "version": 1,
+      "line": 13,
+      "name": "Шпинат ,кг (00-00000226)",
+      "unit": "кг",
+      "qty": 1,
+      "sum": 660.8,
+      "fact": 660.8
+    },
+    {
+      "productKeys": [
+        "courage_cucumber"
+      ],
+      "date": "14.04.2026",
+      "supplier": "ООО \"ИНТЕРФУД\"",
+      "invoice": "ИФЦБ-003986",
+      "publicId": "ab9a9b4a-b2e6-4b07-b1eb-16e5c4b3d582",
+      "version": 1,
+      "line": 25,
+      "name": "Огурцы Кураж Тепличные,кг (00-00001354)",
+      "unit": "кг",
+      "qty": 5.1,
+      "sum": 1313.76,
+      "fact": 257.6
+    },
+    {
+      "productKeys": [
         "eggplant"
       ],
       "date": "14.04.2026",
@@ -781,6 +2554,38 @@
     },
     {
       "productKeys": [
+        "spinach_standard"
+      ],
+      "date": "14.04.2026",
+      "supplier": "ООО \"ИНТЕРФУД\"",
+      "invoice": "ЦБ-3708",
+      "publicId": "720caca6-e713-4505-8132-1431e1420218",
+      "version": 1,
+      "line": 13,
+      "name": "Шпинат,кг (00-00000226)",
+      "unit": "кг",
+      "qty": 1,
+      "sum": 660.8,
+      "fact": 660.8
+    },
+    {
+      "productKeys": [
+        "courage_cucumber"
+      ],
+      "date": "14.04.2026",
+      "supplier": "ООО \"ИНТЕРФУД\"",
+      "invoice": "ЦБ-3708",
+      "publicId": "720caca6-e713-4505-8132-1431e1420218",
+      "version": 1,
+      "line": 25,
+      "name": "Огурцы Кураж Тепличные,кг (00-00001354)",
+      "unit": "кг",
+      "qty": 5.1,
+      "sum": 1313.76,
+      "fact": 257.6
+    },
+    {
+      "productKeys": [
         "eggplant"
       ],
       "date": "14.04.2026",
@@ -794,6 +2599,118 @@
       "qty": 6.3,
       "sum": 1164.24,
       "fact": 184.8
+    },
+    {
+      "productKeys": [
+        "pineapple"
+      ],
+      "date": "16.04.2026",
+      "supplier": "ООО \"ИНТЕРФУД\"",
+      "invoice": "ИФЦБ-004034",
+      "publicId": "b569d9bd-62ba-458b-b29d-e51b5597fb6f",
+      "version": 2,
+      "line": 3,
+      "name": "Ананас Голд ,кг (00-00000326)",
+      "unit": "кг",
+      "qty": 4.57,
+      "sum": 972.5,
+      "fact": 212.8
+    },
+    {
+      "productKeys": [
+        "spinach_standard"
+      ],
+      "date": "16.04.2026",
+      "supplier": "ООО \"ИНТЕРФУД\"",
+      "invoice": "ИФЦБ-004034",
+      "publicId": "b569d9bd-62ba-458b-b29d-e51b5597fb6f",
+      "version": 2,
+      "line": 12,
+      "name": "Шпинат ,кг (00-00000226)",
+      "unit": "кг",
+      "qty": 2.1,
+      "sum": 1387.68,
+      "fact": 660.8
+    },
+    {
+      "productKeys": [
+        "courage_cucumber"
+      ],
+      "date": "16.04.2026",
+      "supplier": "ООО \"ИНТЕРФУД\"",
+      "invoice": "ИФЦБ-004034",
+      "publicId": "b569d9bd-62ba-458b-b29d-e51b5597fb6f",
+      "version": 2,
+      "line": 17,
+      "name": "Огурцы Кураж Тепличные,кг (00-00001354)",
+      "unit": "кг",
+      "qty": 5.1,
+      "sum": 1142.4,
+      "fact": 224
+    },
+    {
+      "productKeys": [
+        "pineapple"
+      ],
+      "date": "16.04.2026",
+      "supplier": "ООО \"ИНТЕРФУД\"",
+      "invoice": "ЦБ-3751",
+      "publicId": "9540ac30-5415-48eb-b263-e2a64fc77531",
+      "version": 1,
+      "line": 3,
+      "name": "Ананас Голд,кг (00-00000326)",
+      "unit": "кг",
+      "qty": 4.57,
+      "sum": 972.5,
+      "fact": 212.8
+    },
+    {
+      "productKeys": [
+        "spinach_standard"
+      ],
+      "date": "16.04.2026",
+      "supplier": "ООО \"ИНТЕРФУД\"",
+      "invoice": "ЦБ-3751",
+      "publicId": "9540ac30-5415-48eb-b263-e2a64fc77531",
+      "version": 1,
+      "line": 12,
+      "name": "Шпинат,кг (00-00000226)",
+      "unit": "кг",
+      "qty": 2.1,
+      "sum": 1387.68,
+      "fact": 660.8
+    },
+    {
+      "productKeys": [
+        "courage_cucumber"
+      ],
+      "date": "16.04.2026",
+      "supplier": "ООО \"ИНТЕРФУД\"",
+      "invoice": "ЦБ-3751",
+      "publicId": "9540ac30-5415-48eb-b263-e2a64fc77531",
+      "version": 1,
+      "line": 17,
+      "name": "Огурцы Кураж Тепличные,кг (00-00001354)",
+      "unit": "кг",
+      "qty": 5.1,
+      "sum": 1142.4,
+      "fact": 224
+    },
+    {
+      "productKeys": [
+        "mozzarella_125"
+      ],
+      "date": "17.04.2026",
+      "supplier": "ООО \"МЕТРО Кэш энд Керри\" ",
+      "invoice": "61 025807 / 011",
+      "publicId": "f8728185-9aa2-4521-b314-7a6c43a7833a",
+      "version": 1,
+      "line": 1,
+      "name": "125Г СЫР МОЦАРЕЛЛА 45% METRO CHEF ФИОРДИЛАТТ БЗМЖ,ШТ (116706)",
+      "unit": "ШТ",
+      "qty": 16,
+      "sum": 2064,
+      "fact": 129
     },
     {
       "productKeys": [
@@ -845,6 +2762,70 @@
     },
     {
       "productKeys": [
+        "courage_cucumber"
+      ],
+      "date": "18.04.2026",
+      "supplier": "ООО \"ИНТЕРФУД\"",
+      "invoice": "ИФЦБ-004084",
+      "publicId": "aedcd23e-2a22-47f0-87d0-ada6657e5205",
+      "version": 1,
+      "line": 20,
+      "name": "Огурцы Кураж ,кг (00-00000168)",
+      "unit": "кг",
+      "qty": 5.6,
+      "sum": 1630.72,
+      "fact": 291.2
+    },
+    {
+      "productKeys": [
+        "pineapple"
+      ],
+      "date": "18.04.2026",
+      "supplier": "ООО \"ИНТЕРФУД\"",
+      "invoice": "ИФЦБ-004084",
+      "publicId": "aedcd23e-2a22-47f0-87d0-ada6657e5205",
+      "version": 1,
+      "line": 24,
+      "name": "Ананас Голд ,кг (00-00000326)",
+      "unit": "кг",
+      "qty": 8.1,
+      "sum": 1723.68,
+      "fact": 212.8
+    },
+    {
+      "productKeys": [
+        "spinach_standard"
+      ],
+      "date": "18.04.2026",
+      "supplier": "ООО \"ИНТЕРФУД\"",
+      "invoice": "ИФЦБ-004084",
+      "publicId": "aedcd23e-2a22-47f0-87d0-ada6657e5205",
+      "version": 1,
+      "line": 29,
+      "name": "Шпинат ,кг (00-00000226)",
+      "unit": "кг",
+      "qty": 2,
+      "sum": 1321.6,
+      "fact": 660.8
+    },
+    {
+      "productKeys": [
+        "mozzarella_125"
+      ],
+      "date": "18.04.2026",
+      "supplier": "ООО \"ИНТЕРФУД\"",
+      "invoice": "ИФЦБ-004084",
+      "publicId": "aedcd23e-2a22-47f0-87d0-ada6657e5205",
+      "version": 1,
+      "line": 31,
+      "name": "Сыр Моцарелла Гальбани 125г 45% ,шт (00-00001150)",
+      "unit": "шт",
+      "qty": 18,
+      "sum": 3218.4,
+      "fact": 178.8
+    },
+    {
+      "productKeys": [
         "eggplant"
       ],
       "date": "18.04.2026",
@@ -858,6 +2839,150 @@
       "qty": 12.1,
       "sum": 2032.8,
       "fact": 168
+    },
+    {
+      "productKeys": [
+        "courage_cucumber"
+      ],
+      "date": "18.04.2026",
+      "supplier": "ООО \"ИНТЕРФУД\"",
+      "invoice": "ЦБ-3795",
+      "publicId": "ffb7e081-6973-4bba-8bc8-d4b0a516ddc5",
+      "version": 1,
+      "line": 20,
+      "name": "Огурцы Кураж,кг (00-00000168)",
+      "unit": "кг",
+      "qty": 5.6,
+      "sum": 1630.72,
+      "fact": 291.2
+    },
+    {
+      "productKeys": [
+        "pineapple"
+      ],
+      "date": "18.04.2026",
+      "supplier": "ООО \"ИНТЕРФУД\"",
+      "invoice": "ЦБ-3795",
+      "publicId": "ffb7e081-6973-4bba-8bc8-d4b0a516ddc5",
+      "version": 1,
+      "line": 24,
+      "name": "Ананас Голд,кг (00-00000326)",
+      "unit": "кг",
+      "qty": 8.1,
+      "sum": 1723.68,
+      "fact": 212.8
+    },
+    {
+      "productKeys": [
+        "spinach_standard"
+      ],
+      "date": "18.04.2026",
+      "supplier": "ООО \"ИНТЕРФУД\"",
+      "invoice": "ЦБ-3795",
+      "publicId": "ffb7e081-6973-4bba-8bc8-d4b0a516ddc5",
+      "version": 1,
+      "line": 29,
+      "name": "Шпинат,кг (00-00000226)",
+      "unit": "кг",
+      "qty": 2,
+      "sum": 1321.6,
+      "fact": 660.8
+    },
+    {
+      "productKeys": [
+        "mozzarella_125"
+      ],
+      "date": "18.04.2026",
+      "supplier": "ООО \"ИНТЕРФУД\"",
+      "invoice": "ЦБ-3795",
+      "publicId": "ffb7e081-6973-4bba-8bc8-d4b0a516ddc5",
+      "version": 1,
+      "line": 31,
+      "name": "Сыр Моцарелла Гальбани 125г 45%,шт (00-00001150)",
+      "unit": "шт",
+      "qty": 18,
+      "sum": 3218.4,
+      "fact": 178.8
+    },
+    {
+      "productKeys": [
+        "mozzarella_125"
+      ],
+      "date": "19.04.2026",
+      "supplier": "ООО \"ИНТЕРФУД\"",
+      "invoice": "ИФЦБ-004098",
+      "publicId": "4689379d-57b3-4632-b737-d01f32278335",
+      "version": 1,
+      "line": 4,
+      "name": "Сыр Моцарелла Гальбани 125г 45% ,шт (00-00001150)",
+      "unit": "шт",
+      "qty": 18,
+      "sum": 3218.4,
+      "fact": 178.8
+    },
+    {
+      "productKeys": [
+        "mozzarella_125"
+      ],
+      "date": "19.04.2026",
+      "supplier": "ООО \"ИНТЕРФУД\"",
+      "invoice": "ЦБ-3808",
+      "publicId": "f26bb03f-96f3-4e89-a343-2e355a01704f",
+      "version": 1,
+      "line": 4,
+      "name": "Сыр Моцарелла Гальбани 125г 45%,шт (00-00001150)",
+      "unit": "шт",
+      "qty": 18,
+      "sum": 3218.4,
+      "fact": 178.8
+    },
+    {
+      "productKeys": [
+        "mozzarella_125"
+      ],
+      "date": "20.04.2026",
+      "supplier": "ООО \"МЕТРО Кэш энд Керри\" ",
+      "invoice": "61 026266 / 011",
+      "publicId": "941a87f9-2eb4-49a7-8f82-2205bcdc05e6",
+      "version": 1,
+      "line": 9,
+      "name": "125Г СЫР МОЦАРЕЛЛА 45% METRO CHEF ФИОРДИЛАТТ БЗМЖ,ШТ (116706)",
+      "unit": "ШТ",
+      "qty": 24,
+      "sum": 3096,
+      "fact": 129
+    },
+    {
+      "productKeys": [
+        "courage_cucumber"
+      ],
+      "date": "20.04.2026",
+      "supplier": "ООО \"ИНТЕРФУД\"",
+      "invoice": "ИФЦБ-004121",
+      "publicId": "6337bc3e-03db-4129-a4b2-3b50c8390949",
+      "version": 1,
+      "line": 5,
+      "name": "Огурцы Кураж Тепличные,кг (00-00001354)",
+      "unit": "кг",
+      "qty": 6,
+      "sum": 1344,
+      "fact": 224
+    },
+    {
+      "productKeys": [
+        "spinach_standard"
+      ],
+      "date": "20.04.2026",
+      "supplier": "ООО \"ИНТЕРФУД\"",
+      "invoice": "ИФЦБ-004121",
+      "publicId": "6337bc3e-03db-4129-a4b2-3b50c8390949",
+      "version": 1,
+      "line": 28,
+      "name": "Шпинат ,кг (00-00000226)",
+      "unit": "кг",
+      "qty": 2.2,
+      "sum": 1453.76,
+      "fact": 660.8
     },
     {
       "productKeys": [
@@ -877,6 +3002,54 @@
     },
     {
       "productKeys": [
+        "pineapple"
+      ],
+      "date": "20.04.2026",
+      "supplier": "ООО \"ИНТЕРФУД\"",
+      "invoice": "ИФЦБ-004121",
+      "publicId": "6337bc3e-03db-4129-a4b2-3b50c8390949",
+      "version": 1,
+      "line": 38,
+      "name": "Ананас Голд ,кг (00-00000326)",
+      "unit": "кг",
+      "qty": 10.2,
+      "sum": 2170.56,
+      "fact": 212.8
+    },
+    {
+      "productKeys": [
+        "courage_cucumber"
+      ],
+      "date": "20.04.2026",
+      "supplier": "ООО \"ИНТЕРФУД\"",
+      "invoice": "ЦБ-3827",
+      "publicId": "7b5943e0-2688-4d9d-a974-1a8e8c0134bb",
+      "version": 1,
+      "line": 5,
+      "name": "Огурцы Кураж Тепличные,кг (00-00001354)",
+      "unit": "кг",
+      "qty": 6,
+      "sum": 1344,
+      "fact": 224
+    },
+    {
+      "productKeys": [
+        "spinach_standard"
+      ],
+      "date": "20.04.2026",
+      "supplier": "ООО \"ИНТЕРФУД\"",
+      "invoice": "ЦБ-3827",
+      "publicId": "7b5943e0-2688-4d9d-a974-1a8e8c0134bb",
+      "version": 1,
+      "line": 28,
+      "name": "Шпинат,кг (00-00000226)",
+      "unit": "кг",
+      "qty": 2.2,
+      "sum": 1453.76,
+      "fact": 660.8
+    },
+    {
+      "productKeys": [
         "eggplant"
       ],
       "date": "20.04.2026",
@@ -890,6 +3063,54 @@
       "qty": 6.3,
       "sum": 1058.4,
       "fact": 168
+    },
+    {
+      "productKeys": [
+        "pineapple"
+      ],
+      "date": "20.04.2026",
+      "supplier": "ООО \"ИНТЕРФУД\"",
+      "invoice": "ЦБ-3827",
+      "publicId": "7b5943e0-2688-4d9d-a974-1a8e8c0134bb",
+      "version": 1,
+      "line": 38,
+      "name": "Ананас Голд,кг (00-00000326)",
+      "unit": "кг",
+      "qty": 10.2,
+      "sum": 2170.56,
+      "fact": 212.8
+    },
+    {
+      "productKeys": [
+        "pineapple"
+      ],
+      "date": "21.04.2026",
+      "supplier": "ООО \"ИНТЕРФУД\"",
+      "invoice": "ИФЦБ-004134",
+      "publicId": "40525e07-e444-4ce6-ba12-1e65872861fe",
+      "version": 1,
+      "line": 6,
+      "name": "Ананас Голд ,кг (00-00000326)",
+      "unit": "кг",
+      "qty": 5.9,
+      "sum": 1255.52,
+      "fact": 212.8
+    },
+    {
+      "productKeys": [
+        "pineapple"
+      ],
+      "date": "21.04.2026",
+      "supplier": "ООО \"ИНТЕРФУД\"",
+      "invoice": "ЦБ-3838",
+      "publicId": "f92074d6-c468-45b4-87ea-c68855d16391",
+      "version": 1,
+      "line": 6,
+      "name": "Ананас Голд,кг (00-00000326)",
+      "unit": "кг",
+      "qty": 5.9,
+      "sum": 1255.52,
+      "fact": 212.8
     },
     {
       "productKeys": [
@@ -925,6 +3146,38 @@
     },
     {
       "productKeys": [
+        "courage_cucumber"
+      ],
+      "date": "24.04.2026",
+      "supplier": "ООО \"ИНТЕРФУД\"",
+      "invoice": "ИФЦБ-004195",
+      "publicId": "514c6f1c-d8da-47f5-b739-9df86b3e8741",
+      "version": 1,
+      "line": 3,
+      "name": "Огурцы Кураж Тепличные,кг (00-00001354)",
+      "unit": "кг",
+      "qty": 6,
+      "sum": 1263.36,
+      "fact": 210.56
+    },
+    {
+      "productKeys": [
+        "spinach_standard"
+      ],
+      "date": "24.04.2026",
+      "supplier": "ООО \"ИНТЕРФУД\"",
+      "invoice": "ИФЦБ-004195",
+      "publicId": "514c6f1c-d8da-47f5-b739-9df86b3e8741",
+      "version": 1,
+      "line": 11,
+      "name": "Шпинат ,кг (00-00000226)",
+      "unit": "кг",
+      "qty": 2.3,
+      "sum": 1339.52,
+      "fact": 582.4
+    },
+    {
+      "productKeys": [
         "eggplant"
       ],
       "date": "24.04.2026",
@@ -938,6 +3191,102 @@
       "qty": 11.2,
       "sum": 1580.54,
       "fact": 141.12
+    },
+    {
+      "productKeys": [
+        "courage_cucumber"
+      ],
+      "date": "24.04.2026",
+      "supplier": "ООО \"ИНТЕРФУД\"",
+      "invoice": "ЦБ-3894",
+      "publicId": "c1839795-0c65-4969-a2a6-bf60f0919644",
+      "version": 1,
+      "line": 3,
+      "name": "Огурцы Кураж Тепличные,кг (00-00001354)",
+      "unit": "кг",
+      "qty": 6,
+      "sum": 1263.36,
+      "fact": 210.56
+    },
+    {
+      "productKeys": [
+        "spinach_standard"
+      ],
+      "date": "24.04.2026",
+      "supplier": "ООО \"ИНТЕРФУД\"",
+      "invoice": "ЦБ-3894",
+      "publicId": "c1839795-0c65-4969-a2a6-bf60f0919644",
+      "version": 1,
+      "line": 11,
+      "name": "Шпинат,кг (00-00000226)",
+      "unit": "кг",
+      "qty": 2.3,
+      "sum": 1339.52,
+      "fact": 582.4
+    },
+    {
+      "productKeys": [
+        "pineapple"
+      ],
+      "date": "25.04.2026",
+      "supplier": "ООО \"ИНТЕРФУД\"",
+      "invoice": "ИФЦБ-004213",
+      "publicId": "bc54b9fe-ce35-4e71-bbd7-3da6009f4a57",
+      "version": 1,
+      "line": 1,
+      "name": "Ананас Голд ,кг (00-00000326)",
+      "unit": "кг",
+      "qty": 12.3,
+      "sum": 2617.44,
+      "fact": 212.8
+    },
+    {
+      "productKeys": [
+        "courage_cucumber"
+      ],
+      "date": "25.04.2026",
+      "supplier": "ООО \"ИНТЕРФУД\"",
+      "invoice": "ИФЦБ-004213",
+      "publicId": "bc54b9fe-ce35-4e71-bbd7-3da6009f4a57",
+      "version": 1,
+      "line": 8,
+      "name": "Огурцы Кураж Тепличные,кг (00-00001354)",
+      "unit": "кг",
+      "qty": 5,
+      "sum": 1052.8,
+      "fact": 210.56
+    },
+    {
+      "productKeys": [
+        "pineapple"
+      ],
+      "date": "25.04.2026",
+      "supplier": "ООО \"ИНТЕРФУД\"",
+      "invoice": "ЦБ-3910",
+      "publicId": "b82054fa-9dae-4d1e-8851-566daa95de7d",
+      "version": 1,
+      "line": 1,
+      "name": "Ананас Голд,кг (00-00000326)",
+      "unit": "кг",
+      "qty": 12.3,
+      "sum": 2617.44,
+      "fact": 212.8
+    },
+    {
+      "productKeys": [
+        "courage_cucumber"
+      ],
+      "date": "25.04.2026",
+      "supplier": "ООО \"ИНТЕРФУД\"",
+      "invoice": "ЦБ-3910",
+      "publicId": "b82054fa-9dae-4d1e-8851-566daa95de7d",
+      "version": 1,
+      "line": 8,
+      "name": "Огурцы Кураж Тепличные,кг (00-00001354)",
+      "unit": "кг",
+      "qty": 5,
+      "sum": 1052.8,
+      "fact": 210.56
     },
     {
       "productKeys": [
@@ -957,6 +3306,22 @@
     },
     {
       "productKeys": [
+        "spinach_standard"
+      ],
+      "date": "27.04.2026",
+      "supplier": "ООО \"ИНТЕРФУД\"",
+      "invoice": "ИФЦБ-004247",
+      "publicId": "def07c29-c970-4d8c-9e7b-9faa76df6c65",
+      "version": 1,
+      "line": 15,
+      "name": "Шпинат ,кг (00-00000226)",
+      "unit": "кг",
+      "qty": 2,
+      "sum": 1164.8,
+      "fact": 582.4
+    },
+    {
+      "productKeys": [
         "eggplant"
       ],
       "date": "27.04.2026",
@@ -970,6 +3335,54 @@
       "qty": 13.8,
       "sum": 1947.46,
       "fact": 141.12
+    },
+    {
+      "productKeys": [
+        "spinach_standard"
+      ],
+      "date": "27.04.2026",
+      "supplier": "ООО \"ИНТЕРФУД\"",
+      "invoice": "ЦБ-3941",
+      "publicId": "2e0578e4-35fd-42b7-bec7-aed083a2dcea",
+      "version": 1,
+      "line": 15,
+      "name": "Шпинат,кг (00-00000226)",
+      "unit": "кг",
+      "qty": 2,
+      "sum": 1164.8,
+      "fact": 582.4
+    },
+    {
+      "productKeys": [
+        "mozzarella_125"
+      ],
+      "date": "28.04.2026",
+      "supplier": "ООО \"ИНТЕРФУД\"",
+      "invoice": "ИФЦБ-004268",
+      "publicId": "ea3dca6a-6a64-42ba-b46f-7c58fe58ab22",
+      "version": 1,
+      "line": 1,
+      "name": "Сыр Моцарелла Гальбани 125г 45% ,шт (00-00001150)",
+      "unit": "шт",
+      "qty": 12,
+      "sum": 1728,
+      "fact": 144
+    },
+    {
+      "productKeys": [
+        "courage_cucumber"
+      ],
+      "date": "28.04.2026",
+      "supplier": "ООО \"ИНТЕРФУД\"",
+      "invoice": "ИФЦБ-004268",
+      "publicId": "ea3dca6a-6a64-42ba-b46f-7c58fe58ab22",
+      "version": 1,
+      "line": 2,
+      "name": "Огурцы Кураж Тепличные,кг (00-00001354)",
+      "unit": "кг",
+      "qty": 3,
+      "sum": 631.68,
+      "fact": 210.56
     },
     {
       "productKeys": [
@@ -989,6 +3402,166 @@
     },
     {
       "productKeys": [
+        "mozzarella_125"
+      ],
+      "date": "28.04.2026",
+      "supplier": "ООО \"ИНТЕРФУД\"",
+      "invoice": "ЦБ-3960",
+      "publicId": "367fa229-6a34-4587-8ef8-eb5763d623a4",
+      "version": 3,
+      "line": 1,
+      "name": "Сыр Моцарелла Гальбани 125г 45%,шт (00-00001150)",
+      "unit": "шт",
+      "qty": 12,
+      "sum": 1728,
+      "fact": 144
+    },
+    {
+      "productKeys": [
+        "courage_cucumber"
+      ],
+      "date": "28.04.2026",
+      "supplier": "ООО \"ИНТЕРФУД\"",
+      "invoice": "ЦБ-3960",
+      "publicId": "367fa229-6a34-4587-8ef8-eb5763d623a4",
+      "version": 3,
+      "line": 2,
+      "name": "Огурцы Кураж Тепличные,кг (00-00001354)",
+      "unit": "кг",
+      "qty": 3,
+      "sum": 631.68,
+      "fact": 210.56
+    },
+    {
+      "productKeys": [
+        "spinach_standard"
+      ],
+      "date": "29.04.2026",
+      "supplier": "ООО \"ИНТЕРФУД\"",
+      "invoice": "ИФЦБ-004287",
+      "publicId": "818f0d0f-0dde-4a5a-a55f-7c6928508eaf",
+      "version": 1,
+      "line": 2,
+      "name": "Шпинат ,кг (00-00000226)",
+      "unit": "кг",
+      "qty": 2.124,
+      "sum": 1284.6,
+      "fact": 604.8
+    },
+    {
+      "productKeys": [
+        "courage_cucumber"
+      ],
+      "date": "29.04.2026",
+      "supplier": "ООО \"ИНТЕРФУД\"",
+      "invoice": "ИФЦБ-004287",
+      "publicId": "818f0d0f-0dde-4a5a-a55f-7c6928508eaf",
+      "version": 1,
+      "line": 10,
+      "name": "Огурцы Кураж Тепличные,кг (00-00001354)",
+      "unit": "кг",
+      "qty": 5.1,
+      "sum": 999.6,
+      "fact": 196
+    },
+    {
+      "productKeys": [
+        "spinach_standard"
+      ],
+      "date": "29.04.2026",
+      "supplier": "ООО \"ИНТЕРФУД\"",
+      "invoice": "ЦБ-3976",
+      "publicId": "df4cd3ef-d8bd-481c-b357-f22c0025786a",
+      "version": 1,
+      "line": 2,
+      "name": "Шпинат,кг (00-00000226)",
+      "unit": "кг",
+      "qty": 2.124,
+      "sum": 1284.6,
+      "fact": 604.8
+    },
+    {
+      "productKeys": [
+        "courage_cucumber"
+      ],
+      "date": "29.04.2026",
+      "supplier": "ООО \"ИНТЕРФУД\"",
+      "invoice": "ЦБ-3976",
+      "publicId": "df4cd3ef-d8bd-481c-b357-f22c0025786a",
+      "version": 1,
+      "line": 10,
+      "name": "Огурцы Кураж Тепличные,кг (00-00001354)",
+      "unit": "кг",
+      "qty": 5.1,
+      "sum": 999.6,
+      "fact": 196
+    },
+    {
+      "productKeys": [
+        "pineapple"
+      ],
+      "date": "01.05.2026",
+      "supplier": "ООО \"МЕТРО Кэш энд Керри\" ",
+      "invoice": "61 029363 / 011",
+      "publicId": "46db97e1-4722-46a2-b850-764151bdf369",
+      "version": 1,
+      "line": 6,
+      "name": "1Л СОК НАП SANTAL АНАНАСОВЫЙ ТЕТ,ШТ (213686)",
+      "unit": "ШТ",
+      "qty": 3,
+      "sum": 597,
+      "fact": 199
+    },
+    {
+      "productKeys": [
+        "sea_bass_400_600"
+      ],
+      "date": "06.05.2026",
+      "supplier": "ИП Носова Юлия Евгеньевна",
+      "invoice": "486",
+      "publicId": "1c497e5c-2c53-4d23-a9b2-280f92af567d",
+      "version": 1,
+      "line": 1,
+      "name": "Сибас, с/г не потр., 400-600 гр/шт., охл.,кг (00-00000040)",
+      "unit": "кг",
+      "qty": 6,
+      "sum": 7140,
+      "fact": 1190
+    },
+    {
+      "productKeys": [
+        "courage_cucumber"
+      ],
+      "date": "06.05.2026",
+      "supplier": "ООО \"ИНТЕРФУД\"",
+      "invoice": "ИФЦБ-004421",
+      "publicId": "d86bf73b-52e4-460a-ae9a-8dd8472a77eb",
+      "version": 2,
+      "line": 14,
+      "name": "Огурцы Кураж Тепличные,кг (00-00001354)",
+      "unit": "кг",
+      "qty": 5,
+      "sum": 980,
+      "fact": 196
+    },
+    {
+      "productKeys": [
+        "spinach_standard"
+      ],
+      "date": "06.05.2026",
+      "supplier": "ООО \"ИНТЕРФУД\"",
+      "invoice": "ИФЦБ-004421",
+      "publicId": "d86bf73b-52e4-460a-ae9a-8dd8472a77eb",
+      "version": 2,
+      "line": 23,
+      "name": "Шпинат ,кг (00-00000226)",
+      "unit": "кг",
+      "qty": 2,
+      "sum": 1209.6,
+      "fact": 604.8
+    },
+    {
+      "productKeys": [
         "eye_muscle"
       ],
       "date": "06.05.2026",
@@ -1002,6 +3575,38 @@
       "qty": 5.4,
       "sum": 4536.03,
       "fact": 840.01
+    },
+    {
+      "productKeys": [
+        "courage_cucumber"
+      ],
+      "date": "06.05.2026",
+      "supplier": "ООО \"ИНТЕРФУД\"",
+      "invoice": "ЦБ-4094",
+      "publicId": "d06622a5-a73b-40ce-a023-f5a84d43bd16",
+      "version": 1,
+      "line": 14,
+      "name": "Огурцы Кураж Тепличные,кг (00-00001354)",
+      "unit": "кг",
+      "qty": 5,
+      "sum": 980,
+      "fact": 196
+    },
+    {
+      "productKeys": [
+        "spinach_standard"
+      ],
+      "date": "06.05.2026",
+      "supplier": "ООО \"ИНТЕРФУД\"",
+      "invoice": "ЦБ-4094",
+      "publicId": "d06622a5-a73b-40ce-a023-f5a84d43bd16",
+      "version": 1,
+      "line": 23,
+      "name": "Шпинат,кг (00-00000226)",
+      "unit": "кг",
+      "qty": 2,
+      "sum": 1209.6,
+      "fact": 604.8
     },
     {
       "productKeys": [
@@ -1037,6 +3642,22 @@
     },
     {
       "productKeys": [
+        "mozzarella_125"
+      ],
+      "date": "08.05.2026",
+      "supplier": "ООО \"АРТАРИ\"",
+      "invoice": "АРУН-001337",
+      "publicId": "b84c7e1b-768b-4869-a417-994d61717989",
+      "version": 1,
+      "line": 2,
+      "name": "Сыр Моцарелла 125г (Mozzarella) уп.3кг БОН ЛАТТЕ,шт (УН-00000249)",
+      "unit": "шт",
+      "qty": 3,
+      "sum": 8415,
+      "fact": 2805
+    },
+    {
+      "productKeys": [
         "eye_muscle"
       ],
       "date": "08.05.2026",
@@ -1069,6 +3690,38 @@
     },
     {
       "productKeys": [
+        "courage_cucumber"
+      ],
+      "date": "08.05.2026",
+      "supplier": "ООО \"ИНТЕРФУД\"",
+      "invoice": "ИФЦБ-004449",
+      "publicId": "799fd5c9-0b3a-4afe-bd08-8dc87e634ffe",
+      "version": 1,
+      "line": 5,
+      "name": "Огурцы Кураж Тепличные,кг (00-00001354)",
+      "unit": "кг",
+      "qty": 3,
+      "sum": 588,
+      "fact": 196
+    },
+    {
+      "productKeys": [
+        "pineapple"
+      ],
+      "date": "08.05.2026",
+      "supplier": "ООО \"ИНТЕРФУД\"",
+      "invoice": "ИФЦБ-004449",
+      "publicId": "799fd5c9-0b3a-4afe-bd08-8dc87e634ffe",
+      "version": 1,
+      "line": 8,
+      "name": "Ананас Del Monte ,кг (ЦБ-00002009)",
+      "unit": "кг",
+      "qty": 10.4,
+      "sum": 3727.36,
+      "fact": 358.4
+    },
+    {
+      "productKeys": [
         "eggplant"
       ],
       "date": "08.05.2026",
@@ -1082,6 +3735,134 @@
       "qty": 13,
       "sum": 2184,
       "fact": 168
+    },
+    {
+      "productKeys": [
+        "courage_cucumber"
+      ],
+      "date": "08.05.2026",
+      "supplier": "ООО \"ИНТЕРФУД\"",
+      "invoice": "ЦБ-4117",
+      "publicId": "657ab4be-a8b9-42c7-a8f8-f2df9f2ca66e",
+      "version": 1,
+      "line": 5,
+      "name": "Огурцы Кураж Тепличные,кг (00-00001354)",
+      "unit": "кг",
+      "qty": 3,
+      "sum": 588,
+      "fact": 196
+    },
+    {
+      "productKeys": [
+        "pineapple"
+      ],
+      "date": "08.05.2026",
+      "supplier": "ООО \"ИНТЕРФУД\"",
+      "invoice": "ЦБ-4117",
+      "publicId": "657ab4be-a8b9-42c7-a8f8-f2df9f2ca66e",
+      "version": 1,
+      "line": 8,
+      "name": "Ананас Del Monte,кг (ЦБ-00002009)",
+      "unit": "кг",
+      "qty": 10.4,
+      "sum": 3727.36,
+      "fact": 358.4
+    },
+    {
+      "productKeys": [
+        "courage_cucumber"
+      ],
+      "date": "09.05.2026",
+      "supplier": "ООО \"ИНТЕРФУД\"",
+      "invoice": "ИФЦБ-004469",
+      "publicId": "5a25d285-4839-4711-89d8-898cab8ac7ff",
+      "version": 1,
+      "line": 4,
+      "name": "Огурцы Кураж Тепличные,кг (00-00001354)",
+      "unit": "кг",
+      "qty": 5,
+      "sum": 980,
+      "fact": 196
+    },
+    {
+      "productKeys": [
+        "spinach_standard"
+      ],
+      "date": "09.05.2026",
+      "supplier": "ООО \"ИНТЕРФУД\"",
+      "invoice": "ИФЦБ-004469",
+      "publicId": "5a25d285-4839-4711-89d8-898cab8ac7ff",
+      "version": 1,
+      "line": 5,
+      "name": "Шпинат ,кг (00-00000226)",
+      "unit": "кг",
+      "qty": 2,
+      "sum": 1209.6,
+      "fact": 604.8
+    },
+    {
+      "productKeys": [
+        "courage_cucumber"
+      ],
+      "date": "09.05.2026",
+      "supplier": "ООО \"ИНТЕРФУД\"",
+      "invoice": "ЦБ-4134",
+      "publicId": "7a7f228a-3eeb-432e-a442-b444f4ffb20f",
+      "version": 1,
+      "line": 4,
+      "name": "Огурцы Кураж Тепличные,кг (00-00001354)",
+      "unit": "кг",
+      "qty": 5,
+      "sum": 980,
+      "fact": 196
+    },
+    {
+      "productKeys": [
+        "spinach_standard"
+      ],
+      "date": "09.05.2026",
+      "supplier": "ООО \"ИНТЕРФУД\"",
+      "invoice": "ЦБ-4134",
+      "publicId": "7a7f228a-3eeb-432e-a442-b444f4ffb20f",
+      "version": 1,
+      "line": 5,
+      "name": "Шпинат,кг (00-00000226)",
+      "unit": "кг",
+      "qty": 2,
+      "sum": 1209.6,
+      "fact": 604.8
+    },
+    {
+      "productKeys": [
+        "courage_cucumber"
+      ],
+      "date": "12.05.2026",
+      "supplier": "ООО \"ИНТЕРФУД\"",
+      "invoice": "ИФЦБ-004499",
+      "publicId": "cd3b3b7f-a0bf-418c-bf9c-545d2b6177d1",
+      "version": 2,
+      "line": 21,
+      "name": "Огурцы Кураж Тепличные,кг (00-00001354)",
+      "unit": "кг",
+      "qty": 3.1,
+      "sum": 607.6,
+      "fact": 196
+    },
+    {
+      "productKeys": [
+        "courage_cucumber"
+      ],
+      "date": "12.05.2026",
+      "supplier": "ООО \"ИНТЕРФУД\"",
+      "invoice": "ЦБ-4161",
+      "publicId": "f2429d11-5636-4126-9db8-921488bc2952",
+      "version": 1,
+      "line": 22,
+      "name": "Огурцы Кураж Тепличные,кг (00-00001354)",
+      "unit": "кг",
+      "qty": 3.1,
+      "sum": 607.6,
+      "fact": 196
     },
     {
       "productKeys": [
@@ -1101,6 +3882,102 @@
     },
     {
       "productKeys": [
+        "courage_cucumber"
+      ],
+      "date": "15.05.2026",
+      "supplier": "ООО \"ИНТЕРФУД\"",
+      "invoice": "ИФЦБ-004546",
+      "publicId": "cc4b962a-7c58-44d5-9dae-9ace61db451c",
+      "version": 1,
+      "line": 6,
+      "name": "Огурцы Кураж Тепличные,кг (00-00001354)",
+      "unit": "кг",
+      "qty": 6,
+      "sum": 1276.8,
+      "fact": 212.8
+    },
+    {
+      "productKeys": [
+        "pineapple"
+      ],
+      "date": "15.05.2026",
+      "supplier": "ООО \"ИНТЕРФУД\"",
+      "invoice": "ИФЦБ-004546",
+      "publicId": "cc4b962a-7c58-44d5-9dae-9ace61db451c",
+      "version": 1,
+      "line": 16,
+      "name": "Ананас Del Monte ,кг (ЦБ-00002009)",
+      "unit": "кг",
+      "qty": 12.9,
+      "sum": 4623.36,
+      "fact": 358.4
+    },
+    {
+      "productKeys": [
+        "spinach_standard"
+      ],
+      "date": "15.05.2026",
+      "supplier": "ООО \"ИНТЕРФУД\"",
+      "invoice": "ИФЦБ-004546",
+      "publicId": "cc4b962a-7c58-44d5-9dae-9ace61db451c",
+      "version": 1,
+      "line": 36,
+      "name": "Шпинат ,кг (00-00000226)",
+      "unit": "кг",
+      "qty": 2,
+      "sum": 1344,
+      "fact": 672
+    },
+    {
+      "productKeys": [
+        "courage_cucumber"
+      ],
+      "date": "15.05.2026",
+      "supplier": "ООО \"ИНТЕРФУД\"",
+      "invoice": "ЦБ-4202",
+      "publicId": "89aa2756-42b7-411e-a45e-0c5b199ea733",
+      "version": 1,
+      "line": 6,
+      "name": "Огурцы Кураж Тепличные,кг (00-00001354)",
+      "unit": "кг",
+      "qty": 6,
+      "sum": 1276.8,
+      "fact": 212.8
+    },
+    {
+      "productKeys": [
+        "pineapple"
+      ],
+      "date": "15.05.2026",
+      "supplier": "ООО \"ИНТЕРФУД\"",
+      "invoice": "ЦБ-4202",
+      "publicId": "89aa2756-42b7-411e-a45e-0c5b199ea733",
+      "version": 1,
+      "line": 16,
+      "name": "Ананас Del Monte,кг (ЦБ-00002009)",
+      "unit": "кг",
+      "qty": 12.9,
+      "sum": 4623.36,
+      "fact": 358.4
+    },
+    {
+      "productKeys": [
+        "spinach_standard"
+      ],
+      "date": "15.05.2026",
+      "supplier": "ООО \"ИНТЕРФУД\"",
+      "invoice": "ЦБ-4202",
+      "publicId": "89aa2756-42b7-411e-a45e-0c5b199ea733",
+      "version": 1,
+      "line": 36,
+      "name": "Шпинат,кг (00-00000226)",
+      "unit": "кг",
+      "qty": 2,
+      "sum": 1344,
+      "fact": 672
+    },
+    {
+      "productKeys": [
         "eggplant"
       ],
       "date": "17.05.2026",
@@ -1114,6 +3991,22 @@
       "qty": 6.1,
       "sum": 854,
       "fact": 140
+    },
+    {
+      "productKeys": [
+        "courage_cucumber"
+      ],
+      "date": "17.05.2026",
+      "supplier": "ООО \"ИНТЕРФУД\"",
+      "invoice": "ИФЦБ-004573",
+      "publicId": "668d2efa-40a9-46cc-8a9a-12d16defcc77",
+      "version": 1,
+      "line": 18,
+      "name": "Огурцы Кураж Тепличные,кг (00-00001354)",
+      "unit": "кг",
+      "qty": 3.168,
+      "sum": 674.15,
+      "fact": 212.8
     },
     {
       "productKeys": [
@@ -1133,6 +4026,86 @@
     },
     {
       "productKeys": [
+        "courage_cucumber"
+      ],
+      "date": "17.05.2026",
+      "supplier": "ООО \"ИНТЕРФУД\"",
+      "invoice": "ЦБ-4224",
+      "publicId": "210f8cda-0577-4f10-90ee-a9be346525db",
+      "version": 1,
+      "line": 18,
+      "name": "Огурцы Кураж Тепличные,кг (00-00001354)",
+      "unit": "кг",
+      "qty": 3.168,
+      "sum": 674.15,
+      "fact": 212.8
+    },
+    {
+      "productKeys": [
+        "spinach_standard"
+      ],
+      "date": "19.05.2026",
+      "supplier": "ООО \"ИНТЕРФУД\"",
+      "invoice": "ИФЦБ-004601",
+      "publicId": "7d47913f-c234-46b1-9830-fb142eb3b5ea",
+      "version": 2,
+      "line": 11,
+      "name": "Шпинат ,кг (00-00000226)",
+      "unit": "кг",
+      "qty": 2.1,
+      "sum": 1411.2,
+      "fact": 672
+    },
+    {
+      "productKeys": [
+        "spinach_standard"
+      ],
+      "date": "19.05.2026",
+      "supplier": "ООО \"ИНТЕРФУД\"",
+      "invoice": "ЦБ-4248",
+      "publicId": "0608b294-91b1-444c-80a8-c76ba0a28b1b",
+      "version": 2,
+      "line": 11,
+      "name": "Шпинат,кг (00-00000226)",
+      "unit": "кг",
+      "qty": 2.1,
+      "sum": 1411.2,
+      "fact": 672
+    },
+    {
+      "productKeys": [
+        "spinach_standard"
+      ],
+      "date": "20.05.2026",
+      "supplier": "ООО \"ИНТЕРФУД\"",
+      "invoice": "ИФЦБ-004609",
+      "publicId": "0d59f90d-f9a0-4133-90d0-2287151fac1f",
+      "version": 1,
+      "line": 11,
+      "name": "Шпинат ,кг (00-00000226)",
+      "unit": "кг",
+      "qty": 2,
+      "sum": 1344,
+      "fact": 672
+    },
+    {
+      "productKeys": [
+        "spinach_standard"
+      ],
+      "date": "20.05.2026",
+      "supplier": "ООО \"ИНТЕРФУД\"",
+      "invoice": "ЦБ-4254",
+      "publicId": "4114fb46-c2ff-49df-ad46-3b4ce47c0c73",
+      "version": 1,
+      "line": 11,
+      "name": "Шпинат,кг (00-00000226)",
+      "unit": "кг",
+      "qty": 2,
+      "sum": 1344,
+      "fact": 672
+    },
+    {
+      "productKeys": [
         "eggplant"
       ],
       "date": "21.05.2026",
@@ -1146,6 +4119,22 @@
       "qty": 6.5,
       "sum": 910,
       "fact": 140
+    },
+    {
+      "productKeys": [
+        "courage_cucumber"
+      ],
+      "date": "21.05.2026",
+      "supplier": "ООО \"ИНТЕРФУД\"",
+      "invoice": "ИФЦБ-004623",
+      "publicId": "c630635a-a781-4a88-ba93-ce06f2a0d3e5",
+      "version": 1,
+      "line": 13,
+      "name": "Огурцы Кураж Тепличные,кг (00-00001354)",
+      "unit": "кг",
+      "qty": 3.056,
+      "sum": 650.32,
+      "fact": 212.8
     },
     {
       "productKeys": [
@@ -1165,6 +4154,70 @@
     },
     {
       "productKeys": [
+        "courage_cucumber"
+      ],
+      "date": "21.05.2026",
+      "supplier": "ООО \"ИНТЕРФУД\"",
+      "invoice": "ЦБ-4264",
+      "publicId": "65b9d61d-6416-465b-a9b3-06b35df5a571",
+      "version": 1,
+      "line": 13,
+      "name": "Огурцы Кураж Тепличные,кг (00-00001354)",
+      "unit": "кг",
+      "qty": 3.056,
+      "sum": 650.32,
+      "fact": 212.8
+    },
+    {
+      "productKeys": [
+        "spinach_standard"
+      ],
+      "date": "22.05.2026",
+      "supplier": "ООО \"ИНТЕРФУД\"",
+      "invoice": "ИФЦБ-004633",
+      "publicId": "ce581276-63da-449c-9f4e-c6d9455bef32",
+      "version": 1,
+      "line": 16,
+      "name": "Шпинат ,кг (00-00000226)",
+      "unit": "кг",
+      "qty": 2,
+      "sum": 1344,
+      "fact": 672
+    },
+    {
+      "productKeys": [
+        "spinach_standard"
+      ],
+      "date": "22.05.2026",
+      "supplier": "ООО \"ИНТЕРФУД\"",
+      "invoice": "ЦБ-4273",
+      "publicId": "0ae24dc8-885f-42dd-a9ee-516f4fe8e458",
+      "version": 1,
+      "line": 16,
+      "name": "Шпинат,кг (00-00000226)",
+      "unit": "кг",
+      "qty": 2,
+      "sum": 1344,
+      "fact": 672
+    },
+    {
+      "productKeys": [
+        "courage_cucumber"
+      ],
+      "date": "24.05.2026",
+      "supplier": "ООО \"ИНТЕРФУД\"",
+      "invoice": "ИФЦБ-004655",
+      "publicId": "388aff80-7530-42c0-baa9-835248142378",
+      "version": 1,
+      "line": 3,
+      "name": "Огурцы Кураж Тепличные,кг (00-00001354)",
+      "unit": "кг",
+      "qty": 5,
+      "sum": 1064,
+      "fact": 212.8
+    },
+    {
+      "productKeys": [
         "eggplant"
       ],
       "date": "24.05.2026",
@@ -1178,6 +4231,38 @@
       "qty": 6.1,
       "sum": 854,
       "fact": 140
+    },
+    {
+      "productKeys": [
+        "spinach_standard"
+      ],
+      "date": "24.05.2026",
+      "supplier": "ООО \"ИНТЕРФУД\"",
+      "invoice": "ИФЦБ-004655",
+      "publicId": "388aff80-7530-42c0-baa9-835248142378",
+      "version": 1,
+      "line": 17,
+      "name": "Шпинат ,кг (00-00000226)",
+      "unit": "кг",
+      "qty": 1.75,
+      "sum": 1176,
+      "fact": 672
+    },
+    {
+      "productKeys": [
+        "courage_cucumber"
+      ],
+      "date": "24.05.2026",
+      "supplier": "ООО \"ИНТЕРФУД\"",
+      "invoice": "ЦБ-4291",
+      "publicId": "23b625c8-ab07-44c8-a850-4232f5d6301d",
+      "version": 1,
+      "line": 3,
+      "name": "Огурцы Кураж Тепличные,кг (00-00001354)",
+      "unit": "кг",
+      "qty": 5,
+      "sum": 1064,
+      "fact": 212.8
     },
     {
       "productKeys": [
@@ -1197,6 +4282,22 @@
     },
     {
       "productKeys": [
+        "spinach_standard"
+      ],
+      "date": "24.05.2026",
+      "supplier": "ООО \"ИНТЕРФУД\"",
+      "invoice": "ЦБ-4291",
+      "publicId": "23b625c8-ab07-44c8-a850-4232f5d6301d",
+      "version": 1,
+      "line": 18,
+      "name": "Шпинат,кг (00-00000226)",
+      "unit": "кг",
+      "qty": 1.75,
+      "sum": 1176,
+      "fact": 672
+    },
+    {
+      "productKeys": [
         "eggplant"
       ],
       "date": "25.05.2026",
@@ -1210,6 +4311,22 @@
       "qty": 6.1,
       "sum": 854,
       "fact": 140
+    },
+    {
+      "productKeys": [
+        "courage_cucumber"
+      ],
+      "date": "25.05.2026",
+      "supplier": "ООО \"ИНТЕРФУД\"",
+      "invoice": "ИФЦБ-004662",
+      "publicId": "4363b525-5326-4df8-b668-868901aabd6b",
+      "version": 1,
+      "line": 15,
+      "name": "Огурцы Кураж Тепличные,кг (00-00001354)",
+      "unit": "кг",
+      "qty": 4.5,
+      "sum": 957.6,
+      "fact": 212.8
     },
     {
       "productKeys": [
@@ -1229,6 +4346,54 @@
     },
     {
       "productKeys": [
+        "courage_cucumber"
+      ],
+      "date": "25.05.2026",
+      "supplier": "ООО \"ИНТЕРФУД\"",
+      "invoice": "ЦБ-4297",
+      "publicId": "510019a1-c997-4405-8888-b3714944f005",
+      "version": 1,
+      "line": 15,
+      "name": "Огурцы Кураж Тепличные,кг (00-00001354)",
+      "unit": "кг",
+      "qty": 4.5,
+      "sum": 957.6,
+      "fact": 212.8
+    },
+    {
+      "productKeys": [
+        "pineapple"
+      ],
+      "date": "26.05.2026",
+      "supplier": "ООО \"МЕТРО Кэш энд Керри\" ",
+      "invoice": "61 035942 / 011",
+      "publicId": "27d8b717-5039-446f-b5de-c9f75393137e",
+      "version": 1,
+      "line": 5,
+      "name": "1Л СОК НАП SANTAL АНАНАСОВЫЙ ТЕТ,ШТ (213686)",
+      "unit": "ШТ",
+      "qty": 3,
+      "sum": 597,
+      "fact": 199
+    },
+    {
+      "productKeys": [
+        "pineapple"
+      ],
+      "date": "26.05.2026",
+      "supplier": "ООО \"ИНТЕРФУД\"",
+      "invoice": "ИФЦБ-004679",
+      "publicId": "aba01a8b-9f72-48ef-b753-123994785d87",
+      "version": 2,
+      "line": 9,
+      "name": "Ананас Del Monte ,кг (ЦБ-00002009)",
+      "unit": "кг",
+      "qty": 6,
+      "sum": 2419.2,
+      "fact": 403.2
+    },
+    {
+      "productKeys": [
         "eggplant"
       ],
       "date": "26.05.2026",
@@ -1242,6 +4407,22 @@
       "qty": 11.4,
       "sum": 1596,
       "fact": 140
+    },
+    {
+      "productKeys": [
+        "pineapple"
+      ],
+      "date": "26.05.2026",
+      "supplier": "ООО \"ИНТЕРФУД\"",
+      "invoice": "ЦБ-4311",
+      "publicId": "c63952d5-482e-4e45-999c-3b3bfcf67722",
+      "version": 1,
+      "line": 9,
+      "name": "Ананас Del Monte,кг (ЦБ-00002009)",
+      "unit": "кг",
+      "qty": 6,
+      "sum": 2419.2,
+      "fact": 403.2
     },
     {
       "productKeys": [
@@ -1261,6 +4442,182 @@
     },
     {
       "productKeys": [
+        "spinach_standard"
+      ],
+      "date": "27.05.2026",
+      "supplier": "ООО \"ИНТЕРФУД\"",
+      "invoice": "ИФЦБ-004691",
+      "publicId": "00485e00-fe86-41e8-8cd6-092c25711245",
+      "version": 1,
+      "line": 7,
+      "name": "Шпинат ,кг (00-00000226)",
+      "unit": "кг",
+      "qty": 2.1,
+      "sum": 1411.2,
+      "fact": 672
+    },
+    {
+      "productKeys": [
+        "mozzarella_125"
+      ],
+      "date": "27.05.2026",
+      "supplier": "ООО \"КАРТАРИ\"",
+      "invoice": "УН-38",
+      "publicId": "9a407c27-99bd-4540-b87d-26540540becc",
+      "version": 1,
+      "line": 1,
+      "name": "Сыр Моцарелла 125 г (Mozzarella) уп.3кг,шт (УН-00000249)",
+      "unit": "шт",
+      "qty": 3,
+      "sum": 7650,
+      "fact": 2550
+    },
+    {
+      "productKeys": [
+        "spinach_standard"
+      ],
+      "date": "27.05.2026",
+      "supplier": "ООО \"ИНТЕРФУД\"",
+      "invoice": "ЦБ-4319",
+      "publicId": "de6db93c-0be2-4aaf-9ce2-aba32eebfd77",
+      "version": 1,
+      "line": 7,
+      "name": "Шпинат,кг (00-00000226)",
+      "unit": "кг",
+      "qty": 2.1,
+      "sum": 1411.2,
+      "fact": 672
+    },
+    {
+      "productKeys": [
+        "courage_cucumber"
+      ],
+      "date": "28.05.2026",
+      "supplier": "ООО \"ИНТЕРФУД\"",
+      "invoice": "ИФЦБ-004696",
+      "publicId": "0262834b-d38a-40b8-8ea0-ae9f2ce901e9",
+      "version": 1,
+      "line": 4,
+      "name": "Огурцы Кураж Тепличные,кг (00-00001354)",
+      "unit": "кг",
+      "qty": 6,
+      "sum": 1310.4,
+      "fact": 218.4
+    },
+    {
+      "productKeys": [
+        "spinach_standard"
+      ],
+      "date": "28.05.2026",
+      "supplier": "ООО \"ИНТЕРФУД\"",
+      "invoice": "ИФЦБ-004696",
+      "publicId": "0262834b-d38a-40b8-8ea0-ae9f2ce901e9",
+      "version": 1,
+      "line": 23,
+      "name": "Шпинат ,кг (00-00000226)",
+      "unit": "кг",
+      "qty": 2,
+      "sum": 1344,
+      "fact": 672
+    },
+    {
+      "productKeys": [
+        "pineapple"
+      ],
+      "date": "28.05.2026",
+      "supplier": "ООО \"ИНТЕРФУД\"",
+      "invoice": "ИФЦБ-004696",
+      "publicId": "0262834b-d38a-40b8-8ea0-ae9f2ce901e9",
+      "version": 1,
+      "line": 29,
+      "name": "Ананас Del Monte ,кг (ЦБ-00002009)",
+      "unit": "кг",
+      "qty": 12,
+      "sum": 4233.6,
+      "fact": 352.8
+    },
+    {
+      "productKeys": [
+        "courage_cucumber"
+      ],
+      "date": "28.05.2026",
+      "supplier": "ООО \"ИНТЕРФУД\"",
+      "invoice": "ЦБ-4324",
+      "publicId": "7f8b9ff8-1eae-4eff-a8f4-ed0fc7fff3f4",
+      "version": 1,
+      "line": 4,
+      "name": "Огурцы Кураж Тепличные,кг (00-00001354)",
+      "unit": "кг",
+      "qty": 6,
+      "sum": 1310.4,
+      "fact": 218.4
+    },
+    {
+      "productKeys": [
+        "spinach_standard"
+      ],
+      "date": "28.05.2026",
+      "supplier": "ООО \"ИНТЕРФУД\"",
+      "invoice": "ЦБ-4324",
+      "publicId": "7f8b9ff8-1eae-4eff-a8f4-ed0fc7fff3f4",
+      "version": 1,
+      "line": 23,
+      "name": "Шпинат,кг (00-00000226)",
+      "unit": "кг",
+      "qty": 2,
+      "sum": 1344,
+      "fact": 672
+    },
+    {
+      "productKeys": [
+        "pineapple"
+      ],
+      "date": "28.05.2026",
+      "supplier": "ООО \"ИНТЕРФУД\"",
+      "invoice": "ЦБ-4324",
+      "publicId": "7f8b9ff8-1eae-4eff-a8f4-ed0fc7fff3f4",
+      "version": 1,
+      "line": 29,
+      "name": "Ананас Del Monte,кг (ЦБ-00002009)",
+      "unit": "кг",
+      "qty": 12,
+      "sum": 4233.6,
+      "fact": 352.8
+    },
+    {
+      "productKeys": [
+        "spinach_standard"
+      ],
+      "date": "29.05.2026",
+      "supplier": "ООО \"ИНТЕРФУД\"",
+      "invoice": "ИФЦБ-004705",
+      "publicId": "2f1dffb5-4b1f-4d4c-8e4b-c8054c725560",
+      "version": 2,
+      "line": 17,
+      "name": "Шпинат ,кг (00-00000226)",
+      "unit": "кг",
+      "qty": 2,
+      "sum": 1344,
+      "fact": 672
+    },
+    {
+      "productKeys": [
+        "spinach_standard"
+      ],
+      "date": "29.05.2026",
+      "supplier": "ООО \"ИНТЕРФУД\"",
+      "invoice": "ЦБ-4328",
+      "publicId": "9baffa8a-eeba-4f91-8567-9d0ed5e022e2",
+      "version": 1,
+      "line": 17,
+      "name": "Шпинат,кг (00-00000226)",
+      "unit": "кг",
+      "qty": 2,
+      "sum": 1344,
+      "fact": 672
+    },
+    {
+      "productKeys": [
         "eggplant"
       ],
       "date": "30.05.2026",
@@ -1274,6 +4631,54 @@
       "qty": 10.7,
       "sum": 1498,
       "fact": 140
+    },
+    {
+      "productKeys": [
+        "courage_cucumber"
+      ],
+      "date": "30.05.2026",
+      "supplier": "ООО \"ИНТЕРФУД\"",
+      "invoice": "ИФЦБ-004721",
+      "publicId": "ef0c6fe4-fe40-47b5-bb94-5ec7deae162d",
+      "version": 1,
+      "line": 3,
+      "name": "Огурцы Кураж Тепличные,кг (00-00001354)",
+      "unit": "кг",
+      "qty": 6,
+      "sum": 1310.4,
+      "fact": 218.4
+    },
+    {
+      "productKeys": [
+        "spinach_standard"
+      ],
+      "date": "30.05.2026",
+      "supplier": "ООО \"ИНТЕРФУД\"",
+      "invoice": "ИФЦБ-004721",
+      "publicId": "ef0c6fe4-fe40-47b5-bb94-5ec7deae162d",
+      "version": 1,
+      "line": 11,
+      "name": "Шпинат ,кг (00-00000226)",
+      "unit": "кг",
+      "qty": 3,
+      "sum": 2016,
+      "fact": 672
+    },
+    {
+      "productKeys": [
+        "pineapple"
+      ],
+      "date": "30.05.2026",
+      "supplier": "ООО \"ИНТЕРФУД\"",
+      "invoice": "ИФЦБ-004721",
+      "publicId": "ef0c6fe4-fe40-47b5-bb94-5ec7deae162d",
+      "version": 1,
+      "line": 16,
+      "name": "Ананас Del Monte ,кг (ЦБ-00002009)",
+      "unit": "кг",
+      "qty": 10.52,
+      "sum": 3711.46,
+      "fact": 352.8
     },
     {
       "productKeys": [
@@ -1293,6 +4698,86 @@
     },
     {
       "productKeys": [
+        "courage_cucumber"
+      ],
+      "date": "30.05.2026",
+      "supplier": "ООО \"ИНТЕРФУД\"",
+      "invoice": "ЦБ-4340",
+      "publicId": "03bb7db7-06d2-4c39-ace8-a2c730c5d80a",
+      "version": 1,
+      "line": 3,
+      "name": "Огурцы Кураж Тепличные,кг (00-00001354)",
+      "unit": "кг",
+      "qty": 6,
+      "sum": 1310.4,
+      "fact": 218.4
+    },
+    {
+      "productKeys": [
+        "spinach_standard"
+      ],
+      "date": "30.05.2026",
+      "supplier": "ООО \"ИНТЕРФУД\"",
+      "invoice": "ЦБ-4340",
+      "publicId": "03bb7db7-06d2-4c39-ace8-a2c730c5d80a",
+      "version": 1,
+      "line": 11,
+      "name": "Шпинат,кг (00-00000226)",
+      "unit": "кг",
+      "qty": 3,
+      "sum": 2016,
+      "fact": 672
+    },
+    {
+      "productKeys": [
+        "pineapple"
+      ],
+      "date": "30.05.2026",
+      "supplier": "ООО \"ИНТЕРФУД\"",
+      "invoice": "ЦБ-4340",
+      "publicId": "03bb7db7-06d2-4c39-ace8-a2c730c5d80a",
+      "version": 1,
+      "line": 16,
+      "name": "Ананас Del Monte,кг (ЦБ-00002009)",
+      "unit": "кг",
+      "qty": 10.52,
+      "sum": 3711.46,
+      "fact": 352.8
+    },
+    {
+      "productKeys": [
+        "spinach_standard"
+      ],
+      "date": "01.06.2026",
+      "supplier": "ООО \"ИНТЕРФУД\"",
+      "invoice": "ИФЦБ-004736",
+      "publicId": "351aa36c-1263-426b-aee8-a4b5cce7371d",
+      "version": 1,
+      "line": 7,
+      "name": "Шпинат ,кг (00-00000226)",
+      "unit": "кг",
+      "qty": 1.63,
+      "sum": 1095.36,
+      "fact": 672
+    },
+    {
+      "productKeys": [
+        "spinach_standard"
+      ],
+      "date": "01.06.2026",
+      "supplier": "ООО \"ИНТЕРФУД\"",
+      "invoice": "ЦБ-4351",
+      "publicId": "9625f9a6-97bf-4fa5-b25e-0fa6f8e9a17f",
+      "version": 1,
+      "line": 7,
+      "name": "Шпинат,кг (00-00000226)",
+      "unit": "кг",
+      "qty": 1.63,
+      "sum": 1095.36,
+      "fact": 672
+    },
+    {
+      "productKeys": [
         "eggplant"
       ],
       "date": "02.06.2026",
@@ -1306,6 +4791,22 @@
       "qty": 5.5,
       "sum": 770,
       "fact": 140
+    },
+    {
+      "productKeys": [
+        "courage_cucumber"
+      ],
+      "date": "02.06.2026",
+      "supplier": "ООО \"ИНТЕРФУД\"",
+      "invoice": "ИФЦБ-004744",
+      "publicId": "6653c3b4-ab60-4fa3-88e0-57fa705a457d",
+      "version": 1,
+      "line": 7,
+      "name": "Огурцы Кураж Тепличные,кг (00-00001354)",
+      "unit": "кг",
+      "qty": 3.56,
+      "sum": 777.5,
+      "fact": 218.4
     },
     {
       "productKeys": [
@@ -1325,6 +4826,22 @@
     },
     {
       "productKeys": [
+        "courage_cucumber"
+      ],
+      "date": "02.06.2026",
+      "supplier": "ООО \"ИНТЕРФУД\"",
+      "invoice": "ЦБ-4355",
+      "publicId": "3f9fcfe3-09a0-414f-afba-657756a596f1",
+      "version": 1,
+      "line": 7,
+      "name": "Огурцы Кураж Тепличные,кг (00-00001354)",
+      "unit": "кг",
+      "qty": 3.56,
+      "sum": 777.5,
+      "fact": 218.4
+    },
+    {
+      "productKeys": [
         "eggplant"
       ],
       "date": "04.06.2026",
@@ -1338,6 +4855,22 @@
       "qty": 16,
       "sum": 2652.16,
       "fact": 165.76
+    },
+    {
+      "productKeys": [
+        "courage_cucumber"
+      ],
+      "date": "06.06.2026",
+      "supplier": "ООО \"ИНТЕРФУД\"",
+      "invoice": "ИФЦБ-004791",
+      "publicId": "47c9e3c6-12fe-4442-8650-02a1e8a41fcc",
+      "version": 2,
+      "line": 15,
+      "name": "Огурцы Кураж Тепличные,кг (00-00001354)",
+      "unit": "кг",
+      "qty": 3,
+      "sum": 840,
+      "fact": 280
     },
     {
       "productKeys": [
@@ -1357,6 +4890,70 @@
     },
     {
       "productKeys": [
+        "courage_cucumber"
+      ],
+      "date": "08.06.2026",
+      "supplier": "ООО \"ИНТЕРФУД\"",
+      "invoice": "ИФЦБ-004809",
+      "publicId": "533c4b86-e476-4091-9181-9abb353191a3",
+      "version": 1,
+      "line": 8,
+      "name": "Огурцы Кураж Тепличные,кг (00-00001354)",
+      "unit": "кг",
+      "qty": 3.256,
+      "sum": 911.68,
+      "fact": 280
+    },
+    {
+      "productKeys": [
+        "sea_bass_400_600"
+      ],
+      "date": "09.06.2026",
+      "supplier": "ИП Носова Юлия Евгеньевна",
+      "invoice": "629",
+      "publicId": "6c7fa4b5-960d-47ae-a9d6-6aab39c7604f",
+      "version": 2,
+      "line": 3,
+      "name": "Сибас, с/г не потр., 400-600 гр/шт., охл.,кг (00-00000040)",
+      "unit": "кг",
+      "qty": 6,
+      "sum": 7200,
+      "fact": 1200
+    },
+    {
+      "productKeys": [
+        "spinach_standard"
+      ],
+      "date": "09.06.2026",
+      "supplier": "ООО \"ИНТЕРФУД\"",
+      "invoice": "ИФЦБ-004816",
+      "publicId": "e14ae902-bde3-48ba-aafd-be991481ae99",
+      "version": 1,
+      "line": 9,
+      "name": "Шпинат ,кг (00-00000226)",
+      "unit": "кг",
+      "qty": 2.45,
+      "sum": 1605.24,
+      "fact": 655.2
+    },
+    {
+      "productKeys": [
+        "courage_cucumber"
+      ],
+      "date": "11.06.2026",
+      "supplier": "ООО \"ИНТЕРФУД\"",
+      "invoice": "ИФЦБ-004836",
+      "publicId": "36afd632-8ef9-4f48-b607-d1e3b2fe717d",
+      "version": 1,
+      "line": 7,
+      "name": "Огурцы Кураж Тепличные,кг (00-00001354)",
+      "unit": "кг",
+      "qty": 5.188,
+      "sum": 1510.75,
+      "fact": 291.2
+    },
+    {
+      "productKeys": [
         "eggplant"
       ],
       "date": "12.06.2026",
@@ -1370,6 +4967,22 @@
       "qty": 18.4,
       "sum": 5754.6,
       "fact": 312.75
+    },
+    {
+      "productKeys": [
+        "courage_cucumber"
+      ],
+      "date": "13.06.2026",
+      "supplier": "ООО \"Парадис Экзотика\" ",
+      "invoice": "ПЭ-21488",
+      "publicId": "1be36123-0ad6-4d94-b30a-a03637e0d602",
+      "version": 1,
+      "line": 13,
+      "name": "Огурцы Кураж короткоплодные Стандарт,кг (00-00009388)",
+      "unit": "кг",
+      "qty": 3.13,
+      "sum": 385.21,
+      "fact": 123.07
     },
     {
       "productKeys": [
@@ -1405,6 +5018,118 @@
     },
     {
       "productKeys": [
+        "spinach_standard"
+      ],
+      "date": "13.06.2026",
+      "supplier": "ООО \"Парадис Экзотика\" ",
+      "invoice": "ПЭ-21488",
+      "publicId": "1be36123-0ad6-4d94-b30a-a03637e0d602",
+      "version": 1,
+      "line": 26,
+      "name": "Шпинат стандарт,кг (00-00009486)",
+      "unit": "кг",
+      "qty": 2.2,
+      "sum": 556.16,
+      "fact": 252.8
+    },
+    {
+      "productKeys": [
+        "courage_cucumber"
+      ],
+      "date": "19.06.2026",
+      "supplier": "ООО \"Парадис Экзотика\" ",
+      "invoice": "ПЭ-22304",
+      "publicId": "ed97d15c-fb79-42a4-9a85-9a03df1c1809",
+      "version": 1,
+      "line": 3,
+      "name": "Огурцы Кураж короткоплодные Стандарт,кг (00-00009388)",
+      "unit": "кг",
+      "qty": 5,
+      "sum": 482.3,
+      "fact": 96.46
+    },
+    {
+      "productKeys": [
+        "pineapple"
+      ],
+      "date": "20.06.2026",
+      "supplier": "ООО \"МЕТРО Кэш энд Керри\" ",
+      "invoice": "61 043244 / 011",
+      "publicId": "f6d7bd74-2b06-43b2-a338-97b73a9b59e1",
+      "version": 1,
+      "line": 5,
+      "name": "1Л СОК RICH АНАНАСОВЫЙ,ШТ (457319)",
+      "unit": "ШТ",
+      "qty": 12,
+      "sum": 3120,
+      "fact": 260
+    },
+    {
+      "productKeys": [
+        "spinach_standard"
+      ],
+      "date": "22.06.2026",
+      "supplier": "ООО \"Парадис Экзотика\" ",
+      "invoice": "ПЭ-22629",
+      "publicId": "85b3b45a-6c7b-4d2a-95b5-16189e5fcf3f",
+      "version": 1,
+      "line": 3,
+      "name": "Шпинат стандарт,кг (00-00009486)",
+      "unit": "кг",
+      "qty": 2.22,
+      "sum": 1015.36,
+      "fact": 457.37
+    },
+    {
+      "productKeys": [
+        "courage_cucumber"
+      ],
+      "date": "22.06.2026",
+      "supplier": "ООО \"Парадис Экзотика\" ",
+      "invoice": "ПЭ-22629",
+      "publicId": "85b3b45a-6c7b-4d2a-95b5-16189e5fcf3f",
+      "version": 1,
+      "line": 12,
+      "name": "Огурцы Кураж короткоплодные Стандарт,кг (00-00009388)",
+      "unit": "кг",
+      "qty": 4,
+      "sum": 439.08,
+      "fact": 109.77
+    },
+    {
+      "productKeys": [
+        "pineapple"
+      ],
+      "date": "23.06.2026",
+      "supplier": "ООО \"Парадис Экзотика\" ",
+      "invoice": "ПЭ-22813",
+      "publicId": "62ba6a5b-c3e4-4bdf-82d3-152355a810a8",
+      "version": 1,
+      "line": 6,
+      "name": "Ананас Дель Монте спелые (5-6) Премиум,кг (00-00000009)",
+      "unit": "кг",
+      "qty": 5.7,
+      "sum": 1756.91,
+      "fact": 308.23
+    },
+    {
+      "productKeys": [
+        "courage_cucumber"
+      ],
+      "date": "23.06.2026",
+      "supplier": "ООО \"Парадис Экзотика\" ",
+      "invoice": "ПЭ-22813",
+      "publicId": "62ba6a5b-c3e4-4bdf-82d3-152355a810a8",
+      "version": 1,
+      "line": 11,
+      "name": "Огурцы Кураж короткоплодные Стандарт,кг (00-00009388)",
+      "unit": "кг",
+      "qty": 5.17,
+      "sum": 567.51,
+      "fact": 109.77
+    },
+    {
+      "productKeys": [
         "salmon"
       ],
       "date": "23.06.2026",
@@ -1437,6 +5162,22 @@
     },
     {
       "productKeys": [
+        "spinach_standard"
+      ],
+      "date": "25.06.2026",
+      "supplier": "ООО \"Парадис Экзотика\" ",
+      "invoice": "ПЭ-23142",
+      "publicId": "d77e2da8-d585-442f-add9-94c8d2e0eb2d",
+      "version": 1,
+      "line": 8,
+      "name": "Шпинат стандарт,кг (00-00009486)",
+      "unit": "кг",
+      "qty": 2.2,
+      "sum": 853.73,
+      "fact": 388.06
+    },
+    {
+      "productKeys": [
         "eggplant"
       ],
       "date": "25.06.2026",
@@ -1450,6 +5191,70 @@
       "qty": 10.5,
       "sum": 2498.06,
       "fact": 237.91
+    },
+    {
+      "productKeys": [
+        "courage_cucumber"
+      ],
+      "date": "25.06.2026",
+      "supplier": "ООО \"Парадис Экзотика\" ",
+      "invoice": "ПЭ-23142",
+      "publicId": "d77e2da8-d585-442f-add9-94c8d2e0eb2d",
+      "version": 1,
+      "line": 17,
+      "name": "Огурцы Кураж короткоплодные Стандарт,кг (00-00009388)",
+      "unit": "кг",
+      "qty": 7.4,
+      "sum": 827.32,
+      "fact": 111.8
+    },
+    {
+      "productKeys": [
+        "mozzarella_125"
+      ],
+      "date": "25.06.2026",
+      "supplier": "ООО \"КАРТАРИ\"",
+      "invoice": "УН-426",
+      "publicId": "1e0393eb-2ddd-499d-83c4-71992513ba1d",
+      "version": 1,
+      "line": 2,
+      "name": "Сыр Моцарелла 125 г (Mozzarella) уп.3кг,шт (УН-00000249)",
+      "unit": "шт",
+      "qty": 4,
+      "sum": 11220,
+      "fact": 2805
+    },
+    {
+      "productKeys": [
+        "pineapple"
+      ],
+      "date": "27.06.2026",
+      "supplier": "ООО \"Парадис Экзотика\" ",
+      "invoice": "ПЭ-23351",
+      "publicId": "40209a36-f948-42c2-b6c6-d9699c0530bc",
+      "version": 1,
+      "line": 13,
+      "name": "Ананас Дель Монте спелые (5-6) ,кг (00-00000009)",
+      "unit": "кг",
+      "qty": 13.5,
+      "sum": 3735.86,
+      "fact": 276.73
+    },
+    {
+      "productKeys": [
+        "courage_cucumber"
+      ],
+      "date": "27.06.2026",
+      "supplier": "ООО \"Парадис Экзотика\" ",
+      "invoice": "ПЭ-23351",
+      "publicId": "40209a36-f948-42c2-b6c6-d9699c0530bc",
+      "version": 1,
+      "line": 20,
+      "name": "Огурцы Кураж короткоплодные Стандарт,кг (00-00009388)",
+      "unit": "кг",
+      "qty": 6.6,
+      "sum": 737.88,
+      "fact": 111.8
     },
     {
       "productKeys": [
@@ -1469,6 +5274,86 @@
     },
     {
       "productKeys": [
+        "spinach_standard"
+      ],
+      "date": "28.06.2026",
+      "supplier": "ООО \"Парадис Экзотика\" ",
+      "invoice": "ПЭ-23483",
+      "publicId": "8bd90e21-d59e-4ce4-8832-6d4c11d8b002",
+      "version": 1,
+      "line": 7,
+      "name": "Шпинат стандарт,кг (00-00009486)",
+      "unit": "кг",
+      "qty": 2.12,
+      "sum": 822.69,
+      "fact": 388.06
+    },
+    {
+      "productKeys": [
+        "courage_cucumber"
+      ],
+      "date": "29.06.2026",
+      "supplier": "ООО \"Парадис Экзотика\" ",
+      "invoice": "ПЭ-23613",
+      "publicId": "6c9a333d-7b2d-4310-8ff9-c21adde471e7",
+      "version": 2,
+      "line": 11,
+      "name": "Огурцы Кураж короткоплодные Стандарт,кг (00-00009388)",
+      "unit": "кг",
+      "qty": 5.3,
+      "sum": 517.12,
+      "fact": 97.57
+    },
+    {
+      "productKeys": [
+        "courage_cucumber"
+      ],
+      "date": "30.06.2026",
+      "supplier": "ООО \"Парадис Экзотика\" ",
+      "invoice": "ПЭ-23653",
+      "publicId": "a58f97c5-8852-4185-9257-60fc40b87169",
+      "version": 2,
+      "line": 6,
+      "name": "Огурцы Кураж короткоплодные Стандарт,кг (00-00009388)",
+      "unit": "кг",
+      "qty": 3,
+      "sum": 292.71,
+      "fact": 97.57
+    },
+    {
+      "productKeys": [
+        "pineapple"
+      ],
+      "date": "30.06.2026",
+      "supplier": "ООО \"Парадис Экзотика\" ",
+      "invoice": "ПЭ-23653",
+      "publicId": "a58f97c5-8852-4185-9257-60fc40b87169",
+      "version": 2,
+      "line": 9,
+      "name": "Ананас Дель Монте спелые (5-6) ,кг (00-00000009)",
+      "unit": "кг",
+      "qty": 7,
+      "sum": 2561.23,
+      "fact": 365.89
+    },
+    {
+      "productKeys": [
+        "spinach_standard"
+      ],
+      "date": "30.06.2026",
+      "supplier": "ООО \"Парадис Экзотика\" ",
+      "invoice": "ПЭ-23653",
+      "publicId": "a58f97c5-8852-4185-9257-60fc40b87169",
+      "version": 2,
+      "line": 17,
+      "name": "Шпинат стандарт,кг (00-00009486)",
+      "unit": "кг",
+      "qty": 2.14,
+      "sum": 830.45,
+      "fact": 388.06
+    },
+    {
+      "productKeys": [
         "eggplant"
       ],
       "date": "30.06.2026",
@@ -1482,6 +5367,38 @@
       "qty": 10.8,
       "sum": 2263.14,
       "fact": 209.55
+    },
+    {
+      "productKeys": [
+        "sea_bass_400_600"
+      ],
+      "date": "01.07.2026",
+      "supplier": "ИП Носова Юлия Евгеньевна",
+      "invoice": "687",
+      "publicId": "023848b6-34b0-4fc1-8380-faac9eea4212",
+      "version": 1,
+      "line": 1,
+      "name": "Сибас, с/г не потр., 400-600 гр/шт., охл.,кг (00-00000040)",
+      "unit": "кг",
+      "qty": 18,
+      "sum": 21420,
+      "fact": 1190
+    },
+    {
+      "productKeys": [
+        "spinach_standard"
+      ],
+      "date": "01.07.2026",
+      "supplier": "ООО \"Парадис Экзотика\" ",
+      "invoice": "ПЭ-23857",
+      "publicId": "b872d114-6110-4945-86a4-0f805ee11cb5",
+      "version": 1,
+      "line": 8,
+      "name": "Шпинат стандарт,кг (00-00009486)",
+      "unit": "кг",
+      "qty": 2,
+      "sum": 776.12,
+      "fact": 388.06
     },
     {
       "productKeys": [
@@ -1501,6 +5418,22 @@
     },
     {
       "productKeys": [
+        "courage_cucumber"
+      ],
+      "date": "01.07.2026",
+      "supplier": "ООО \"Парадис Экзотика\" ",
+      "invoice": "ПЭ-23857",
+      "publicId": "b872d114-6110-4945-86a4-0f805ee11cb5",
+      "version": 1,
+      "line": 16,
+      "name": "Огурцы Кураж короткоплодные Стандарт,кг (00-00009388)",
+      "unit": "кг",
+      "qty": 6.1,
+      "sum": 595.18,
+      "fact": 97.57
+    },
+    {
+      "productKeys": [
         "eggplant"
       ],
       "date": "02.07.2026",
@@ -1517,6 +5450,102 @@
     },
     {
       "productKeys": [
+        "spinach_standard"
+      ],
+      "date": "02.07.2026",
+      "supplier": "ООО \"Парадис Экзотика\" ",
+      "invoice": "ПЭ-24029",
+      "publicId": "e6cb82aa-2407-4ca1-a5f1-9663a1c95449",
+      "version": 2,
+      "line": 13,
+      "name": "Шпинат стандарт,кг (00-00009486)",
+      "unit": "кг",
+      "qty": 2.15,
+      "sum": 626.94,
+      "fact": 291.6
+    },
+    {
+      "productKeys": [
+        "pineapple"
+      ],
+      "date": "02.07.2026",
+      "supplier": "ООО \"Парадис Экзотика\" ",
+      "invoice": "ПЭ-24029",
+      "publicId": "e6cb82aa-2407-4ca1-a5f1-9663a1c95449",
+      "version": 2,
+      "line": 14,
+      "name": "Ананас Дель Монте спелые (5-6) ,кг (00-00000009)",
+      "unit": "кг",
+      "qty": 10.1,
+      "sum": 3695.49,
+      "fact": 365.89
+    },
+    {
+      "productKeys": [
+        "courage_cucumber"
+      ],
+      "date": "02.07.2026",
+      "supplier": "ООО \"Парадис Экзотика\" ",
+      "invoice": "ПЭ-24029",
+      "publicId": "e6cb82aa-2407-4ca1-a5f1-9663a1c95449",
+      "version": 2,
+      "line": 15,
+      "name": "Огурцы Кураж короткоплодные Стандарт,кг (00-00009388)",
+      "unit": "кг",
+      "qty": 5,
+      "sum": 487.85,
+      "fact": 97.57
+    },
+    {
+      "productKeys": [
+        "pineapple"
+      ],
+      "date": "03.07.2026",
+      "supplier": "ООО \"Парадис Экзотика\" ",
+      "invoice": "ПЭ-24139",
+      "publicId": "b48bc6c6-89f7-4a3c-9d6f-f733fea7d785",
+      "version": 1,
+      "line": 22,
+      "name": "Ананас Дель Монте спелые (5-6) ,кг (00-00000009)",
+      "unit": "кг",
+      "qty": 3.86,
+      "sum": 1412.34,
+      "fact": 365.89
+    },
+    {
+      "productKeys": [
+        "mozzarella_125"
+      ],
+      "date": "04.07.2026",
+      "supplier": "ООО \"МЕТРО Кэш энд Керри\" ",
+      "invoice": "9610473890119",
+      "publicId": "bd9e183f-eb6f-4821-9813-b7e0983ff853",
+      "version": 2,
+      "line": 2,
+      "name": "125Г СЫР МОЦАРЕЛЛА 45% METRO CHEF ФИОРДИЛАТТ БЗМЖ,ШТ (116706)",
+      "unit": "ШТ",
+      "qty": 15,
+      "sum": 2085,
+      "fact": 139
+    },
+    {
+      "productKeys": [
+        "pineapple"
+      ],
+      "date": "04.07.2026",
+      "supplier": "ООО \"Парадис Экзотика\" ",
+      "invoice": "ПЭ-24321",
+      "publicId": "8217df27-203d-41b1-b265-9070aec7d2ef",
+      "version": 1,
+      "line": 10,
+      "name": "Ананас Дель Монте спелые (5-6) ,кг (00-00000009)",
+      "unit": "кг",
+      "qty": 11.5,
+      "sum": 4207.74,
+      "fact": 365.89
+    },
+    {
+      "productKeys": [
         "eggplant"
       ],
       "date": "04.07.2026",
@@ -1530,6 +5559,86 @@
       "qty": 6.2,
       "sum": 859.26,
       "fact": 138.59
+    },
+    {
+      "productKeys": [
+        "courage_cucumber"
+      ],
+      "date": "04.07.2026",
+      "supplier": "ООО \"Парадис Экзотика\" ",
+      "invoice": "ПЭ-24321",
+      "publicId": "8217df27-203d-41b1-b265-9070aec7d2ef",
+      "version": 1,
+      "line": 29,
+      "name": "Огурцы Кураж короткоплодные Стандарт,кг (00-00009388)",
+      "unit": "кг",
+      "qty": 8.4,
+      "sum": 983.64,
+      "fact": 117.1
+    },
+    {
+      "productKeys": [
+        "spinach_standard"
+      ],
+      "date": "04.07.2026",
+      "supplier": "ООО \"Парадис Экзотика\" ",
+      "invoice": "ПЭ-24321",
+      "publicId": "8217df27-203d-41b1-b265-9070aec7d2ef",
+      "version": 1,
+      "line": 40,
+      "name": "Шпинат стандарт,кг (00-00009486)",
+      "unit": "кг",
+      "qty": 2,
+      "sum": 953.52,
+      "fact": 476.76
+    },
+    {
+      "productKeys": [
+        "spinach_standard"
+      ],
+      "date": "05.07.2026",
+      "supplier": "ООО \"Парадис Экзотика\" ",
+      "invoice": "ПЭ-24398",
+      "publicId": "b7c4641a-dd76-4ac7-8805-075db71db7de",
+      "version": 1,
+      "line": 27,
+      "name": "Шпинат стандарт,кг (00-00009486)",
+      "unit": "кг",
+      "qty": 2.17,
+      "sum": 1034.57,
+      "fact": 476.76
+    },
+    {
+      "productKeys": [
+        "courage_cucumber"
+      ],
+      "date": "06.07.2026",
+      "supplier": "ООО \"Парадис Экзотика\" ",
+      "invoice": "ПЭ-24448",
+      "publicId": "964659e1-9bd2-4d81-8a62-364d8198e642",
+      "version": 1,
+      "line": 4,
+      "name": "Огурцы Кураж короткоплодные Стандарт,кг (00-00009388)",
+      "unit": "кг",
+      "qty": 6.4,
+      "sum": 749.44,
+      "fact": 117.1
+    },
+    {
+      "productKeys": [
+        "mozzarella_125"
+      ],
+      "date": "07.07.2026",
+      "supplier": "ООО \"Парадис Экзотика\" ",
+      "invoice": "ПЭ-24659",
+      "publicId": "5b4167db-9316-46a4-87ed-873b0124ba6b",
+      "version": 1,
+      "line": 1,
+      "name": "/Сыр Моцарелла Galbani 125 г. 45%,шт (00-00001991)",
+      "unit": "шт",
+      "qty": 6,
+      "sum": 956.4,
+      "fact": 159.4
     },
     {
       "productKeys": [
@@ -1565,6 +5674,38 @@
     },
     {
       "productKeys": [
+        "gorgonzola_cheese"
+      ],
+      "date": "07.07.2026",
+      "supplier": "ООО \"Торговый дом \"Глобал Фудс\" ***",
+      "invoice": "ТД0707/0453",
+      "publicId": "8f3c3aaf-1dd0-46c5-82d4-ece1541e8e20",
+      "version": 2,
+      "line": 6,
+      "name": "Сыр Горгонзола с голубой плесенью 50% ~1кг фольга из цельного молока БЗМЖ Шангал Россия (ПУ) (КОД 74540) (0°С),кг (74540)",
+      "unit": "кг",
+      "qty": 7.698,
+      "sum": 10794.92,
+      "fact": 1402.3
+    },
+    {
+      "productKeys": [
+        "courage_cucumber"
+      ],
+      "date": "08.07.2026",
+      "supplier": "ООО \"Парадис Экзотика\" ",
+      "invoice": "ПЭ-24704",
+      "publicId": "894ffc8a-5f63-4e6b-a303-e0072d563e26",
+      "version": 2,
+      "line": 8,
+      "name": "Огурцы Кураж короткоплодные Стандарт,кг (00-00009388)",
+      "unit": "кг",
+      "qty": 3,
+      "sum": 299.37,
+      "fact": 99.79
+    },
+    {
+      "productKeys": [
         "eggplant"
       ],
       "date": "10.07.2026",
@@ -1597,6 +5738,118 @@
     },
     {
       "productKeys": [
+        "courage_cucumber"
+      ],
+      "date": "10.07.2026",
+      "supplier": "ООО \"Парадис Экзотика\" ",
+      "invoice": "ПЭ-24998",
+      "publicId": "83b3edff-1026-452e-9fab-8a0c963570fc",
+      "version": 2,
+      "line": 18,
+      "name": "Огурцы Кураж короткоплодные Стандарт,кг (00-00009388)",
+      "unit": "кг",
+      "qty": 5.09,
+      "sum": 536.18,
+      "fact": 105.34
+    },
+    {
+      "productKeys": [
+        "mozzarella_125"
+      ],
+      "date": "10.07.2026",
+      "supplier": "ООО \"КАРТАРИ\"",
+      "invoice": "УН-644",
+      "publicId": "1084a21e-3b28-4dba-a717-fde133ed5d29",
+      "version": 1,
+      "line": 2,
+      "name": "Сыр Моцарелла 125 г (Mozzarella) уп.3кг,шт (УН-00000249)",
+      "unit": "шт",
+      "qty": 3,
+      "sum": 8415,
+      "fact": 2805
+    },
+    {
+      "productKeys": [
+        "pineapple"
+      ],
+      "date": "11.07.2026",
+      "supplier": "ООО \"Парадис Экзотика\" ",
+      "invoice": "ПЭ-25193",
+      "publicId": "61cad4fa-7232-43e6-9ae7-2ed513ca231b",
+      "version": 1,
+      "line": 4,
+      "name": "Ананас Дель Монте спелые (5-6) ,кг (00-00000009)",
+      "unit": "кг",
+      "qty": 2.24,
+      "sum": 789.73,
+      "fact": 352.56
+    },
+    {
+      "productKeys": [
+        "spinach_standard"
+      ],
+      "date": "11.07.2026",
+      "supplier": "ООО \"Парадис Экзотика\" ",
+      "invoice": "ПЭ-25193",
+      "publicId": "61cad4fa-7232-43e6-9ae7-2ed513ca231b",
+      "version": 1,
+      "line": 10,
+      "name": "Шпинат стандарт,кг (00-00009486)",
+      "unit": "кг",
+      "qty": 2,
+      "sum": 762.82,
+      "fact": 381.41
+    },
+    {
+      "productKeys": [
+        "courage_cucumber"
+      ],
+      "date": "14.07.2026",
+      "supplier": "ООО \"Парадис Экзотика\" ",
+      "invoice": "ПЭ-25543",
+      "publicId": "748de797-32c8-455c-8f77-5bd96cf2b9d1",
+      "version": 1,
+      "line": 10,
+      "name": "Огурцы Кураж короткоплодные Стандарт,кг (00-00009388)",
+      "unit": "кг",
+      "qty": 3.34,
+      "sum": 318.47,
+      "fact": 95.35
+    },
+    {
+      "productKeys": [
+        "courage_cucumber"
+      ],
+      "date": "15.07.2026",
+      "supplier": "ООО \"Парадис Экзотика\" ",
+      "invoice": "ПЭ-25649",
+      "publicId": "b3d079bb-2e63-4a83-bbb6-9d7cd8062db7",
+      "version": 1,
+      "line": 15,
+      "name": "Огурцы Кураж короткоплодные Стандарт,кг (00-00009388)",
+      "unit": "кг",
+      "qty": 5,
+      "sum": 476.75,
+      "fact": 95.35
+    },
+    {
+      "productKeys": [
+        "courage_cucumber"
+      ],
+      "date": "16.07.2026",
+      "supplier": "ООО \"Парадис Экзотика\" ",
+      "invoice": "ПЭ-25785",
+      "publicId": "2574bb31-1b40-4c68-b2fa-6c479f3a2438",
+      "version": 1,
+      "line": 14,
+      "name": "Огурцы Кураж короткоплодные Стандарт,кг (00-00009388)",
+      "unit": "кг",
+      "qty": 4.4,
+      "sum": 419.54,
+      "fact": 95.35
+    },
+    {
+      "productKeys": [
         "eye_muscle"
       ],
       "date": "17.07.2026",
@@ -1610,6 +5863,118 @@
       "qty": 13.45,
       "sum": 12199.22,
       "fact": 907.01
+    },
+    {
+      "productKeys": [
+        "spinach_standard"
+      ],
+      "date": "19.07.2026",
+      "supplier": "ООО \"Парадис Экзотика\" ",
+      "invoice": "ПЭ-26235",
+      "publicId": "481a3009-2989-43ad-af5c-7678ca8541ad",
+      "version": 2,
+      "line": 33,
+      "name": "Шпинат стандарт,кг (00-00009486)",
+      "unit": "кг",
+      "qty": 2.31,
+      "sum": 881.06,
+      "fact": 381.41
+    },
+    {
+      "productKeys": [
+        "courage_cucumber"
+      ],
+      "date": "20.07.2026",
+      "supplier": "ООО \"Парадис Экзотика\" ",
+      "invoice": "ПЭ-26371",
+      "publicId": "1676a705-896b-42ca-b00d-1398754e68bd",
+      "version": 1,
+      "line": 2,
+      "name": "Огурцы Кураж короткоплодные Стандарт,кг (00-00009388)",
+      "unit": "кг",
+      "qty": 5.12,
+      "sum": 488.19,
+      "fact": 95.35
+    },
+    {
+      "productKeys": [
+        "spinach_standard"
+      ],
+      "date": "20.07.2026",
+      "supplier": "ООО \"Парадис Экзотика\" ",
+      "invoice": "ПЭ-26371",
+      "publicId": "1676a705-896b-42ca-b00d-1398754e68bd",
+      "version": 1,
+      "line": 9,
+      "name": "Шпинат стандарт,кг (00-00009486)",
+      "unit": "кг",
+      "qty": 2,
+      "sum": 762.82,
+      "fact": 381.41
+    },
+    {
+      "productKeys": [
+        "pineapple"
+      ],
+      "date": "21.07.2026",
+      "supplier": "ООО \"Мултон Партнерс\"",
+      "invoice": "3655073171/3801",
+      "publicId": "73781455-fbf6-496b-acbf-6427a72693d1",
+      "version": 1,
+      "line": 4,
+      "name": "2Х6 ТП ДОБРЫЙ АНАНАС ЯБЛОКО НЕКТ,упак ()",
+      "unit": "упак",
+      "qty": 1,
+      "sum": 1569.28,
+      "fact": 1569.28
+    },
+    {
+      "productKeys": [
+        "pineapple"
+      ],
+      "date": "21.07.2026",
+      "supplier": "ООО \"Парадис Экзотика\" ",
+      "invoice": "ПЭ-26536",
+      "publicId": "ef1c2113-4c3a-4332-b1ea-dcaefae16225",
+      "version": 1,
+      "line": 3,
+      "name": "Ананас Голд Стандарт,кг (00-00009305)",
+      "unit": "кг",
+      "qty": 5.3,
+      "sum": 1325.32,
+      "fact": 250.06
+    },
+    {
+      "productKeys": [
+        "courage_cucumber"
+      ],
+      "date": "21.07.2026",
+      "supplier": "ООО \"Парадис Экзотика\" ",
+      "invoice": "ПЭ-26536",
+      "publicId": "ef1c2113-4c3a-4332-b1ea-dcaefae16225",
+      "version": 1,
+      "line": 11,
+      "name": "Огурцы Кураж короткоплодные Стандарт,кг (00-00009388)",
+      "unit": "кг",
+      "qty": 3.7,
+      "sum": 324.08,
+      "fact": 87.59
+    },
+    {
+      "productKeys": [
+        "sea_bass_400_600"
+      ],
+      "date": "22.07.2026",
+      "supplier": "ИП Носова Юлия Евгеньевна",
+      "invoice": "729",
+      "publicId": "eb773db1-490b-4fdb-8f29-0fbb63a20e86",
+      "version": 1,
+      "line": 6,
+      "name": "Сибас, с/г не потр., 400-600 гр/шт., охл.,кг (00-00000040)",
+      "unit": "кг",
+      "qty": 6,
+      "sum": 7200,
+      "fact": 1200
     },
     {
       "productKeys": [
@@ -1645,6 +6010,166 @@
     },
     {
       "productKeys": [
+        "courage_cucumber"
+      ],
+      "date": "22.07.2026",
+      "supplier": "ООО \"Парадис Экзотика\" ",
+      "invoice": "ПЭ-26664",
+      "publicId": "791ff6f2-b47e-4295-a495-ff83911f1de8",
+      "version": 1,
+      "line": 13,
+      "name": "Огурцы Кураж короткоплодные Стандарт,кг (00-00009388)",
+      "unit": "кг",
+      "qty": 4.28,
+      "sum": 374.89,
+      "fact": 87.59
+    },
+    {
+      "productKeys": [
+        "spinach_standard"
+      ],
+      "date": "23.07.2026",
+      "supplier": "ООО \"Парадис Экзотика\" ",
+      "invoice": "ПЭ-26811",
+      "publicId": "c86da637-22c7-43f7-ba96-31cf1fe01388",
+      "version": 1,
+      "line": 11,
+      "name": "Шпинат стандарт,кг (00-00009486)",
+      "unit": "кг",
+      "qty": 2.4,
+      "sum": 915.38,
+      "fact": 381.41
+    },
+    {
+      "productKeys": [
+        "courage_cucumber"
+      ],
+      "date": "24.07.2026",
+      "supplier": "ООО \"Парадис Экзотика\" ",
+      "invoice": "ПЭ-26927",
+      "publicId": "8b84211f-9339-4196-9e79-037fd966e07a",
+      "version": 2,
+      "line": 9,
+      "name": "Огурцы Кураж короткоплодные Стандарт,кг (00-00009388)",
+      "unit": "кг",
+      "qty": 3.5,
+      "sum": 336.28,
+      "fact": 96.08
+    },
+    {
+      "productKeys": [
+        "spinach_standard"
+      ],
+      "date": "24.07.2026",
+      "supplier": "ООО \"Парадис Экзотика\" ",
+      "invoice": "ПЭ-26927",
+      "publicId": "8b84211f-9339-4196-9e79-037fd966e07a",
+      "version": 2,
+      "line": 10,
+      "name": "Шпинат стандарт,кг (00-00009486)",
+      "unit": "кг",
+      "qty": 0.6,
+      "sum": 174.96,
+      "fact": 291.6
+    },
+    {
+      "productKeys": [
+        "pineapple"
+      ],
+      "date": "24.07.2026",
+      "supplier": "ООО \"Парадис Экзотика\" ",
+      "invoice": "ПЭ-26927",
+      "publicId": "8b84211f-9339-4196-9e79-037fd966e07a",
+      "version": 2,
+      "line": 11,
+      "name": "Ананас Дель Монте спелые (5-6) ,кг (00-00000009)",
+      "unit": "кг",
+      "qty": 6.2,
+      "sum": 2261.88,
+      "fact": 364.82
+    },
+    {
+      "productKeys": [
+        "spinach_standard"
+      ],
+      "date": "25.07.2026",
+      "supplier": "ООО \"Парадис Экзотика\" ",
+      "invoice": "ПЭ-27077",
+      "publicId": "effb4b49-8a0f-4b0a-8ba3-a03aee508aaf",
+      "version": 1,
+      "line": 8,
+      "name": "Шпинат стандарт,кг (00-00009486)",
+      "unit": "кг",
+      "qty": 2,
+      "sum": 583.2,
+      "fact": 291.6
+    },
+    {
+      "productKeys": [
+        "courage_cucumber"
+      ],
+      "date": "25.07.2026",
+      "supplier": "ООО \"Парадис Экзотика\" ",
+      "invoice": "ПЭ-27077",
+      "publicId": "effb4b49-8a0f-4b0a-8ba3-a03aee508aaf",
+      "version": 1,
+      "line": 15,
+      "name": "Огурцы Кураж короткоплодные Стандарт,кг (00-00009388)",
+      "unit": "кг",
+      "qty": 9,
+      "sum": 864.72,
+      "fact": 96.08
+    },
+    {
+      "productKeys": [
+        "gorgonzola_cheese"
+      ],
+      "date": "25.07.2026",
+      "supplier": "ООО \"ТД \"ГЛОБАЛ ФУДС\"",
+      "invoice": "ТД2507/0122",
+      "publicId": "9eb53fa4-c63e-4f1e-983a-bc4477f61241",
+      "version": 1,
+      "line": 5,
+      "name": "Сыр Горгонзола с голубой плесенью 50% ~1кг фольга из цельного молока БЗМЖ Шангал Россия (ПУ),кг (74540)",
+      "unit": "кг",
+      "qty": 4.112,
+      "sum": 5766.27,
+      "fact": 1402.3
+    },
+    {
+      "productKeys": [
+        "pineapple"
+      ],
+      "date": "26.07.2026",
+      "supplier": "ООО \"Парадис Экзотика\" ",
+      "invoice": "ПЭ-27194",
+      "publicId": "64cb6b7c-b95e-4eb1-becf-fff29f89dcb1",
+      "version": 2,
+      "line": 4,
+      "name": "Ананас Дель Монте спелые (5-6) ,кг (00-00000009)",
+      "unit": "кг",
+      "qty": 11,
+      "sum": 4013.02,
+      "fact": 364.82
+    },
+    {
+      "productKeys": [
+        "mozzarella_125"
+      ],
+      "date": "26.07.2026",
+      "supplier": "ООО \"Парадис Экзотика\" ",
+      "invoice": "ПЭ-27194",
+      "publicId": "64cb6b7c-b95e-4eb1-becf-fff29f89dcb1",
+      "version": 2,
+      "line": 17,
+      "name": "/Сыр Моцарелла Galbani 125 г. 45%,шт (00-00001991)",
+      "unit": "шт",
+      "qty": 4,
+      "sum": 645.92,
+      "fact": 161.48
+    },
+    {
+      "productKeys": [
         "eggplant"
       ],
       "date": "26.07.2026",
@@ -1677,6 +6202,38 @@
     },
     {
       "productKeys": [
+        "courage_cucumber"
+      ],
+      "date": "29.07.2026",
+      "supplier": "ООО \"Парадис Экзотика\" ",
+      "invoice": "ПЭ-27565",
+      "publicId": "09c71859-09b1-495f-aab4-83aa00ece601",
+      "version": 2,
+      "line": 4,
+      "name": "Огурцы Кураж выс/кат ,кг (00-00000074)",
+      "unit": "кг",
+      "qty": 6.2,
+      "sum": 1567.36,
+      "fact": 252.8
+    },
+    {
+      "productKeys": [
+        "pineapple"
+      ],
+      "date": "29.07.2026",
+      "supplier": "ООО \"Парадис Экзотика\" ",
+      "invoice": "ПЭ-27565",
+      "publicId": "09c71859-09b1-495f-aab4-83aa00ece601",
+      "version": 2,
+      "line": 28,
+      "name": "Ананас Дель Монте спелые (5-6) ,кг (00-00000009)",
+      "unit": "кг",
+      "qty": 6.6,
+      "sum": 2407.81,
+      "fact": 364.82
+    },
+    {
+      "productKeys": [
         "eye_muscle"
       ],
       "date": "29.07.2026",
@@ -1690,6 +6247,54 @@
       "qty": 15.56,
       "sum": 14111.28,
       "fact": 906.89
+    },
+    {
+      "productKeys": [
+        "courage_cucumber"
+      ],
+      "date": "30.07.2026",
+      "supplier": "ООО \"Парадис Экзотика\" ",
+      "invoice": "ПЭ-27651",
+      "publicId": "b15d9063-6c76-4e94-8f44-0193c7e8cc65",
+      "version": 1,
+      "line": 2,
+      "name": "Огурцы Кураж выс/кат ,кг (00-00000074)",
+      "unit": "кг",
+      "qty": 5,
+      "sum": 1346.2,
+      "fact": 269.24
+    },
+    {
+      "productKeys": [
+        "spinach_standard"
+      ],
+      "date": "30.07.2026",
+      "supplier": "ООО \"Парадис Экзотика\" ",
+      "invoice": "ПЭ-27651",
+      "publicId": "b15d9063-6c76-4e94-8f44-0193c7e8cc65",
+      "version": 1,
+      "line": 12,
+      "name": "Шпинат стандарт,кг (00-00009486)",
+      "unit": "кг",
+      "qty": 2,
+      "sum": 583.2,
+      "fact": 291.6
+    },
+    {
+      "productKeys": [
+        "pineapple"
+      ],
+      "date": "01.08.2026",
+      "supplier": "ООО \"Парадис Экзотика\" ",
+      "invoice": "ПЭ-27946",
+      "publicId": "cfae6190-c346-4708-b31f-db5caa2c799a",
+      "version": 2,
+      "line": 27,
+      "name": "Ананас Дель Монте спелые (5-6) ,кг (00-00000009)",
+      "unit": "кг",
+      "qty": 4.15,
+      "sum": 1603.73,
+      "fact": 386.44
     },
     {
       "productKeys": [
@@ -1709,6 +6314,70 @@
     },
     {
       "productKeys": [
+        "courage_cucumber"
+      ],
+      "date": "02.08.2026",
+      "supplier": "ООО \"Парадис Экзотика\" ",
+      "invoice": "ПЭ-28053",
+      "publicId": "dad595d7-20be-4162-8d32-43f0eec4a963",
+      "version": 2,
+      "line": 6,
+      "name": "Огурцы Кураж выс/кат ,кг (00-00000074)",
+      "unit": "кг",
+      "qty": 6,
+      "sum": 2065.2,
+      "fact": 344.2
+    },
+    {
+      "productKeys": [
+        "spinach_standard"
+      ],
+      "date": "02.08.2026",
+      "supplier": "ООО \"Парадис Экзотика\" ",
+      "invoice": "ПЭ-28053",
+      "publicId": "dad595d7-20be-4162-8d32-43f0eec4a963",
+      "version": 2,
+      "line": 12,
+      "name": "Шпинат стандарт,кг (00-00009486)",
+      "unit": "кг",
+      "qty": 2.1,
+      "sum": 612.36,
+      "fact": 291.6
+    },
+    {
+      "productKeys": [
+        "pineapple"
+      ],
+      "date": "04.08.2026",
+      "supplier": "ООО \"Парадис Экзотика\" ",
+      "invoice": "ПЭ-28331",
+      "publicId": "9a90bb45-e36f-4ca2-acb8-e9f66c3f1d7a",
+      "version": 1,
+      "line": 11,
+      "name": "Ананас Дель Монте спелые (5-6) ,кг (00-00000009)",
+      "unit": "кг",
+      "qty": 3.85,
+      "sum": 1487.79,
+      "fact": 386.44
+    },
+    {
+      "productKeys": [
+        "spinach_standard"
+      ],
+      "date": "04.08.2026",
+      "supplier": "ООО \"Парадис Экзотика\" ",
+      "invoice": "ПЭ-28331",
+      "publicId": "9a90bb45-e36f-4ca2-acb8-e9f66c3f1d7a",
+      "version": 1,
+      "line": 13,
+      "name": "Шпинат стандарт,кг (00-00009486)",
+      "unit": "кг",
+      "qty": 2.2,
+      "sum": 641.52,
+      "fact": 291.6
+    },
+    {
+      "productKeys": [
         "eggplant"
       ],
       "date": "04.08.2026",
@@ -1722,6 +6391,22 @@
       "qty": 6.4,
       "sum": 872.83,
       "fact": 136.38
+    },
+    {
+      "productKeys": [
+        "courage_cucumber"
+      ],
+      "date": "04.08.2026",
+      "supplier": "ООО \"Парадис Экзотика\" ",
+      "invoice": "ПЭ-28331",
+      "publicId": "9a90bb45-e36f-4ca2-acb8-e9f66c3f1d7a",
+      "version": 1,
+      "line": 22,
+      "name": "Огурцы Кураж выс/кат ,кг (00-00000074)",
+      "unit": "кг",
+      "qty": 5.3,
+      "sum": 1840.96,
+      "fact": 347.35
     },
     {
       "productKeys": [
@@ -1757,6 +6442,70 @@
     },
     {
       "productKeys": [
+        "mozzarella_125"
+      ],
+      "date": "05.08.2026",
+      "supplier": "ООО \"МЕТРО Кэш энд Керри\" ",
+      "invoice": "9610565840119",
+      "publicId": "18492421-ac97-437b-9ab2-2b8f52dc798f",
+      "version": 1,
+      "line": 3,
+      "name": "125Г СЫР МОЦАРЕЛЛА 45% METRO CHEF ФИОРДИЛАТТ БЗМЖ,ШТ (116706)",
+      "unit": "ШТ",
+      "qty": 16,
+      "sum": 2224,
+      "fact": 139
+    },
+    {
+      "productKeys": [
+        "pineapple"
+      ],
+      "date": "05.08.2026",
+      "supplier": "ООО \"Парадис Экзотика\" ",
+      "invoice": "ПЭ-28530",
+      "publicId": "eba03709-5868-4c7c-a4ab-a568984addcd",
+      "version": 1,
+      "line": 27,
+      "name": "Ананас Дель Монте спелые (5-6) ,кг (00-00000009)",
+      "unit": "кг",
+      "qty": 6.3,
+      "sum": 2512.13,
+      "fact": 398.75
+    },
+    {
+      "productKeys": [
+        "spinach_standard"
+      ],
+      "date": "05.08.2026",
+      "supplier": "ООО \"Парадис Экзотика\" ",
+      "invoice": "ПЭ-28530",
+      "publicId": "eba03709-5868-4c7c-a4ab-a568984addcd",
+      "version": 1,
+      "line": 33,
+      "name": "Шпинат стандарт,кг (00-00009486)",
+      "unit": "кг",
+      "qty": 2.1,
+      "sum": 612.36,
+      "fact": 291.6
+    },
+    {
+      "productKeys": [
+        "gorgonzola_cheese"
+      ],
+      "date": "05.08.2026",
+      "supplier": "ООО \"ТД \"ГЛОБАЛ ФУДС\"",
+      "invoice": "ТД0508/0278",
+      "publicId": "8c96ded9-2981-4478-b1d6-f753b47a31c5",
+      "version": 1,
+      "line": 3,
+      "name": "Сыр Горгонзола с голубой плесенью 50% ~1кг фольга из цельного молока БЗМЖ Шангал Россия (ПУ),кг (74540)",
+      "unit": "кг",
+      "qty": 1.902,
+      "sum": 2667.18,
+      "fact": 1402.3
+    },
+    {
+      "productKeys": [
         "eggplant"
       ],
       "date": "06.08.2026",
@@ -1770,6 +6519,54 @@
       "qty": 0.6,
       "sum": 81.83,
       "fact": 136.38
+    },
+    {
+      "productKeys": [
+        "courage_cucumber"
+      ],
+      "date": "06.08.2026",
+      "supplier": "ООО \"Парадис Экзотика\" ",
+      "invoice": "ПЭ-28607",
+      "publicId": "a526faf5-eec8-4805-a1c9-f36ceba7459a",
+      "version": 1,
+      "line": 11,
+      "name": "Огурцы Кураж короткоплодные Стандарт,кг (00-00009388)",
+      "unit": "кг",
+      "qty": 5.5,
+      "sum": 536.64,
+      "fact": 97.57
+    },
+    {
+      "productKeys": [
+        "pineapple"
+      ],
+      "date": "06.08.2026",
+      "supplier": "ООО \"Парадис Экзотика\" ",
+      "invoice": "ПЭ-28607",
+      "publicId": "a526faf5-eec8-4805-a1c9-f36ceba7459a",
+      "version": 1,
+      "line": 29,
+      "name": "Ананас Дель Монте спелые (5-6) ,кг (00-00000009)",
+      "unit": "кг",
+      "qty": 9.8,
+      "sum": 4102.67,
+      "fact": 418.64
+    },
+    {
+      "productKeys": [
+        "spinach_standard"
+      ],
+      "date": "06.08.2026",
+      "supplier": "ООО \"Парадис Экзотика\" ",
+      "invoice": "ПЭ-28607",
+      "publicId": "a526faf5-eec8-4805-a1c9-f36ceba7459a",
+      "version": 1,
+      "line": 34,
+      "name": "Шпинат стандарт,кг (00-00009486)",
+      "unit": "кг",
+      "qty": 2,
+      "sum": 583.2,
+      "fact": 291.6
     },
     {
       "productKeys": [
@@ -1789,6 +6586,22 @@
     },
     {
       "productKeys": [
+        "mozzarella_125"
+      ],
+      "date": "06.08.2026",
+      "supplier": "ООО \"КАРТАРИ\"",
+      "invoice": "УН-987",
+      "publicId": "b177b73a-965e-4691-a10e-a4f5cdcee1f4",
+      "version": 1,
+      "line": 2,
+      "name": "Сыр Моцарелла 125 г (Mozzarella) уп.3кг,шт (УН-00000249)",
+      "unit": "шт",
+      "qty": 3,
+      "sum": 8415,
+      "fact": 2805
+    },
+    {
+      "productKeys": [
         "eggplant"
       ],
       "date": "07.08.2026",
@@ -1802,6 +6615,86 @@
       "qty": 6.15,
       "sum": 838.74,
       "fact": 136.38
+    },
+    {
+      "productKeys": [
+        "courage_cucumber"
+      ],
+      "date": "07.08.2026",
+      "supplier": "ООО \"Парадис Экзотика\" ",
+      "invoice": "ПЭ-28741",
+      "publicId": "a63e1b3f-e8dc-47ff-9459-f8029ac14e55",
+      "version": 1,
+      "line": 14,
+      "name": "Огурцы Кураж выс/кат ,кг (00-00000074)",
+      "unit": "кг",
+      "qty": 6.12,
+      "sum": 2140.35,
+      "fact": 349.73
+    },
+    {
+      "productKeys": [
+        "spinach_standard"
+      ],
+      "date": "07.08.2026",
+      "supplier": "ООО \"Парадис Экзотика\" ",
+      "invoice": "ПЭ-28741",
+      "publicId": "a63e1b3f-e8dc-47ff-9459-f8029ac14e55",
+      "version": 1,
+      "line": 22,
+      "name": "Шпинат стандарт,кг (00-00009486)",
+      "unit": "кг",
+      "qty": 2.2,
+      "sum": 755.19,
+      "fact": 343.27
+    },
+    {
+      "productKeys": [
+        "pineapple"
+      ],
+      "date": "08.08.2026",
+      "supplier": "ООО \"Парадис Экзотика\" ",
+      "invoice": "ПЭ-28925",
+      "publicId": "ce3aeab8-5317-40fa-8a35-543f986d71cf",
+      "version": 1,
+      "line": 4,
+      "name": "Ананас Дель Монте спелые (5-6) ,кг (00-00000009)",
+      "unit": "кг",
+      "qty": 9.8,
+      "sum": 4102.67,
+      "fact": 418.64
+    },
+    {
+      "productKeys": [
+        "courage_cucumber"
+      ],
+      "date": "08.08.2026",
+      "supplier": "ООО \"Парадис Экзотика\" ",
+      "invoice": "ПЭ-28925",
+      "publicId": "ce3aeab8-5317-40fa-8a35-543f986d71cf",
+      "version": 1,
+      "line": 14,
+      "name": "Огурцы Кураж короткоплодные Стандарт,кг (00-00009388)",
+      "unit": "кг",
+      "qty": 7.5,
+      "sum": 731.78,
+      "fact": 97.57
+    },
+    {
+      "productKeys": [
+        "spinach_standard"
+      ],
+      "date": "08.08.2026",
+      "supplier": "ООО \"Парадис Экзотика\" ",
+      "invoice": "ПЭ-28925",
+      "publicId": "ce3aeab8-5317-40fa-8a35-543f986d71cf",
+      "version": 1,
+      "line": 20,
+      "name": "Шпинат мини 125 г стандарт,шт (00-00009487)",
+      "unit": "шт",
+      "qty": 2,
+      "sum": 729.56,
+      "fact": 364.78
     },
     {
       "productKeys": [
@@ -1837,6 +6730,70 @@
     },
     {
       "productKeys": [
+        "gorgonzola_cheese"
+      ],
+      "date": "11.08.2026",
+      "supplier": "ООО \"Торговый дом \"Глобал Фудс\" ***",
+      "invoice": "ТД1108/0581",
+      "publicId": "a1d46b29-a4ff-4fe9-9c5e-3d6624dee657",
+      "version": 1,
+      "line": 14,
+      "name": "Сыр Горгонзола с голубой плесенью 50% ~2,5кг/круг фольга Monblu™ БЗМЖ Бобровский СЗ (КОД 48248) (0°С),кг (48248)",
+      "unit": "кг",
+      "qty": 5.155,
+      "sum": 4433.31,
+      "fact": 860
+    },
+    {
+      "productKeys": [
+        "sea_bass_400_600"
+      ],
+      "date": "12.08.2026",
+      "supplier": "ИП Носова Юлия Евгеньевна",
+      "invoice": "763",
+      "publicId": "1ca6b54b-808c-410e-97e6-ce6752a5eded",
+      "version": 1,
+      "line": 3,
+      "name": "Сибас, с/г не потр., 400-600 гр/шт., охл.,кг (00-00000040)",
+      "unit": "кг",
+      "qty": 12,
+      "sum": 15120,
+      "fact": 1260
+    },
+    {
+      "productKeys": [
+        "spinach_standard"
+      ],
+      "date": "12.08.2026",
+      "supplier": "ООО \"Парадис Экзотика\" ",
+      "invoice": "ПЭ-29415",
+      "publicId": "2e7c4327-341d-4318-b86f-604c263697df",
+      "version": 1,
+      "line": 10,
+      "name": "Шпинат стандарт,кг (00-00009486)",
+      "unit": "кг",
+      "qty": 2.21,
+      "sum": 644.44,
+      "fact": 291.6
+    },
+    {
+      "productKeys": [
+        "courage_cucumber"
+      ],
+      "date": "12.08.2026",
+      "supplier": "ООО \"Парадис Экзотика\" ",
+      "invoice": "ПЭ-29415",
+      "publicId": "2e7c4327-341d-4318-b86f-604c263697df",
+      "version": 1,
+      "line": 15,
+      "name": "Огурцы Кураж выс/кат ,кг (00-00000074)",
+      "unit": "кг",
+      "qty": 5.03,
+      "sum": 1759.14,
+      "fact": 349.73
+    },
+    {
+      "productKeys": [
         "eggplant"
       ],
       "date": "14.08.2026",
@@ -1850,6 +6807,102 @@
       "qty": 14.5,
       "sum": 2765.3,
       "fact": 190.71
+    },
+    {
+      "productKeys": [
+        "pineapple"
+      ],
+      "date": "14.08.2026",
+      "supplier": "ООО \"Парадис Экзотика\" ",
+      "invoice": "ПЭ-29698",
+      "publicId": "dbf6d0bc-14ec-4aa3-ab47-595de41c15f6",
+      "version": 2,
+      "line": 22,
+      "name": "Ананас Голд Стандарт,кг (00-00009305)",
+      "unit": "кг",
+      "qty": 3.34,
+      "sum": 1105.21,
+      "fact": 330.9
+    },
+    {
+      "productKeys": [
+        "spinach_standard"
+      ],
+      "date": "14.08.2026",
+      "supplier": "ООО \"Парадис Экзотика\" ",
+      "invoice": "ПЭ-29698",
+      "publicId": "dbf6d0bc-14ec-4aa3-ab47-595de41c15f6",
+      "version": 2,
+      "line": 30,
+      "name": "Шпинат стандарт,кг (00-00009486)",
+      "unit": "кг",
+      "qty": 2.09,
+      "sum": 1594.29,
+      "fact": 762.82
+    },
+    {
+      "productKeys": [
+        "courage_cucumber"
+      ],
+      "date": "14.08.2026",
+      "supplier": "ООО \"Парадис Экзотика\" ",
+      "invoice": "ПЭ-29698",
+      "publicId": "dbf6d0bc-14ec-4aa3-ab47-595de41c15f6",
+      "version": 2,
+      "line": 34,
+      "name": "Огурцы Кураж короткоплодные Стандарт,кг (00-00009388)",
+      "unit": "кг",
+      "qty": 3,
+      "sum": 292.71,
+      "fact": 97.57
+    },
+    {
+      "productKeys": [
+        "spinach_standard"
+      ],
+      "date": "15.08.2026",
+      "supplier": "ООО \"Парадис Экзотика\" ",
+      "invoice": "ПЭ-29757",
+      "publicId": "92228cb7-0257-445c-95cf-9a01dc02ae9e",
+      "version": 1,
+      "line": 6,
+      "name": "Шпинат выс/кат ,кг (00-00000125)",
+      "unit": "кг",
+      "qty": 2,
+      "sum": 1525.64,
+      "fact": 762.82
+    },
+    {
+      "productKeys": [
+        "pineapple"
+      ],
+      "date": "15.08.2026",
+      "supplier": "ООО \"Парадис Экзотика\" ",
+      "invoice": "ПЭ-29757",
+      "publicId": "92228cb7-0257-445c-95cf-9a01dc02ae9e",
+      "version": 1,
+      "line": 16,
+      "name": "Ананас Дель Монте спелые (5-6) ,кг (00-00000009)",
+      "unit": "кг",
+      "qty": 4.3,
+      "sum": 1692.52,
+      "fact": 393.61
+    },
+    {
+      "productKeys": [
+        "courage_cucumber"
+      ],
+      "date": "15.08.2026",
+      "supplier": "ООО \"Парадис Экзотика\" ",
+      "invoice": "ПЭ-29757",
+      "publicId": "92228cb7-0257-445c-95cf-9a01dc02ae9e",
+      "version": 1,
+      "line": 22,
+      "name": "Огурцы Кураж выс/кат ,кг (00-00000074)",
+      "unit": "кг",
+      "qty": 5,
+      "sum": 1748.65,
+      "fact": 349.73
     },
     {
       "productKeys": [
@@ -1885,6 +6938,38 @@
     },
     {
       "productKeys": [
+        "courage_cucumber"
+      ],
+      "date": "17.08.2026",
+      "supplier": "ООО \"Парадис Экзотика\" ",
+      "invoice": "ПЭ-30058",
+      "publicId": "811292af-a472-4ea5-9d80-51a5c6deae1f",
+      "version": 1,
+      "line": 3,
+      "name": "Огурцы Кураж выс/кат ,кг (00-00000074)",
+      "unit": "кг",
+      "qty": 5.3,
+      "sum": 1853.57,
+      "fact": 349.73
+    },
+    {
+      "productKeys": [
+        "spinach_standard"
+      ],
+      "date": "18.08.2026",
+      "supplier": "ООО \"Парадис Экзотика\" ",
+      "invoice": "ПЭ-30188",
+      "publicId": "59c6228e-bb4b-44ab-814c-bcfd68772e78",
+      "version": 2,
+      "line": 18,
+      "name": "Шпинат стандарт,кг (00-00009486)",
+      "unit": "кг",
+      "qty": 2.32,
+      "sum": 1036.65,
+      "fact": 446.83
+    },
+    {
+      "productKeys": [
         "eye_muscle"
       ],
       "date": "20.08.2026",
@@ -1898,6 +6983,22 @@
       "qty": 25.011,
       "sum": 19058.46,
       "fact": 762
+    },
+    {
+      "productKeys": [
+        "courage_cucumber"
+      ],
+      "date": "21.08.2026",
+      "supplier": "ООО \"Парадис Экзотика\" ",
+      "invoice": "ПЭ-30577",
+      "publicId": "5c1aff5c-1b25-453d-b26e-40fa3e4915ab",
+      "version": 2,
+      "line": 18,
+      "name": "Огурцы Кураж выс/кат ,кг (00-00000074)",
+      "unit": "кг",
+      "qty": 6.1,
+      "sum": 2135.98,
+      "fact": 350.16
     },
     {
       "productKeys": [
@@ -1917,6 +7018,70 @@
     },
     {
       "productKeys": [
+        "spinach_standard"
+      ],
+      "date": "21.08.2026",
+      "supplier": "ООО \"Парадис Экзотика\" ",
+      "invoice": "ПЭ-30577",
+      "publicId": "5c1aff5c-1b25-453d-b26e-40fa3e4915ab",
+      "version": 2,
+      "line": 27,
+      "name": "Шпинат стандарт,кг (00-00009486)",
+      "unit": "кг",
+      "qty": 2.2,
+      "sum": 755.19,
+      "fact": 343.27
+    },
+    {
+      "productKeys": [
+        "pineapple"
+      ],
+      "date": "21.08.2026",
+      "supplier": "ООО \"Парадис Экзотика\" ",
+      "invoice": "ПЭ-30577",
+      "publicId": "5c1aff5c-1b25-453d-b26e-40fa3e4915ab",
+      "version": 2,
+      "line": 30,
+      "name": "Ананас Дель Монте спелые (5-6) ,кг (00-00000009)",
+      "unit": "кг",
+      "qty": 7.6,
+      "sum": 2991.44,
+      "fact": 393.61
+    },
+    {
+      "productKeys": [
+        "gorgonzola_cheese"
+      ],
+      "date": "21.08.2026",
+      "supplier": "ООО \"Торговый дом \"Глобал Фудс\" ***",
+      "invoice": "ТД2108/0046",
+      "publicId": "64b23dbf-d0f2-4c6f-bf42-e7e6b5868e08",
+      "version": 1,
+      "line": 2,
+      "name": "Сыр Горгонзола с голубой плесенью 50% ~2,5кг/круг фольга Monblu™ БЗМЖ Бобровский СЗ (КОД 48248) (0°С),кг (48248)",
+      "unit": "кг",
+      "qty": 2.61,
+      "sum": 2244.61,
+      "fact": 860
+    },
+    {
+      "productKeys": [
+        "courage_cucumber"
+      ],
+      "date": "22.08.2026",
+      "supplier": "ООО \"Парадис Экзотика\" ",
+      "invoice": "ПЭ-30702",
+      "publicId": "ee4494ff-35c2-42ed-bfff-9114b751ac62",
+      "version": 1,
+      "line": 15,
+      "name": "Огурцы Кураж короткоплодные Стандарт,кг (00-00009388)",
+      "unit": "кг",
+      "qty": 5.4,
+      "sum": 1133.89,
+      "fact": 209.98
+    },
+    {
+      "productKeys": [
         "eggplant"
       ],
       "date": "22.08.2026",
@@ -1930,6 +7095,54 @@
       "qty": 3,
       "sum": 465.69,
       "fact": 155.23
+    },
+    {
+      "productKeys": [
+        "sea_bass_400_600"
+      ],
+      "date": "26.08.2026",
+      "supplier": "ИП Носова Юлия Евгеньевна",
+      "invoice": "789",
+      "publicId": "71d3b0b5-1ebf-4e72-83c4-d0a1b2acfb46",
+      "version": 2,
+      "line": 1,
+      "name": "Сибас, с/г не потр., 400-600 гр/шт., охл.,кг (00-00000040)",
+      "unit": "кг",
+      "qty": 6,
+      "sum": 7560,
+      "fact": 1260
+    },
+    {
+      "productKeys": [
+        "spinach_standard"
+      ],
+      "date": "26.08.2026",
+      "supplier": "ООО \"Парадис Экзотика\" ",
+      "invoice": "ПЭ-31153",
+      "publicId": "f76eb39d-15f7-4792-adf8-a8144084fc31",
+      "version": 1,
+      "line": 11,
+      "name": "Шпинат стандарт,кг (00-00009486)",
+      "unit": "кг",
+      "qty": 2,
+      "sum": 686.54,
+      "fact": 343.27
+    },
+    {
+      "productKeys": [
+        "courage_cucumber"
+      ],
+      "date": "26.08.2026",
+      "supplier": "ООО \"Парадис Экзотика\" ",
+      "invoice": "ПЭ-31153",
+      "publicId": "f76eb39d-15f7-4792-adf8-a8144084fc31",
+      "version": 1,
+      "line": 12,
+      "name": "Огурцы Кураж выс/кат ,кг (00-00000074)",
+      "unit": "кг",
+      "qty": 5,
+      "sum": 1774.05,
+      "fact": 354.81
     },
     {
       "productKeys": [
@@ -1949,6 +7162,54 @@
     },
     {
       "productKeys": [
+        "mozzarella_125"
+      ],
+      "date": "27.08.2026",
+      "supplier": "ООО \"МЕТРО Кэш энд Керри\" ",
+      "invoice": "9610635190119",
+      "publicId": "9d8ade87-2df5-4976-8cf9-2e6e7d3da657",
+      "version": 1,
+      "line": 1,
+      "name": "125Г СЫР МОЦАРЕЛЛА 45% METRO CHEF ФИОРДИЛАТТ БЗМЖ,ШТ (116706)",
+      "unit": "ШТ",
+      "qty": 20,
+      "sum": 2780,
+      "fact": 139
+    },
+    {
+      "productKeys": [
+        "pineapple"
+      ],
+      "date": "27.08.2026",
+      "supplier": "ООО \"Парадис Экзотика\" ",
+      "invoice": "ПЭ-31313",
+      "publicId": "233b372f-8ff9-4aab-917d-0009ca713908",
+      "version": 1,
+      "line": 14,
+      "name": "Ананас Дель Монте спелые (5-6) ,кг (00-00000009)",
+      "unit": "кг",
+      "qty": 5.87,
+      "sum": 2310.49,
+      "fact": 393.61
+    },
+    {
+      "productKeys": [
+        "courage_cucumber"
+      ],
+      "date": "28.08.2026",
+      "supplier": "ООО \"Парадис Экзотика\" ",
+      "invoice": "ПЭ-31513",
+      "publicId": "ce7da935-f87a-4317-8df0-d6df0e29721a",
+      "version": 1,
+      "line": 7,
+      "name": "Огурцы Кураж выс/кат ,кг (00-00000074)",
+      "unit": "кг",
+      "qty": 3.1,
+      "sum": 1099.91,
+      "fact": 354.81
+    },
+    {
+      "productKeys": [
         "eggplant"
       ],
       "date": "29.08.2026",
@@ -1962,6 +7223,38 @@
       "qty": 5.03,
       "sum": 1260.42,
       "fact": 250.58
+    },
+    {
+      "productKeys": [
+        "courage_cucumber"
+      ],
+      "date": "29.08.2026",
+      "supplier": "ООО \"Парадис Экзотика\" ",
+      "invoice": "ПЭ-31667",
+      "publicId": "cfcc4caa-ccfb-43d2-abd4-7b8cd00b739c",
+      "version": 1,
+      "line": 6,
+      "name": "Огурцы Кураж выс/кат ,кг (00-00000074)",
+      "unit": "кг",
+      "qty": 3.1,
+      "sum": 1099.91,
+      "fact": 354.81
+    },
+    {
+      "productKeys": [
+        "spinach_standard"
+      ],
+      "date": "29.08.2026",
+      "supplier": "ООО \"Парадис Экзотика\" ",
+      "invoice": "ПЭ-31667",
+      "publicId": "cfcc4caa-ccfb-43d2-abd4-7b8cd00b739c",
+      "version": 1,
+      "line": 9,
+      "name": "Шпинат стандарт,кг (00-00009486)",
+      "unit": "кг",
+      "qty": 2.13,
+      "sum": 621.11,
+      "fact": 291.6
     },
     {
       "productKeys": [
@@ -1997,6 +7290,38 @@
     },
     {
       "productKeys": [
+        "spinach_standard"
+      ],
+      "date": "01.09.2026",
+      "supplier": "ООО \"Парадис Экзотика\" ",
+      "invoice": "ПЭ-32023",
+      "publicId": "41ae2cf1-0d2b-4610-98ac-72bb21a664fd",
+      "version": 1,
+      "line": 19,
+      "name": "Шпинат выс/кат ,кг (00-00000125)",
+      "unit": "кг",
+      "qty": 2.344,
+      "sum": 894.03,
+      "fact": 381.41
+    },
+    {
+      "productKeys": [
+        "courage_cucumber"
+      ],
+      "date": "01.09.2026",
+      "supplier": "ООО \"Парадис Экзотика\" ",
+      "invoice": "ПЭ-32023",
+      "publicId": "41ae2cf1-0d2b-4610-98ac-72bb21a664fd",
+      "version": 1,
+      "line": 23,
+      "name": "Огурцы Кураж выс/кат ,кг (00-00000074)",
+      "unit": "кг",
+      "qty": 5.4,
+      "sum": 1915.97,
+      "fact": 354.81
+    },
+    {
+      "productKeys": [
         "salmon"
       ],
       "date": "02.09.2026",
@@ -2029,6 +7354,54 @@
     },
     {
       "productKeys": [
+        "courage_cucumber"
+      ],
+      "date": "04.09.2026",
+      "supplier": "ООО \"Парадис Экзотика\" ",
+      "invoice": "ПЭ-32411",
+      "publicId": "8b3b6741-aa3f-4a07-8f32-61dcd4faa4d8",
+      "version": 1,
+      "line": 8,
+      "name": "Огурцы Кураж выс/кат ,кг (00-00000074)",
+      "unit": "кг",
+      "qty": 6,
+      "sum": 1762.92,
+      "fact": 293.82
+    },
+    {
+      "productKeys": [
+        "spinach_standard"
+      ],
+      "date": "04.09.2026",
+      "supplier": "ООО \"Парадис Экзотика\" ",
+      "invoice": "ПЭ-32411",
+      "publicId": "8b3b6741-aa3f-4a07-8f32-61dcd4faa4d8",
+      "version": 1,
+      "line": 21,
+      "name": "Шпинат стандарт,кг (00-00009486)",
+      "unit": "кг",
+      "qty": 2,
+      "sum": 686.54,
+      "fact": 343.27
+    },
+    {
+      "productKeys": [
+        "pineapple"
+      ],
+      "date": "04.09.2026",
+      "supplier": "ООО \"Парадис Экзотика\" ",
+      "invoice": "ПЭ-32411",
+      "publicId": "8b3b6741-aa3f-4a07-8f32-61dcd4faa4d8",
+      "version": 1,
+      "line": 36,
+      "name": "Ананас Дель Монте спелые (5-6) ,кг (00-00000009)",
+      "unit": "кг",
+      "qty": 5.5,
+      "sum": 2353.56,
+      "fact": 427.92
+    },
+    {
+      "productKeys": [
         "eggplant"
       ],
       "date": "05.09.2026",
@@ -2045,6 +7418,70 @@
     },
     {
       "productKeys": [
+        "courage_cucumber"
+      ],
+      "date": "05.09.2026",
+      "supplier": "ООО \"Парадис Экзотика\" ",
+      "invoice": "ПЭ-32596",
+      "publicId": "d1e123b2-3d5e-4bce-be78-2d4d8d20ed7b",
+      "version": 1,
+      "line": 17,
+      "name": "Огурцы Кураж выс/кат ,кг (00-00000074)",
+      "unit": "кг",
+      "qty": 6,
+      "sum": 1762.92,
+      "fact": 293.82
+    },
+    {
+      "productKeys": [
+        "spinach_standard"
+      ],
+      "date": "05.09.2026",
+      "supplier": "ООО \"Парадис Экзотика\" ",
+      "invoice": "ПЭ-32596",
+      "publicId": "d1e123b2-3d5e-4bce-be78-2d4d8d20ed7b",
+      "version": 1,
+      "line": 21,
+      "name": "Шпинат стандарт,кг (00-00009486)",
+      "unit": "кг",
+      "qty": 2.2,
+      "sum": 839.1,
+      "fact": 381.41
+    },
+    {
+      "productKeys": [
+        "pineapple"
+      ],
+      "date": "05.09.2026",
+      "supplier": "ООО \"Парадис Экзотика\" ",
+      "invoice": "ПЭ-32596",
+      "publicId": "d1e123b2-3d5e-4bce-be78-2d4d8d20ed7b",
+      "version": 1,
+      "line": 28,
+      "name": "Ананас Дель Монте спелые (5-6) ,кг (00-00000009)",
+      "unit": "кг",
+      "qty": 6.3,
+      "sum": 2695.9,
+      "fact": 427.92
+    },
+    {
+      "productKeys": [
+        "courage_cucumber"
+      ],
+      "date": "06.09.2026",
+      "supplier": "ООО \"Парадис Экзотика\" ",
+      "invoice": "ПЭ-32699",
+      "publicId": "1f1f02c2-f083-4ed0-bfd7-f43fc3cdc291",
+      "version": 2,
+      "line": 10,
+      "name": "Огурцы Кураж выс/кат ,кг (00-00000074)",
+      "unit": "кг",
+      "qty": 3.2,
+      "sum": 1097.6,
+      "fact": 343
+    },
+    {
+      "productKeys": [
         "eggplant"
       ],
       "date": "06.09.2026",
@@ -2058,6 +7495,22 @@
       "qty": 8,
       "sum": 1587.76,
       "fact": 198.47
+    },
+    {
+      "productKeys": [
+        "pineapple"
+      ],
+      "date": "06.09.2026",
+      "supplier": "ООО \"Парадис Экзотика\" ",
+      "invoice": "ПЭ-32699",
+      "publicId": "1f1f02c2-f083-4ed0-bfd7-f43fc3cdc291",
+      "version": 2,
+      "line": 14,
+      "name": "Ананас Дель Монте спелые (5-6) ,кг (00-00000009)",
+      "unit": "кг",
+      "qty": 1.9,
+      "sum": 813.05,
+      "fact": 427.92
     }
   ]
 }
