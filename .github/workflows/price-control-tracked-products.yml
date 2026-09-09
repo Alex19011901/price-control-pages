@@ -2,6 +2,11 @@ name: Price Control Tracked Products Audit
 
 on:
   workflow_dispatch:
+  push:
+    paths:
+      - '.github/workflows/price-control-tracked-products.yml'
+      - 'price-control/tracked_products_scan.js'
+      - 'price-control/build_tracked_products.js'
   workflow_run:
     workflows:
       - Price Control Public Refresh
@@ -17,7 +22,7 @@ concurrency:
 
 jobs:
   scan:
-    if: github.event_name == 'workflow_dispatch' || github.event.workflow_run.conclusion == 'success'
+    if: github.event_name == 'workflow_dispatch' || github.event_name == 'push' || github.event.workflow_run.conclusion == 'success'
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -48,12 +53,6 @@ jobs:
 
       - name: Build tracked product index
         run: node price-control/build_tracked_products.js price-control/tracked_products_audit.json price-control/tracked_products.json
-
-      - name: Preserve Courage product
-        run: |
-          if [ -f price-control/courage_audit.json ] && [ -f price-control/merge_courage_product.js ]; then
-            node price-control/merge_courage_product.js price-control/tracked_products.json price-control/courage_audit.json
-          fi
 
       - name: Save tracked product data
         run: |
