@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-09T11:35:31.100Z",
+  "generatedAt": "2026-09-09T12:32:09.641Z",
   "start": "01.01.2026",
   "suppliesScanned": 720,
   "invoicesScanned": 812,
@@ -52,8 +52,8 @@
     },
     "eggplant": {
       "label": "Баклажан",
-      "rows": 96,
-      "invoices": 92,
+      "rows": 97,
+      "invoices": 93,
       "exactNames": [
         "Баклажаны ,кг (00-00012458) | кг",
         "Баклажаны ,кг (00000000069) | кг",
@@ -155,8 +155,8 @@
     },
     "spinach_standard": {
       "label": "Шпинат Стандарт",
-      "rows": 107,
-      "invoices": 107,
+      "rows": 108,
+      "invoices": 108,
       "exactNames": [
         "Шпинат ,кг (00-00000226) | кг",
         "Шпинат выс/кат ,кг (00-00000125) | кг",
@@ -1375,8 +1375,8 @@
       "date": "03.03.2026",
       "supplier": "ООО \"ИНТЕРФУД\"",
       "invoice": "ИФЦБ-002610",
-      "publicId": "5b283a1d-f027-491f-b2c4-df7dd25047cb",
-      "version": 1,
+      "publicId": "9e36996f-fdb2-4a6b-98d0-33c27b2bbca0",
+      "version": 2,
       "line": 6,
       "name": "Шпинат ,кг (00-00000226)",
       "unit": "кг",
@@ -1391,10 +1391,42 @@
       "date": "03.03.2026",
       "supplier": "ООО \"ИНТЕРФУД\"",
       "invoice": "ИФЦБ-002610",
-      "publicId": "5b283a1d-f027-491f-b2c4-df7dd25047cb",
-      "version": 1,
-      "line": 19,
+      "publicId": "9e36996f-fdb2-4a6b-98d0-33c27b2bbca0",
+      "version": 2,
+      "line": 18,
       "name": "Баклажаны импортные ,кг (00-00000110)",
+      "unit": "кг",
+      "qty": 8.157,
+      "sum": 1370.38,
+      "fact": 168
+    },
+    {
+      "productKeys": [
+        "spinach_standard"
+      ],
+      "date": "03.03.2026",
+      "supplier": "ООО \"ИНТЕРФУД\"",
+      "invoice": "ЦБ-2441",
+      "publicId": "d3ab7d65-b181-4ee4-8d7d-305892c3211b",
+      "version": 1,
+      "line": 6,
+      "name": "Шпинат,кг (00-00000226)",
+      "unit": "кг",
+      "qty": 2.052,
+      "sum": 1723.68,
+      "fact": 840
+    },
+    {
+      "productKeys": [
+        "eggplant"
+      ],
+      "date": "03.03.2026",
+      "supplier": "ООО \"ИНТЕРФУД\"",
+      "invoice": "ЦБ-2441",
+      "publicId": "d3ab7d65-b181-4ee4-8d7d-305892c3211b",
+      "version": 1,
+      "line": 18,
+      "name": "Баклажаны импортные,кг (00-00000110)",
       "unit": "кг",
       "qty": 8.157,
       "sum": 1370.38,
