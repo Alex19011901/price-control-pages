@@ -6,9 +6,11 @@ const ROOT = __dirname;
 const AUTH = process.env.DOCSINBOX_STORAGE_STATE;
 const OUT = process.argv[2] || path.join(ROOT, 'current.json');
 const OLD_PRICE_FILE = path.join(ROOT, 'price_20260826.json');
-const NEW_PRICE_FILE = path.join(ROOT, 'price_20260902.json');
+const PRICE_0902_FILE = path.join(ROOT, 'price_20260902.json');
+const PRICE_0910_FILE = path.join(ROOT, 'price_20260910.json');
 const SUPPLIER = 'парадис экзотика';
-const SWITCH_ISO = '2026-09-03';
+const SWITCH_0903 = '2026-09-03';
+const SWITCH_0911 = '2026-09-11';
 
 function round2(v) {
   if (!Number.isFinite(v)) return null;
@@ -55,16 +57,26 @@ function buildPriceMap(priceDoc) {
 
 (async () => {
   const todayMoscow = new Date(Date.now() + 3 * 60 * 60 * 1000).toISOString().slice(0, 10);
-  const useNewPrice = todayMoscow >= SWITCH_ISO;
-  const cfg = useNewPrice ? {
-    priceFile: NEW_PRICE_FILE,
+  const cfg = todayMoscow >= SWITCH_0911 ? {
+    priceFile: PRICE_0910_FILE,
+    weekKey: '2026-09-11',
+    startIso: '2026-09-11',
+    endIso: null,
+    startRu: '11.09.2026',
+    endRu: null,
+    label: 'Прайс с 11.09',
+    priceDocumentDate: '10.09.2026',
+    validFrom: '11.09.2026'
+  } : todayMoscow >= SWITCH_0903 ? {
+    priceFile: PRICE_0902_FILE,
     weekKey: '2026-09-03',
     startIso: '2026-09-03',
-    endIso: null,
+    endIso: '2026-09-10',
     startRu: '03.09.2026',
-    endRu: null,
-    label: 'Прайс с 03.09',
-    priceDocumentDate: '02.09.2026'
+    endRu: '10.09.2026',
+    label: 'Прайс 03.09 → 10.09',
+    priceDocumentDate: '02.09.2026',
+    validFrom: '03.09.2026'
   } : {
     priceFile: OLD_PRICE_FILE,
     weekKey: '2026-08-26',
@@ -73,7 +85,8 @@ function buildPriceMap(priceDoc) {
     startRu: '26.08.2026',
     endRu: '02.09.2026',
     label: 'Прайс 26.08 → 02.09',
-    priceDocumentDate: '26.08.2026'
+    priceDocumentDate: '26.08.2026',
+    validOn: '2026-08-26'
   };
 
   if (!AUTH) throw new Error('DOCSINBOX_AUTH_PATH_MISSING');
@@ -81,12 +94,10 @@ function buildPriceMap(priceDoc) {
   if (!fs.existsSync(cfg.priceFile)) throw new Error('PRICE_PAYLOAD_MISSING:' + cfg.priceFile);
   const priceDoc = JSON.parse(fs.readFileSync(cfg.priceFile, 'utf8'));
   if (!Array.isArray(priceDoc.rows) || !priceDoc.rows.length) throw new Error('PRICE_PAYLOAD_EMPTY');
-  if (useNewPrice) {
-    if (priceDoc.documentDate !== '02.09.2026' || priceDoc.validFrom !== '03.09.2026') {
-      throw new Error('PRICE_DATE_MISMATCH');
-    }
-  } else if (priceDoc.valid_on !== '2026-08-26') {
-    throw new Error('OLD_PRICE_DATE_MISMATCH');
+  if (cfg.validOn) {
+    if (priceDoc.valid_on !== cfg.validOn) throw new Error('OLD_PRICE_DATE_MISMATCH');
+  } else if (priceDoc.documentDate !== cfg.priceDocumentDate || priceDoc.validFrom !== cfg.validFrom) {
+    throw new Error('PRICE_DATE_MISMATCH');
   }
   const priceMap = buildPriceMap(priceDoc);
 
@@ -199,8 +210,6 @@ function buildPriceMap(priceDoc) {
 
   await browser.close();
 
-  // For the same invoice number, only the latest numeric DocsInBox version participates.
-  // This prevents older document versions from duplicating rows and cluttering the filter.
   const latestByNumber = new Map();
   for (const d of docs) {
     const versionNum = d.version == null ? null : Number(d.version);
