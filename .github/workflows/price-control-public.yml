@@ -41,19 +41,29 @@ jobs:
           printf '%s' "$DXBX_STORAGE_STATE" > /tmp/price-control-dxbx-state.json
           cat price-control/price_20260826.parts/* > /tmp/price_20260826.json.gz.b64
           base64 --decode /tmp/price_20260826.json.gz.b64 | gzip -dc > price-control/price_20260826.json
+          base64 --decode price-control/price_20260910.json.gz.b64 | gzip -dc > price-control/price_20260910.json
           python - <<'PY'
           import json
+
           old = json.load(open("price-control/price_20260826.json", encoding="utf-8"))
           assert old.get("valid_on") == "2026-08-26"
           assert len(old.get("rows", [])) == 2170
 
-          new = json.load(open("price-control/price_20260902.json", encoding="utf-8"))
-          assert new.get("supplier") == "Парадис Экзотика"
-          assert new.get("documentDate") == "02.09.2026"
-          assert new.get("validFrom") == "03.09.2026"
-          assert len(new.get("rows", [])) == 2161
+          mid = json.load(open("price-control/price_20260902.json", encoding="utf-8"))
+          assert mid.get("supplier") == "Парадис Экзотика"
+          assert mid.get("documentDate") == "02.09.2026"
+          assert mid.get("validFrom") == "03.09.2026"
+          assert len(mid.get("rows", [])) == 2161
 
-          print("Price payloads OK:", len(old["rows"]), "old rows;", len(new["rows"]), "new rows")
+          new = json.load(open("price-control/price_20260910.json", encoding="utf-8"))
+          assert new.get("supplier") == "Парадис Экзотика"
+          assert new.get("documentDate") == "10.09.2026"
+          assert new.get("validFrom") == "11.09.2026"
+          assert len(new.get("rows", [])) == 2154
+          keys = [(str(r.get("name", "")).strip().lower(), str(r.get("unit", "")).strip().lower()) for r in new["rows"]]
+          assert len(keys) == len(set(keys)), "Duplicate name+unit keys in 10.09 price"
+
+          print("Price payloads OK:", len(old["rows"]), "old rows;", len(mid["rows"]), "02.09 rows;", len(new["rows"]), "10.09 rows")
           PY
 
       - name: Refresh DocsInBox data
@@ -66,7 +76,7 @@ jobs:
 
       - name: Save refreshed data
         run: |
-          rm -f /tmp/price-control-dxbx-state.json price-control/price_20260826.json
+          rm -f /tmp/price-control-dxbx-state.json price-control/price_20260826.json price-control/price_20260910.json
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add price-control/current.json price-control/full.json
