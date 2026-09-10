@@ -43,24 +43,23 @@ def normalize_hist(src, *, key, label, start, end, price_date):
     return out
 
 
-
 def _norm(v):
     import re
     s = str(v or "").replace("\u00a0", " ").replace("ё", "е").lower()
-    s = re.sub(r"^[!/*+\\s]+", "", s)
-    s = re.sub(r"\\s+([,.;:])", r"\\1", s)
-    s = re.sub(r"\\s+", " ", s).strip()
+    s = re.sub(r"^[!/*+\s]+", "", s)
+    s = re.sub(r"\s+([,.;:])", r"\1", s)
+    s = re.sub(r"\s+", " ", s).strip()
     return s
 
 
 def _core_name(display_name, unit):
     import re
     s = str(display_name or "").replace("\u00a0", " ")
-    s = re.sub(r"\\s+", " ", s).strip()
+    s = re.sub(r"\s+", " ", s).strip()
     eu = re.escape(str(unit or ""))
     if eu:
-        s = re.sub(r",\\s*" + eu + r"\\s*\\([^)]*\\)\\s*$", "", s, flags=re.I)
-        s = re.sub(r",\\s*" + eu + r"\\s*$", "", s, flags=re.I)
+        s = re.sub(r",\s*" + eu + r"\s*\([^)]*\)\s*$", "", s, flags=re.I)
+        s = re.sub(r",\s*" + eu + r"\s*$", "", s, flags=re.I)
     return s.strip()
 
 
@@ -74,7 +73,7 @@ def _period_price_qty_map(period):
             continue
         if price is None or price <= 0 or qty <= 0:
             continue
-        key = _norm(_core_name(row[0], row[4])) + "\\0" + _norm(row[4])
+        key = _norm(_core_name(row[0], row[4])) + "\0" + _norm(row[4])
         item = out.setdefault(key, {"price": price, "qty": 0.0})
         if round(item["price"], 2) != round(price, 2):
             continue
@@ -98,6 +97,7 @@ def _weighted_index_change(prev_period, curr_period):
     if common == 0 or den <= 0:
         return None, 0
     return num / den, common
+
 
 def validate_period(p):
     assert len(p["rowsData"]) == int(p["rows"]), (p["key"], len(p["rowsData"]), p["rows"])
@@ -139,24 +139,35 @@ expected = {
     "2026-05-20": (13, 305, 20, 0, 269, 16, 1676.33),
 }
 
-assert current["key"] in {"2026-08-26", "2026-09-03"}, current["key"]
+assert current["key"] in {"2026-08-26", "2026-09-03", "2026-09-11"}, current["key"]
 validate_period(current)
 
-p2608 = None
 full_path = PC / "full.json"
-if full_path.exists():
-    previous_full = load_json(full_path)
-    p2608 = next((p for p in previous_full.get("periods", []) if p.get("key") == "2026-08-26"), None)
+previous_full = load_json(full_path) if full_path.exists() else {"periods": []}
+previous_periods = {p.get("key"): p for p in previous_full.get("periods", [])}
+p2608 = previous_periods.get("2026-08-26")
+p0903 = previous_periods.get("2026-09-03")
 
 if current["key"] == "2026-08-26":
     periods = [current, p3007, p2407, p2606, interfood]
-else:
+elif current["key"] == "2026-09-03":
     assert p2608 is not None, "Previous 2026-08-26 period is missing from full.json"
     validate_period(p2608)
     periods = [current, p2608, p3007, p2407, p2606, interfood]
+else:
+    assert p2608 is not None, "Previous 2026-08-26 period is missing from full.json"
+    assert p0903 is not None, "Previous 2026-09-03 period is missing from full.json"
+    validate_period(p2608)
+    validate_period(p0903)
+    p0903 = dict(p0903)
+    p0903["label"] = "Прайс 03.09 → 10.09"
+    p0903["start"] = "03.09.2026"
+    p0903["end"] = "10.09.2026"
+    p0903["priceDocumentDate"] = "02.09.2026"
+    periods = [current, p0903, p2608, p3007, p2407, p2606, interfood]
 
 for p in periods:
-    if p["key"] in {current["key"], "2026-08-26"}:
+    if p["key"] in {current["key"], "2026-08-26", "2026-09-03"}:
         validate_period(p)
         continue
     got = (
@@ -181,6 +192,10 @@ paradis_index = {
     "prevChange": 7.6,
     "periodChange": 8.9,
 }
+
+last_index = 108.9
+prev_period = p2608
+
 if current["key"] == "2026-09-03":
     factor, common_count = _weighted_index_change(p2608, current)
     if factor is None:
@@ -188,16 +203,35 @@ if current["key"] == "2026-09-03":
         paradis_index["prevChange"] = None
         paradis_index["periodChange"] = None
     else:
-        new_index = round(108.9 * factor, 1)
-        paradis_index["points"].append({
-            "key": "2026-09-03",
-            "label": "с 03.09",
-            "value": new_index,
-        })
+        new_index = round(last_index * factor, 1)
+        paradis_index["points"].append({"key": "2026-09-03", "label": "03.09–10.09", "value": new_index})
         paradis_index["current"] = new_index
-        paradis_index["prevChange"] = round((new_index / 108.9 - 1.0) * 100.0, 1)
+        paradis_index["prevChange"] = round((new_index / last_index - 1.0) * 100.0, 1)
         paradis_index["periodChange"] = round(new_index - 100.0, 1)
         paradis_index["commonProducts"] = common_count
+elif current["key"] == "2026-09-11":
+    factor_0903, common_0903 = _weighted_index_change(p2608, p0903)
+    if factor_0903 is None:
+        paradis_index["current"] = None
+        paradis_index["prevChange"] = None
+        paradis_index["periodChange"] = None
+    else:
+        index_0903 = round(last_index * factor_0903, 1)
+        paradis_index["points"].append({"key": "2026-09-03", "label": "03.09–10.09", "value": index_0903})
+        factor_0911, common_0911 = _weighted_index_change(p0903, current)
+        if factor_0911 is None:
+            paradis_index["current"] = None
+            paradis_index["prevChange"] = None
+            paradis_index["periodChange"] = None
+            paradis_index["commonProducts"] = 0
+        else:
+            index_0911 = round(index_0903 * factor_0911, 1)
+            paradis_index["points"].append({"key": "2026-09-11", "label": "с 11.09", "value": index_0911})
+            paradis_index["current"] = index_0911
+            paradis_index["prevChange"] = round((index_0911 / index_0903 - 1.0) * 100.0, 1)
+            paradis_index["periodChange"] = round(index_0911 - 100.0, 1)
+            paradis_index["commonProducts"] = common_0911
+            paradis_index["previousCommonProducts"] = common_0903
 
 full = {
     "generatedAt": current_payload["generatedAt"],
