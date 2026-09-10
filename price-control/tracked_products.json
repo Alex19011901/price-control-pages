@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-09T12:32:09.641Z",
+  "generatedAt": "2026-09-10T07:29:53.959Z",
   "start": "01.01.2026",
   "source": "DocsInBox",
   "methodology": "First available factual purchase price for each tracked product = 100; later supply prices are indexed to that baseline. Multiple lines of the same product in one invoice are quantity-weighted.",
@@ -236,6 +236,19 @@
             "Говядина глазной мускул б/к ~3-7кг в/у ~25кг/кор Тимашевскмясопродукт (КОР) (КОД 73170)(-18°С),кг (73170)"
           ],
           "index": 70.4
+        },
+        {
+          "date": "10.09.2026",
+          "dateIso": "2026-09-10",
+          "supplier": "ООО \"Арктика\" ",
+          "invoice": "АР-00003697",
+          "qty": 27.29,
+          "sum": 26416.72,
+          "fact": 968,
+          "sourceNames": [
+            "Глазной мускул вес Бразилия,кг (00000002218)"
+          ],
+          "index": 89.4
         }
       ],
       "aliases": [
