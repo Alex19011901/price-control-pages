@@ -1,8 +1,8 @@
 {
-  "generatedAt": "2026-09-10T07:29:53.959Z",
+  "generatedAt": "2026-09-10T08:58:37.244Z",
   "start": "01.01.2026",
-  "suppliesScanned": 730,
-  "invoicesScanned": 822,
+  "suppliesScanned": 732,
+  "invoicesScanned": 824,
   "invoiceErrors": 0,
   "errors": [],
   "summary": {
@@ -156,8 +156,8 @@
     },
     "spinach_standard": {
       "label": "Шпинат Стандарт",
-      "rows": 108,
-      "invoices": 108,
+      "rows": 109,
+      "invoices": 109,
       "exactNames": [
         "Шпинат ,кг (00-00000226) | кг",
         "Шпинат выс/кат ,кг (00-00000125) | кг",
@@ -173,12 +173,12 @@
         "ООО \"Парадис Экзотика\" "
       ],
       "firstDate": "11.01.2026",
-      "lastDate": "05.09.2026"
+      "lastDate": "10.09.2026"
     },
     "mozzarella_125": {
       "label": "Сыр Моцарелла 125 г",
-      "rows": 28,
-      "invoices": 28,
+      "rows": 29,
+      "invoices": 29,
       "exactNames": [
         "/Сыр Моцарелла Galbani 125 г. 45%,шт (00-00001991) | шт",
         "125Г СЫР МОЦАРЕЛЛА 45% METRO CHEF ФИОРДИЛАТТ БЗМЖ,ШТ (116706) | ШТ",
@@ -197,7 +197,7 @@
         "ООО \"Парадис Экзотика\" "
       ],
       "firstDate": "22.01.2026",
-      "lastDate": "27.08.2026"
+      "lastDate": "10.09.2026"
     }
   },
   "matches": [
@@ -7515,6 +7515,22 @@
     },
     {
       "productKeys": [
+        "mozzarella_125"
+      ],
+      "date": "10.09.2026",
+      "supplier": "ООО \"МЕТРО Кэш энд Керри\" ",
+      "invoice": "9610681720119",
+      "publicId": "3f05fd12-a0af-4d2a-9a52-5b9f04343cb0",
+      "version": 1,
+      "line": 3,
+      "name": "125Г СЫР МОЦАРЕЛЛА 45% METRO CHEF ФИОРДИЛАТТ БЗМЖ,ШТ (116706)",
+      "unit": "ШТ",
+      "qty": 4,
+      "sum": 556,
+      "fact": 139
+    },
+    {
+      "productKeys": [
         "eye_muscle"
       ],
       "date": "10.09.2026",
@@ -7528,6 +7544,22 @@
       "qty": 27.29,
       "sum": 26416.72,
       "fact": 968
+    },
+    {
+      "productKeys": [
+        "spinach_standard"
+      ],
+      "date": "10.09.2026",
+      "supplier": "ООО \"Парадис Экзотика\" ",
+      "invoice": "ПЭ-33258",
+      "publicId": "a3663886-ee3a-41ca-a8ed-eb316fdb891b",
+      "version": 1,
+      "line": 3,
+      "name": "Шпинат стандарт,кг (00-00009486)",
+      "unit": "кг",
+      "qty": 2.2,
+      "sum": 853.73,
+      "fact": 388.06
     }
   ]
 }

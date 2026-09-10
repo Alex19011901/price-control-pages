@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-10T07:29:53.959Z",
+  "generatedAt": "2026-09-10T08:58:37.244Z",
   "start": "01.01.2026",
   "source": "DocsInBox",
   "methodology": "First available factual purchase price for each tracked product = 100; later supply prices are indexed to that baseline. Multiple lines of the same product in one invoice are quantity-weighted.",
@@ -4535,6 +4535,19 @@
             "Шпинат стандарт,кг (00-00009486)"
           ],
           "index": 150.9
+        },
+        {
+          "date": "10.09.2026",
+          "dateIso": "2026-09-10",
+          "supplier": "ООО \"Парадис Экзотика\" ",
+          "invoice": "ПЭ-33258",
+          "qty": 2.2,
+          "sum": 853.73,
+          "fact": 388.06,
+          "sourceNames": [
+            "Шпинат стандарт,кг (00-00009486)"
+          ],
+          "index": 153.5
         }
       ],
       "aliases": [
@@ -4911,6 +4924,19 @@
           "invoice": "9610635190119",
           "qty": 20,
           "sum": 2780,
+          "fact": 139,
+          "sourceNames": [
+            "125Г СЫР МОЦАРЕЛЛА 45% METRO CHEF ФИОРДИЛАТТ БЗМЖ,ШТ (116706)"
+          ],
+          "index": 90.5
+        },
+        {
+          "date": "10.09.2026",
+          "dateIso": "2026-09-10",
+          "supplier": "ООО \"МЕТРО Кэш энд Керри\" ",
+          "invoice": "9610681720119",
+          "qty": 4,
+          "sum": 556,
           "fact": 139,
           "sourceNames": [
             "125Г СЫР МОЦАРЕЛЛА 45% METRO CHEF ФИОРДИЛАТТ БЗМЖ,ШТ (116706)"
