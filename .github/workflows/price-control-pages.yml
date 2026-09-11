@@ -61,8 +61,9 @@ jobs:
           if not token:
               raise SystemExit("PUBLIC_REFRESH_TOKEN is not configured")
           placeholder = "__PUBLIC_REFRESH_TOKEN__"
+          version = os.environ.get("GITHUB_SHA", "").strip()[:12] or "latest"
           widget_scripts = [
-              '<script src="./purchase-history-widget.js"></script>',
+              f'<script src="./purchase-history-widget.js?v={version}"></script>',
               '<script src="./tracked-products-widget.js"></script>',
           ]
           for path in [
