@@ -3,6 +3,7 @@
 
   const DATA_URL='./full.json';
   const MAX_PREVIOUS=5;
+  const state={data:null};
 
   function esc(v){
     return String(v==null?'':v).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
@@ -42,6 +43,15 @@
     const ra=invoiceRank(a),rb=invoiceRank(b);
     if(ra.n!==rb.n)return rb.n-ra.n;
     return rb.s.localeCompare(ra.s,'ru');
+  }
+  function compareDeliveryDesc(a,b){
+    const dd=dateKey(b.date).localeCompare(dateKey(a.date));
+    return dd||compareInvoiceDesc(a.invoice,b.invoice);
+  }
+  function isBefore(delivery,base){
+    const d=dateKey(delivery.date),b=dateKey(base.date);
+    if(d!==b)return d<b;
+    return compareInvoiceDesc(delivery.invoice,base.invoice)>0;
   }
   function priceForRows(rows){
     let qty=0,total=0,fallback=null;
@@ -101,7 +111,7 @@
         <table class="purchase-history-table">
           <thead><tr>
             <th>Товар</th>
-            <th>Сегодня</th>
+            <th id="purchaseHistoryBaseHead">Выбранная</th>
             <th>Пред. 1</th>
             <th>Пред. 2</th>
             <th>Пред. 3</th>
@@ -111,7 +121,7 @@
           <tbody id="purchaseHistoryBody"></tbody>
         </table>
       </div>
-      <div class="purchase-history-note">Для каждого товара берётся последняя накладная дня. Если товара не было в предыдущей поставке, поиск идёт дальше назад до ближайшей поставки этого товара.</div>
+      <div class="purchase-history-note">База — выбранная сверху накладная. При «Все накладные» берётся последняя накладная выбранного периода. Для каждого товара показываются 5 предыдущих фактических цен; если товара не было в ближайшей поставке, поиск идёт дальше назад.</div>
     `;
     anchor.insertAdjacentElement('afterend',section);
     return true;
@@ -151,68 +161,77 @@
     return deliveries;
   }
 
-  function latestByProductAndDay(deliveries){
-    const byProduct=new Map();
-    for(const d of deliveries){
-      if(!byProduct.has(d.key))byProduct.set(d.key,new Map());
-      const byDay=byProduct.get(d.key);
-      const old=byDay.get(d.date);
-      if(!old||compareInvoiceDesc(d.invoice,old.invoice)<0)byDay.set(d.date,d);
-    }
-    const result=new Map();
-    for(const [key,byDay] of byProduct){
-      result.set(key,[...byDay.values()].sort((a,b)=>{
-        const dd=dateKey(b.date).localeCompare(dateKey(a.date));
-        return dd||compareInvoiceDesc(a.invoice,b.invoice);
-      }));
-    }
-    return result;
+  function selectedPeriod(data){
+    const week=document.getElementById('weekFilter');
+    const key=week&&week.value?week.value:data.currentKey;
+    return (data.periods||[]).find(p=>p.key===key)||((data.periods||[])[0]||null);
   }
 
-  function currentDateFromCurrentPeriod(data){
-    const current=(data.periods||[]).find(p=>p.key===data.currentKey)||((data.periods||[])[0]||null);
-    if(!current)return '';
-    const dates=(current.rowsData||[]).map(r=>String(r[1]||'')).filter(Boolean);
-    return dates.sort((a,b)=>dateKey(b).localeCompare(dateKey(a)))[0]||'';
+  function latestInvoiceInPeriod(period){
+    if(!period)return '';
+    const seen=new Map();
+    for(const r of (period.rowsData||[])){
+      const invoice=String(r[2]||'');
+      const date=String(r[1]||'');
+      if(!invoice)continue;
+      const old=seen.get(invoice);
+      if(!old||dateKey(date)>dateKey(old.date))seen.set(invoice,{invoice,date});
+    }
+    return [...seen.values()].sort(compareDeliveryDesc)[0]?.invoice||'';
+  }
+
+  function baseInvoice(period){
+    const filter=document.getElementById('invoiceFilter');
+    const selected=filter&&filter.value?filter.value:'';
+    return selected||latestInvoiceInPeriod(period);
+  }
+
+  function baseDeliveries(period,invoice){
+    if(!period||!invoice)return [];
+    return collapseDeliveries((period.rowsData||[]).filter(r=>String(r[2]||'')===invoice)).sort((a,b)=>a.name.localeCompare(b.name,'ru'));
+  }
+
+  function previousForProduct(allDeliveries,base){
+    const candidates=allDeliveries.filter(d=>d.key===base.key&&isBefore(d,base));
+    const latestByDay=new Map();
+    for(const d of candidates){
+      const old=latestByDay.get(d.date);
+      if(!old||compareInvoiceDesc(d.invoice,old.invoice)<0)latestByDay.set(d.date,d);
+    }
+    return [...latestByDay.values()].sort(compareDeliveryDesc).slice(0,MAX_PREVIOUS);
   }
 
   function render(data){
     const body=document.getElementById('purchaseHistoryBody');
     const dateEl=document.getElementById('purchaseHistoryDate');
-    if(!body||!dateEl)return;
+    const baseHead=document.getElementById('purchaseHistoryBaseHead');
+    if(!body||!dateEl||!baseHead)return;
 
-    const rows=allRows(data);
-    const deliveries=collapseDeliveries(rows);
-    const history=latestByProductAndDay(deliveries);
-    const currentDate=currentDateFromCurrentPeriod(data);
-    dateEl.textContent=currentDate?'Последняя поставка: '+currentDate:'Нет данных';
+    const period=selectedPeriod(data);
+    const invoice=baseInvoice(period);
+    const base=baseDeliveries(period,invoice);
+    const deliveries=collapseDeliveries(allRows(data));
 
-    if(!currentDate){
-      body.innerHTML='<tr><td colspan="7"><div class="purchase-history-empty">Нет данных о поставках</div></td></tr>';
+    if(!invoice||!base.length){
+      dateEl.textContent='Нет данных';
+      baseHead.textContent='Выбранная';
+      body.innerHTML='<tr><td colspan="7"><div class="purchase-history-empty">В выбранной накладной нет товаров</div></td></tr>';
       return;
     }
 
-    const current=[];
-    for(const list of history.values()){
-      if(list.length&&list[0].date===currentDate)current.push(list[0]);
-    }
-    current.sort((a,b)=>a.name.localeCompare(b.name,'ru'));
+    const baseDate=base[0].date||'';
+    dateEl.textContent=invoice+(baseDate?' · '+baseDate:'');
+    baseHead.textContent=invoice;
 
-    if(!current.length){
-      body.innerHTML='<tr><td colspan="7"><div class="purchase-history-empty">Нет товаров в последней поставке</div></td></tr>';
-      return;
-    }
-
-    body.innerHTML=current.map(today=>{
-      const list=history.get(today.key)||[];
-      const previous=list.filter(d=>d.date!==currentDate).slice(0,MAX_PREVIOUS);
+    body.innerHTML=base.map(current=>{
+      const previous=previousForProduct(deliveries,current);
       const cells=[];
-      cells.push('<td class="purchase-history-name" title="'+esc(today.name)+'">'+esc(today.name)+'</td>');
-      cells.push('<td class="purchase-history-current">'+money(today.price,today.unit)+'</td>');
+      cells.push('<td class="purchase-history-name" title="'+esc(current.name)+'">'+esc(current.name)+'</td>');
+      cells.push('<td class="purchase-history-current">'+money(current.price,current.unit)+'</td>');
       for(let i=0;i<MAX_PREVIOUS;i++){
         const d=previous[i];
         cells.push(d
-          ?'<td class="purchase-history-past"><span class="purchase-history-past-date">'+esc(String(d.date).slice(0,5))+'</span>'+money(d.price,d.unit)+'</td>'
+          ?'<td class="purchase-history-past" title="'+esc(d.invoice)+'"><span class="purchase-history-past-date">'+esc(String(d.date).slice(0,5))+'</span>'+money(d.price,d.unit)+'</td>'
           :'<td class="purchase-history-past">—</td>');
       }
       return '<tr>'+cells.join('')+'</tr>';
@@ -232,15 +251,31 @@
       if(!r.ok)throw new Error('HTTP '+r.status);
       const data=await r.json();
       if(!data||!Array.isArray(data.periods))throw new Error('Некорректные данные');
+      state.data=data;
       render(data);
     }catch(e){
       showError();
     }
   }
 
+  function bindFilters(){
+    const week=document.getElementById('weekFilter');
+    const invoice=document.getElementById('invoiceFilter');
+    if(week)week.addEventListener('change',()=>setTimeout(()=>state.data&&render(state.data),0));
+    if(invoice)invoice.addEventListener('change',()=>state.data&&render(state.data));
+
+    const observer=new MutationObserver(mutations=>{
+      if(mutations.some(m=>m.type==='attributes'&&m.attributeName==='data-last-applied-generated-at'))load();
+    });
+    observer.observe(document.body,{attributes:true,attributeFilter:['data-last-applied-generated-at']});
+  }
+
   function init(){
     installStyles();
-    if(buildShell())load();
+    if(buildShell()){
+      bindFilters();
+      load();
+    }
   }
 
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init,{once:true});
