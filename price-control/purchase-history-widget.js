@@ -6,7 +6,7 @@
   const state={data:null};
 
   function esc(v){
-    return String(v==null?'':v).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot',"'":'&#39;'}[c]));
+    return String(v==null?'':v).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
   }
   function fmt(v){
     if(v===null||v===undefined||!Number.isFinite(Number(v)))return '—';
