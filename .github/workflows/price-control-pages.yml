@@ -11,6 +11,7 @@ on:
       - "price-control/full.json"
       - "price-control/tracked_products.json"
       - "price-control/tracked-products-widget.js"
+      - "price-control/purchase-history-widget.js"
   workflow_run:
     workflows:
       - Price Control Public Refresh
@@ -50,6 +51,7 @@ jobs:
           cp price-control/full.json public-site/full.json
           cp price-control/tracked_products.json public-site/tracked_products.json
           cp price-control/tracked-products-widget.js public-site/tracked-products-widget.js
+          cp price-control/purchase-history-widget.js public-site/purchase-history-widget.js
           cp price-control/trigger.html public-site/price-control-trigger.html
           python - <<'PY'
           import os
@@ -59,7 +61,10 @@ jobs:
           if not token:
               raise SystemExit("PUBLIC_REFRESH_TOKEN is not configured")
           placeholder = "__PUBLIC_REFRESH_TOKEN__"
-          widget_script = '<script src="./tracked-products-widget.js"></script>'
+          widget_scripts = [
+              '<script src="./purchase-history-widget.js"></script>',
+              '<script src="./tracked-products-widget.js"></script>',
+          ]
           for path in [
               Path("public-site/index.html"),
               Path("public-site/price-control-draft.html"),
@@ -69,10 +74,12 @@ jobs:
               if placeholder not in html:
                   raise SystemExit(f"Token placeholder was not found in {path}")
               html = html.replace(placeholder, token)
-              if path.name != "price-control-trigger.html" and widget_script not in html:
-                  if "</body>" not in html:
-                      raise SystemExit(f"Closing body was not found in {path}")
-                  html = html.replace("</body>", widget_script + "\n</body>", 1)
+              if path.name != "price-control-trigger.html":
+                  for widget_script in widget_scripts:
+                      if widget_script not in html:
+                          if "</body>" not in html:
+                              raise SystemExit(f"Closing body was not found in {path}")
+                          html = html.replace("</body>", widget_script + "\n</body>", 1)
               path.write_text(html, encoding="utf-8")
           PY
 
