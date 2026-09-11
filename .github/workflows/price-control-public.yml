@@ -21,12 +21,12 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Set up Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v5
         with:
           node-version: "20"
 
       - name: Set up Python
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v6
         with:
           python-version: "3.12"
 
@@ -77,7 +77,31 @@ jobs:
               return (norm(r.get("name", "")), norm(r.get("unit", "")))
 
           remove_keys = {key(r) for r in patch["remove"]}
-          rows = [dict(r) for r in mid["rows"] if key(r) not in remove_keys]
+
+          # One-off repair only for reconstructing the verified 10.09 payload.
+          # These five 02.09 rows use obsolete keys that do not match their
+          # authoritative 10.09 patch rows, so they must be dropped before set[].
+          repair_drop = [
+              {"name": "Консервация Томаты /Томаты вяленые Botanica 950г(ч/в 600г)1062мл ст/б", "unit": "шт"},
+              {"name": "Масло растительное /Масло Растительное Нерафинированное ЗОЛОТАЯ СЕМЕЧКА 1л", "unit": "шт"},
+              {"name": "/Мука для пиццы MOLINO GRASSI ОО 25 кг (из Мягких Сортов Пшеницы)", "unit": "шт"},
+              {"name": "/Сосиски Молочные Егорьевские ( ~1.5кг) кг", "unit": "кг"},
+              {"name": "/Томаты очищ целые в т/с Antica Napoli 2,5 кг ж/б", "unit": "шт"},
+          ]
+          repair_drop_keys = {key(r) for r in repair_drop}
+          mid_keys = {key(r) for r in mid["rows"]}
+          set_keys = {key(r) for r in patch["set"]}
+          assert len(repair_drop_keys) == 5
+          assert repair_drop_keys <= mid_keys, "Missing expected 02.09 reconstruction keys"
+          assert not (repair_drop_keys & remove_keys), "Repair keys overlap authoritative removals"
+          base_keys = mid_keys - remove_keys - repair_drop_keys
+          assert len(set_keys - base_keys) == 10, "Unexpected 10.09 reconstruction key delta"
+
+          rows = [
+              dict(r)
+              for r in mid["rows"]
+              if key(r) not in remove_keys and key(r) not in repair_drop_keys
+          ]
           index = {key(r): i for i, r in enumerate(rows)}
           for r in patch["set"]:
               k = key(r)
