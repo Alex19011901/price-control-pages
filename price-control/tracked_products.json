@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-10T08:58:37.244Z",
+  "generatedAt": "2026-09-11T14:03:21.393Z",
   "start": "01.01.2026",
   "source": "DocsInBox",
   "methodology": "First available factual purchase price for each tracked product = 100; later supply prices are indexed to that baseline. Multiple lines of the same product in one invoice are quantity-weighted.",
@@ -1552,6 +1552,19 @@
             "Баклажаны импорт Стандарт,кг (00-00009312)"
           ],
           "index": 49.2
+        },
+        {
+          "date": "11.09.2026",
+          "dateIso": "2026-09-11",
+          "supplier": "ООО \"Парадис Экзотика\" ",
+          "invoice": "ПЭ-33332",
+          "qty": 10.8,
+          "sum": 2885.87,
+          "fact": 267.21,
+          "sourceNames": [
+            "Баклажаны ,кг (00-00012458)"
+          ],
+          "index": 66.3
         }
       ],
       "aliases": [
@@ -3007,6 +3020,19 @@
             "Огурцы Кураж выс/кат ,кг (00-00000074)"
           ],
           "index": 56.7
+        },
+        {
+          "date": "11.09.2026",
+          "dateIso": "2026-09-11",
+          "supplier": "ООО \"Парадис Экзотика\" ",
+          "invoice": "ПЭ-33332",
+          "qty": 5.2,
+          "sum": 1868.72,
+          "fact": 359.37,
+          "sourceNames": [
+            "Огурцы Кураж выс/кат ,кг (00-00000074)"
+          ],
+          "index": 59.4
         }
       ],
       "aliases": [
@@ -4134,6 +4160,19 @@
             "Ананас Дель Монте спелые (5-6) ,кг (00-00000009)"
           ],
           "index": 74.9
+        },
+        {
+          "date": "11.09.2026",
+          "dateIso": "2026-09-11",
+          "supplier": "ООО \"Парадис Экзотика\" ",
+          "invoice": "ПЭ-33332",
+          "qty": 7.29,
+          "sum": 3119.54,
+          "fact": 427.92,
+          "sourceNames": [
+            "Ананас Дель Монте спелые (5-6) ,кг (00-00000009)"
+          ],
+          "index": 74.9
         }
       ],
       "aliases": [
@@ -4937,6 +4976,19 @@
           "invoice": "9610681720119",
           "qty": 4,
           "sum": 556,
+          "fact": 139,
+          "sourceNames": [
+            "125Г СЫР МОЦАРЕЛЛА 45% METRO CHEF ФИОРДИЛАТТ БЗМЖ,ШТ (116706)"
+          ],
+          "index": 90.5
+        },
+        {
+          "date": "11.09.2026",
+          "dateIso": "2026-09-11",
+          "supplier": "ООО \"МЕТРО Кэш энд Керри\" ",
+          "invoice": "9610686240119",
+          "qty": 16,
+          "sum": 2224,
           "fact": 139,
           "sourceNames": [
             "125Г СЫР МОЦАРЕЛЛА 45% METRO CHEF ФИОРДИЛАТТ БЗМЖ,ШТ (116706)"
