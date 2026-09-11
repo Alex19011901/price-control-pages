@@ -85,7 +85,7 @@
       .purchase-history-name{font-size:11px;font-weight:600;overflow:hidden;text-overflow:ellipsis}
       .purchase-history-current{font-size:11px;font-weight:800;color:var(--text)}
       .purchase-history-past{color:#c4cfdb}
-      .purchase-history-past-date{color:var(--muted);margin-right:5px}
+      .purchase-history-past-date{font-size:8px;color:var(--muted);margin-right:5px}
       .purchase-history-empty{padding:16px 14px;color:var(--muted);font-size:12px}
       .purchase-history-note{padding:9px 14px 11px;color:var(--muted);font-size:10px;line-height:1.35}
       @media(max-width:900px){
