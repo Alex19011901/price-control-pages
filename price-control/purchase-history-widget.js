@@ -188,7 +188,7 @@
 
   function baseDeliveries(period,invoice){
     if(!period||!invoice)return [];
-    return collapseDeliveries((period.rowsData||[]).filter(r=>String(r[2]||'')===invoice)).sort((a,b)=>a.name.localeCompare(b.name,'ru'));
+    return collapseDeliveries((period.rowsData||[]).filter(r=>String(r[2]||'')===invoice));
   }
 
   function previousForProduct(allDeliveries,base){
