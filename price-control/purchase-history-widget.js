@@ -6,7 +6,7 @@
   const state={data:null};
 
   function esc(v){
-    return String(v==null?'':v).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+    return String(v==null?'':v).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot',"'":'&#39;'}[c]));
   }
   function fmt(v){
     if(v===null||v===undefined||!Number.isFinite(Number(v)))return '—';
@@ -267,7 +267,13 @@
     document.addEventListener('change',event=>{
       const target=event.target;
       if(!target)return;
-      if(target.id==='weekFilter'||target.id==='invoiceFilter')queueRender();
+      if(target.id==='weekFilter'||target.id==='invoiceFilter'){
+        requestAnimationFrame(()=>{
+          const mainWrap=document.querySelector('.table-card .table-wrap');
+          if(mainWrap)mainWrap.scrollTop=0;
+          if(state.data)render(state.data);
+        });
+      }
     },true);
 
     const observer=new MutationObserver(mutations=>{
