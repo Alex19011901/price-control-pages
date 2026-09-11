@@ -48,6 +48,7 @@ jobs:
           base64 --decode /tmp/price_20260910.patch.json.gz.b64 | gzip -dc > /tmp/price_20260910.patch.json
           python - <<'PY'
           import json
+          import re
 
           old = json.load(open("price-control/price_20260826.json", encoding="utf-8"))
           assert old.get("valid_on") == "2026-08-26"
@@ -67,8 +68,14 @@ jobs:
           assert len(patch.get("set", [])) == 486
           assert len(patch.get("remove", [])) == 12
 
+          def norm(v):
+              s = str(v or "").replace("\u00a0", " ").replace("ё", "е").lower()
+              s = re.sub(r"^[!/*+\s]+", "", s)
+              s = re.sub(r"\s+([,.;:])", r"\1", s)
+              return re.sub(r"\s+", " ", s).strip()
+
           def key(r):
-              return (str(r.get("name", "")).strip().lower(), str(r.get("unit", "")).strip().lower())
+              return (norm(r.get("name", "")), norm(r.get("unit", "")))
 
           remove_keys = {key(r) for r in patch["remove"]}
           rows = [dict(r) for r in mid["rows"] if key(r) not in remove_keys]
@@ -91,7 +98,7 @@ jobs:
           }
           keys = [key(r) for r in rows]
           assert len(rows) == 2154, len(rows)
-          assert len(keys) == len(set(keys)), "Duplicate name+unit keys in 10.09 price"
+          assert len(keys) == len(set(keys)), "Duplicate normalized name+unit keys in 10.09 price"
           controls = {key(r): r["price"] for r in rows}
           assert controls[("авокадо хаас стандарт", "кг")] == 887.0
           assert controls[("айсберг стандарт", "кг")] == 171.86
