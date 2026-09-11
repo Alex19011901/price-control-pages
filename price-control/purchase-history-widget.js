@@ -245,6 +245,11 @@
     if(body)body.innerHTML='<tr><td colspan="7"><div class="purchase-history-empty">Не удалось загрузить историю поставок</div></td></tr>';
   }
 
+  function queueRender(){
+    if(!state.data)return;
+    requestAnimationFrame(()=>render(state.data));
+  }
+
   async function load(){
     try{
       const r=await fetch(DATA_URL+'?cb='+Date.now(),{cache:'no-store'});
@@ -259,10 +264,11 @@
   }
 
   function bindFilters(){
-    const week=document.getElementById('weekFilter');
-    const invoice=document.getElementById('invoiceFilter');
-    if(week)week.addEventListener('change',()=>setTimeout(()=>state.data&&render(state.data),0));
-    if(invoice)invoice.addEventListener('change',()=>state.data&&render(state.data));
+    document.addEventListener('change',event=>{
+      const target=event.target;
+      if(!target)return;
+      if(target.id==='weekFilter'||target.id==='invoiceFilter')queueRender();
+    },true);
 
     const observer=new MutationObserver(mutations=>{
       if(mutations.some(m=>m.type==='attributes'&&m.attributeName==='data-last-applied-generated-at'))load();
