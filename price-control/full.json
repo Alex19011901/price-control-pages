@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-12T11:14:28.515Z",
+  "generatedAt": "2026-09-12T11:25:27.946Z",
   "currentKey": "2026-09-11",
   "periods": [
     {
@@ -10,11 +10,11 @@
       "end": null,
       "docs": 3,
       "rows": 36,
-      "above": 7,
-      "below": 3,
-      "equal": 26,
+      "above": 5,
+      "below": 4,
+      "equal": 27,
       "unmatched": 0,
-      "overpay": 643.46,
+      "overpay": 0.02,
       "priceDocumentDate": "10.09.2026",
       "indexGroup": "paradis",
       "rowsData": [
@@ -48,11 +48,11 @@
           "ПЭ-33479",
           0.375,
           "кг",
-          2499.69,
+          3055.18,
           3055.17,
-          555.48,
-          208.31,
-          "ABOVE"
+          -0.01,
+          0,
+          "BELOW"
         ],
         [
           "Кинза Стандарт,кг (00-00009358)",
@@ -84,11 +84,11 @@
           "ПЭ-33479",
           1.15,
           "кг",
-          575.15,
           953.53,
-          378.38,
-          435.14,
-          "ABOVE"
+          953.53,
+          0,
+          0,
+          "EQUAL"
         ],
         [
           "Радиччо Стандарт,кг (00-00009448)",
@@ -14299,12 +14299,12 @@
         {
           "key": "2026-09-11",
           "label": "с 11.09",
-          "value": 104.2
+          "value": 106.7
         }
       ],
-      "current": 104.2,
-      "prevChange": -0.9,
-      "periodChange": 4.2,
+      "current": 106.7,
+      "prevChange": 1.5,
+      "periodChange": 6.7,
       "commonProducts": 19,
       "previousCommonProducts": 42
     },
