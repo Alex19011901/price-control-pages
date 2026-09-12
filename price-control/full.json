@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-12T11:39:34.359Z",
+  "generatedAt": "2026-09-12T11:45:13.570Z",
   "currentKey": "2026-09-12",
   "periods": [
     {
@@ -224,7 +224,7 @@
       "below": 1,
       "equal": 16,
       "unmatched": 0,
-      "overpay": 0.0,
+      "overpay": 0.01,
       "priceDocumentDate": "10.09.2026",
       "indexGroup": "paradis",
       "rowsData": [
