@@ -115,7 +115,18 @@ def slice_period_date(src, *, date_ru, key, label, start, end, price_date):
     equal = sum(1 for r in rows if r[9] == "EQUAL")
     unmatched = sum(1 for r in rows if r[9] == "UNMATCHED")
     docs = len({r[2] for r in rows if r[2]})
-    overpay = round(sum(max(0.0, float(r[8] or 0.0)) for r in rows if r[9] == "ABOVE"), 2)
+    overpay_raw = 0.0
+    for r in rows:
+        if r[9] != "ABOVE":
+            continue
+        try:
+            qty = float(r[3])
+            price = float(r[5])
+            fact = float(r[6])
+        except (TypeError, ValueError):
+            continue
+        overpay_raw += max(0.0, (fact - price) * qty)
+    overpay = round(overpay_raw + 1e-12, 2)
     out = {
         "key": key,
         "label": label,
