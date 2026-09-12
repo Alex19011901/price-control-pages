@@ -107,6 +107,36 @@ def validate_period(p):
     ), p["key"]
 
 
+def slice_period_date(src, *, date_ru, key, label, start, end, price_date):
+    rows = [r for r in src.get("rowsData", []) if len(r) >= 10 and r[1] == date_ru]
+    assert rows, (key, date_ru, "no rows")
+    above = sum(1 for r in rows if r[9] == "ABOVE")
+    below = sum(1 for r in rows if r[9] == "BELOW")
+    equal = sum(1 for r in rows if r[9] == "EQUAL")
+    unmatched = sum(1 for r in rows if r[9] == "UNMATCHED")
+    docs = len({r[2] for r in rows if r[2]})
+    overpay = round(sum(max(0.0, float(r[8] or 0.0)) for r in rows if r[9] == "ABOVE"), 2)
+    out = {
+        "key": key,
+        "label": label,
+        "supplier": "Парадис Экзотика",
+        "start": start,
+        "end": end,
+        "docs": docs,
+        "rows": len(rows),
+        "above": above,
+        "below": below,
+        "equal": equal,
+        "unmatched": unmatched,
+        "overpay": overpay,
+        "priceDocumentDate": price_date,
+        "indexGroup": "paradis",
+        "rowsData": rows,
+    }
+    validate_period(out)
+    return out
+
+
 p2606 = load_gzip_b64([
     PARTS / "hist_2606_0207.v2.b64.00",
     PARTS / "hist_2606_0207.v2.b64.01",
@@ -139,7 +169,7 @@ expected = {
     "2026-05-20": (13, 305, 20, 0, 269, 16, 1676.33),
 }
 
-assert current["key"] in {"2026-08-26", "2026-09-03", "2026-09-11"}, current["key"]
+assert current["key"] in {"2026-08-26", "2026-09-03", "2026-09-11", "2026-09-12"}, current["key"]
 validate_period(current)
 
 full_path = PC / "full.json"
@@ -147,6 +177,7 @@ previous_full = load_json(full_path) if full_path.exists() else {"periods": []}
 previous_periods = {p.get("key"): p for p in previous_full.get("periods", [])}
 p2608 = previous_periods.get("2026-08-26")
 p0903 = previous_periods.get("2026-09-03")
+p0911 = previous_periods.get("2026-09-11")
 
 if current["key"] == "2026-08-26":
     periods = [current, p3007, p2407, p2606, interfood]
@@ -154,7 +185,7 @@ elif current["key"] == "2026-09-03":
     assert p2608 is not None, "Previous 2026-08-26 period is missing from full.json"
     validate_period(p2608)
     periods = [current, p2608, p3007, p2407, p2606, interfood]
-else:
+elif current["key"] == "2026-09-11":
     assert p2608 is not None, "Previous 2026-08-26 period is missing from full.json"
     assert p0903 is not None, "Previous 2026-09-03 period is missing from full.json"
     validate_period(p2608)
@@ -165,9 +196,31 @@ else:
     p0903["end"] = "10.09.2026"
     p0903["priceDocumentDate"] = "02.09.2026"
     periods = [current, p0903, p2608, p3007, p2407, p2606, interfood]
+else:
+    assert p2608 is not None, "Previous 2026-08-26 period is missing from full.json"
+    assert p0903 is not None, "Previous 2026-09-03 period is missing from full.json"
+    assert p0911 is not None, "Previous 2026-09-11 period is missing from full.json"
+    validate_period(p2608)
+    validate_period(p0903)
+    validate_period(p0911)
+    p0903 = dict(p0903)
+    p0903["label"] = "Прайс 03.09 → 10.09"
+    p0903["start"] = "03.09.2026"
+    p0903["end"] = "10.09.2026"
+    p0903["priceDocumentDate"] = "02.09.2026"
+    p0911 = slice_period_date(
+        p0911,
+        date_ru="11.09.2026",
+        key="2026-09-11",
+        label="Прайс 11.09",
+        start="11.09.2026",
+        end="11.09.2026",
+        price_date="10.09.2026",
+    )
+    periods = [current, p0911, p0903, p2608, p3007, p2407, p2606, interfood]
 
 for p in periods:
-    if p["key"] in {current["key"], "2026-08-26", "2026-09-03"}:
+    if p["key"] in {current["key"], "2026-08-26", "2026-09-03", "2026-09-11"}:
         validate_period(p)
         continue
     got = (
@@ -232,6 +285,10 @@ elif current["key"] == "2026-09-11":
             paradis_index["periodChange"] = round(index_0911 - 100.0, 1)
             paradis_index["commonProducts"] = common_0911
             paradis_index["previousCommonProducts"] = common_0903
+elif current["key"] == "2026-09-12":
+    stored_index = previous_full.get("indexGroups", {}).get("paradis")
+    if stored_index:
+        paradis_index = stored_index
 
 full = {
     "generatedAt": current_payload["generatedAt"],
