@@ -1,20 +1,20 @@
 {
-  "generatedAt": "2026-09-12T11:28:11.512Z",
-  "currentKey": "2026-09-11",
+  "generatedAt": "2026-09-12T11:39:34.359Z",
+  "currentKey": "2026-09-12",
   "periods": [
     {
-      "key": "2026-09-11",
-      "label": "Прайс с 11.09",
+      "key": "2026-09-12",
+      "label": "Прайс с 12.09",
       "supplier": "Парадис Экзотика",
-      "start": "11.09.2026",
+      "start": "12.09.2026",
       "end": null,
-      "docs": 3,
-      "rows": 36,
-      "above": 5,
-      "below": 4,
-      "equal": 27,
+      "docs": 1,
+      "rows": 16,
+      "above": 2,
+      "below": 3,
+      "equal": 11,
       "unmatched": 0,
-      "overpay": 0.02,
+      "overpay": 0.01,
       "priceDocumentDate": "10.09.2026",
       "indexGroup": "paradis",
       "rowsData": [
@@ -209,7 +209,25 @@
           0,
           0,
           "EQUAL"
-        ],
+        ]
+      ]
+    },
+    {
+      "key": "2026-09-11",
+      "label": "Прайс 11.09",
+      "supplier": "Парадис Экзотика",
+      "start": "11.09.2026",
+      "end": "11.09.2026",
+      "docs": 2,
+      "rows": 20,
+      "above": 3,
+      "below": 1,
+      "equal": 16,
+      "unmatched": 0,
+      "overpay": 0.0,
+      "priceDocumentDate": "10.09.2026",
+      "indexGroup": "paradis",
+      "rowsData": [
         [
           "Картофель Батат Стандарт,кг (00-00009352)",
           "11.09.2026",
