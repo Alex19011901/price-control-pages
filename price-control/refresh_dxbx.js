@@ -8,6 +8,7 @@ const OUT = process.argv[2] || path.join(ROOT, 'current.json');
 const OLD_PRICE_FILE = path.join(ROOT, 'price_20260826.json');
 const PRICE_0902_FILE = path.join(ROOT, 'price_20260902.json');
 const PRICE_0910_FILE = path.join(ROOT, 'price_20260910.json');
+const PRICE_SLICES_FILE = path.join(ROOT, 'invoice_price_slices.json');
 const SUPPLIER = 'парадис экзотика';
 const SWITCH_0903 = '2026-09-03';
 const SWITCH_0911 = '2026-09-11';
@@ -53,6 +54,27 @@ function buildPriceMap(priceDoc) {
     else map.set(key, null);
   }
   return map;
+}
+function loadInvoicePriceSlices() {
+  if (!fs.existsSync(PRICE_SLICES_FILE)) return new Map();
+  const payload = JSON.parse(fs.readFileSync(PRICE_SLICES_FILE, 'utf8'));
+  const out = new Map();
+  for (const slice of payload.slices || []) {
+    if (!slice.invoice || !slice.supplyDate || !Array.isArray(slice.rows) || !slice.rows.length) {
+      throw new Error('INVALID_INVOICE_PRICE_SLICE');
+    }
+    const map = new Map();
+    for (const r of slice.rows) {
+      const key = norm(r.name) + '\u0000' + norm(r.unit);
+      const price = round2(Number(r.price));
+      if (!Number.isFinite(price)) throw new Error(`INVALID_INVOICE_PRICE:${slice.invoice}:${r.name}`);
+      if (map.has(key)) throw new Error(`DUPLICATE_INVOICE_PRICE_SLICE_KEY:${slice.invoice}:${r.name}:${r.unit}`);
+      map.set(key, price);
+    }
+    if (out.has(slice.invoice)) throw new Error(`DUPLICATE_INVOICE_PRICE_SLICE:${slice.invoice}`);
+    out.set(slice.invoice, { supplyDate: slice.supplyDate, source: slice.source || '', map });
+  }
+  return out;
 }
 
 (async () => {
@@ -100,6 +122,7 @@ function buildPriceMap(priceDoc) {
     throw new Error('PRICE_DATE_MISMATCH');
   }
   const priceMap = buildPriceMap(priceDoc);
+  const invoicePriceSlices = loadInvoicePriceSlices();
 
   const browser = await chromium.launch({ headless: true });
   const context = await browser.newContext({ storageState: AUTH });
@@ -233,12 +256,26 @@ function buildPriceMap(priceDoc) {
 
   for (const d of activeDocs.sort((a,b) => ruToIso(b.date).localeCompare(ruToIso(a.date)))) {
     const invoiceLabel = d.number;
+    const invoiceSlice = invoicePriceSlices.get(invoiceLabel);
+    if (invoiceSlice && d.date !== invoiceSlice.supplyDate) {
+      throw new Error(`INVOICE_PRICE_SLICE_DATE_MISMATCH:${invoiceLabel}:${d.date}:${invoiceSlice.supplyDate}`);
+    }
+    const usedSliceKeys = new Set();
     for (const it of (d.items || []).sort((a,b) => (a.line || 0) - (b.line || 0))) {
       const qty = Number(it.count);
       const fact = qty && Number.isFinite(Number(it.sum)) ? round2(Number(it.sum) / qty) : null;
       const core = coreName(it.name, it.unit);
       const key = norm(core) + '\u0000' + norm(it.unit);
-      const price = priceMap.has(key) ? priceMap.get(key) : undefined;
+      let price;
+      if (invoiceSlice) {
+        if (!invoiceSlice.map.has(key)) {
+          throw new Error(`INVOICE_PRICE_SLICE_MISSING:${invoiceLabel}:${core}:${it.unit}`);
+        }
+        price = invoiceSlice.map.get(key);
+        usedSliceKeys.add(key);
+      } else {
+        price = priceMap.has(key) ? priceMap.get(key) : undefined;
+      }
       let status = 'UNMATCHED', delta = null, impact = 0;
       if (price !== undefined && price !== null && fact !== null) {
         delta = round2(fact - price);
@@ -255,6 +292,13 @@ function buildPriceMap(priceDoc) {
         price === undefined || price === null ? null : price,
         fact, delta, status === 'UNMATCHED' ? 0 : impact, status
       ]);
+    }
+    if (invoiceSlice) {
+      if (usedSliceKeys.size !== invoiceSlice.map.size) {
+        const unused = [...invoiceSlice.map.keys()].filter(k => !usedSliceKeys.has(k));
+        throw new Error(`INVOICE_PRICE_SLICE_UNUSED:${invoiceLabel}:${unused.join('|')}`);
+      }
+      console.log('Invoice price slice applied:', invoiceLabel, usedSliceKeys.size, invoiceSlice.source || '');
     }
   }
 
