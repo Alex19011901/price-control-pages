@@ -1,8 +1,8 @@
 {
-  "generatedAt": "2026-09-11T14:48:23.620Z",
+  "generatedAt": "2026-09-12T11:20:13.260Z",
   "start": "01.01.2026",
-  "suppliesScanned": 735,
-  "invoicesScanned": 827,
+  "suppliesScanned": 737,
+  "invoicesScanned": 829,
   "invoiceErrors": 0,
   "errors": [],
   "summary": {
@@ -129,8 +129,8 @@
     },
     "pineapple": {
       "label": "Ананас",
-      "rows": 76,
-      "invoices": 76,
+      "rows": 77,
+      "invoices": 77,
       "exactNames": [
         "1Л СОК НАП SANTAL АНАНАСОВЫЙ ТЕТ,ШТ (213686) | ШТ",
         "1Л СОК RICH АНАНАСОВЫЙ,ШТ (457319) | ШТ",
@@ -152,7 +152,7 @@
         "ООО \"Парадис Экзотика\" "
       ],
       "firstDate": "15.01.2026",
-      "lastDate": "11.09.2026"
+      "lastDate": "12.09.2026"
     },
     "spinach_standard": {
       "label": "Шпинат Стандарт",
@@ -7639,6 +7639,22 @@
       "unit": "кг",
       "qty": 7.29,
       "sum": 3119.54,
+      "fact": 427.92
+    },
+    {
+      "productKeys": [
+        "pineapple"
+      ],
+      "date": "12.09.2026",
+      "supplier": "ООО \"Парадис Экзотика\" ",
+      "invoice": "ПЭ-33479",
+      "publicId": "4ccf3c05-76ea-4907-b46b-8e2afec00045",
+      "version": 1,
+      "line": 1,
+      "name": "Ананас Дель Монте спелые (5-6) ,кг (00-00000009)",
+      "unit": "кг",
+      "qty": 5.6,
+      "sum": 2396.35,
       "fact": 427.92
     }
   ]
