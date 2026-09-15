@@ -1,8 +1,8 @@
 {
-  "generatedAt": "2026-09-14T07:03:08.216Z",
+  "generatedAt": "2026-09-15T05:49:03.598Z",
   "start": "01.01.2026",
-  "suppliesScanned": 737,
-  "invoicesScanned": 829,
+  "suppliesScanned": 738,
+  "invoicesScanned": 831,
   "invoiceErrors": 0,
   "errors": [],
   "summary": {
@@ -156,8 +156,8 @@
     },
     "spinach_standard": {
       "label": "Шпинат Стандарт",
-      "rows": 109,
-      "invoices": 109,
+      "rows": 110,
+      "invoices": 110,
       "exactNames": [
         "Шпинат ,кг (00-00000226) | кг",
         "Шпинат выс/кат ,кг (00-00000125) | кг",
@@ -173,7 +173,7 @@
         "ООО \"Парадис Экзотика\" "
       ],
       "firstDate": "11.01.2026",
-      "lastDate": "10.09.2026"
+      "lastDate": "15.09.2026"
     },
     "mozzarella_125": {
       "label": "Сыр Моцарелла 125 г",
@@ -7536,7 +7536,7 @@
       "date": "10.09.2026",
       "supplier": "ООО \"Арктика\" ",
       "invoice": "АР-00003697",
-      "publicId": "7d2dc91f-8103-4deb-a410-b7d7e7f860f2",
+      "publicId": "0ec79088-9afc-4ca5-b359-06fdce853d90",
       "version": 1,
       "line": 1,
       "name": "Глазной мускул вес Бразилия,кг (00000002218)",
@@ -7600,8 +7600,8 @@
       "date": "11.09.2026",
       "supplier": "ООО \"Парадис Экзотика\" ",
       "invoice": "ПЭ-33332",
-      "publicId": "dcb58c15-7ad7-48fe-9f76-e8f7beedc041",
-      "version": 1,
+      "publicId": "59e27c4d-cf56-41e2-97a8-6df882c8be1b",
+      "version": 2,
       "line": 1,
       "name": "Баклажаны ,кг (00-00012458)",
       "unit": "кг",
@@ -7616,8 +7616,8 @@
       "date": "11.09.2026",
       "supplier": "ООО \"Парадис Экзотика\" ",
       "invoice": "ПЭ-33332",
-      "publicId": "dcb58c15-7ad7-48fe-9f76-e8f7beedc041",
-      "version": 1,
+      "publicId": "59e27c4d-cf56-41e2-97a8-6df882c8be1b",
+      "version": 2,
       "line": 3,
       "name": "Огурцы Кураж выс/кат ,кг (00-00000074)",
       "unit": "кг",
@@ -7632,9 +7632,9 @@
       "date": "11.09.2026",
       "supplier": "ООО \"Парадис Экзотика\" ",
       "invoice": "ПЭ-33332",
-      "publicId": "dcb58c15-7ad7-48fe-9f76-e8f7beedc041",
-      "version": 1,
-      "line": 18,
+      "publicId": "59e27c4d-cf56-41e2-97a8-6df882c8be1b",
+      "version": 2,
+      "line": 17,
       "name": "Ананас Дель Монте спелые (5-6) ,кг (00-00000009)",
       "unit": "кг",
       "qty": 7.29,
@@ -7656,6 +7656,22 @@
       "qty": 5.6,
       "sum": 2396.35,
       "fact": 427.92
+    },
+    {
+      "productKeys": [
+        "spinach_standard"
+      ],
+      "date": "15.09.2026",
+      "supplier": "ООО \"Парадис Экзотика\" ",
+      "invoice": "ПЭ-33929",
+      "publicId": "7d73c70b-2232-485a-9e5b-b704bd6efdf7",
+      "version": 1,
+      "line": 11,
+      "name": "Шпинат стандарт,кг (00-00009486)",
+      "unit": "кг",
+      "qty": 2.1,
+      "sum": 814.93,
+      "fact": 388.06
     }
   ]
 }

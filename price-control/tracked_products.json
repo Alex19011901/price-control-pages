@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-14T07:03:08.216Z",
+  "generatedAt": "2026-09-15T05:49:03.598Z",
   "start": "01.01.2026",
   "source": "DocsInBox",
   "methodology": "First available factual purchase price for each tracked product = 100; later supply prices are indexed to that baseline. Multiple lines of the same product in one invoice are quantity-weighted.",
@@ -4595,6 +4595,19 @@
           "invoice": "ПЭ-33258",
           "qty": 2.2,
           "sum": 853.73,
+          "fact": 388.06,
+          "sourceNames": [
+            "Шпинат стандарт,кг (00-00009486)"
+          ],
+          "index": 153.5
+        },
+        {
+          "date": "15.09.2026",
+          "dateIso": "2026-09-15",
+          "supplier": "ООО \"Парадис Экзотика\" ",
+          "invoice": "ПЭ-33929",
+          "qty": 2.1,
+          "sum": 814.93,
           "fact": 388.06,
           "sourceNames": [
             "Шпинат стандарт,кг (00-00009486)"
