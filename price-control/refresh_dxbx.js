@@ -13,6 +13,7 @@ const SUPPLIER = 'парадис экзотика';
 const SWITCH_0903 = '2026-09-03';
 const SWITCH_0911 = '2026-09-11';
 const SWITCH_0912 = '2026-09-12';
+const SWITCH_0915 = '2026-09-15';
 
 function round2(v) {
   if (!Number.isFinite(v)) return null;
@@ -67,20 +68,40 @@ function loadInvoicePriceSlices() {
     const map = new Map();
     for (const r of slice.rows) {
       const key = norm(r.name) + '\u0000' + norm(r.unit);
-      const price = round2(Number(r.price));
-      if (!Number.isFinite(price)) throw new Error(`INVALID_INVOICE_PRICE:${slice.invoice}:${r.name}`);
+      let price = null;
+      if (r.unmatched !== true) {
+        price = round2(Number(r.price));
+        if (!Number.isFinite(price)) throw new Error(`INVALID_INVOICE_PRICE:${slice.invoice}:${r.name}`);
+      }
       if (map.has(key)) throw new Error(`DUPLICATE_INVOICE_PRICE_SLICE_KEY:${slice.invoice}:${r.name}:${r.unit}`);
       map.set(key, price);
     }
     if (out.has(slice.invoice)) throw new Error(`DUPLICATE_INVOICE_PRICE_SLICE:${slice.invoice}`);
-    out.set(slice.invoice, { supplyDate: slice.supplyDate, source: slice.source || '', map });
+    out.set(slice.invoice, {
+      supplyDate: slice.supplyDate,
+      source: slice.source || '',
+      sourceValidDate: slice.sourceValidDate || '',
+      map
+    });
   }
   return out;
 }
 
 (async () => {
   const todayMoscow = new Date(Date.now() + 3 * 60 * 60 * 1000).toISOString().slice(0, 10);
-  const cfg = todayMoscow >= SWITCH_0912 ? {
+  const cfg = todayMoscow >= SWITCH_0915 ? {
+    priceFile: PRICE_0910_FILE,
+    weekKey: '2026-09-15',
+    startIso: '2026-09-15',
+    endIso: null,
+    startRu: '15.09.2026',
+    endRu: null,
+    label: 'Прайс с 15.09',
+    priceDocumentDate: '10.09.2026',
+    displayPriceDocumentDate: '14.09.2026',
+    validFrom: '11.09.2026',
+    requireInvoiceSlices: true
+  } : todayMoscow >= SWITCH_0912 ? {
     priceFile: PRICE_0910_FILE,
     weekKey: '2026-09-12',
     startIso: '2026-09-12',
@@ -268,6 +289,9 @@ function loadInvoicePriceSlices() {
   for (const d of activeDocs.sort((a,b) => ruToIso(b.date).localeCompare(ruToIso(a.date)))) {
     const invoiceLabel = d.number;
     const invoiceSlice = invoicePriceSlices.get(invoiceLabel);
+    if (cfg.requireInvoiceSlices && !invoiceSlice) {
+      throw new Error(`INVOICE_PRICE_SLICE_REQUIRED:${invoiceLabel}`);
+    }
     if (invoiceSlice && d.date !== invoiceSlice.supplyDate) {
       throw new Error(`INVOICE_PRICE_SLICE_DATE_MISMATCH:${invoiceLabel}:${d.date}:${invoiceSlice.supplyDate}`);
     }
@@ -331,7 +355,7 @@ function loadInvoicePriceSlices() {
       docs: activeDocs.length,
       rows: rowsData.length,
       above, below, equal, unmatched, overpay,
-      priceDocumentDate: cfg.priceDocumentDate,
+      priceDocumentDate: cfg.displayPriceDocumentDate || cfg.priceDocumentDate,
       indexGroup: 'paradis',
       rowsData
     }
