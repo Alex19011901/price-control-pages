@@ -1,0 +1,48 @@
+name: Price Control DocsInBox Inspect
+
+on:
+  push:
+    paths:
+      - "price-control/inspect.trigger"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: price-control-dxbx-inspect
+  cancel-in-progress: false
+
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Install Playwright
+        run: |
+          npm init -y >/dev/null 2>&1
+          npm install playwright@1.55.0 >/dev/null 2>&1
+          npx playwright install --with-deps chromium
+
+      - name: Restore DocsInBox session
+        env:
+          DXBX_STORAGE_STATE: ${{ secrets.DXBX_STORAGE_STATE }}
+        run: |
+          test -n "$DXBX_STORAGE_STATE" || { echo "DXBX_STORAGE_STATE is not configured"; exit 1; }
+          printf '%s' "$DXBX_STORAGE_STATE" > /tmp/price-control-dxbx-state.json
+
+      - name: Inspect today
+        env:
+          DOCSINBOX_STORAGE_STATE: /tmp/price-control-dxbx-state.json
+          TARGET_ISO: "2026-09-16"
+        run: node price-control/inspect_dxbx_today.js
+
+      - name: Cleanup
+        if: always()
+        run: rm -f /tmp/price-control-dxbx-state.json
