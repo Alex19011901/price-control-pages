@@ -1,8 +1,8 @@
 {
-  "generatedAt": "2026-09-15T11:09:58.339Z",
+  "generatedAt": "2026-09-16T13:06:42.186Z",
   "start": "01.01.2026",
-  "suppliesScanned": 739,
-  "invoicesScanned": 832,
+  "suppliesScanned": 741,
+  "invoicesScanned": 835,
   "invoiceErrors": 0,
   "errors": [],
   "summary": {
@@ -76,8 +76,8 @@
     },
     "courage_cucumber": {
       "label": "Огурцы Кураж",
-      "rows": 111,
-      "invoices": 111,
+      "rows": 112,
+      "invoices": 112,
       "exactNames": [
         "!Огурцы Кураж,кг (2087874) | кг",
         "Огурцы Кураж ,кг (00-00000168) | кг",
@@ -94,7 +94,7 @@
         "ООО \"Парадис Экзотика\" "
       ],
       "firstDate": "11.01.2026",
-      "lastDate": "11.09.2026"
+      "lastDate": "16.09.2026"
     },
     "sea_bass_400_600": {
       "label": "Сибас 400–600",
@@ -7664,14 +7664,30 @@
       "date": "15.09.2026",
       "supplier": "ООО \"Парадис Экзотика\" ",
       "invoice": "ПЭ-33929",
-      "publicId": "7d73c70b-2232-485a-9e5b-b704bd6efdf7",
-      "version": 1,
-      "line": 11,
+      "publicId": "371f2ba5-d9ed-4254-b111-d67e2a17cb5b",
+      "version": 2,
+      "line": 10,
       "name": "Шпинат стандарт,кг (00-00009486)",
       "unit": "кг",
       "qty": 2.1,
       "sum": 814.93,
       "fact": 388.06
+    },
+    {
+      "productKeys": [
+        "courage_cucumber"
+      ],
+      "date": "16.09.2026",
+      "supplier": "ООО \"Парадис Экзотика\" ",
+      "invoice": "ПЭ-34074",
+      "publicId": "da950d7e-3784-4181-930e-7a8a8a0cc6cd",
+      "version": 1,
+      "line": 12,
+      "name": "Огурцы Кураж выс/кат ,кг (00-00000074)",
+      "unit": "кг",
+      "qty": 5,
+      "sum": 1902.65,
+      "fact": 380.53
     }
   ]
 }
