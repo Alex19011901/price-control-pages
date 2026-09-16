@@ -1,0 +1,82 @@
+name: Price Control Roll 16.09
+
+on:
+  push:
+    paths:
+      - "price-control/roll-1609.trigger"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: price-control-roll-1609
+  cancel-in-progress: false
+
+jobs:
+  roll:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Patch 16.09 period logic
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+
+          refresh = Path('price-control/refresh_dxbx.js')
+          s = refresh.read_text(encoding='utf-8')
+          old = "const SWITCH_0915 = '2026-09-15';\n"
+          new = old + "const SWITCH_0916 = '2026-09-16';\n"
+          assert s.count(old) == 1
+          s = s.replace(old, new, 1)
+
+          old = """  const cfg = todayMoscow >= SWITCH_0915 ? {\n    priceFile: PRICE_0910_FILE,\n    weekKey: '2026-09-15',\n    startIso: '2026-09-15',\n    endIso: null,\n    startRu: '15.09.2026',\n    endRu: null,\n    label: 'Прайс с 15.09',\n    priceDocumentDate: '10.09.2026',\n    displayPriceDocumentDate: '14.09.2026',\n    validFrom: '11.09.2026',\n    requireInvoiceSlices: true\n  } : todayMoscow >= SWITCH_0912 ? {\n"""
+          new = """  const cfg = todayMoscow >= SWITCH_0916 ? {\n    priceFile: PRICE_0910_FILE,\n    weekKey: '2026-09-16',\n    startIso: '2026-09-16',\n    endIso: null,\n    startRu: '16.09.2026',\n    endRu: null,\n    label: 'Прайс с 16.09',\n    priceDocumentDate: '10.09.2026',\n    displayPriceDocumentDate: '16.09.2026',\n    validFrom: '11.09.2026',\n    requireInvoiceSlices: true\n  } : todayMoscow >= SWITCH_0915 ? {\n    priceFile: PRICE_0910_FILE,\n    weekKey: '2026-09-15',\n    startIso: '2026-09-15',\n    endIso: null,\n    startRu: '15.09.2026',\n    endRu: null,\n    label: 'Прайс с 15.09',\n    priceDocumentDate: '10.09.2026',\n    displayPriceDocumentDate: '14.09.2026',\n    validFrom: '11.09.2026',\n    requireInvoiceSlices: true\n  } : todayMoscow >= SWITCH_0912 ? {\n"""
+          assert s.count(old) == 1
+          s = s.replace(old, new, 1)
+          refresh.write_text(s, encoding='utf-8')
+
+          build = Path('price-control/build_full_history.py')
+          b = build.read_text(encoding='utf-8')
+          old = 'assert current["key"] in {"2026-08-26", "2026-09-03", "2026-09-11", "2026-09-12", "2026-09-15"}, current["key"]'
+          new = 'assert current["key"] in {"2026-08-26", "2026-09-03", "2026-09-11", "2026-09-12", "2026-09-15", "2026-09-16"}, current["key"]'
+          assert b.count(old) == 1
+          b = b.replace(old, new, 1)
+
+          old = 'p0912 = previous_periods.get("2026-09-12")\n'
+          new = old + 'p0915 = previous_periods.get("2026-09-15")\n'
+          assert b.count(old) == 1
+          b = b.replace(old, new, 1)
+
+          old = """else:\n    assert p2608 is not None, \"Previous 2026-08-26 period is missing from full.json\"\n    assert p0903 is not None, \"Previous 2026-09-03 period is missing from full.json\"\n    assert p0911 is not None, \"Previous 2026-09-11 period is missing from full.json\"\n    assert p0912 is not None, \"Previous 2026-09-12 period is missing from full.json\"\n    validate_period(p2608)\n    validate_period(p0903)\n    validate_period(p0911)\n    validate_period(p0912)\n    p0903 = dict(p0903)\n    p0903[\"label\"] = \"Прайс 03.09 → 10.09\"\n    p0903[\"start\"] = \"03.09.2026\"\n    p0903[\"end\"] = \"10.09.2026\"\n    p0903[\"priceDocumentDate\"] = \"02.09.2026\"\n    p0911 = slice_period_date(\n        p0911,\n        date_ru=\"11.09.2026\",\n        key=\"2026-09-11\",\n        label=\"Прайс 11.09\",\n        start=\"11.09.2026\",\n        end=\"11.09.2026\",\n        price_date=\"10.09.2026\",\n    )\n    p0912 = slice_period_date(\n        p0912,\n        date_ru=\"12.09.2026\",\n        key=\"2026-09-12\",\n        label=\"Прайс 12.09 → 14.09\",\n        start=\"12.09.2026\",\n        end=\"14.09.2026\",\n        price_date=\"11.09.2026\",\n    )\n    periods = [current, p0912, p0911, p0903, p2608, p3007, p2407, p2606, interfood]\n"""
+          new = """elif current[\"key\"] == \"2026-09-15\":\n    assert p2608 is not None, \"Previous 2026-08-26 period is missing from full.json\"\n    assert p0903 is not None, \"Previous 2026-09-03 period is missing from full.json\"\n    assert p0911 is not None, \"Previous 2026-09-11 period is missing from full.json\"\n    assert p0912 is not None, \"Previous 2026-09-12 period is missing from full.json\"\n    validate_period(p2608)\n    validate_period(p0903)\n    validate_period(p0911)\n    validate_period(p0912)\n    p0903 = dict(p0903)\n    p0903[\"label\"] = \"Прайс 03.09 → 10.09\"\n    p0903[\"start\"] = \"03.09.2026\"\n    p0903[\"end\"] = \"10.09.2026\"\n    p0903[\"priceDocumentDate\"] = \"02.09.2026\"\n    p0911 = slice_period_date(\n        p0911,\n        date_ru=\"11.09.2026\",\n        key=\"2026-09-11\",\n        label=\"Прайс 11.09\",\n        start=\"11.09.2026\",\n        end=\"11.09.2026\",\n        price_date=\"10.09.2026\",\n    )\n    p0912 = slice_period_date(\n        p0912,\n        date_ru=\"12.09.2026\",\n        key=\"2026-09-12\",\n        label=\"Прайс 12.09 → 14.09\",\n        start=\"12.09.2026\",\n        end=\"14.09.2026\",\n        price_date=\"11.09.2026\",\n    )\n    periods = [current, p0912, p0911, p0903, p2608, p3007, p2407, p2606, interfood]\nelse:\n    assert p2608 is not None, \"Previous 2026-08-26 period is missing from full.json\"\n    assert p0903 is not None, \"Previous 2026-09-03 period is missing from full.json\"\n    assert p0911 is not None, \"Previous 2026-09-11 period is missing from full.json\"\n    assert p0912 is not None, \"Previous 2026-09-12 period is missing from full.json\"\n    assert p0915 is not None, \"Previous 2026-09-15 period is missing from full.json\"\n    validate_period(p2608)\n    validate_period(p0903)\n    validate_period(p0911)\n    validate_period(p0912)\n    validate_period(p0915)\n    p0903 = dict(p0903)\n    p0903[\"label\"] = \"Прайс 03.09 → 10.09\"\n    p0903[\"start\"] = \"03.09.2026\"\n    p0903[\"end\"] = \"10.09.2026\"\n    p0903[\"priceDocumentDate\"] = \"02.09.2026\"\n    p0911 = slice_period_date(\n        p0911,\n        date_ru=\"11.09.2026\",\n        key=\"2026-09-11\",\n        label=\"Прайс 11.09\",\n        start=\"11.09.2026\",\n        end=\"11.09.2026\",\n        price_date=\"10.09.2026\",\n    )\n    p0912 = slice_period_date(\n        p0912,\n        date_ru=\"12.09.2026\",\n        key=\"2026-09-12\",\n        label=\"Прайс 12.09 → 14.09\",\n        start=\"12.09.2026\",\n        end=\"14.09.2026\",\n        price_date=\"11.09.2026\",\n    )\n    p0915 = slice_period_date(\n        p0915,\n        date_ru=\"15.09.2026\",\n        key=\"2026-09-15\",\n        label=\"Прайс 15.09\",\n        start=\"15.09.2026\",\n        end=\"15.09.2026\",\n        price_date=\"14.09.2026\",\n    )\n    periods = [current, p0915, p0912, p0911, p0903, p2608, p3007, p2407, p2606, interfood]\n"""
+          assert b.count(old) == 1
+          b = b.replace(old, new, 1)
+
+          old = 'if p["key"] in {current["key"], "2026-08-26", "2026-09-03", "2026-09-11", "2026-09-12"}:'
+          new = 'if p["key"] in {current["key"], "2026-08-26", "2026-09-03", "2026-09-11", "2026-09-12", "2026-09-15"}:'
+          assert b.count(old) == 1
+          b = b.replace(old, new, 1)
+
+          old = 'elif current["key"] in {"2026-09-12", "2026-09-15"}:'
+          new = 'elif current["key"] in {"2026-09-12", "2026-09-15", "2026-09-16"}:'
+          assert b.count(old) == 1
+          b = b.replace(old, new, 1)
+          build.write_text(b, encoding='utf-8')
+          PY
+
+      - name: Verify patch diff
+        run: |
+          git diff --check
+          git diff -- price-control/refresh_dxbx.js price-control/build_full_history.py
+
+      - name: Commit period logic
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add price-control/refresh_dxbx.js price-control/build_full_history.py
+          git commit -m "Start 16.09 Price Control period"
+          git push origin main
