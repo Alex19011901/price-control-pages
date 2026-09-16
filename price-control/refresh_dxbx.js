@@ -14,6 +14,7 @@ const SWITCH_0903 = '2026-09-03';
 const SWITCH_0911 = '2026-09-11';
 const SWITCH_0912 = '2026-09-12';
 const SWITCH_0915 = '2026-09-15';
+const SWITCH_0916 = '2026-09-16';
 
 function round2(v) {
   if (!Number.isFinite(v)) return null;
@@ -89,7 +90,19 @@ function loadInvoicePriceSlices() {
 
 (async () => {
   const todayMoscow = new Date(Date.now() + 3 * 60 * 60 * 1000).toISOString().slice(0, 10);
-  const cfg = todayMoscow >= SWITCH_0915 ? {
+  const cfg = todayMoscow >= SWITCH_0916 ? {
+    priceFile: PRICE_0910_FILE,
+    weekKey: '2026-09-16',
+    startIso: '2026-09-16',
+    endIso: null,
+    startRu: '16.09.2026',
+    endRu: null,
+    label: 'Прайс с 16.09',
+    priceDocumentDate: '10.09.2026',
+    displayPriceDocumentDate: '16.09.2026',
+    validFrom: '11.09.2026',
+    requireInvoiceSlices: true
+  } : todayMoscow >= SWITCH_0915 ? {
     priceFile: PRICE_0910_FILE,
     weekKey: '2026-09-15',
     startIso: '2026-09-15',
