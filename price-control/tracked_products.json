@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-16T13:06:42.186Z",
+  "generatedAt": "2026-09-17T10:35:46.584Z",
   "start": "01.01.2026",
   "source": "DocsInBox",
   "methodology": "First available factual purchase price for each tracked product = 100; later supply prices are indexed to that baseline. Multiple lines of the same product in one invoice are quantity-weighted.",
@@ -1565,6 +1565,19 @@
             "Баклажаны ,кг (00-00012458)"
           ],
           "index": 66.3
+        },
+        {
+          "date": "17.09.2026",
+          "dateIso": "2026-09-17",
+          "supplier": "ООО \"Парадис Экзотика\" ",
+          "invoice": "ПЭ-34169",
+          "qty": 5.2,
+          "sum": 1585.06,
+          "fact": 304.82,
+          "sourceNames": [
+            "Баклажаны ,кг (00-00012458)"
+          ],
+          "index": 75.6
         }
       ],
       "aliases": [

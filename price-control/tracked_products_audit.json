@@ -1,8 +1,8 @@
 {
-  "generatedAt": "2026-09-16T13:06:42.186Z",
+  "generatedAt": "2026-09-17T10:35:46.584Z",
   "start": "01.01.2026",
-  "suppliesScanned": 741,
-  "invoicesScanned": 835,
+  "suppliesScanned": 750,
+  "invoicesScanned": 844,
   "invoiceErrors": 0,
   "errors": [],
   "summary": {
@@ -53,8 +53,8 @@
     },
     "eggplant": {
       "label": "Баклажан",
-      "rows": 98,
-      "invoices": 94,
+      "rows": 99,
+      "invoices": 95,
       "exactNames": [
         "Баклажаны ,кг (00-00012458) | кг",
         "Баклажаны ,кг (00000000069) | кг",
@@ -72,7 +72,7 @@
         "ООО \"Парадис Экзотика\" "
       ],
       "firstDate": "11.01.2026",
-      "lastDate": "11.09.2026"
+      "lastDate": "17.09.2026"
     },
     "courage_cucumber": {
       "label": "Огурцы Кураж",
@@ -7688,6 +7688,22 @@
       "qty": 5,
       "sum": 1902.65,
       "fact": 380.53
+    },
+    {
+      "productKeys": [
+        "eggplant"
+      ],
+      "date": "17.09.2026",
+      "supplier": "ООО \"Парадис Экзотика\" ",
+      "invoice": "ПЭ-34169",
+      "publicId": "9f5f8eab-c3a7-438e-8788-f76adadd1365",
+      "version": 1,
+      "line": 7,
+      "name": "Баклажаны ,кг (00-00012458)",
+      "unit": "кг",
+      "qty": 5.2,
+      "sum": 1585.06,
+      "fact": 304.82
     }
   ]
 }
