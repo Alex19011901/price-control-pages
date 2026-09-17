@@ -1,0 +1,64 @@
+name: Price Control Purchase History
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - '.github/workflows/price-control-purchase-history.yml'
+      - 'price-control/purchase_history_scan.js'
+  workflow_run:
+    workflows:
+      - Price Control Tracked Products Audit
+    types:
+      - completed
+
+permissions:
+  contents: write
+
+concurrency:
+  group: price-control-purchase-history
+  cancel-in-progress: true
+
+jobs:
+  scan:
+    if: github.event_name == 'workflow_dispatch' || github.event_name == 'push' || github.event.workflow_run.conclusion == 'success'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install Playwright
+        run: |
+          npm init -y >/dev/null 2>&1
+          npm install playwright@1.55.0 >/dev/null 2>&1
+          npx playwright install --with-deps chromium
+
+      - name: Restore DocsInBox session
+        env:
+          DXBX_STORAGE_STATE: ${{ secrets.DXBX_STORAGE_STATE }}
+        run: |
+          test -n "$DXBX_STORAGE_STATE" || { echo "DXBX_STORAGE_STATE is not configured"; exit 1; }
+          printf '%s' "$DXBX_STORAGE_STATE" > /tmp/price-control-dxbx-state.json
+
+      - name: Scan Paradis purchase history from 01.01.2026
+        env:
+          DOCSINBOX_STORAGE_STATE: /tmp/price-control-dxbx-state.json
+        run: node price-control/purchase_history_scan.js price-control/purchase_history.json
+
+      - name: Save purchase history
+        run: |
+          rm -f /tmp/price-control-dxbx-state.json
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add price-control/purchase_history.json
+          if git diff --cached --quiet; then
+            echo "No purchase-history changes"
+          else
+            git commit -m "Update DocsInBox purchase history"
+            git push origin main
+          fi
