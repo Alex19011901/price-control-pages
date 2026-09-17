@@ -2,8 +2,9 @@
   'use strict';
 
   const DATA_URL='./full.json';
+  const HISTORY_URL='./purchase_history.json';
   const MAX_PREVIOUS=5;
-  const state={data:null};
+  const state={data:null,history:null};
 
   function esc(v){
     return String(v==null?'':v).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
@@ -28,7 +29,8 @@
   function normUnit(v){
     return String(v==null?'':v).toLowerCase().replace(/\u00a0/g,' ').replace(/\s+/g,' ').trim();
   }
-  function productKey(row){return normName(row[0])+'\u0000'+normUnit(row[4])}
+  function productKeyFromValues(name,unit){return normName(name)+'\u0000'+normUnit(unit)}
+  function productKey(row){return productKeyFromValues(row[0],row[4])}
   function dateKey(v){
     const m=String(v||'').match(/^(\d{2})\.(\d{2})\.(\d{4})$/);
     return m?m[3]+m[2]+m[1]:String(v||'');
@@ -121,20 +123,10 @@
           <tbody id="purchaseHistoryBody"></tbody>
         </table>
       </div>
-      <div class="purchase-history-note">База — выбранная сверху накладная. При «Все накладные» берётся последняя накладная выбранного периода. Для каждого товара показываются 5 предыдущих фактических цен; если товара не было в ближайшей поставке, поиск идёт дальше назад.</div>
+      <div class="purchase-history-note">История предыдущих фактических цен берётся напрямую из DocsInBox с 01.01.2026. База — выбранная сверху накладная. При «Все накладные» берётся последняя накладная выбранного периода. Если товара не было в ближайшей поставке, поиск идёт дальше назад.</div>
     `;
     anchor.insertAdjacentElement('afterend',section);
     return true;
-  }
-
-  function allRows(data){
-    const out=[];
-    for(const period of (data.periods||[])){
-      for(const row of (period.rowsData||[])){
-        if(Array.isArray(row)&&row.length>=7)out.push(row);
-      }
-    }
-    return out;
   }
 
   function collapseDeliveries(rows){
@@ -159,6 +151,43 @@
       });
     }
     return deliveries;
+  }
+
+  function collapseHistoryDeliveries(history){
+    const groups=new Map();
+    for(const inv of (history&&history.invoices)||[]){
+      const date=String(inv.date||'');
+      const invoice=String(inv.invoice||'');
+      if(!date||!invoice)continue;
+      for(const item of (inv.items||[])){
+        const name=String(item.name||'');
+        const unit=String(item.unit||'');
+        if(!name||!unit)continue;
+        const key=productKeyFromValues(name,unit)+'\u0000'+date+'\u0000'+invoice;
+        if(!groups.has(key))groups.set(key,{name,unit,date,invoice,qty:0,sum:0,fallback:null});
+        const g=groups.get(key);
+        const qty=Number(item.qty),sum=Number(item.sum),fact=Number(item.fact);
+        if(Number.isFinite(fact))g.fallback=fact;
+        if(Number.isFinite(qty)&&qty>0&&Number.isFinite(sum)){
+          g.qty+=qty;
+          g.sum+=sum;
+        }
+      }
+    }
+    const out=[];
+    for(const g of groups.values()){
+      const price=g.qty>0?g.sum/g.qty:g.fallback;
+      if(!Number.isFinite(Number(price)))continue;
+      out.push({
+        key:productKeyFromValues(g.name,g.unit),
+        name:g.name,
+        unit:g.unit,
+        date:g.date,
+        invoice:g.invoice,
+        price:Number(price)
+      });
+    }
+    return out;
   }
 
   function selectedPeriod(data){
@@ -210,7 +239,7 @@
     const period=selectedPeriod(data);
     const invoice=baseInvoice(period);
     const base=baseDeliveries(period,invoice);
-    const deliveries=collapseDeliveries(allRows(data));
+    const deliveries=collapseHistoryDeliveries(state.history);
 
     if(!invoice||!base.length){
       dateEl.textContent='Нет данных';
@@ -242,21 +271,22 @@
     const body=document.getElementById('purchaseHistoryBody');
     const dateEl=document.getElementById('purchaseHistoryDate');
     if(dateEl)dateEl.textContent='Ошибка загрузки';
-    if(body)body.innerHTML='<tr><td colspan="7"><div class="purchase-history-empty">Не удалось загрузить историю поставок</div></td></tr>';
+    if(body)body.innerHTML='<tr><td colspan="7"><div class="purchase-history-empty">Не удалось загрузить историю поставок из DocsInBox</div></td></tr>';
   }
 
-  function queueRender(){
-    if(!state.data)return;
-    requestAnimationFrame(()=>render(state.data));
+  async function fetchJson(url){
+    const r=await fetch(url+'?cb='+Date.now(),{cache:'no-store'});
+    if(!r.ok)throw new Error('HTTP '+r.status+' '+url);
+    return r.json();
   }
 
   async function load(){
     try{
-      const r=await fetch(DATA_URL+'?cb='+Date.now(),{cache:'no-store'});
-      if(!r.ok)throw new Error('HTTP '+r.status);
-      const data=await r.json();
-      if(!data||!Array.isArray(data.periods))throw new Error('Некорректные данные');
+      const [data,history]=await Promise.all([fetchJson(DATA_URL),fetchJson(HISTORY_URL)]);
+      if(!data||!Array.isArray(data.periods))throw new Error('Некорректные данные даша');
+      if(!history||!Array.isArray(history.invoices))throw new Error('Некорректная история DocsInBox');
       state.data=data;
+      state.history=history;
       render(data);
     }catch(e){
       showError();
