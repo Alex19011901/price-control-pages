@@ -9,6 +9,7 @@ on:
       - "price-control/trigger.html"
       - "price-control/current.json"
       - "price-control/full.json"
+      - "price-control/purchase_history.json"
       - "price-control/tracked_products.json"
       - "price-control/tracked-products-widget.js"
       - "price-control/purchase-history-widget.js"
@@ -49,6 +50,7 @@ jobs:
           cp price-control/draft.html public-site/price-control-draft.html
           cp price-control/current.json public-site/current.json
           cp price-control/full.json public-site/full.json
+          cp price-control/purchase_history.json public-site/purchase_history.json
           cp price-control/tracked_products.json public-site/tracked_products.json
           cp price-control/tracked-products-widget.js public-site/tracked-products-widget.js
           cp price-control/purchase-history-widget.js public-site/purchase-history-widget.js
