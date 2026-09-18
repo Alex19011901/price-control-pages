@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-17T10:43:15.440Z",
+  "generatedAt": "2026-09-18T11:37:43.979Z",
   "start": "01.01.2026",
   "source": "DocsInBox",
   "methodology": "First available factual purchase price for each tracked product = 100; later supply prices are indexed to that baseline. Multiple lines of the same product in one invoice are quantity-weighted.",
@@ -3059,6 +3059,19 @@
             "Огурцы Кураж выс/кат ,кг (00-00000074)"
           ],
           "index": 62.9
+        },
+        {
+          "date": "18.09.2026",
+          "dateIso": "2026-09-18",
+          "supplier": "ООО \"Парадис Экзотика\" ",
+          "invoice": "ПЭ-34321",
+          "qty": 5.38,
+          "sum": 2069.79,
+          "fact": 384.72,
+          "sourceNames": [
+            "Огурцы Кураж выс/кат ,кг (00-00000074)"
+          ],
+          "index": 63.6
         }
       ],
       "aliases": [
@@ -4212,6 +4225,19 @@
             "Ананас Дель Монте спелые (5-6) ,кг (00-00000009)"
           ],
           "index": 74.9
+        },
+        {
+          "date": "18.09.2026",
+          "dateIso": "2026-09-18",
+          "supplier": "ООО \"Парадис Экзотика\" ",
+          "invoice": "ПЭ-34321",
+          "qty": 5.37,
+          "sum": 2179.15,
+          "fact": 405.8,
+          "sourceNames": [
+            "Ананас Дель Монте спелые (5-6) ,кг (00-00000009)"
+          ],
+          "index": 71
         }
       ],
       "aliases": [
@@ -4639,6 +4665,19 @@
             "Шпинат стандарт,кг (00-00009486)"
           ],
           "index": 153.5
+        },
+        {
+          "date": "18.09.2026",
+          "dateIso": "2026-09-18",
+          "supplier": "ООО \"Парадис Экзотика\" ",
+          "invoice": "ПЭ-34321",
+          "qty": 2.09,
+          "sum": 729.95,
+          "fact": 349.26,
+          "sourceNames": [
+            "Шпинат стандарт,кг (00-00009486)"
+          ],
+          "index": 138.2
         }
       ],
       "aliases": [
@@ -5046,6 +5085,19 @@
             "125Г СЫР МОЦАРЕЛЛА 45% METRO CHEF ФИОРДИЛАТТ БЗМЖ,ШТ (116706)"
           ],
           "index": 90.5
+        },
+        {
+          "date": "18.09.2026",
+          "dateIso": "2026-09-18",
+          "supplier": "ООО \"КАРТАРИ\"",
+          "invoice": "УН-1521",
+          "qty": 2,
+          "sum": 5610,
+          "fact": 2805,
+          "sourceNames": [
+            "Сыр Моцарелла 125 г (Mozzarella) уп.3кг,шт (УН-00000249)"
+          ],
+          "index": 1826.2
         }
       ],
       "aliases": [

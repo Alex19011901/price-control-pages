@@ -1,8 +1,8 @@
 {
-  "generatedAt": "2026-09-17T10:43:15.440Z",
+  "generatedAt": "2026-09-18T11:37:43.979Z",
   "start": "01.01.2026",
-  "suppliesScanned": 750,
-  "invoicesScanned": 844,
+  "suppliesScanned": 755,
+  "invoicesScanned": 849,
   "invoiceErrors": 0,
   "errors": [],
   "summary": {
@@ -76,8 +76,8 @@
     },
     "courage_cucumber": {
       "label": "Огурцы Кураж",
-      "rows": 112,
-      "invoices": 112,
+      "rows": 113,
+      "invoices": 113,
       "exactNames": [
         "!Огурцы Кураж,кг (2087874) | кг",
         "Огурцы Кураж ,кг (00-00000168) | кг",
@@ -94,7 +94,7 @@
         "ООО \"Парадис Экзотика\" "
       ],
       "firstDate": "11.01.2026",
-      "lastDate": "16.09.2026"
+      "lastDate": "18.09.2026"
     },
     "sea_bass_400_600": {
       "label": "Сибас 400–600",
@@ -129,8 +129,8 @@
     },
     "pineapple": {
       "label": "Ананас",
-      "rows": 77,
-      "invoices": 77,
+      "rows": 78,
+      "invoices": 78,
       "exactNames": [
         "1Л СОК НАП SANTAL АНАНАСОВЫЙ ТЕТ,ШТ (213686) | ШТ",
         "1Л СОК RICH АНАНАСОВЫЙ,ШТ (457319) | ШТ",
@@ -152,12 +152,12 @@
         "ООО \"Парадис Экзотика\" "
       ],
       "firstDate": "15.01.2026",
-      "lastDate": "12.09.2026"
+      "lastDate": "18.09.2026"
     },
     "spinach_standard": {
       "label": "Шпинат Стандарт",
-      "rows": 110,
-      "invoices": 110,
+      "rows": 111,
+      "invoices": 111,
       "exactNames": [
         "Шпинат ,кг (00-00000226) | кг",
         "Шпинат выс/кат ,кг (00-00000125) | кг",
@@ -173,12 +173,12 @@
         "ООО \"Парадис Экзотика\" "
       ],
       "firstDate": "11.01.2026",
-      "lastDate": "15.09.2026"
+      "lastDate": "18.09.2026"
     },
     "mozzarella_125": {
       "label": "Сыр Моцарелла 125 г",
-      "rows": 30,
-      "invoices": 30,
+      "rows": 31,
+      "invoices": 31,
       "exactNames": [
         "/Сыр Моцарелла Galbani 125 г. 45%,шт (00-00001991) | шт",
         "125Г СЫР МОЦАРЕЛЛА 45% METRO CHEF ФИОРДИЛАТТ БЗМЖ,ШТ (116706) | ШТ",
@@ -197,7 +197,7 @@
         "ООО \"Парадис Экзотика\" "
       ],
       "firstDate": "22.01.2026",
-      "lastDate": "11.09.2026"
+      "lastDate": "18.09.2026"
     }
   },
   "matches": [
@@ -7704,6 +7704,70 @@
       "qty": 5.2,
       "sum": 1585.06,
       "fact": 304.82
+    },
+    {
+      "productKeys": [
+        "pineapple"
+      ],
+      "date": "18.09.2026",
+      "supplier": "ООО \"Парадис Экзотика\" ",
+      "invoice": "ПЭ-34321",
+      "publicId": "913f99bd-57ac-4a5c-a037-84009c985979",
+      "version": 1,
+      "line": 3,
+      "name": "Ананас Дель Монте спелые (5-6) ,кг (00-00000009)",
+      "unit": "кг",
+      "qty": 5.37,
+      "sum": 2179.15,
+      "fact": 405.8
+    },
+    {
+      "productKeys": [
+        "spinach_standard"
+      ],
+      "date": "18.09.2026",
+      "supplier": "ООО \"Парадис Экзотика\" ",
+      "invoice": "ПЭ-34321",
+      "publicId": "913f99bd-57ac-4a5c-a037-84009c985979",
+      "version": 1,
+      "line": 14,
+      "name": "Шпинат стандарт,кг (00-00009486)",
+      "unit": "кг",
+      "qty": 2.09,
+      "sum": 729.95,
+      "fact": 349.26
+    },
+    {
+      "productKeys": [
+        "courage_cucumber"
+      ],
+      "date": "18.09.2026",
+      "supplier": "ООО \"Парадис Экзотика\" ",
+      "invoice": "ПЭ-34321",
+      "publicId": "913f99bd-57ac-4a5c-a037-84009c985979",
+      "version": 1,
+      "line": 21,
+      "name": "Огурцы Кураж выс/кат ,кг (00-00000074)",
+      "unit": "кг",
+      "qty": 5.38,
+      "sum": 2069.79,
+      "fact": 384.72
+    },
+    {
+      "productKeys": [
+        "mozzarella_125"
+      ],
+      "date": "18.09.2026",
+      "supplier": "ООО \"КАРТАРИ\"",
+      "invoice": "УН-1521",
+      "publicId": "fc243e92-9cea-4718-9bdf-84330f653a1c",
+      "version": 1,
+      "line": 2,
+      "name": "Сыр Моцарелла 125 г (Mozzarella) уп.3кг,шт (УН-00000249)",
+      "unit": "шт",
+      "qty": 2,
+      "sum": 5610,
+      "fact": 2805
     }
   ]
 }
