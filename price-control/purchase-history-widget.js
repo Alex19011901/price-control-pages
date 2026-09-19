@@ -29,7 +29,23 @@
   function normUnit(v){
     return String(v==null?'':v).toLowerCase().replace(/\u00a0/g,' ').replace(/\s+/g,' ').trim();
   }
-  function productKeyFromValues(name,unit){return normName(name)+'\u0000'+normUnit(unit)}
+  const HISTORY_CODE_ALIASES=new Map([
+    ['00-00000091','lollo-rossa'],
+    ['00-00009441','lollo-rossa'],
+    ['00-00000087','rukola-125'],
+    ['00-00009451','rukola-125'],
+    ['00-00000082','petrushka-kudryavaya'],
+    ['00-00009404','petrushka-kudryavaya']
+  ]);
+  function productCode(v){
+    const m=String(v==null?'':v).match(/\((00-[^)]+)\)\s*$/i);
+    return m?m[1].toLowerCase():'';
+  }
+  function productKeyFromValues(name,unit){
+    const code=productCode(name);
+    const alias=HISTORY_CODE_ALIASES.get(code);
+    return (alias?'alias:'+alias:normName(name))+'\u0000'+normUnit(unit);
+  }
   function productKey(row){return productKeyFromValues(row[0],row[4])}
   function dateKey(v){
     const m=String(v||'').match(/^(\d{2})\.(\d{2})\.(\d{4})$/);
