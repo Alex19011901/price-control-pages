@@ -1,8 +1,8 @@
 {
-  "generatedAt": "2026-09-18T11:47:44.831Z",
+  "generatedAt": "2026-09-19T14:09:30.227Z",
   "start": "01.01.2026",
-  "suppliesScanned": 755,
-  "invoicesScanned": 849,
+  "suppliesScanned": 756,
+  "invoicesScanned": 850,
   "invoiceErrors": 0,
   "errors": [],
   "summary": {
@@ -53,8 +53,8 @@
     },
     "eggplant": {
       "label": "Баклажан",
-      "rows": 99,
-      "invoices": 95,
+      "rows": 100,
+      "invoices": 96,
       "exactNames": [
         "Баклажаны ,кг (00-00012458) | кг",
         "Баклажаны ,кг (00000000069) | кг",
@@ -72,7 +72,7 @@
         "ООО \"Парадис Экзотика\" "
       ],
       "firstDate": "11.01.2026",
-      "lastDate": "17.09.2026"
+      "lastDate": "19.09.2026"
     },
     "courage_cucumber": {
       "label": "Огурцы Кураж",
@@ -129,8 +129,8 @@
     },
     "pineapple": {
       "label": "Ананас",
-      "rows": 78,
-      "invoices": 78,
+      "rows": 79,
+      "invoices": 79,
       "exactNames": [
         "1Л СОК НАП SANTAL АНАНАСОВЫЙ ТЕТ,ШТ (213686) | ШТ",
         "1Л СОК RICH АНАНАСОВЫЙ,ШТ (457319) | ШТ",
@@ -152,7 +152,7 @@
         "ООО \"Парадис Экзотика\" "
       ],
       "firstDate": "15.01.2026",
-      "lastDate": "18.09.2026"
+      "lastDate": "19.09.2026"
     },
     "spinach_standard": {
       "label": "Шпинат Стандарт",
@@ -7768,6 +7768,38 @@
       "qty": 2,
       "sum": 5610,
       "fact": 2805
+    },
+    {
+      "productKeys": [
+        "pineapple"
+      ],
+      "date": "19.09.2026",
+      "supplier": "ООО \"Парадис Экзотика\" ",
+      "invoice": "ПЭ-34489",
+      "publicId": "e112f27a-f0c8-4e9c-aa39-12d360e8ae47",
+      "version": 1,
+      "line": 7,
+      "name": "Ананас Дель Монте спелые (5-6) ,кг (00-00000009)",
+      "unit": "кг",
+      "qty": 5.8,
+      "sum": 2353.64,
+      "fact": 405.8
+    },
+    {
+      "productKeys": [
+        "eggplant"
+      ],
+      "date": "19.09.2026",
+      "supplier": "ООО \"Парадис Экзотика\" ",
+      "invoice": "ПЭ-34489",
+      "publicId": "e112f27a-f0c8-4e9c-aa39-12d360e8ae47",
+      "version": 1,
+      "line": 8,
+      "name": "Баклажаны ,кг (00-00012458)",
+      "unit": "кг",
+      "qty": 5.45,
+      "sum": 1774.3,
+      "fact": 325.56
     }
   ]
 }
