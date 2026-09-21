@@ -1,8 +1,8 @@
 {
-  "generatedAt": "2026-09-19T14:09:30.227Z",
+  "generatedAt": "2026-09-21T06:45:02.585Z",
   "start": "01.01.2026",
-  "suppliesScanned": 756,
-  "invoicesScanned": 850,
+  "suppliesScanned": 758,
+  "invoicesScanned": 852,
   "invoiceErrors": 0,
   "errors": [],
   "summary": {
@@ -76,8 +76,8 @@
     },
     "courage_cucumber": {
       "label": "Огурцы Кураж",
-      "rows": 113,
-      "invoices": 113,
+      "rows": 114,
+      "invoices": 114,
       "exactNames": [
         "!Огурцы Кураж,кг (2087874) | кг",
         "Огурцы Кураж ,кг (00-00000168) | кг",
@@ -94,7 +94,7 @@
         "ООО \"Парадис Экзотика\" "
       ],
       "firstDate": "11.01.2026",
-      "lastDate": "18.09.2026"
+      "lastDate": "20.09.2026"
     },
     "sea_bass_400_600": {
       "label": "Сибас 400–600",
@@ -7800,6 +7800,22 @@
       "qty": 5.45,
       "sum": 1774.3,
       "fact": 325.56
+    },
+    {
+      "productKeys": [
+        "courage_cucumber"
+      ],
+      "date": "20.09.2026",
+      "supplier": "ООО \"Парадис Экзотика\" ",
+      "invoice": "ПЭ-34639",
+      "publicId": "bf17a39f-56bd-4aef-a3f2-44f3021b6adf",
+      "version": 1,
+      "line": 21,
+      "name": "Огурцы Кураж выс/кат ,кг (00-00000074)",
+      "unit": "кг",
+      "qty": 5,
+      "sum": 1923.6,
+      "fact": 384.72
     }
   ]
 }

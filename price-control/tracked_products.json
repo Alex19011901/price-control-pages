@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-19T14:09:30.227Z",
+  "generatedAt": "2026-09-21T06:45:02.585Z",
   "start": "01.01.2026",
   "source": "DocsInBox",
   "methodology": "First available factual purchase price for each tracked product = 100; later supply prices are indexed to that baseline. Multiple lines of the same product in one invoice are quantity-weighted.",
@@ -3080,6 +3080,19 @@
           "invoice": "ПЭ-34321",
           "qty": 5.38,
           "sum": 2069.79,
+          "fact": 384.72,
+          "sourceNames": [
+            "Огурцы Кураж выс/кат ,кг (00-00000074)"
+          ],
+          "index": 63.6
+        },
+        {
+          "date": "20.09.2026",
+          "dateIso": "2026-09-20",
+          "supplier": "ООО \"Парадис Экзотика\" ",
+          "invoice": "ПЭ-34639",
+          "qty": 5,
+          "sum": 1923.6,
           "fact": 384.72,
           "sourceNames": [
             "Огурцы Кураж выс/кат ,кг (00-00000074)"
