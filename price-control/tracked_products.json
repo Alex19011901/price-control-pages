@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-21T14:36:01.727Z",
+  "generatedAt": "2026-09-22T14:28:47.130Z",
   "start": "01.01.2026",
   "source": "DocsInBox",
   "methodology": "First available factual purchase price for each tracked product = 100; later supply prices are indexed to that baseline. Multiple lines of the same product in one invoice are quantity-weighted.",
@@ -3308,6 +3308,19 @@
             "Сыр Горгонзола с голубой плесенью 50% ~2,5кг/круг фольга Monblu™ БЗМЖ Бобровский СЗ (КОД 48248) (0°С),кг (48248)"
           ],
           "index": 53.8
+        },
+        {
+          "date": "22.09.2026",
+          "dateIso": "2026-09-22",
+          "supplier": "ООО \"Торговый дом \"Глобал Фудс\" ***",
+          "invoice": "ТД2209/0194",
+          "qty": 5,
+          "sum": 4300.01,
+          "fact": 860,
+          "sourceNames": [
+            "Сыр Горгонзола с голубой плесенью 50% ~2,5кг/круг фольга Monblu™ БЗМЖ Бобровский СЗ (КОД 48248) (0°С),кг (48248)"
+          ],
+          "index": 53.8
         }
       ],
       "aliases": [
@@ -4712,6 +4725,19 @@
           "invoice": "ПЭ-34321",
           "qty": 2.09,
           "sum": 729.95,
+          "fact": 349.26,
+          "sourceNames": [
+            "Шпинат стандарт,кг (00-00009486)"
+          ],
+          "index": 138.2
+        },
+        {
+          "date": "22.09.2026",
+          "dateIso": "2026-09-22",
+          "supplier": "ООО \"Парадис Экзотика\" ",
+          "invoice": "ПЭ-34908",
+          "qty": 2.05,
+          "sum": 715.98,
           "fact": 349.26,
           "sourceNames": [
             "Шпинат стандарт,кг (00-00009486)"
