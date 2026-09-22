@@ -40,6 +40,7 @@ jobs:
       - name: Inspect today
         env:
           DOCSINBOX_STORAGE_STATE: /tmp/price-control-dxbx-state.json
+          TARGET_ISO: "2026-09-20"
         run: node price-control/inspect_dxbx_today.js
 
       - name: Cleanup
