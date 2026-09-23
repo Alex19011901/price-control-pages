@@ -1,8 +1,8 @@
 {
-  "generatedAt": "2026-09-22T14:28:47.130Z",
+  "generatedAt": "2026-09-23T12:32:52.454Z",
   "start": "01.01.2026",
-  "suppliesScanned": 771,
-  "invoicesScanned": 868,
+  "suppliesScanned": 773,
+  "invoicesScanned": 870,
   "invoiceErrors": 0,
   "errors": [],
   "summary": {
@@ -55,8 +55,8 @@
     },
     "eggplant": {
       "label": "Баклажан",
-      "rows": 100,
-      "invoices": 96,
+      "rows": 101,
+      "invoices": 97,
       "exactNames": [
         "Баклажаны ,кг (00-00012458) | кг",
         "Баклажаны ,кг (00000000069) | кг",
@@ -74,7 +74,7 @@
         "ООО \"Парадис Экзотика\" "
       ],
       "firstDate": "11.01.2026",
-      "lastDate": "19.09.2026"
+      "lastDate": "23.09.2026"
     },
     "courage_cucumber": {
       "label": "Огурцы Кураж",
@@ -131,8 +131,8 @@
     },
     "pineapple": {
       "label": "Ананас",
-      "rows": 79,
-      "invoices": 79,
+      "rows": 80,
+      "invoices": 80,
       "exactNames": [
         "1Л СОК НАП SANTAL АНАНАСОВЫЙ ТЕТ,ШТ (213686) | ШТ",
         "1Л СОК RICH АНАНАСОВЫЙ,ШТ (457319) | ШТ",
@@ -154,7 +154,7 @@
         "ООО \"Парадис Экзотика\" "
       ],
       "firstDate": "15.01.2026",
-      "lastDate": "19.09.2026"
+      "lastDate": "23.09.2026"
     },
     "spinach_standard": {
       "label": "Шпинат Стандарт",
@@ -7882,6 +7882,38 @@
       "qty": 5,
       "sum": 4300.01,
       "fact": 860
+    },
+    {
+      "productKeys": [
+        "eggplant"
+      ],
+      "date": "23.09.2026",
+      "supplier": "ООО \"Парадис Экзотика\" ",
+      "invoice": "ПЭ-34998",
+      "publicId": "a944c577-4258-460d-a8b3-1442d08773fe",
+      "version": 1,
+      "line": 9,
+      "name": "Баклажаны ,кг (00-00012458)",
+      "unit": "кг",
+      "qty": 5.3,
+      "sum": 1725.47,
+      "fact": 325.56
+    },
+    {
+      "productKeys": [
+        "pineapple"
+      ],
+      "date": "23.09.2026",
+      "supplier": "ООО \"Парадис Экзотика\" ",
+      "invoice": "ПЭ-34998",
+      "publicId": "a944c577-4258-460d-a8b3-1442d08773fe",
+      "version": 1,
+      "line": 19,
+      "name": "Ананас Дель Монте спелые (5-6) ,кг (00-00000009)",
+      "unit": "кг",
+      "qty": 3.7,
+      "sum": 1501.46,
+      "fact": 405.8
     }
   ]
 }
