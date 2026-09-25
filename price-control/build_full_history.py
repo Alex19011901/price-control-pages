@@ -180,7 +180,7 @@ expected = {
     "2026-05-20": (13, 305, 20, 0, 269, 16, 1676.33),
 }
 
-assert current["key"] in {"2026-08-26", "2026-09-03", "2026-09-11", "2026-09-12", "2026-09-15", "2026-09-16", "2026-09-18"}, current["key"]
+assert current["key"] in {"2026-08-26", "2026-09-03", "2026-09-11", "2026-09-12", "2026-09-15", "2026-09-16", "2026-09-18", "2026-09-25"}, current["key"]
 validate_period(current)
 
 full_path = PC / "full.json"
@@ -192,6 +192,7 @@ p0911 = previous_periods.get("2026-09-11")
 p0912 = previous_periods.get("2026-09-12")
 p0915 = previous_periods.get("2026-09-15")
 p0916 = previous_periods.get("2026-09-16")
+p0918 = previous_periods.get("2026-09-18")
 
 if current["key"] == "2026-08-26":
     periods = [current, p3007, p2407, p2606, interfood]
@@ -265,6 +266,65 @@ elif current["key"] == "2026-09-15":
         price_date="11.09.2026",
     )
     periods = [current, p0912, p0911, p0903, p2608, p3007, p2407, p2606, interfood]
+elif current["key"] == "2026-09-25":
+    assert p2608 is not None, "Previous 2026-08-26 period is missing from full.json"
+    assert p0903 is not None, "Previous 2026-09-03 period is missing from full.json"
+    assert p0911 is not None, "Previous 2026-09-11 period is missing from full.json"
+    assert p0912 is not None, "Previous 2026-09-12 period is missing from full.json"
+    assert p0915 is not None, "Previous 2026-09-15 period is missing from full.json"
+    assert p0916 is not None, "Previous 2026-09-16 period is missing from full.json"
+    assert p0918 is not None, "Previous 2026-09-18 period is missing from full.json"
+    validate_period(p2608)
+    validate_period(p0903)
+    validate_period(p0911)
+    validate_period(p0912)
+    validate_period(p0915)
+    validate_period(p0916)
+    validate_period(p0918)
+    p0903 = dict(p0903)
+    p0903["label"] = "Прайс 03.09 → 10.09"
+    p0903["start"] = "03.09.2026"
+    p0903["end"] = "10.09.2026"
+    p0903["priceDocumentDate"] = "02.09.2026"
+    p0911 = slice_period_date(
+        p0911,
+        date_ru="11.09.2026",
+        key="2026-09-11",
+        label="Прайс 11.09",
+        start="11.09.2026",
+        end="11.09.2026",
+        price_date="10.09.2026",
+    )
+    p0912 = slice_period_date(
+        p0912,
+        date_ru="12.09.2026",
+        key="2026-09-12",
+        label="Прайс 12.09 → 14.09",
+        start="12.09.2026",
+        end="14.09.2026",
+        price_date="11.09.2026",
+    )
+    p0915 = slice_period_date(
+        p0915,
+        date_ru="15.09.2026",
+        key="2026-09-15",
+        label="Прайс 15.09",
+        start="15.09.2026",
+        end="15.09.2026",
+        price_date="14.09.2026",
+    )
+    p0916 = dict(p0916)
+    p0916["label"] = "Прайс 16.09 → 17.09"
+    p0916["start"] = "16.09.2026"
+    p0916["end"] = "17.09.2026"
+    p0916["priceDocumentDate"] = "16.09.2026"
+    p0918 = dict(p0918)
+    p0918["label"] = "Прайс 18.09 → 24.09"
+    p0918["start"] = "18.09.2026"
+    p0918["end"] = "24.09.2026"
+    p0918["priceDocumentDate"] = "17.09.2026"
+    periods = [current, p0918, p0916, p0915, p0912, p0911, p0903, p2608, p3007, p2407, p2606, interfood]
+
 elif current["key"] == "2026-09-18":
     assert p2608 is not None, "Previous 2026-08-26 period is missing from full.json"
     assert p0903 is not None, "Previous 2026-09-03 period is missing from full.json"
@@ -363,7 +423,7 @@ else:
     periods = [current, p0915, p0912, p0911, p0903, p2608, p3007, p2407, p2606, interfood]
 
 for p in periods:
-    if p["key"] in {current["key"], "2026-08-26", "2026-09-03", "2026-09-11", "2026-09-12", "2026-09-15", "2026-09-16"}:
+    if p["key"] in {current["key"], "2026-08-26", "2026-09-03", "2026-09-11", "2026-09-12", "2026-09-15", "2026-09-16", "2026-09-18"}:
         validate_period(p)
         continue
     got = (
@@ -428,7 +488,7 @@ elif current["key"] == "2026-09-11":
             paradis_index["periodChange"] = round(index_0911 - 100.0, 1)
             paradis_index["commonProducts"] = common_0911
             paradis_index["previousCommonProducts"] = common_0903
-elif current["key"] in {"2026-09-12", "2026-09-15", "2026-09-16", "2026-09-18"}:
+elif current["key"] in {"2026-09-12", "2026-09-15", "2026-09-16", "2026-09-18", "2026-09-25"}:
     stored_index = previous_full.get("indexGroups", {}).get("paradis")
     if stored_index:
         paradis_index = stored_index
