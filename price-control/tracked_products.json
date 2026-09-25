@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-23T12:32:52.454Z",
+  "generatedAt": "2026-09-25T12:25:25.877Z",
   "start": "01.01.2026",
   "source": "DocsInBox",
   "methodology": "First available factual purchase price for each tracked product = 100; later supply prices are indexed to that baseline. Multiple lines of the same product in one invoice are quantity-weighted.",
@@ -249,6 +249,19 @@
             "Глазной мускул вес Бразилия,кг (00000002218)"
           ],
           "index": 89.4
+        },
+        {
+          "date": "24.09.2026",
+          "dateIso": "2026-09-24",
+          "supplier": "ООО \"ТД \"ГЛОБАЛ ФУДС\"",
+          "invoice": "ТД2409/0099",
+          "qty": 19.76,
+          "sum": 18089.57,
+          "fact": 915.46,
+          "sourceNames": [
+            "Говядина глазной мускул б/к п/сухожил мышца ~2кг в/у Вахавяк + Беларусь,кг (76109)"
+          ],
+          "index": 84.5
         }
       ],
       "aliases": [
@@ -1604,6 +1617,19 @@
             "Баклажаны ,кг (00-00012458)"
           ],
           "index": 80.7
+        },
+        {
+          "date": "25.09.2026",
+          "dateIso": "2026-09-25",
+          "supplier": "ООО \"Парадис Экзотика\" ",
+          "invoice": "ПЭ-35328",
+          "qty": 11.4,
+          "sum": 3913.28,
+          "fact": 343.27,
+          "sourceNames": [
+            "Баклажаны ,кг (00-00012458)"
+          ],
+          "index": 85.1
         }
       ],
       "aliases": [
@@ -3111,6 +3137,19 @@
             "Огурцы Кураж выс/кат ,кг (00-00000074)"
           ],
           "index": 63.6
+        },
+        {
+          "date": "25.09.2026",
+          "dateIso": "2026-09-25",
+          "supplier": "ООО \"Парадис Экзотика\" ",
+          "invoice": "ПЭ-35328",
+          "qty": 5.5,
+          "sum": 2093.36,
+          "fact": 380.61,
+          "sourceNames": [
+            "Огурцы Кураж выс/кат ,кг (00-00000074)"
+          ],
+          "index": 62.9
         }
       ],
       "aliases": [
