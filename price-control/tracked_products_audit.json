@@ -1,8 +1,8 @@
 {
-  "generatedAt": "2026-09-25T12:25:25.877Z",
+  "generatedAt": "2026-09-26T14:49:54.099Z",
   "start": "01.01.2026",
-  "suppliesScanned": 779,
-  "invoicesScanned": 876,
+  "suppliesScanned": 781,
+  "invoicesScanned": 878,
   "invoiceErrors": 0,
   "errors": [],
   "summary": {
@@ -78,8 +78,8 @@
     },
     "courage_cucumber": {
       "label": "Огурцы Кураж",
-      "rows": 115,
-      "invoices": 115,
+      "rows": 116,
+      "invoices": 116,
       "exactNames": [
         "!Огурцы Кураж,кг (2087874) | кг",
         "Огурцы Кураж ,кг (00-00000168) | кг",
@@ -96,7 +96,7 @@
         "ООО \"Парадис Экзотика\" "
       ],
       "firstDate": "11.01.2026",
-      "lastDate": "25.09.2026"
+      "lastDate": "26.09.2026"
     },
     "sea_bass_400_600": {
       "label": "Сибас 400–600",
@@ -131,8 +131,8 @@
     },
     "pineapple": {
       "label": "Ананас",
-      "rows": 80,
-      "invoices": 80,
+      "rows": 81,
+      "invoices": 81,
       "exactNames": [
         "1Л СОК НАП SANTAL АНАНАСОВЫЙ ТЕТ,ШТ (213686) | ШТ",
         "1Л СОК RICH АНАНАСОВЫЙ,ШТ (457319) | ШТ",
@@ -154,7 +154,7 @@
         "ООО \"Парадис Экзотика\" "
       ],
       "firstDate": "15.01.2026",
-      "lastDate": "23.09.2026"
+      "lastDate": "26.09.2026"
     },
     "spinach_standard": {
       "label": "Шпинат Стандарт",
@@ -179,8 +179,8 @@
     },
     "mozzarella_125": {
       "label": "Сыр Моцарелла 125 г",
-      "rows": 31,
-      "invoices": 31,
+      "rows": 32,
+      "invoices": 32,
       "exactNames": [
         "/Сыр Моцарелла Galbani 125 г. 45%,шт (00-00001991) | шт",
         "125Г СЫР МОЦАРЕЛЛА 45% METRO CHEF ФИОРДИЛАТТ БЗМЖ,ШТ (116706) | ШТ",
@@ -199,7 +199,7 @@
         "ООО \"Парадис Экзотика\" "
       ],
       "firstDate": "22.01.2026",
-      "lastDate": "18.09.2026"
+      "lastDate": "26.09.2026"
     }
   },
   "matches": [
@@ -7961,6 +7961,54 @@
       "unit": "кг",
       "qty": 5.5,
       "sum": 2093.36,
+      "fact": 380.61
+    },
+    {
+      "productKeys": [
+        "mozzarella_125"
+      ],
+      "date": "26.09.2026",
+      "supplier": "ООО \"МЕТРО Кэш энд Керри\" ",
+      "invoice": "9610732930119",
+      "publicId": "0fab7723-09e4-46a1-bc5d-7cb73d7d2428",
+      "version": 1,
+      "line": 1,
+      "name": "125Г СЫР МОЦАРЕЛЛА 45% METRO CHEF ФИОРДИЛАТТ БЗМЖ,ШТ (116706)",
+      "unit": "ШТ",
+      "qty": 16,
+      "sum": 2224,
+      "fact": 139
+    },
+    {
+      "productKeys": [
+        "pineapple"
+      ],
+      "date": "26.09.2026",
+      "supplier": "ООО \"Парадис Экзотика\" ",
+      "invoice": "ПЭ-35404",
+      "publicId": "6e431be7-b996-4a1c-97b0-e49cb3687fb4",
+      "version": 1,
+      "line": 5,
+      "name": "Ананас Дель Монте спелые (5-6) ,кг (00-00000009)",
+      "unit": "кг",
+      "qty": 5,
+      "sum": 1796.2,
+      "fact": 359.24
+    },
+    {
+      "productKeys": [
+        "courage_cucumber"
+      ],
+      "date": "26.09.2026",
+      "supplier": "ООО \"Парадис Экзотика\" ",
+      "invoice": "ПЭ-35404",
+      "publicId": "6e431be7-b996-4a1c-97b0-e49cb3687fb4",
+      "version": 1,
+      "line": 31,
+      "name": "Огурцы Кураж выс/кат ,кг (00-00000074)",
+      "unit": "кг",
+      "qty": 3.3,
+      "sum": 1256.01,
       "fact": 380.61
     }
   ]
