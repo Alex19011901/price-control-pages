@@ -9,7 +9,7 @@ permissions:
   contents: read
 
 concurrency:
-  group: price-control-dxbx-inspect
+  group: price-control-public-refresh
   cancel-in-progress: false
 
 jobs:
@@ -33,9 +33,9 @@ jobs:
       - name: Restore DocsInBox session
         env:
           DXBX_STORAGE_STATE: ${{ secrets.DXBX_STORAGE_STATE }}
-        run: |
-          test -n "$DXBX_STORAGE_STATE" || { echo "DXBX_STORAGE_STATE is not configured"; exit 1; }
-          printf '%s' "$DXBX_STORAGE_STATE" > /tmp/price-control-dxbx-state.json
+          DXBX_LOGIN: ${{ secrets.DXBX_LOGIN }}
+          DXBX_PASSWORD: ${{ secrets.DXBX_PASSWORD }}
+        run: node price-control/prepare_dxbx_auth.js /tmp/price-control-dxbx-state.json
 
       - name: Inspect today
         env:
@@ -44,4 +44,4 @@ jobs:
 
       - name: Cleanup
         if: always()
-        run: rm -f /tmp/price-control-dxbx-state.json
+        run: rm -f /tmp/price-control-dxbx-state.json /tmp/price-control-dxbx-state.json.*.tmp
