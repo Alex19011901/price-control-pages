@@ -1,0 +1,110 @@
+name: Price Control DocsInBox Direct Inspect
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/price-control-dxbx-direct-inspect.yml"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: price-control-dxbx-inspect
+  cancel-in-progress: false
+
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Read DocsInBox directly without browser
+        env:
+          DXBX_STORAGE_STATE: ${{ secrets.DXBX_STORAGE_STATE }}
+          TARGET_ISO: "2026-10-04"
+        run: |
+          node <<'NODE'
+          'use strict';
+          // Read-only diagnostic. No browser, no repository checkout, no uploads.
+          // Saved credentials go only to their original HTTPS origin.
+          // Never log cookies, localStorage values, response bodies or secrets.
+          const ORIGIN = 'https://dxbx.ru';
+          const API_PATH = '/api/front/supplies';
+          const targetIso = process.env.TARGET_ISO;
+          const iso = value => {
+            const m = String(value || '').match(/^(\d{2})\.(\d{2})\.(\d{4})$/);
+            return m ? `${m[3]}-${m[2]}-${m[1]}` : '';
+          };
+          (async () => {
+            if (!process.env.DXBX_STORAGE_STATE) throw new Error('DXBX_STATE_MISSING');
+            let state;
+            try { state = JSON.parse(process.env.DXBX_STORAGE_STATE); }
+            catch { throw new Error('DXBX_STATE_INVALID_JSON'); }
+            if (!state || !Array.isArray(state.cookies)) throw new Error('DXBX_STATE_INVALID_SHAPE');
+            const cookies = state.cookies.filter(c => {
+              const domain = String(c.domain || '').replace(/^\./, '').toLowerCase();
+              const p = String(c.path || '/');
+              const pathMatches = API_PATH === p || API_PATH.startsWith(p.endsWith('/') ? p : p + '/');
+              return domain === 'dxbx.ru' && pathMatches && typeof c.name === 'string' && typeof c.value === 'string';
+            }).sort((a, b) => String(b.path || '/').length - String(a.path || '/').length);
+            const now = Date.now() / 1000;
+            console.log('DXBX_STATE_META=' + JSON.stringify({
+              storedCookies: state.cookies.length,
+              apiCookies: cookies.length,
+              expiredApiCookies: cookies.filter(c => Number(c.expires) > 0 && Number(c.expires) <= now).length,
+              storageOrigins: Array.isArray(state.origins) ? state.origins.length : 0
+            }));
+            if (!cookies.length) throw new Error('DXBX_NO_API_COOKIES');
+            if (cookies.some(c => /[\r\n;]/.test(c.name + c.value))) throw new Error('DXBX_COOKIE_FORMAT_INVALID');
+            // Preserve original saved credential values. The server validates them.
+            const cookieHeader = cookies.map(c => c.name + '=' + c.value).join('; ');
+            const found = [];
+            let offset = 0;
+            let finished = false;
+            for (let pageNo = 0; pageNo < 50; pageNo++) {
+              const response = await fetch(ORIGIN + API_PATH + '?offset=' + offset, {
+                method: 'GET',
+                redirect: 'manual',
+                signal: AbortSignal.timeout(30000),
+                headers: {
+                  Accept: 'application/json',
+                  Cookie: cookieHeader,
+                  Origin: ORIGIN,
+                  Referer: ORIGIN + '/fe/supplies?offset=0'
+                }
+              });
+              console.log('DXBX_DIRECT_RESPONSE=' + JSON.stringify({ page: pageNo, status: response.status }));
+              if (!response.ok) throw new Error('DXBX_DIRECT_HTTP_' + response.status);
+              let payload;
+              try { payload = await response.json(); }
+              catch { throw new Error('DXBX_DIRECT_NON_JSON'); }
+              if (!Array.isArray(payload.data)) throw new Error('DXBX_SUPPLIES_INVALID_SHAPE');
+              const rows = payload.data;
+              for (const supply of rows) {
+                if (iso(supply.date) !== targetIso || !String(supply.supplier?.name || '').toLowerCase().includes('парадис экзотика')) continue;
+                found.push({
+                  date: supply.date,
+                  number: supply.number,
+                  invoices: (Array.isArray(supply.invoices) ? supply.invoices : []).map(i => ({number: i.number, publicId: i.publicId, link: i.link}))
+                });
+              }
+              const dates = rows.map(r => iso(r.date)).filter(Boolean);
+              if (!rows.length || rows.length < 10 || (dates.length === rows.length && dates.every(d => d < targetIso))) {
+                finished = true;
+                break;
+              }
+              offset += rows.length;
+            }
+            if (!finished) throw new Error('DXBX_SCAN_LIMIT_REACHED');
+            console.log('DXBX_DIRECT_TODAY_JSON=' + JSON.stringify({targetIso, supplier: 'Парадис Экзотика', supplies: found}));
+          })().catch(error => {
+            const message = String(error?.message || '');
+            console.error(/^DXBX_[A-Z0-9_]+$/.test(message) ? message : 'DXBX_DIRECT_REQUEST_FAILED');
+            process.exitCode = 1;
+          });
+          NODE
