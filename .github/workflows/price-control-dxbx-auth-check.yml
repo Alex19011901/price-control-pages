@@ -6,6 +6,8 @@ on:
     branches: [main]
     paths:
       - ".github/workflows/price-control-dxbx-auth-check.yml"
+      - "price-control/prepare_dxbx_auth.js"
+      - "price-control/prepare_dxbx_auth.test.js"
 
 permissions:
   contents: read
@@ -19,96 +21,39 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 6
     steps:
+      - name: Checkout
+        uses: actions/checkout@v4
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
           node-version: "20"
-      - name: Install isolated browser
+      - name: Test authentication safeguards
+        run: node --test price-control/prepare_dxbx_auth.test.js
+      - name: Install Playwright
         run: |
           npm init -y >/dev/null 2>&1
           npm install playwright@1.55.0 >/dev/null 2>&1
           npx playwright install --with-deps chromium >/dev/null 2>&1
-      - name: Check autonomous authentication without data writes
+      - name: Prepare autonomous DocsInBox login
         env:
           DXBX_STORAGE_STATE: ${{ secrets.DXBX_STORAGE_STATE }}
           DXBX_LOGIN: ${{ secrets.DXBX_LOGIN }}
           DXBX_PASSWORD: ${{ secrets.DXBX_PASSWORD }}
+        run: node price-control/prepare_dxbx_auth.js /tmp/price-control-dxbx-auth-check.json
+      - name: Verify saved login in an independent context
         run: |
           node <<'NODE'
-          'use strict';
           const {chromium} = require('playwright');
-          const ORIGIN = 'https://dxbx.ru';
-          const safePath = url => {
-            try {
-              const u = new URL(url, ORIGIN);
-              return u.origin === ORIGIN ? u.pathname.replace(/[0-9a-f]{24,}/gi, '[id]') : '[external]';
-            } catch { return '[invalid]'; }
-          };
-          const cookieMeta = cookies => cookies.filter(c => c.domain.replace(/^\./, '') === 'dxbx.ru').map(c => ({
-            name: /^[A-Za-z0-9_.$-]{1,80}$/.test(c.name) ? c.name : '[other]',
-            path: c.path,
-            expires: c.expires > 0 ? new Date(c.expires * 1000).toISOString() : 'session',
-            expired: c.expires > 0 && c.expires < Date.now() / 1000
-          }));
+          const {verifySupplies} = require('./price-control/prepare_dxbx_auth');
           (async () => {
-            let state;
-            try { state = JSON.parse(process.env.DXBX_STORAGE_STATE || 'null'); }
-            catch { throw new Error('STATE_INVALID_JSON'); }
-            if (!state || !Array.isArray(state.cookies)) throw new Error('STATE_MISSING');
-            console.log('SAVED_AUTH_METADATA=' + JSON.stringify({
-              cookies: cookieMeta(state.cookies),
-              authStorageKeys: (state.origins || []).filter(o => o.origin === ORIGIN).flatMap(o => (o.localStorage || []).map(x => x.name).filter(k => /auth|token|session|refresh|login/i.test(k) && /^[A-Za-z0-9_.$-]{1,80}$/.test(k))),
-              loginSecretPresent: !!process.env.DXBX_LOGIN,
-              passwordSecretPresent: !!process.env.DXBX_PASSWORD
-            }));
             const browser = await chromium.launch({headless: true});
             try {
-              const context = await browser.newContext({storageState: state});
-              const page = await context.newPage();
-              const events = [];
-              page.on('response', response => {
-                const p = safePath(response.url());
-                if (/^\/api\/front\/(?:auth|login|user|session|refresh|supplies)(?:\/|$)/i.test(p) && events.length < 25) {
-                  events.push({path: p, status: response.status()});
-                }
-              });
-              await page.goto(ORIGIN + '/', {waitUntil: 'domcontentloaded', timeout: 45000});
-              try { await page.waitForLoadState('networkidle', {timeout: 20000}); } catch {}
-              const initialPath = safePath(page.url());
-              if (!/login|sign.?in|auth/i.test(initialPath)) {
-                await page.goto(ORIGIN + '/fe/supplies?offset=0', {waitUntil: 'domcontentloaded', timeout: 45000});
-                try { await page.waitForLoadState('networkidle', {timeout: 15000}); } catch {}
-              }
-              const response = await context.request.get(ORIGIN + '/api/front/supplies?offset=0', {
-                timeout: 30000, maxRedirects: 0, headers: {Accept: 'application/json'}
-              });
-              let validSupplies = false;
-              if (response.ok()) {
-                try { validSupplies = Array.isArray((await response.json()).data); } catch {}
-              }
-              const fresh = await context.storageState();
-              const finalPath = safePath(page.url());
-              console.log('AUTONOMOUS_AUTH_RESULT=' + JSON.stringify({
-                initialPath, finalPath, status: response.status(), validSupplies,
-                cookiesAfterBootstrap: cookieMeta(fresh.cookies), authResponses: events
-              }));
-              if (!validSupplies && /login|sign.?in|auth/i.test(finalPath)) {
-                const form = await page.evaluate(() => ({
-                  inputs: Array.from(document.querySelectorAll('input')).map(e => ({
-                    type: e.type, name: e.name, id: e.id, placeholder: e.placeholder,
-                    autocomplete: e.autocomplete
-                  })),
-                  buttons: Array.from(document.querySelectorAll('button')).map(e => (e.textContent || '').replace(/\s+/g, ' ').trim()).filter(Boolean).slice(0, 12),
-                  scripts: Array.from(document.scripts).map(e => e.src).filter(Boolean).map(s => {const u = new URL(s); return u.origin === location.origin ? u.pathname : '[external]';})
-                }));
-                console.log('PUBLIC_LOGIN_FORM=' + JSON.stringify(form));
-              }
-              console.log(validSupplies ? 'AUTH_CONFIRMED' : 'AUTH_NOT_RESTORED');
-              if (!validSupplies) process.exitCode = 1;
+              const context = await browser.newContext({storageState: '/tmp/price-control-dxbx-auth-check.json'});
+              if (!await verifySupplies(context)) throw new Error('AUTH_REUSE_REJECTED');
+              console.log('AUTH_REUSE_CONFIRMED HTTP 200');
             } finally { await browser.close(); }
-          })().catch(error => {
-            const code = String(error && error.message || '');
-            console.error(/^[A-Z_]{1,80}$/.test(code) ? code : 'AUTH_CHECK_FAILED');
-            process.exitCode = 1;
-          });
+          })().catch(() => {console.error('AUTH_REUSE_FAILED'); process.exitCode = 1;});
           NODE
+      - name: Remove temporary session
+        if: always()
+        run: rm -f /tmp/price-control-dxbx-auth-check.json /tmp/price-control-dxbx-auth-check.json.*.tmp
