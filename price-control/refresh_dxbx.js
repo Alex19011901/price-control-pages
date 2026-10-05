@@ -18,6 +18,7 @@ const SWITCH_0916 = '2026-09-16';
 const SWITCH_0918 = '2026-09-18';
 const SWITCH_0925 = '2026-09-25';
 const SWITCH_1001 = '2026-10-01';
+const SWITCH_1004 = '2026-10-04';
 
 function round2(v) {
   if (!Number.isFinite(v)) return null;
@@ -93,7 +94,20 @@ function loadInvoicePriceSlices() {
 
 (async () => {
   const todayMoscow = new Date(Date.now() + 3 * 60 * 60 * 1000).toISOString().slice(0, 10);
-  const cfg = todayMoscow >= SWITCH_1001 ? {
+  const cfg = todayMoscow >= SWITCH_1004 ? {
+    priceFile: PRICE_0910_FILE,
+    weekKey: '2026-10-04',
+    startIso: '2026-10-04',
+    endIso: null,
+    startRu: '04.10.2026',
+    endRu: null,
+    label: 'Прайс с 04.10',
+    priceDocumentDate: '10.09.2026',
+    displayPriceDocumentDate: '02.10.2026',
+    validFrom: '11.09.2026',
+    requireInvoiceSlices: true,
+    sumPositiveRowImpacts: true
+  } : todayMoscow >= SWITCH_1001 ? {
     priceFile: PRICE_0910_FILE,
     weekKey: '2026-10-01',
     startIso: '2026-10-01',
@@ -347,6 +361,10 @@ function loadInvoicePriceSlices() {
     if (invoiceSlice && d.date !== invoiceSlice.supplyDate) {
       throw new Error(`INVOICE_PRICE_SLICE_DATE_MISMATCH:${invoiceLabel}:${d.date}:${invoiceSlice.supplyDate}`);
     }
+    if (cfg.sumPositiveRowImpacts && invoiceSlice &&
+        invoiceSlice.sourceValidDate !== cfg.displayPriceDocumentDate) {
+      throw new Error(`INVOICE_PRICE_SOURCE_DATE_MISMATCH:${invoiceLabel}`);
+    }
     const usedSliceKeys = new Set();
     for (const it of (d.items || []).sort((a,b) => (a.line || 0) - (b.line || 0))) {
       const qty = Number(it.count);
@@ -366,11 +384,15 @@ function loadInvoicePriceSlices() {
       let status = 'UNMATCHED', delta = null, impact = 0;
       if (price !== undefined && price !== null && fact !== null) {
         delta = round2(fact - price);
-        const rawImpact = Number(it.sum) - price * qty;
+        const rawDifference = Number(it.sum) - price * qty;
+        // Stabilize decimal arithmetic for new receipt periods only.
+        const rawImpact = cfg.sumPositiveRowImpacts
+          ? Math.round(rawDifference * 1e8) / 1e8 : rawDifference;
+        if (cfg.sumPositiveRowImpacts) overpayRaw += Math.max(0, rawImpact);
         impact = round2(rawImpact);
         if (delta > 0) {
           status = 'ABOVE';
-          overpayRaw += rawImpact;
+          if (!cfg.sumPositiveRowImpacts) overpayRaw += rawImpact;
         } else if (delta < 0) status = 'BELOW';
         else status = 'EQUAL';
       }

@@ -148,6 +148,33 @@ def slice_period_date(src, *, date_ru, key, label, start, end, price_date):
     return out
 
 
+# The 04 October period uses confirmed invoice slices only.
+# Preserve every closed period and its calculations instead of rebuilding them.
+_candidate = load_json(PC / "current.json")
+if _candidate["week"]["key"] == "2026-10-04":
+    _current = _candidate["week"]
+    validate_period(_current)
+    _full = load_json(PC / "full.json")
+    assert _full["currentKey"] in {"2026-10-01", "2026-10-04"}
+    _old = []
+    for _period in _full["periods"]:
+        if _period["key"] == _current["key"]:
+            continue
+        if _period["key"] == "2026-10-01":
+            _period = dict(_period)
+            _period["label"] = "Прайс 01.10 → 03.10"
+            _period["end"] = "03.10.2026"
+        validate_period(_period)
+        _old.append(_period)
+    assert any(_p["key"] == "2026-10-01" for _p in _old)
+    _full["generatedAt"] = _candidate["generatedAt"]
+    _full["currentKey"] = _current["key"]
+    _full["periods"] = [_current] + _old
+    (PC / "full.json").write_text(json.dumps(_full, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    print("FULL_DATA_OK", json.dumps({"currentKey": _current["key"], "rows": _current["rows"], "overpay": _current["overpay"], "preservedPeriods": len(_old)}, ensure_ascii=False))
+    raise SystemExit(0)
+
+
 p2606 = load_gzip_b64([
     PARTS / "hist_2606_0207.v2.b64.00",
     PARTS / "hist_2606_0207.v2.b64.01",
