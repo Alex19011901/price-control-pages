@@ -6,23 +6,69 @@ on:
       - ".github/workflows/price-control-delivery-20261004.yml"
 
 permissions:
-  contents: read
+  contents: write
 
 concurrency:
   group: price-control-public-refresh
   cancel-in-progress: false
 
 jobs:
-  validate:
+  import:
     runs-on: ubuntu-latest
-    timeout-minutes: 5
+    timeout-minutes: 8
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      - name: Export existing data for preservation checks
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+      - name: Install Playwright
+        run: |
+          npm init -y >/dev/null 2>&1
+          npm install playwright@1.55.0 >/dev/null 2>&1
+          npx playwright install --with-deps chromium >/dev/null 2>&1
+      - name: Autonomous DocsInBox login
+        env:
+          DXBX_STORAGE_STATE: ${{ secrets.DXBX_STORAGE_STATE }}
+          DXBX_LOGIN: ${{ secrets.DXBX_LOGIN }}
+          DXBX_PASSWORD: ${{ secrets.DXBX_PASSWORD }}
+        run: node price-control/prepare_dxbx_auth.js /tmp/price-control-dxbx-state.json
+      - name: Read actual 04 October receipt again
+        env:
+          DOCSINBOX_STORAGE_STATE: /tmp/price-control-dxbx-state.json
+          TARGET_ISO: "2026-10-04"
+        run: node price-control/inspect_dxbx_today.js > /tmp/price-control-receipt-20261004.txt
+      - name: Validate exact price matches and preserve history
+        run: python3 price-control/apply_delivery_20261004.py --inspect /tmp/price-control-receipt-20261004.txt
+      - name: Apply only the verified receipt
+        run: |
+          python3 price-control/apply_delivery_20261004.py --inspect /tmp/price-control-receipt-20261004.txt --apply
+          node --check price-control/refresh_dxbx.js
+          python3 price-control/build_full_history.py
+          python3 price-control/apply_delivery_20261004.py --inspect /tmp/price-control-receipt-20261004.txt
+      - name: Commit verified data and period support
+        run: |
+          python3 - <<'PY'
+          import subprocess
+          expected = {'price-control/' + name for name in ['current.json', 'full.json', 'purchase_history.json', 'invoice_price_slices.json', 'refresh_dxbx.js', 'build_full_history.py']}
+          changed = set(subprocess.check_output(['git', 'diff', '--name-only'], text=True).splitlines())
+          assert changed == expected or not changed, changed
+          PY
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add price-control/current.json price-control/full.json price-control/purchase_history.json price-control/invoice_price_slices.json price-control/refresh_dxbx.js price-control/build_full_history.py
+          if git diff --cached --quiet; then
+            echo 'Already applied; no duplicate import'
+          else
+            git diff --cached --stat
+            git commit -m "Import PE-36297 for 04 October against Svetly 02 October price slice"
+            git push origin main
+          fi
+      - name: Export verification result
         uses: actions/upload-artifact@v4
         with:
-          name: price-control-baseline-20261004
+          name: price-control-delivery-20261004-result
           retention-days: 1
           if-no-files-found: error
           path: |
@@ -32,5 +78,6 @@ jobs:
             price-control/invoice_price_slices.json
             price-control/refresh_dxbx.js
             price-control/build_full_history.py
-            price-control/purchase-history-widget.js
-            price-control/tracked_products.json
+      - name: Remove temporary authentication and receipt
+        if: always()
+        run: rm -f /tmp/price-control-dxbx-state.json /tmp/price-control-dxbx-state.json.*.tmp /tmp/price-control-receipt-20261004.txt
