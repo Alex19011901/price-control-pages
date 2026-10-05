@@ -40,7 +40,8 @@ jobs:
       - name: Inspect today
         env:
           DOCSINBOX_STORAGE_STATE: /tmp/price-control-dxbx-state.json
-        run: node price-control/inspect_dxbx_today.js
+        run: |
+          TARGET_ISO="$(sed -n 's/^targetIso=//p' price-control/inspect.trigger)" node price-control/inspect_dxbx_today.js
 
       - name: Cleanup
         if: always()
