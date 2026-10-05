@@ -1,0 +1,36 @@
+name: Price Control Delivery 20261004
+
+on:
+  push:
+    paths:
+      - ".github/workflows/price-control-delivery-20261004.yml"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: price-control-public-refresh
+  cancel-in-progress: false
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Export existing data for preservation checks
+        uses: actions/upload-artifact@v4
+        with:
+          name: price-control-baseline-20261004
+          retention-days: 1
+          if-no-files-found: error
+          path: |
+            price-control/current.json
+            price-control/full.json
+            price-control/purchase_history.json
+            price-control/invoice_price_slices.json
+            price-control/refresh_dxbx.js
+            price-control/build_full_history.py
+            price-control/purchase-history-widget.js
+            price-control/tracked_products.json
