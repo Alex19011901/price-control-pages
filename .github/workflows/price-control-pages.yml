@@ -148,3 +148,56 @@ jobs:
       - name: Deploy Pages
         id: deployment
         uses: actions/deploy-pages@v4
+
+      - name: Verify live Pages and preserved data
+        run: |
+          python - <<'PY'
+          import json
+          import os
+          import re
+          import time
+          import urllib.request
+          from pathlib import Path
+
+          base = "https://alex19011901.github.io/price-control-pages/"
+          revision = os.environ["GITHUB_SHA"]
+
+          def read_public(name, suffix=""):
+              request = urllib.request.Request(
+                  base + name + "?verify=" + revision + suffix,
+                  headers={"Cache-Control": "no-cache"},
+              )
+              # HTTP failures, rate limits and timeouts are not retried.
+              with urllib.request.urlopen(request, timeout=25) as response:
+                  if response.status != 200:
+                      raise SystemExit(f"Unexpected HTTP status for {name}: {response.status}")
+                  return response.read()
+
+          for attempt in range(6):
+              manifest = json.loads(read_public("deployment.json", "-" + str(attempt)))
+              if manifest.get("commit") == revision:
+                  break
+              if attempt == 5:
+                  raise SystemExit("Live Pages still serves an older deployment")
+              time.sleep(5)
+
+          forbidden = re.compile(
+              r"PUBLIC_REFRESH_TOKEN|DXBX_(?:LOGIN|PASSWORD|STORAGE_STATE)|"
+              r"github_pat_[A-Za-z0-9_]{20,}|gh[pousr]_[A-Za-z0-9]{20,}|"
+              r"Authorization|/dispatches"
+          )
+          checked = 0
+          for path in sorted(Path("public-site").iterdir()):
+              if not path.is_file():
+                  continue
+              actual = read_public(path.name)
+              if actual != path.read_bytes():
+                  raise SystemExit(f"Live content mismatch: {path.name}")
+              if forbidden.search(actual.decode("utf-8")):
+                  raise SystemExit(f"Unsafe marker in live content: {path.name}")
+              checked += 1
+          current = json.loads(Path("public-site/current.json").read_text(encoding="utf-8"))
+          week = current["week"]
+          summary = {k: week[k] for k in ("key", "docs", "rows", "above", "below", "equal", "unmatched", "overpay")}
+          print("LIVE_PAGES_VERIFIED", json.dumps({"files": checked, "current": summary}))
+          PY
