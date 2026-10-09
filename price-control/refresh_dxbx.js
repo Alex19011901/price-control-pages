@@ -370,6 +370,12 @@ function loadInvoicePriceSlices() {
     const invoiceLabel = d.number;
     const invoiceSlice = invoicePriceSlices.get(invoiceLabel);
     if (cfg.requireInvoiceSlices && !invoiceSlice) {
+      console.log('MISSING_INVOICE_JSON=' + JSON.stringify({
+        date: d.date,
+        invoice: invoiceLabel,
+        version: d.version,
+        items: d.items
+      }));
       throw new Error(`INVOICE_PRICE_SLICE_REQUIRED:${invoiceLabel}`);
     }
     if (invoiceSlice && d.date !== invoiceSlice.supplyDate) {
