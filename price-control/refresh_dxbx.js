@@ -21,6 +21,9 @@ const SWITCH_1001 = '2026-10-01';
 const SWITCH_1004 = '2026-10-04';
 const SWITCH_1008 = '2026-10-08';
 const SWITCH_1014 = '2026-10-14';
+const INVOICE_LINE_EXCLUSIONS = new Set([
+  'ПЭ-37391:21', // DocsInBox error: duplicate/incorrect basil line 34.58 kg; excluded by user instruction.
+]);
 
 function round2(v) {
   if (!Number.isFinite(v)) return null;
@@ -401,6 +404,11 @@ function loadInvoicePriceSlices() {
     }
     const usedSliceKeys = new Set();
     for (const it of (d.items || []).sort((a,b) => (a.line || 0) - (b.line || 0))) {
+      const exclusionKey = `${invoiceLabel}:${it.line}`;
+      if (INVOICE_LINE_EXCLUSIONS.has(exclusionKey)) {
+        console.log('INVOICE_LINE_EXCLUDED=' + exclusionKey);
+        continue;
+      }
       const qty = Number(it.count);
       const fact = qty && Number.isFinite(Number(it.sum)) ? round2(Number(it.sum) / qty) : null;
       const core = coreName(it.name, it.unit);
