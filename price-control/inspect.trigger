@@ -1,2 +1,2 @@
-2026-10-16 read-only inspect retry
-targetIso=2026-10-16
+2026-10-17 read-only inspect
+targetIso=2026-10-17
