@@ -35,7 +35,12 @@
     ['00-00000087','rukola-125'],
     ['00-00009451','rukola-125'],
     ['00-00000082','petrushka-kudryavaya'],
-    ['00-00009404','petrushka-kudryavaya']
+    ['00-00009404','petrushka-kudryavaya'],
+    ['00-00000019','red-globe'],
+    ['00-00009316','red-globe'],
+    ['00-00000042','kiwi'],
+    ['00-00009357','kiwi'],
+    ['00-00000332','kiwi']
   ]);
   function productCode(v){
     const m=String(v==null?'':v).match(/\((00-[^)]+)\)\s*$/i);
