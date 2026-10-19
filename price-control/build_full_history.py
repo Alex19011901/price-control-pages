@@ -151,7 +151,7 @@ def slice_period_date(src, *, date_ru, key, label, start, end, price_date):
 # October periods use confirmed invoice slices only.
 # Preserve every closed period and its calculations instead of rebuilding them.
 _candidate = load_json(PC / "current.json")
-if _candidate["week"]["key"] in {"2026-10-04", "2026-10-08", "2026-10-14", "2026-10-16"}:
+if _candidate["week"]["key"] in {"2026-10-04", "2026-10-08", "2026-10-14", "2026-10-16", "2026-10-19"}:
     _current = _candidate["week"]
     validate_period(_current)
     _full = load_json(PC / "full.json")
@@ -160,6 +160,7 @@ if _candidate["week"]["key"] in {"2026-10-04", "2026-10-08", "2026-10-14", "2026
         "2026-10-08": "2026-10-04",
         "2026-10-14": "2026-10-08",
         "2026-10-16": "2026-10-14",
+        "2026-10-19": "2026-10-16",
     }[_current["key"]]
     assert _full["currentKey"] in {_previous_key, _current["key"]}
     _old = []
@@ -182,6 +183,10 @@ if _candidate["week"]["key"] in {"2026-10-04", "2026-10-08", "2026-10-14", "2026
             _period = dict(_period)
             _period["label"] = "Прайс 14.10 → 15.10"
             _period["end"] = "15.10.2026"
+        if _current["key"] == "2026-10-19" and _period["key"] == "2026-10-16":
+            _period = dict(_period)
+            _period["label"] = "Прайс 16.10 - 18.10"
+            _period["end"] = "18.10.2026"
         validate_period(_period)
         _old.append(_period)
     assert any(_p["key"] == _previous_key for _p in _old)
