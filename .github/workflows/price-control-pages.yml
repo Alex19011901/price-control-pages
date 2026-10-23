@@ -126,7 +126,6 @@ jobs:
           version = os.environ["GITHUB_SHA"]
           widget_scripts = [
               f'<script src="./purchase-history-widget.js?v={version[:12]}"></script>',
-              '<script src="./tracked-products-widget.js"></script>',
           ]
 
           class RefreshLinkParser(HTMLParser):
@@ -154,6 +153,12 @@ jobs:
                           if "</body>" not in html:
                               raise SystemExit(f"Closing body was not found in {path.name}")
                           html = html.replace("</body>", widget_script + "\n</body>", 1)
+              if ("tracked-products-widget.js" in html or
+                  "trackedProductIndexCard" in html or
+                  "Динамика цен по товарам" in html):
+                  raise SystemExit("Removed product price dynamics widget is still included")
+              if path.name != "price-control-trigger.html" and "purchase-history-widget.js" not in html:
+                  raise SystemExit("Purchase History widget missing")
               path.write_text(html, encoding="utf-8")
 
           forbidden = re.compile(
