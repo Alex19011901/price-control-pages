@@ -2,7 +2,7 @@ const { chromium } = require('playwright');
 const fs = require('fs');
 
 const AUTH = process.env.DOCSINBOX_STORAGE_STATE;
-const SUPPLIER = 'парадис экзотика';
+const SUPPLIER = String(process.env.DXBX_SUPPLIER || 'парадис экзотика').trim().toLowerCase() === 'all' ? '' : 'парадис экзотика';
 const TARGET_ISO = process.env.TARGET_ISO || new Date(Date.now() + 3 * 60 * 60 * 1000).toISOString().slice(0, 10);
 
 function ruToIso(s) {
@@ -42,6 +42,7 @@ function ruToIso(s) {
     ).map(s => ({
       date: s.date,
       number: s.number,
+      supplier: String(s.supplier?.name || ''),
       invoices: (s.invoices || []).map(i => ({ number: i.number, publicId: i.publicId, link: i.link }))
     }));
   }, { supplierNeedle: SUPPLIER, targetIso: TARGET_ISO });
@@ -49,6 +50,8 @@ function ruToIso(s) {
   const docs = [];
   for (const supply of selected) {
     for (const inv of (supply.invoices || [])) {
+      try {
+      if (!inv.link) throw new Error('INVOICE_LINK_MISSING');
       await page.goto(inv.link, { waitUntil: 'domcontentloaded', timeout: 60000 });
       await page.waitForFunction(() => {
         const clean = v => String(v ?? '').replace(/\u00a0/g, ' ').replace(/\s+/g, ' ').trim();
@@ -88,17 +91,39 @@ function ruToIso(s) {
         return { title: clean(heading?.textContent), items };
       });
       const vm = detail.title.match(/\(вер\.(\d+)\)/i);
-      docs.push({ date: supply.date, number: inv.number || supply.number, publicId: inv.publicId, version: vm ? Number(vm[1]) : null, title: detail.title, items: detail.items });
+      docs.push({ date: supply.date, supplier: supply.supplier, number: inv.number || supply.number, publicId: inv.publicId, version: vm ? Number(vm[1]) : null, title: detail.title, items: detail.items });
+      } catch (err) {
+        console.log('DXBX_TODAY_UNREADABLE supplier=' + supply.supplier + ' number=' + (inv.number || supply.number) + ' reason=' + String(err?.message || err).split('\n')[0].slice(0,100));
+      }
     }
   }
   await browser.close();
 
   const latest = new Map();
   for (const d of docs) {
-    const prev = latest.get(d.number);
-    if (!prev || (d.version !== null && (prev.version === null || d.version > prev.version))) latest.set(d.number, d);
+    const key = d.supplier + '|' + d.number;
+    const prev = latest.get(key);
+    if (!prev || (d.version !== null && (prev.version === null || d.version > prev.version))) latest.set(key, d);
   }
-  const result = { targetIso: TARGET_ISO, supplier: 'Парадис Экзотика', invoices: [...latest.values()] };
+  const invoices = [...latest.values()];
+  const bySupplier = new Map();
+  let totalAmount = 0;
+  for (const invoice of invoices) {
+    const amount = Math.round(invoice.items.reduce((sum, item) => sum + item.sum, 0) * 100) / 100;
+    const supplier = invoice.supplier || 'Не указан';
+    const previous = bySupplier.get(supplier) || {invoices: 0, rows: 0, amount: 0};
+    previous.invoices++;
+    previous.rows += invoice.items.length;
+    previous.amount = Math.round((previous.amount + amount) * 100) / 100;
+    bySupplier.set(supplier, previous);
+    totalAmount = Math.round((totalAmount + amount) * 100) / 100;
+    console.log('DXBX_DAY_INVOICE supplier=' + supplier + ' number=' + invoice.number + ' rows=' + invoice.items.length + ' amount=' + amount.toFixed(2));
+  }
+  console.log('DXBX_DAY_TOTAL date=' + TARGET_ISO + ' selectedSupplies=' + selected.length + ' readableInvoices=' + invoices.length + ' amount=' + totalAmount.toFixed(2));
+  for (const [supplier, data] of bySupplier) {
+    console.log('DXBX_DAY_SUPPLIER supplier=' + supplier + ' invoices=' + data.invoices + ' rows=' + data.rows + ' amount=' + data.amount.toFixed(2));
+  }
+  const result = { targetIso: TARGET_ISO, supplier: SUPPLIER || 'ALL', selectedSupplies: selected.length, invoices };
   console.log('DXBX_TODAY_JSON=' + JSON.stringify(result));
 })().catch(err => {
   console.error(err && (err.stack || err.message) || err);
