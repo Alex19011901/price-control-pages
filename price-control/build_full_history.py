@@ -4,6 +4,8 @@ import gzip
 import json
 from pathlib import Path
 
+from fresh_produce_scope import is_fresh_produce
+
 ROOT = Path(__file__).resolve().parents[1]
 PC = ROOT / "price-control"
 HISTORY = PC / "history"
@@ -81,9 +83,17 @@ def _period_price_qty_map(period):
     return out
 
 
+def _fresh_produce_price_qty_map(period):
+    """Only fresh produce receipt prices qualify for the price index."""
+    return {
+        key: item for key, item in _period_price_qty_map(period).items()
+        if is_fresh_produce(key.split("\0", 1)[0])
+    }
+
+
 def _weighted_index_change(prev_period, curr_period):
-    prev = _period_price_qty_map(prev_period)
-    curr = _period_price_qty_map(curr_period)
+    prev = _fresh_produce_price_qty_map(prev_period)
+    curr = _fresh_produce_price_qty_map(curr_period)
     num = den = 0.0
     common = 0
     for key, cur in curr.items():
@@ -106,7 +116,7 @@ def _bridge_price_qty_map(period):
     retaining the unit. If two names collapse to one key, exclude that key
     rather than guessing which SKU/price should be compared.
     """
-    source = _period_price_qty_map(period)
+    source = _fresh_produce_price_qty_map(period)
     result = {}
     ambiguous = set()
     for key, item in source.items():
@@ -128,8 +138,9 @@ def build_combined_price_index(periods):
 
     May 2026 is the common 100-point base. Every subsequent price-period
     value is chained from the previous one using verified receipt rows,
-    with strictly identical normalized product names and units. Only the
-    May/June supplier-name transition strips the terminal 'Стандарт'.
+    with strictly identical normalized fresh-produce names and units.
+    Grocery, frozen, preserved and processed items are excluded.
+    Only the May/June transition strips terminal 'Стандарт'.
     """
     relevant = sorted(
         (p for p in periods if p.get("indexGroup") in {"paradis", "interfood"}),
@@ -140,9 +151,14 @@ def build_combined_price_index(periods):
     assert relevant[0].get("indexGroup") == "interfood", "Unexpected historical index base"
     index = {
         "supplier": "Парадис Экзотика / Интерфуд",
+        "scope": "fresh_produce",
+        "scopeLabel": "Фрукты / овощи / салаты",
         "baseKey": "2026-05-20",
         "baseLabel": "20.05–26.05",
-        "points": [{"key": "2026-05-20", "label": "20.05–26.05", "value": 100.0}],
+        "points": [{
+            "key": "2026-05-20", "label": "20.05–26.05", "value": 100.0,
+            "includedProducts": len(_fresh_produce_price_qty_map(relevant[0])),
+        }],
         "current": 100.0,
         "prevChange": None,
         "periodChange": 0.0,
@@ -179,6 +195,7 @@ def build_combined_price_index(periods):
             "label": period["start"][:5],
             "value": new_value,
             "commonProducts": common,
+            "includedProducts": len(_fresh_produce_price_qty_map(period)),
         })
         index["current"] = new_value
         index["prevChange"] = round(

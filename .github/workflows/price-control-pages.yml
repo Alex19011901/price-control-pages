@@ -10,6 +10,8 @@ on:
       - "price-control/current.json"
       - "price-control/full.json"
       - "price-control/build_full_history.py"
+      - "price-control/fresh_produce_scope.py"
+      - "price-control/test_fresh_produce_scope.py"
       - "price-control/purchase_history.json"
       - "price-control/tracked_products.json"
       - "price-control/tracked-products-widget.js"
@@ -43,7 +45,8 @@ jobs:
 
       - name: Verify unified price index and protected receipt data
         run: |
-          python -m py_compile price-control/build_full_history.py
+          python -m py_compile price-control/build_full_history.py price-control/fresh_produce_scope.py
+          python price-control/test_fresh_produce_scope.py
           python - <<'PY'
           import json
           import subprocess
@@ -71,6 +74,10 @@ jobs:
           index = original["indexGroups"]["paradis"]
           assert original["indexGroups"]["interfood"] == index, "Suppliers not unified"
           assert index["baseKey"] == "2026-05-20"
+          assert index["scope"] == "fresh_produce"
+          assert index["scopeLabel"] == "Фрукты / овощи / салаты"
+          assert all(p.get("includedProducts", 0) >= p.get("commonProducts", 0)
+                     for p in index["points"][1:]), "Invalid produce count metadata"
           expected_keys = sorted(p["key"] for p in old_periods)
           keys = [p["key"] for p in index["points"]]
           assert keys == expected_keys, "Missing or duplicate index period"
