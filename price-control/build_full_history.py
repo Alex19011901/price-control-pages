@@ -99,6 +99,98 @@ def _weighted_index_change(prev_period, curr_period):
     return num / den, common
 
 
+def _bridge_price_qty_map(period):
+    """Deterministic May Interfood -> June Paradis catalog-name normalization.
+
+    Remove *only* the terminal product qualifier 'Стандарт' (not fuzzy match),
+    retaining the unit. If two names collapse to one key, exclude that key
+    rather than guessing which SKU/price should be compared.
+    """
+    source = _period_price_qty_map(period)
+    result = {}
+    ambiguous = set()
+    for key, item in source.items():
+        name, unit = key.split("\0", 1)
+        if name.endswith(" стандарт"):
+            name = name[:-len(" стандарт")]
+        canonical = name + "\0" + unit
+        if canonical in result:
+            ambiguous.add(canonical)
+        else:
+            result[canonical] = item
+    for key in ambiguous:
+        result.pop(key, None)
+    return result
+
+
+def build_combined_price_index(periods):
+    """One supplier across the Interfood -> Paradis name transition.
+
+    May 2026 is the common 100-point base. Every subsequent price-period
+    value is chained from the previous one using verified receipt rows,
+    with strictly identical normalized product names and units. Only the
+    May/June supplier-name transition strips the terminal 'Стандарт'.
+    """
+    relevant = sorted(
+        (p for p in periods if p.get("indexGroup") in {"paradis", "interfood"}),
+        key=lambda p: p["key"],
+    )
+    assert relevant and relevant[0]["key"] == "2026-05-20", "Missing Interfood base"
+    assert len({p["key"] for p in relevant}) == len(relevant), "Duplicate index period"
+    assert relevant[0].get("indexGroup") == "interfood", "Unexpected historical index base"
+    index = {
+        "supplier": "Парадис Экзотика / Интерфуд",
+        "baseKey": "2026-05-20",
+        "baseLabel": "20.05–26.05",
+        "points": [{"key": "2026-05-20", "label": "20.05–26.05", "value": 100.0}],
+        "current": 100.0,
+        "prevChange": None,
+        "periodChange": 0.0,
+        "commonProducts": None,
+        "previousCommonProducts": None,
+    }
+    previous = relevant[0]
+    previous_value = 100.0
+    previous_common = None
+
+    for period in relevant[1:]:
+        is_bridge = previous["key"] == "2026-05-20" and period["key"] == "2026-06-26"
+        if is_bridge:
+            prior_map = _bridge_price_qty_map(previous)
+            current_map = _bridge_price_qty_map(period)
+            numerator = denominator = 0.0
+            common = 0
+            for key, item in current_map.items():
+                old = prior_map.get(key)
+                if old is None:
+                    continue
+                weight = item["qty"]
+                numerator += item["price"] * weight
+                denominator += old["price"] * weight
+                common += 1
+            factor = numerator / denominator if common and denominator > 0 else None
+            assert common >= 10, "May/June bridge lacks reliable exact matches"
+        else:
+            factor, common = _weighted_index_change(previous, period)
+        assert factor is not None, ("No comparable products", previous["key"], period["key"])
+        new_value = round(previous_value * factor, 1)
+        index["points"].append({
+            "key": period["key"],
+            "label": period["start"][:5],
+            "value": new_value,
+            "commonProducts": common,
+        })
+        index["current"] = new_value
+        index["prevChange"] = round(
+            (new_value / previous_value - 1.0) * 100.0, 1
+        )
+        index["periodChange"] = round(new_value - 100.0, 1)
+        index["previousCommonProducts"] = previous_common
+        index["commonProducts"] = common
+        previous, previous_value, previous_common = period, new_value, common
+    return index
+
+
 def validate_period(p):
     assert len(p["rowsData"]) == int(p["rows"]), (p["key"], len(p["rowsData"]), p["rows"])
     assert int(p["rows"]) == (
@@ -198,6 +290,9 @@ if _candidate["week"]["key"] in {"2026-10-04", "2026-10-08", "2026-10-14", "2026
     _full["generatedAt"] = _candidate["generatedAt"]
     _full["currentKey"] = _current["key"]
     _full["periods"] = [_current] + _old
+    _combined_index = build_combined_price_index(_full["periods"])
+    _full["indexGroups"]["paradis"] = _combined_index
+    _full["indexGroups"]["interfood"] = _combined_index
     (PC / "full.json").write_text(json.dumps(_full, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     print("FULL_DATA_OK", json.dumps({"currentKey": _current["key"], "rows": _current["rows"], "overpay": _current["overpay"], "preservedPeriods": len(_old)}, ensure_ascii=False))
     raise SystemExit(0)
@@ -615,23 +710,15 @@ elif current["key"] in {"2026-09-12", "2026-09-15", "2026-09-16", "2026-09-18", 
     if stored_index:
         paradis_index = stored_index
 
+combined_index = build_combined_price_index(periods)
+
 full = {
     "generatedAt": current_payload["generatedAt"],
     "currentKey": current["key"],
     "periods": periods,
     "indexGroups": {
-        "paradis": paradis_index,
-        "interfood": {
-            "supplier": "Интерфуд",
-            "baseKey": "2026-05-20",
-            "baseLabel": "20.05–26.05",
-            "points": [
-                {"key": "2026-05-20", "label": "20.05–26.05", "value": 100.0}
-            ],
-            "current": 100.0,
-            "prevChange": None,
-            "periodChange": 0.0,
-        },
+        "paradis": combined_index,
+        "interfood": combined_index,
     },
 }
 

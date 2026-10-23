@@ -40,6 +40,55 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Verify unified price index and protected receipt data
+        run: |
+          python -m py_compile price-control/build_full_history.py
+          python - <<'PY'
+          import json
+          import subprocess
+          from pathlib import Path
+
+          path = Path("price-control/full.json")
+          original = json.loads(path.read_text(encoding="utf-8"))
+          old_periods = original["periods"]
+          assert len(old_periods) >= 19
+          all_invoices = set()
+          for period in old_periods:
+              rows = period["rowsData"]
+              assert len(rows) == period["rows"], period["key"]
+              statuses = {key: 0 for key in ("ABOVE", "BELOW", "EQUAL", "UNMATCHED")}
+              invoices = set()
+              for row in rows:
+                  statuses[row[9]] += 1
+                  invoices.add(row[2])
+              assert len(invoices) == period["docs"], period["key"]
+              assert not (invoices & all_invoices), ("Duplicate invoice across periods", period["key"])
+              all_invoices.update(invoices)
+              for category in ("above", "below", "equal", "unmatched"):
+                  assert period[category] == statuses[category.upper()], period["key"]
+
+          index = original["indexGroups"]["paradis"]
+          assert original["indexGroups"]["interfood"] == index, "Suppliers not unified"
+          assert index["baseKey"] == "2026-05-20"
+          expected_keys = sorted(p["key"] for p in old_periods)
+          keys = [p["key"] for p in index["points"]]
+          assert keys == expected_keys, "Missing or duplicate index period"
+          assert index["current"] == index["points"][-1]["value"]
+          assert index["commonProducts"] >= 1
+
+          before = json.dumps(old_periods, sort_keys=True, ensure_ascii=False)
+          subprocess.run(["python", "price-control/build_full_history.py"], check=True)
+          rebuilt = json.loads(path.read_text(encoding="utf-8"))
+          assert rebuilt == original, "Index is not reproducible from receipts"
+          after = json.dumps(rebuilt["periods"], sort_keys=True, ensure_ascii=False)
+          assert before == after, "Historical receipt data changed"
+          print("UNIFIED_PRICE_INDEX_VERIFIED", json.dumps({
+              "periods": len(keys), "current": index["current"],
+              "base": index["baseKey"], "shared": index["commonProducts"],
+              "invoices": len(all_invoices),
+          }))
+          PY
+
       - name: Build public site without credentials
         run: |
           mkdir -p public-site

@@ -21347,49 +21347,7 @@
   ],
   "indexGroups": {
     "paradis": {
-      "supplier": "Парадис Экзотика",
-      "baseKey": "2026-06-26",
-      "baseLabel": "26.06–02.07",
-      "points": [
-        {
-          "key": "2026-06-26",
-          "label": "26.06–02.07",
-          "value": 100
-        },
-        {
-          "key": "2026-07-24",
-          "label": "24.07–29.07",
-          "value": 98.5
-        },
-        {
-          "key": "2026-07-30",
-          "label": "30.07–05.08",
-          "value": 101.2
-        },
-        {
-          "key": "2026-08-26",
-          "label": "26.08–01.09",
-          "value": 108.9
-        },
-        {
-          "key": "2026-09-03",
-          "label": "03.09–10.09",
-          "value": 105.1
-        },
-        {
-          "key": "2026-09-11",
-          "label": "с 11.09",
-          "value": 106.7
-        }
-      ],
-      "current": 106.7,
-      "prevChange": 1.5,
-      "periodChange": 6.7,
-      "commonProducts": 19,
-      "previousCommonProducts": 42
-    },
-    "interfood": {
-      "supplier": "Интерфуд",
+      "supplier": "Парадис Экзотика / Интерфуд",
       "baseKey": "2026-05-20",
       "baseLabel": "20.05–26.05",
       "points": [
@@ -21397,11 +21355,246 @@
           "key": "2026-05-20",
           "label": "20.05–26.05",
           "value": 100
+        },
+        {
+          "key": "2026-06-26",
+          "label": "26.06",
+          "value": 105.8,
+          "commonProducts": 15
+        },
+        {
+          "key": "2026-07-24",
+          "label": "24.07",
+          "value": 105.7,
+          "commonProducts": 41
+        },
+        {
+          "key": "2026-07-30",
+          "label": "30.07",
+          "value": 110.5,
+          "commonProducts": 45
+        },
+        {
+          "key": "2026-08-26",
+          "label": "26.08",
+          "value": 118.9,
+          "commonProducts": 44
+        },
+        {
+          "key": "2026-09-03",
+          "label": "03.09",
+          "value": 114.7,
+          "commonProducts": 42
+        },
+        {
+          "key": "2026-09-11",
+          "label": "11.09",
+          "value": 111.1,
+          "commonProducts": 12
+        },
+        {
+          "key": "2026-09-12",
+          "label": "12.09",
+          "value": 111.1,
+          "commonProducts": 3
+        },
+        {
+          "key": "2026-09-15",
+          "label": "15.09",
+          "value": 111.1,
+          "commonProducts": 1
+        },
+        {
+          "key": "2026-09-16",
+          "label": "16.09",
+          "value": 111.1,
+          "commonProducts": 1
+        },
+        {
+          "key": "2026-09-18",
+          "label": "18.09",
+          "value": 114.9,
+          "commonProducts": 8
+        },
+        {
+          "key": "2026-09-25",
+          "label": "25.09",
+          "value": 118,
+          "commonProducts": 40
+        },
+        {
+          "key": "2026-10-01",
+          "label": "01.10",
+          "value": 121.1,
+          "commonProducts": 26
+        },
+        {
+          "key": "2026-10-04",
+          "label": "04.10",
+          "value": 123,
+          "commonProducts": 14
+        },
+        {
+          "key": "2026-10-08",
+          "label": "08.10",
+          "value": 124.1,
+          "commonProducts": 35
+        },
+        {
+          "key": "2026-10-14",
+          "label": "14.10",
+          "value": 116.5,
+          "commonProducts": 21
+        },
+        {
+          "key": "2026-10-16",
+          "label": "16.10",
+          "value": 115.7,
+          "commonProducts": 7
+        },
+        {
+          "key": "2026-10-19",
+          "label": "19.10",
+          "value": 115.7,
+          "commonProducts": 6
+        },
+        {
+          "key": "2026-10-22",
+          "label": "22.10",
+          "value": 125.5,
+          "commonProducts": 9
         }
       ],
-      "current": 100,
-      "prevChange": null,
-      "periodChange": 0
+      "current": 125.5,
+      "prevChange": 8.5,
+      "periodChange": 25.5,
+      "commonProducts": 9,
+      "previousCommonProducts": 6
+    },
+    "interfood": {
+      "supplier": "Парадис Экзотика / Интерфуд",
+      "baseKey": "2026-05-20",
+      "baseLabel": "20.05–26.05",
+      "points": [
+        {
+          "key": "2026-05-20",
+          "label": "20.05–26.05",
+          "value": 100
+        },
+        {
+          "key": "2026-06-26",
+          "label": "26.06",
+          "value": 105.8,
+          "commonProducts": 15
+        },
+        {
+          "key": "2026-07-24",
+          "label": "24.07",
+          "value": 105.7,
+          "commonProducts": 41
+        },
+        {
+          "key": "2026-07-30",
+          "label": "30.07",
+          "value": 110.5,
+          "commonProducts": 45
+        },
+        {
+          "key": "2026-08-26",
+          "label": "26.08",
+          "value": 118.9,
+          "commonProducts": 44
+        },
+        {
+          "key": "2026-09-03",
+          "label": "03.09",
+          "value": 114.7,
+          "commonProducts": 42
+        },
+        {
+          "key": "2026-09-11",
+          "label": "11.09",
+          "value": 111.1,
+          "commonProducts": 12
+        },
+        {
+          "key": "2026-09-12",
+          "label": "12.09",
+          "value": 111.1,
+          "commonProducts": 3
+        },
+        {
+          "key": "2026-09-15",
+          "label": "15.09",
+          "value": 111.1,
+          "commonProducts": 1
+        },
+        {
+          "key": "2026-09-16",
+          "label": "16.09",
+          "value": 111.1,
+          "commonProducts": 1
+        },
+        {
+          "key": "2026-09-18",
+          "label": "18.09",
+          "value": 114.9,
+          "commonProducts": 8
+        },
+        {
+          "key": "2026-09-25",
+          "label": "25.09",
+          "value": 118,
+          "commonProducts": 40
+        },
+        {
+          "key": "2026-10-01",
+          "label": "01.10",
+          "value": 121.1,
+          "commonProducts": 26
+        },
+        {
+          "key": "2026-10-04",
+          "label": "04.10",
+          "value": 123,
+          "commonProducts": 14
+        },
+        {
+          "key": "2026-10-08",
+          "label": "08.10",
+          "value": 124.1,
+          "commonProducts": 35
+        },
+        {
+          "key": "2026-10-14",
+          "label": "14.10",
+          "value": 116.5,
+          "commonProducts": 21
+        },
+        {
+          "key": "2026-10-16",
+          "label": "16.10",
+          "value": 115.7,
+          "commonProducts": 7
+        },
+        {
+          "key": "2026-10-19",
+          "label": "19.10",
+          "value": 115.7,
+          "commonProducts": 6
+        },
+        {
+          "key": "2026-10-22",
+          "label": "22.10",
+          "value": 125.5,
+          "commonProducts": 9
+        }
+      ],
+      "current": 125.5,
+      "prevChange": 8.5,
+      "periodChange": 25.5,
+      "commonProducts": 9,
+      "previousCommonProducts": 6
     }
   }
 }
