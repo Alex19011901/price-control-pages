@@ -453,6 +453,10 @@ tbody tr:hover{background:#ffffff05}
   id('invoiceFilter').addEventListener('change',renderRows);
   id('statusFilter').addEventListener('change',renderRows);
   id('searchFilter').addEventListener('input',renderRows);
+  window.addEventListener('resize',function(){
+    const active=period();
+    if(active)renderIndex(active);
+  });
 
   load().catch(()=>setState('Ошибка загрузки данных',true));
 })();
