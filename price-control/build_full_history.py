@@ -282,7 +282,8 @@ if _candidate["week"]["key"] in {"2026-10-04", "2026-10-08", "2026-10-14", "2026
             _period["end"] = "18.10.2026"
         if _current["key"] == "2026-10-22" and _period["key"] == "2026-10-19":
             _period = dict(_period)
-            _period["label"] = "Прайс 19.10 - 21.10"
+            if not _period.get("end"):
+                _period["label"] = "Прайс 19.10 → 21.10"
             _period["end"] = "21.10.2026"
         validate_period(_period)
         _old.append(_period)

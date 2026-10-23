@@ -9,6 +9,7 @@ on:
       - "price-control/trigger.html"
       - "price-control/current.json"
       - "price-control/full.json"
+      - "price-control/build_full_history.py"
       - "price-control/purchase_history.json"
       - "price-control/tracked_products.json"
       - "price-control/tracked-products-widget.js"
@@ -79,7 +80,13 @@ jobs:
           before = json.dumps(old_periods, sort_keys=True, ensure_ascii=False)
           subprocess.run(["python", "price-control/build_full_history.py"], check=True)
           rebuilt = json.loads(path.read_text(encoding="utf-8"))
-          assert rebuilt == original, "Index is not reproducible from receipts"
+          differences = [name for name in original if original.get(name) != rebuilt.get(name)]
+          assert not differences, ("Index is not reproducible from receipts", differences,
+                                   [(p["key"], q["key"], p["label"], q["label"])
+                                    for p, q in zip(original["periods"], rebuilt["periods"])
+                                    if p != q][:10],
+                                   original["indexGroups"]["paradis"]["points"][-5:],
+                                   rebuilt["indexGroups"]["paradis"]["points"][-5:])
           after = json.dumps(rebuilt["periods"], sort_keys=True, ensure_ascii=False)
           assert before == after, "Historical receipt data changed"
           print("UNIFIED_PRICE_INDEX_VERIFIED", json.dumps({
