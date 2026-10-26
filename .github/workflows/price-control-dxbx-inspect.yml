@@ -41,7 +41,7 @@ jobs:
         env:
           DOCSINBOX_STORAGE_STATE: /tmp/price-control-dxbx-state.json
         run: |
-          TARGET_ISO="$(sed -n 's/^targetIso=//p' price-control/inspect.trigger)" DXBX_SUPPLIER="$(sed -n 's/^supplier=//p' price-control/inspect.trigger)" node price-control/inspect_dxbx_today.js
+          TARGET_ISO="$(sed -n 's/^targetIso=//p' price-control/inspect.trigger)" DXBX_SUPPLIER="$(sed -n 's/^supplier=//p' price-control/inspect.trigger)" DXBX_START_ISO="$(sed -n 's/^startIso=//p' price-control/inspect.trigger)" DXBX_END_ISO="$(sed -n 's/^endIso=//p' price-control/inspect.trigger)" node price-control/inspect_dxbx_today.js
 
       - name: Cleanup
         if: always()
