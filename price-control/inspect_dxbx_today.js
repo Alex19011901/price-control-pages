@@ -4,6 +4,9 @@ const fs = require('fs');
 const AUTH = process.env.DOCSINBOX_STORAGE_STATE;
 const SUPPLIER = String(process.env.DXBX_SUPPLIER || 'парадис экзотика').trim().toLowerCase() === 'all' ? '' : 'парадис экзотика';
 const TARGET_ISO = process.env.TARGET_ISO || new Date(Date.now() + 3 * 60 * 60 * 1000).toISOString().slice(0, 10);
+const START_ISO = process.env.DXBX_START_ISO || TARGET_ISO;
+const END_ISO = process.env.DXBX_END_ISO || TARGET_ISO;
+if (!/^\d{4}-\d{2}-\d{2}$/.test(START_ISO) || !/^\d{4}-\d{2}-\d{2}$/.test(END_ISO) || START_ISO > END_ISO) throw new Error('INVALID_INSPECT_DATE_RANGE');
 
 function ruToIso(s) {
   const m = String(s || '').match(/^(\d{2})\.(\d{2})\.(\d{4})$/);
@@ -17,7 +20,7 @@ function ruToIso(s) {
   const page = await context.newPage();
   await page.goto('https://dxbx.ru/fe/supplies?offset=0', { waitUntil: 'domcontentloaded', timeout: 60000 });
 
-  const selected = await page.evaluate(async ({supplierNeedle, targetIso}) => {
+  const selected = await page.evaluate(async ({supplierNeedle, startIso, endIso}) => {
     const ruToIso = s => {
       const m = String(s || '').match(/^(\d{2})\.(\d{2})\.(\d{4})$/);
       return m ? `${m[3]}-${m[2]}-${m[1]}` : '';
@@ -32,12 +35,12 @@ function ruToIso(s) {
       all.push(...rows);
       if (!rows.length) break;
       const isos = rows.map(x => ruToIso(x.date)).filter(Boolean);
-      if (isos.length && isos.every(x => x < targetIso)) break;
+      if (isos.length && isos.every(x => x < startIso)) break;
       offset += rows.length;
       if (rows.length < 10) break;
     }
     return all.filter(s =>
-      ruToIso(s.date) === targetIso &&
+      ruToIso(s.date) >= startIso && ruToIso(s.date) <= endIso &&
       String(s.supplier?.name || '').toLowerCase().includes(supplierNeedle)
     ).map(s => ({
       date: s.date,
@@ -45,7 +48,7 @@ function ruToIso(s) {
       supplier: String(s.supplier?.name || ''),
       invoices: (s.invoices || []).map(i => ({ number: i.number, publicId: i.publicId, link: i.link }))
     }));
-  }, { supplierNeedle: SUPPLIER, targetIso: TARGET_ISO });
+  }, { supplierNeedle: SUPPLIER, startIso: START_ISO, endIso: END_ISO });
 
   const docs = [];
   for (const supply of selected) {
@@ -123,7 +126,10 @@ function ruToIso(s) {
   for (const [supplier, data] of bySupplier) {
     console.log('DXBX_DAY_SUPPLIER supplier=' + supplier + ' invoices=' + data.invoices + ' rows=' + data.rows + ' amount=' + data.amount.toFixed(2));
   }
-  const result = { targetIso: TARGET_ISO, supplier: SUPPLIER || 'ALL', selectedSupplies: selected.length, invoices };
+  const result = { targetIso: TARGET_ISO, startIso: START_ISO, endIso: END_ISO, supplier: SUPPLIER || 'ALL', selectedSupplies: selected.length, invoices };
+  console.log('DXBX_AUDIT_RANGE start=' + START_ISO + ' end=' + END_ISO + ' supplier=' + (SUPPLIER || 'ALL') + ' selected=' + selected.length + ' invoices=' + invoices.length);
+  for (const item of invoices) console.log('DXBX_AUDIT_INVOICE date=' + item.date + ' number=' + item.number + ' rows=' + item.items.length + ' supplier=' + item.supplier);
+  console.log('DXBX_AUDIT_B64=' + Buffer.from(JSON.stringify(result)).toString('base64'));
   console.log('DXBX_TODAY_JSON=' + JSON.stringify(result));
 })().catch(err => {
   console.error(err && (err.stack || err.message) || err);
