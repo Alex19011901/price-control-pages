@@ -1,21 +1,21 @@
 {
-  "generatedAt": "2026-10-29T10:31:13.000Z",
-  "currentKey": "2026-10-27",
+  "generatedAt": "2026-10-29T10:44:39.211Z",
+  "currentKey": "2026-10-23",
   "periods": [
     {
-      "key": "2026-10-27",
-      "label": "Прайс с 27.10",
+      "key": "2026-10-23",
+      "label": "Прайс с 23.10",
       "supplier": "Парадис Экзотика",
-      "start": "27.10.2026",
+      "start": "23.10.2026",
       "end": null,
-      "docs": 1,
-      "rows": 12,
-      "above": 2,
-      "below": 3,
-      "equal": 7,
-      "unmatched": 0,
-      "overpay": 94.67,
-      "priceDocumentDate": "27.10.2026",
+      "docs": 3,
+      "rows": 40,
+      "above": 9,
+      "below": 8,
+      "equal": 22,
+      "unmatched": 1,
+      "overpay": 459.45,
+      "priceDocumentDate": "23.10.2026",
       "indexGroup": "paradis",
       "rowsData": [
         [
@@ -24,11 +24,11 @@
           "ПЭ-38825",
           1.2,
           "кг",
+          252.8,
           286.06,
-          286.06,
-          0,
-          0,
-          "EQUAL"
+          33.26,
+          39.91,
+          "ABOVE"
         ],
         [
           "/Батон белый Нарезной (в нарезку) 400 г,шт (00-00000514)",
@@ -60,11 +60,11 @@
           "ПЭ-38825",
           3.45,
           "кг",
+          153.66,
           139.7,
-          139.7,
-          0,
-          0.01,
-          "EQUAL"
+          -13.96,
+          -48.16,
+          "BELOW"
         ],
         [
           "Огурцы Кураж выс/кат ,кг (00-00000074)",
@@ -72,11 +72,11 @@
           "ПЭ-38825",
           3.1,
           "кг",
+          420.22,
           418.87,
-          418.87,
-          0,
-          0,
-          "EQUAL"
+          -1.35,
+          -4.18,
+          "BELOW"
         ],
         [
           "Айсберг Стандарт,кг (00-00009427)",
@@ -84,11 +84,11 @@
           "ПЭ-38825",
           1.89,
           "кг",
+          160.77,
           267.21,
-          267.21,
-          0,
-          0,
-          "EQUAL"
+          106.44,
+          201.17,
+          "ABOVE"
         ],
         [
           "Айсберг Стандарт,кг (00-00009427)",
@@ -96,11 +96,11 @@
           "ПЭ-38825",
           0.01,
           "кг",
-          267.21,
+          160.77,
           267,
-          -0.21,
-          0,
-          "BELOW"
+          106.23,
+          1.06,
+          "ABOVE"
         ],
         [
           "Кинза Стандарт,кг (00-00009358)",
@@ -108,10 +108,10 @@
           "ПЭ-38825",
           0.3,
           "кг",
-          545.51,
+          679.67,
           545.5,
-          -0.01,
-          0,
+          -134.17,
+          -40.25,
           "BELOW"
         ],
         [
@@ -120,10 +120,10 @@
           "ПЭ-38825",
           0.2,
           "кг",
-          1144.23,
+          1048.88,
           1144.25,
-          0.02,
-          0,
+          95.37,
+          19.07,
           "ABOVE"
         ],
         [
@@ -144,10 +144,10 @@
           "ПЭ-38825",
           0.55,
           "кг",
-          388.06,
+          512.24,
           388.05,
-          -0.01,
-          0,
+          -124.19,
+          -68.3,
           "BELOW"
         ],
         [
@@ -156,30 +156,12 @@
           "ПЭ-38825",
           2,
           "шт",
+          476.6,
           438.83,
-          438.83,
-          0,
-          0,
-          "EQUAL"
-        ]
-      ]
-    },
-    {
-      "key": "2026-10-23",
-      "label": "Прайс 23.10 → 26.10",
-      "supplier": "Парадис Экзотика",
-      "start": "23.10.2026",
-      "end": "26.10.2026",
-      "docs": 2,
-      "rows": 28,
-      "above": 4,
-      "below": 3,
-      "equal": 20,
-      "unmatched": 1,
-      "overpay": 103.58,
-      "priceDocumentDate": "23.10.2026",
-      "indexGroup": "paradis",
-      "rowsData": [
+          -37.77,
+          -75.54,
+          "BELOW"
+        ],
         [
           "*Тесто слоеное бездрожжевое Звездный (Хлебный дом) 500г,шт (00-00000472)",
           "26.10.2026",
@@ -22004,23 +21986,16 @@
         {
           "key": "2026-10-23",
           "label": "23.10",
-          "value": 128.4,
-          "commonProducts": 4,
-          "includedProducts": 18
-        },
-        {
-          "key": "2026-10-27",
-          "label": "27.10",
-          "value": 138.4,
-          "commonProducts": 4,
-          "includedProducts": 8
+          "value": 128.2,
+          "commonProducts": 6,
+          "includedProducts": 22
         }
       ],
-      "current": 138.4,
-      "prevChange": 7.8,
-      "periodChange": 38.4,
-      "commonProducts": 4,
-      "previousCommonProducts": 4
+      "current": 128.2,
+      "prevChange": 1.2,
+      "periodChange": 28.2,
+      "commonProducts": 6,
+      "previousCommonProducts": 9
     },
     "interfood": {
       "supplier": "Парадис Экзотика / Интерфуд",
@@ -22164,23 +22139,16 @@
         {
           "key": "2026-10-23",
           "label": "23.10",
-          "value": 128.4,
-          "commonProducts": 4,
-          "includedProducts": 18
-        },
-        {
-          "key": "2026-10-27",
-          "label": "27.10",
-          "value": 138.4,
-          "commonProducts": 4,
-          "includedProducts": 8
+          "value": 128.2,
+          "commonProducts": 6,
+          "includedProducts": 22
         }
       ],
-      "current": 138.4,
-      "prevChange": 7.8,
-      "periodChange": 38.4,
-      "commonProducts": 4,
-      "previousCommonProducts": 4
+      "current": 128.2,
+      "prevChange": 1.2,
+      "periodChange": 28.2,
+      "commonProducts": 6,
+      "previousCommonProducts": 9
     }
   }
 }
