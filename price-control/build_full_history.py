@@ -274,9 +274,14 @@ if _candidate["week"]["key"] in {"2026-10-04", "2026-10-08", "2026-10-14", "2026
         "2026-10-23": "2026-10-22",
         "2026-10-27": "2026-10-23",
     }[_current["key"]]
-    assert _full["currentKey"] in {_previous_key, _current["key"]}
+    _allowed_current_keys = {_previous_key, _current["key"]}
+    if _current["key"] == "2026-10-23":
+        _allowed_current_keys.add("2026-10-27")  # rollback of the not-yet-authorized 27.10 price period
+    assert _full["currentKey"] in _allowed_current_keys
     _old = []
     for _period in _full["periods"]:
+        if _current["key"] == "2026-10-23" and _period["key"] == "2026-10-27":
+            continue
         if _period["key"] == _current["key"]:
             continue
         if _period["key"] == "2026-10-01":
