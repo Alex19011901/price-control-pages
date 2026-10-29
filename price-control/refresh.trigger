@@ -1,2 +1,2 @@
-2026-10-29T13:30:00+03:00
-Load DocsInBox supply 2026-10-28 using Paradis price valid 27.10.2026; invoice ПЭ-38825.
+2026-10-29T13:40:00+03:00
+Recalculate 28.10 supply without 27.10 price; use last price list available on 26.10 (Светлый(1).xlsx, valid 23.10.2026). Invoice ПЭ-38825.
