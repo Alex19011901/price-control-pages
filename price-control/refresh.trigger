@@ -1,2 +1,2 @@
-2026-10-26T14:42:00+03:00
-Backfill 2026-10-23..2026-10-26 using Svetlyy price valid 23.10.2026; confirmed invoices ПЭ-38507, ПЭ-38621.
+2026-10-29T13:30:00+03:00
+Load DocsInBox supply 2026-10-28 using Paradis price valid 27.10.2026; invoice ПЭ-38825.
