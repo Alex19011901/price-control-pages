@@ -1,5 +1,5 @@
-2026-11-02 read-only Paradis audit 31.10-02.11
+2026-11-06 read-only Paradis audit 05.11-06.11
 supplier=paradis
-targetIso=2026-11-02
-startIso=2026-10-31
-endIso=2026-11-02
+targetIso=2026-11-06
+startIso=2026-11-05
+endIso=2026-11-06
