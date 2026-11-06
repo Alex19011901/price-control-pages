@@ -1,2 +1,2 @@
-2026-11-02T13:12:00+03:00
-Load DocsInBox supplies 31.10.2026, 01.11.2026, 02.11.2026 using Paradis price list valid 29.10.2026 (Прайс лист.xlsx); invoices ПЭ-39180, ПЭ-39230, ПЭ-39364.
+2026-11-06T15:20:00+03:00
+Load DocsInBox supplies 05.11.2026 and 06.11.2026 using Paradis price list valid 03.11.2026 (Копия Светлый (3).pdf); invoices ПЭ-39706, ПЭ-39824.
