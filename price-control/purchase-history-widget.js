@@ -40,7 +40,14 @@
     ['00-00009316','red-globe'],
     ['00-00000042','kiwi'],
     ['00-00009357','kiwi'],
-    ['00-00000332','kiwi']
+    ['00-00000332','kiwi'],
+    // Authorized family aliases for purchase-price history only.
+    // Does not change strict supplier price matching or overpayment calculations.
+    ['00-00009304','avocado-haas'],
+    ['00-00000325','avocado-haas'],
+    ['00-00009388','cucumber-kurazh'],
+    ['00-00000074','cucumber-kurazh'],
+    ['00-00001354','cucumber-kurazh']
   ]);
   function productCode(v){
     const m=String(v==null?'':v).match(/\((00-[^)]+)\)\s*$/i);
@@ -48,8 +55,16 @@
   }
   function productKeyFromValues(name,unit){
     const code=productCode(name);
-    const alias=HISTORY_CODE_ALIASES.get(code);
-    return (alias?'alias:'+alias:normName(name))+'\u0000'+normUnit(unit);
+    const normalizedUnit=normUnit(unit);
+    const normalizedName=normName(name).replace(/^[!/*+\s]+/,'');
+    let alias=HISTORY_CODE_ALIASES.get(code);
+    // Name fallback only for these explicitly approved produce families:
+    // spelling "Хаас/Хасс/Хас" and two grades of cucumber "Кураж".
+    if(normalizedUnit==='кг'){
+      if(/^авокадо\s+х(?:аас|асс|ас)(?:\s|,|$)/.test(normalizedName))alias='avocado-haas';
+      else if(/^огурцы\s+кураж(?:\s|,|$)/.test(normalizedName))alias='cucumber-kurazh';
+    }
+    return (alias?'alias:'+alias:normName(name))+'\u0000'+normalizedUnit;
   }
   function productKey(row){return productKeyFromValues(row[0],row[4])}
   function dateKey(v){
@@ -144,7 +159,7 @@
           <tbody id="purchaseHistoryBody"></tbody>
         </table>
       </div>
-      <div class="purchase-history-note">История предыдущих фактических цен берётся напрямую из DocsInBox с 01.01.2026. База — выбранная сверху накладная. При «Все накладные» берётся последняя накладная выбранного периода. Если товара не было в ближайшей поставке, поиск идёт дальше назад.</div>
+      <div class="purchase-history-note">История фактических цен из DocsInBox с 01.01.2026, включая новые поставки из дашборда. База — выбранная накладная; при «Все накладные» — последняя накладная периода. Для истории объединены варианты «Авокадо Хаас / Хасс / Хас» и «Огурцы Кураж» (Стандарт / высшая категория); у огурцов цены разных категорий могут отличаться. На расчёт переплат это не влияет.</div>
     `;
     anchor.insertAdjacentElement('afterend',section);
     return true;
@@ -211,6 +226,24 @@
     return out;
   }
 
+  function combinedHistoryDeliveries(data,history){
+    const scanned=collapseHistoryDeliveries(history);
+    // purchase_history.json can lag behind the latest verified DocsInBox
+    // receipts in full.json. Append newer receipts, never duplicate history.
+    const latestScanned=scanned.reduce(
+      (latest,d)=>dateKey(d.date)>latest?dateKey(d.date):latest,''
+    );
+    const newerRows=(data.periods||[]).flatMap(p=>p.rowsData||[])
+      .filter(r=>dateKey(r[1])>latestScanned);
+    const newer=collapseDeliveries(newerRows);
+    const combined=new Map();
+    for(const d of scanned.concat(newer)){
+      const key=d.key+'\u0000'+dateKey(d.date)+'\u0000'+d.invoice;
+      combined.set(key,d);
+    }
+    return [...combined.values()];
+  }
+
   function selectedPeriod(data){
     const week=document.getElementById('weekFilter');
     const key=week&&week.value?week.value:data.currentKey;
@@ -260,7 +293,7 @@
     const period=selectedPeriod(data);
     const invoice=baseInvoice(period);
     const base=baseDeliveries(period,invoice);
-    const deliveries=collapseHistoryDeliveries(state.history);
+    const deliveries=combinedHistoryDeliveries(data,state.history);
 
     if(!invoice||!base.length){
       dateEl.textContent='Нет данных';
@@ -281,7 +314,7 @@
       for(let i=0;i<MAX_PREVIOUS;i++){
         const d=previous[i];
         cells.push(d
-          ?'<td class="purchase-history-past" title="'+esc(d.invoice)+'"><span class="purchase-history-past-date">'+esc(String(d.date).slice(0,5))+'</span>'+money(d.price,d.unit)+'</td>'
+          ?'<td class="purchase-history-past" title="'+esc(d.invoice+' · '+d.name)+'"><span class="purchase-history-past-date">'+esc(String(d.date).slice(0,5))+'</span>'+money(d.price,d.unit)+'</td>'
           :'<td class="purchase-history-past">—</td>');
       }
       return '<tr>'+cells.join('')+'</tr>';
