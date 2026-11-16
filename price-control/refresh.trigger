@@ -1,2 +1,2 @@
 2026-11-16
-Load DocsInBox invoice ПЭ-40641 dated 14.11.2026 using verified Paradis price from Светлый (2).xlsx valid 12.11.2026. Exact product name + unit only; 2 explicitly unmatched rows. Preserve all closed periods.
+Retry 14.11.2026 invoice ПЭ-40641 against Paradis price valid 12.11.2026; explicit unavailable price index due to no exact comparable fresh products versus 13.11. Preserve all earlier periods.
