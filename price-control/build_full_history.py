@@ -260,7 +260,7 @@ def slice_period_date(src, *, date_ru, key, label, start, end, price_date):
 # October periods use confirmed invoice slices only.
 # Preserve every closed period and its calculations instead of rebuilding them.
 _candidate = load_json(PC / "current.json")
-if _candidate["week"]["key"] in {"2026-10-04", "2026-10-08", "2026-10-14", "2026-10-16", "2026-10-19", "2026-10-22", "2026-10-23", "2026-10-27", "2026-10-30", "2026-10-31", "2026-11-05", "2026-11-10"}:
+if _candidate["week"]["key"] in {"2026-10-04", "2026-10-08", "2026-10-14", "2026-10-16", "2026-10-19", "2026-10-22", "2026-10-23", "2026-10-27", "2026-10-30", "2026-10-31", "2026-11-05", "2026-11-10", "2026-11-13"}:
     _current = _candidate["week"]
     validate_period(_current)
     _full = load_json(PC / "full.json")
@@ -277,6 +277,7 @@ if _candidate["week"]["key"] in {"2026-10-04", "2026-10-08", "2026-10-14", "2026
         "2026-10-31": "2026-10-30",
         "2026-11-05": "2026-10-31",
         "2026-11-10": "2026-11-05",
+        "2026-11-13": "2026-11-10",
     }[_current["key"]]
     _allowed_current_keys = {_previous_key, _current["key"]}
     if _current["key"] == "2026-10-23":
@@ -329,6 +330,10 @@ if _candidate["week"]["key"] in {"2026-10-04", "2026-10-08", "2026-10-14", "2026
             _period = dict(_period)
             _period["label"] = "Прайс 30.10"
             _period["end"] = "30.10.2026"
+        if _current["key"] == "2026-11-13" and _period["key"] == "2026-11-10":
+            _period = dict(_period)
+            _period["label"] = "Прайс 10.11 → 12.11"
+            _period["end"] = "12.11.2026"
         if _current["key"] == "2026-11-10" and _period["key"] == "2026-11-05":
             _period = dict(_period)
             _period["label"] = "Прайс 05.11 → 09.11"
