@@ -19,6 +19,7 @@ on:
   workflow_run:
     workflows:
       - Price Control Public Refresh
+      - Price Control Purchase History
     types:
       - completed
   workflow_dispatch:
