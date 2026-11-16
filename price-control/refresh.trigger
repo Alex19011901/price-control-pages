@@ -1,2 +1,2 @@
 2026-11-16
-Refresh only invoice ПЭ-40572 for delivery 13.11.2026, using user-uploaded Paradis price list valid 10.11.2026. Manual exception: invoice Авокадо Хасс Стандарт = price Авокадо Хаас Стандарт (user authorized). All other keys exact, previous periods unchanged.
+Load DocsInBox invoice ПЭ-40641 dated 14.11.2026 using verified Paradis price from Светлый (2).xlsx valid 12.11.2026. Exact product name + unit only; 2 explicitly unmatched rows. Preserve all closed periods.
