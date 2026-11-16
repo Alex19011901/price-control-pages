@@ -266,7 +266,7 @@ tbody tr:hover{background:#ffffff05}
           <svg id="indexChart" viewBox="0 0 760 184" role="img" aria-label="Индекс фрукты/овощи/салаты">
           <line id="index100Line" x1="46" y1="140" x2="742" y2="140" class="gridline"/>
           <text id="index100Label" x="8" y="144" class="axis-label">100</text>
-          <polyline id="indexLine" class="index-line" points=""/>
+          <path id="indexLine" class="index-line" d=""/>
           <g id="indexPoints"></g>
           </svg>
         </div>
@@ -349,7 +349,7 @@ tbody tr:hover{background:#ffffff05}
   function renderIndex(w){
     const g=(model.indexGroups||{})[w.indexGroup]||null;
     if(!g){
-      id('indexLine').setAttribute('points','');
+      id('indexLine').setAttribute('d','');
       id('indexPoints').innerHTML='';
       id('currentIndex').textContent=id('prevChange').textContent=id('periodChange').textContent='—';
       id('indexLegend').textContent='—';
@@ -357,15 +357,17 @@ tbody tr:hover{background:#ffffff05}
       return;
     }
     const pts=g.points||[];
-    id('currentIndex').textContent=fmt(g.current);
+    id('currentIndex').textContent=g.current==null?'—':fmt(g.current);
     id('prevChange').textContent=pct(g.prevChange);
     id('periodChange').textContent=pct(g.periodChange);
     id('indexLegend').textContent=(g.baseLabel||'База')+' = 100';
-    id('currentIndexHint').textContent=((pts[pts.length-1]||{}).label||'—')+
-      (g.commonProducts==null?'':' · общих товаров: '+g.commonProducts);
+    const lastPoint=pts[pts.length-1]||{};
+    id('currentIndexHint').textContent=(lastPoint.label||'—')+
+      (lastPoint.noComparableProducts?' · нет общих товаров для сравнения':
+       g.commonProducts==null?'':' · общих товаров: '+g.commonProducts);
     const chart=id('indexChart');
     if(!pts.length){
-      id('indexLine').setAttribute('points','');
+      id('indexLine').setAttribute('d','');
       id('indexPoints').innerHTML='';
       return;
     }
@@ -375,7 +377,7 @@ tbody tr:hover{background:#ffffff05}
     const height=184;
     chart.setAttribute('viewBox','0 0 '+width+' '+height);
     const x0=46,x1=width-16,yTop=23,yBottom=140;
-    const values=pts.map(p=>Number(p.value));
+    const values=pts.filter(p=>p.value!=null&&Number.isFinite(Number(p.value))).map(p=>Number(p.value));
     const min=Math.min(98,...values),max=Math.max(110,...values);
     const span=Math.max(1,max-min);
     const y=v=>yBottom-(v-min)/span*(yBottom-yTop);
@@ -391,10 +393,16 @@ tbody tr:hover{background:#ffffff05}
     const step=pts.length===1?0:(x1-x0)/(pts.length-1);
     const xy=pts.map((p,i)=>({
       x:pts.length===1?(x0+x1)/2:x0+step*i,
-      y:y(Number(p.value)),
+      y:p.value==null?null:y(Number(p.value)),
       p
     }));
-    id('indexLine').setAttribute('points',xy.map(o=>o.x.toFixed(1)+','+o.y.toFixed(1)).join(' '));
+    let linePath='',connected=false;
+    for(const o of xy){
+      if(o.y==null){connected=false;continue;}
+      linePath+=(connected?' L':' M')+o.x.toFixed(1)+','+o.y.toFixed(1);
+      connected=true;
+    }
+    id('indexLine').setAttribute('d',linePath.trim());
 
     // Labels are thinned adaptively; every point remains, with an exact tooltip.
     const last=xy.length-1;
@@ -403,10 +411,13 @@ tbody tr:hover{background:#ffffff05}
     const isLabel=(i,every,gap)=>i===0||i===last||(i%every===0&&(last-i)*step>=gap);
     id('indexPoints').innerHTML=xy.map((o,i)=>{
       const x=o.x.toFixed(1),ypos=o.y.toFixed(1);
-      const details=o.p.label+' · '+fmt(o.p.value)+
-        (o.p.commonProducts==null?'':' · общих товаров: '+o.p.commonProducts);
-      const dot='<circle class="index-point" cx="'+x+'" cy="'+ypos+'" r="4"><title>'+esc(details)+'</title></circle>';
-      const value=isLabel(i,valueEvery,60)?
+      const missing=o.y==null;
+      const details=o.p.label+(missing?' · нет общих товаров для сравнения':
+        ' · '+fmt(o.p.value)+(o.p.commonProducts==null?'':' · общих товаров: '+o.p.commonProducts));
+      const dot=missing?'':'<circle class="index-point" cx="'+x+'" cy="'+ypos+'" r="4"><title>'+esc(details)+'</title></circle>';
+      const value=missing?
+        '<text class="index-point-label" x="'+x+'" y="144" text-anchor="middle">н/д</text>':
+        isLabel(i,valueEvery,60)?
         '<text class="index-point-label" x="'+x+'" y="'+(o.y-10).toFixed(1)+'" text-anchor="middle">'+esc(fmt(o.p.value))+'</text>':'';
       const date=isLabel(i,dateEvery,48)?
         '<text class="index-x-label" x="'+x+'" y="173" text-anchor="middle">'+esc(o.p.label)+'</text>':'';
