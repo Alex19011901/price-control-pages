@@ -82,7 +82,11 @@ jobs:
           keys = [p["key"] for p in index["points"]]
           assert keys == expected_keys, "Missing or duplicate index period"
           assert index["current"] == index["points"][-1]["value"]
-          assert index["commonProducts"] >= 1
+          assert index["commonProducts"] >= 1 or (
+              index["commonProducts"] == 0
+              and index["current"] is None
+              and index["points"][-1].get("noComparableProducts") is True
+          ), "Index without exact common products must not imply a price movement"
 
           before = json.dumps(old_periods, sort_keys=True, ensure_ascii=False)
           subprocess.run(["python", "price-control/build_full_history.py"], check=True)
