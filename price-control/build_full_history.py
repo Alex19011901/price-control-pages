@@ -188,7 +188,25 @@ def build_combined_price_index(periods):
             assert common >= 10, "May/June bridge lacks reliable exact matches"
         else:
             factor, common = _weighted_index_change(previous, period)
-        assert factor is not None, ("No comparable products", previous["key"], period["key"])
+        if factor is None:
+            # A receipt may have no fresh products common with the last
+            # comparable period. Record an unavailable index point, never
+            # manufacture a 0% price movement or alter closed periods.
+            index["points"].append({
+                "key": period["key"],
+                "label": period["start"][:5],
+                "value": None,
+                "commonProducts": 0,
+                "includedProducts": len(_fresh_produce_price_qty_map(period)),
+                "noComparableProducts": True,
+            })
+            index["current"] = None
+            index["prevChange"] = None
+            index["periodChange"] = None
+            index["previousCommonProducts"] = previous_common
+            index["commonProducts"] = 0
+            print("PRICE_INDEX_UNAVAILABLE", previous["key"], period["key"])
+            continue  # Keep the last comparable period as the numeric baseline.
         new_value = round(previous_value * factor, 1)
         index["points"].append({
             "key": period["key"],
