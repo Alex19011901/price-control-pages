@@ -1,2 +1,2 @@
-2026-11-10T21:40:00+03:00
-Load DocsInBox receipt 10.11.2026, invoice ПЭ-40182, using Paradis price valid 06.11.2026 from Светлый (1)-1.xlsx. Preserve prior periods.
+2026-11-16
+Refresh only invoice ПЭ-40572 for delivery 13.11.2026, using user-uploaded Paradis price list valid 10.11.2026. Manual exception: invoice Авокадо Хасс Стандарт = price Авокадо Хаас Стандарт (user authorized). All other keys exact, previous periods unchanged.
