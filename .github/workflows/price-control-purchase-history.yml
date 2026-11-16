@@ -8,7 +8,7 @@ on:
       - 'price-control/purchase_history_scan.js'
   workflow_run:
     workflows:
-      - Price Control Tracked Products Audit
+      - Price Control Public Refresh
     types:
       - completed
 
