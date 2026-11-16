@@ -410,7 +410,7 @@ tbody tr:hover{background:#ffffff05}
     const dateEvery=Math.max(1,Math.ceil(72/Math.max(step,1)));
     const isLabel=(i,every,gap)=>i===0||i===last||(i%every===0&&(last-i)*step>=gap);
     id('indexPoints').innerHTML=xy.map((o,i)=>{
-      const x=o.x.toFixed(1),ypos=o.y.toFixed(1);
+      const x=o.x.toFixed(1),ypos=o.y==null?'':o.y.toFixed(1);
       const missing=o.y==null;
       const details=o.p.label+(missing?' · нет общих товаров для сравнения':
         ' · '+fmt(o.p.value)+(o.p.commonProducts==null?'':' · общих товаров: '+o.p.commonProducts));
