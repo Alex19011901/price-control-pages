@@ -31,6 +31,7 @@ const SWITCH_1105 = '2026-11-05';
 const SWITCH_1110 = '2026-11-10';
 const SWITCH_1113 = '2026-11-13';
 const SWITCH_1114 = '2026-11-14';
+const SWITCH_1116 = '2026-11-16';
 const INVOICE_LINE_EXCLUSIONS = new Set([
   'ПЭ-37391:21', // DocsInBox error: duplicate/incorrect basil line 34.58 kg; excluded by user instruction.
 ]);
@@ -109,7 +110,20 @@ function loadInvoicePriceSlices() {
 
 (async () => {
   const todayMoscow = new Date(Date.now() + 3 * 60 * 60 * 1000).toISOString().slice(0, 10);
-  const cfg = todayMoscow >= SWITCH_1114 ? {
+  const cfg = todayMoscow >= SWITCH_1116 ? {
+    priceFile: PRICE_0910_FILE,
+    weekKey: '2026-11-16',
+    startIso: '2026-11-16',
+    endIso: '2026-11-17',
+    startRu: '16.11.2026',
+    endRu: '17.11.2026',
+    label: 'Поставки 16–17.11',
+    priceDocumentDate: '10.09.2026',
+    displayPriceDocumentDate: '13.11.2026',
+    validFrom: '11.09.2026',
+    requireInvoiceSlices: true,
+    sumPositiveRowImpacts: true
+  } : todayMoscow >= SWITCH_1114 ? {
     priceFile: PRICE_0910_FILE,
     weekKey: '2026-11-14',
     startIso: '2026-11-14',
