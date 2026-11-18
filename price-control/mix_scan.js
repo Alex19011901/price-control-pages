@@ -9,7 +9,7 @@ const AUTH=process.env.DOCSINBOX_STORAGE_STATE;
 const OUT=process.argv[2]||path.join(__dirname,'mix_receipts.json');
 const MIN_DATE='2026-01-01';
 const RECHECK_DAYS=45;
-const CATALOG_REVISION=2; // Classifier changes require full historical rescan once.
+const CATALOG_REVISION=3; // Full rescan to recover Sirtaки / Фетакса / фета brand-only rows.
 const WORKERS=5;
 if(!AUTH||!fs.existsSync(AUTH))throw new Error('DOCSINBOX_AUTH_MISSING');
 const old=fs.existsSync(OUT)?JSON.parse(fs.readFileSync(OUT,'utf8')):null;
