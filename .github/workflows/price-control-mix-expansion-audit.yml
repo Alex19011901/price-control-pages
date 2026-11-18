@@ -1,0 +1,71 @@
+name: Price Control Mix Expansion Audit
+
+on:
+  push:
+    paths:
+      - "price-control/mix_expansion_catalog.js"
+      - "price-control/mix_expansion_scan.js"
+      - ".github/workflows/price-control-mix-expansion-audit.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: price-control-mix-expansion-audit
+  cancel-in-progress: false
+
+jobs:
+  discover:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+      - name: Verify scanner and set up hosted Chrome
+        run: |
+          npm init -y >/dev/null 2>&1
+          npm install playwright@1.55.0 >/dev/null 2>&1
+          node --check price-control/mix_expansion_scan.js
+          node --check price-control/mix_expansion_catalog.js
+          CHROME_BIN="$(command -v google-chrome || command -v google-chrome-stable || true)"
+          if [ -n "$CHROME_BIN" ]; then
+            echo "MIX_CHROME_EXECUTABLE=$CHROME_BIN" >> "$GITHUB_ENV"
+          else
+            npx playwright install --with-deps chromium
+          fi
+      - name: Authenticate DocsInBox, read-only
+        env:
+          DXBX_STORAGE_STATE: ${{ secrets.DXBX_STORAGE_STATE }}
+          DXBX_LOGIN: ${{ secrets.DXBX_LOGIN }}
+          DXBX_PASSWORD: ${{ secrets.DXBX_PASSWORD }}
+        run: node price-control/prepare_dxbx_auth.js /tmp/mix-expansion-auth.json
+      - name: Inspect invoice nomenclature across all suppliers
+        env:
+          DOCSINBOX_STORAGE_STATE: /tmp/mix-expansion-auth.json
+          MIX_CHROME_EXECUTABLE: ${{ env.MIX_CHROME_EXECUTABLE }}
+        run: node price-control/mix_expansion_scan.js price-control/mix_expansion_audit.json
+      - name: Check discovery completeness
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          data=json.loads(Path('price-control/mix_expansion_audit.json').read_text())
+          assert data['invoiceErrors']==0, data['invoiceErrors']
+          assert data['scanStart']=='2026-01-01', data['scanStart']
+          assert data['invoices'], "No matching products found"
+          print('MIX_EXPANSION_SCAN_OK', data['invoicesScanned'], len(data['invoices']))
+          PY
+      - name: Save raw candidate names for review
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add price-control/mix_expansion_audit.json
+          git commit -m "Audit new Mix product names and variants from DocsInBox"
+          git pull --rebase origin main
+          git push origin main
+      - name: Clean up DocsInBox state
+        if: always()
+        run: rm -f /tmp/mix-expansion-auth.json /tmp/mix-expansion-auth.json.*.tmp
