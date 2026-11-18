@@ -107,8 +107,12 @@ jobs:
 
           new_product_ids=["beef_tenderloin","veal_cheeks","duck_fillet_oz500","duck_fillet_oz400","duck_fillet_myasko","duck_fillet_china","duck_fillet_other","duck_smoked_breast","duck_legs","turkey_fillet","parma_ham","beef_shoulder","pizza_sausages","tuna_fillet_1_10","tuna_saku_aaa","seabass","flounder","salmon_fillet","dorado","anchovies","cod_fillet","scallops","parmesan","suluguni","cremette","stracciatella","teriyaki","semola","wheat_flour","almond_flakes","sweet_peas","black_olives","green_olives","buckwheat","walnut","artichokes"]
           assert all(p in products for p in new_product_ids)
+          cheek_rows=products["veal_cheeks"]["deliveries"]
+          assert len(cheek_rows)>=17, ("Missing beef cheek invoices", len(cheek_rows))
+          assert all(any(r["date"]==day for r in cheek_rows) for day in ("28.10.2026","21.10.2026","13.10.2026","09.10.2026"))
+          assert all("щек" in r["name"].lower().replace("ё","е") or "щеч" in r["name"].lower().replace("ё","е") for r in cheek_rows)
           for product_id in new_product_ids:
-              if product_id not in {"veal_cheeks","duck_fillet_other"}:
+              if product_id not in {"duck_fillet_other"}:
                   assert products[product_id]["count"]>0, ("New Mix product missing from receipts",product_id)
           assert any("SAKU" in r["name"].upper() for r in products["tuna_saku_aaa"]["deliveries"])
           assert any("1/10" in r["name"] for r in products["tuna_fillet_1_10"]["deliveries"])

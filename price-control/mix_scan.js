@@ -9,7 +9,7 @@ const AUTH=process.env.DOCSINBOX_STORAGE_STATE;
 const OUT=process.argv[2]||path.join(__dirname,'mix_receipts.json');
 const MIN_DATE='2026-01-01';
 const RECHECK_DAYS=45;
-const CATALOG_REVISION=4; // Add user-selected meat, fish, dairy and pantry products; rescan all history.
+const CATALOG_REVISION=5; // Re-index beef/veal cheek aliases from all historical DocsInBox invoices.
 const WORKERS=5;
 if(!AUTH||!fs.existsSync(AUTH))throw new Error('DOCSINBOX_AUTH_MISSING');
 const old=fs.existsSync(OUT)?JSON.parse(fs.readFileSync(OUT,'utf8')):null;
