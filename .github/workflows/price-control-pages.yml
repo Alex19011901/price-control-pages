@@ -16,10 +16,13 @@ on:
       - "price-control/tracked_products.json"
       - "price-control/tracked-products-widget.js"
       - "price-control/purchase-history-widget.js"
+      - "price-control/mix_data.json"
+      - "price-control/mix-widget.js"
   workflow_run:
     workflows:
       - Price Control Public Refresh
       - Price Control Purchase History
+      - Price Control Mix
     types:
       - completed
   workflow_dispatch:
@@ -119,6 +122,10 @@ jobs:
           cp price-control/tracked_products.json public-site/tracked_products.json
           cp price-control/tracked-products-widget.js public-site/tracked-products-widget.js
           cp price-control/purchase-history-widget.js public-site/purchase-history-widget.js
+          cp price-control/mix-widget.js public-site/mix-widget.js
+          if [ -f price-control/mix_data.json ]; then
+            cp price-control/mix_data.json public-site/mix_data.json
+          fi
           cp price-control/trigger.html public-site/price-control-trigger.html
           python - <<'PY'
           import json
@@ -132,6 +139,9 @@ jobs:
           widget_scripts = [
               f'<script src="./purchase-history-widget.js?v={version[:12]}"></script>',
           ]
+          if Path("public-site/mix_data.json").exists():
+              widget_scripts.append(f'<script src="./mix-widget.js?v={version[:12]}"></script>')
+
 
           class RefreshLinkParser(HTMLParser):
               def __init__(self):
@@ -164,6 +174,9 @@ jobs:
                   raise SystemExit("Removed product price dynamics widget is still included")
               if path.name != "price-control-trigger.html" and "purchase-history-widget.js" not in html:
                   raise SystemExit("Purchase History widget missing")
+              if Path("public-site/mix_data.json").exists() and path.name != "price-control-trigger.html" and "mix-widget.js" not in html:
+                  raise SystemExit("Mix widget missing")
+
               path.write_text(html, encoding="utf-8")
 
           forbidden = re.compile(
@@ -175,7 +188,10 @@ jobs:
               if path.is_file() and forbidden.search(path.read_text(encoding="utf-8")):
                   raise SystemExit(f"Credential or client-side dispatch marker in {path.name}")
 
-          for name in ("current.json", "full.json", "purchase_history.json", "tracked_products.json"):
+          payload_names = ["current.json", "full.json", "purchase_history.json", "tracked_products.json"]
+          if Path("public-site/mix_data.json").exists():
+              payload_names.append("mix_data.json")
+          for name in payload_names:
               original = Path("price-control", name).read_bytes()
               if original != Path("public-site", name).read_bytes():
                   raise SystemExit(f"Data changed while publishing: {name}")
