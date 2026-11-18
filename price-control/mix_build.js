@@ -1,7 +1,7 @@
 'use strict';
 // Build the public Mix widgets without modifying the original price dashboard.
 const fs=require('node:fs'),path=require('node:path');
-const {PRODUCTS,GROUPS,iso,unit,round2}=require('./mix_catalog');
+const {PRODUCTS,GROUPS,iso,unit,round2,norm}=require('./mix_catalog');
 const INPUT=process.argv[2]||path.join(__dirname,'mix_receipts.json');
 const OUT=process.argv[3]||path.join(__dirname,'mix_data.json');
 const data=JSON.parse(fs.readFileSync(INPUT,'utf8'));
@@ -56,7 +56,7 @@ for(const invoice of data.invoices){
    const q=Number(item.qty),sum=Number(item.sum),rawUnit=unit(item.unit);
    if(!(q>0)||!(sum>=0)||!Number.isFinite(sum)||!rawUnit)throw new Error('MIX_BAD_RECEIPT_ROW');
    // Keep separate receipt lines for different products/units even inside same invoice.
-   const key=[item.productId,date,supplier,number,rawUnit].join('\u0000');
+   const key=[item.productId,date,supplier,number,rawUnit,norm(item.name)].join('\u0000');
    if(!grouped.has(key))grouped.set(key,{productId:item.productId,date,dateIso,supplier,invoice:number,qty:0,sum:0,unit:rawUnit,names:new Set()});
    const g=grouped.get(key);g.qty+=q;g.sum+=sum;g.names.add(String(item.name||''));
  }
