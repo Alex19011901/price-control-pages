@@ -28,7 +28,10 @@ function num(s){
   return t&&Number.isFinite(x)?x:null;
 }
 (async()=>{
-  const browser=await chromium.launch({headless:true});
+  const browser=await chromium.launch({
+    headless:true,
+    ...(process.env.MIX_CHROME_EXECUTABLE?{executablePath:process.env.MIX_CHROME_EXECUTABLE}:{})
+  });
   const context=await browser.newContext({storageState:AUTH});
   try{
     const seed=await context.newPage();
