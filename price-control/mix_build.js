@@ -84,45 +84,69 @@ const products=PRODUCTS.map(p=>{
    indexedDeliveries:deliveries.filter(r=>r.indexUnit===dominant).length};
 });
 const indexedProducts=products.filter(p=>p.indexUnit&&p.indexedDeliveries>0);
-const updatesByDay=new Map();
+// Only compare identical catalog rows from the same supplier in the same
+// normalized physical unit. Broader product family/group is for display only;
+// different brands, pack sizes, grades and suppliers must never be priced as
+// if they were identical purchases.
+const daily=new Map();
 for(const p of indexedProducts){
- for(const e of byProduct.get(p.id)){
-   if(e.indexUnit!==p.indexUnit||!e.indexQty)continue;
-   if(!updatesByDay.has(e.dateIso))updatesByDay.set(e.dateIso,new Map());
-   const productsOfDay=updatesByDay.get(e.dateIso);
-   if(!productsOfDay.has(p.id))productsOfDay.set(p.id,{sum:0,qty:0});
-   const x=productsOfDay.get(p.id);x.sum+=e.sum;x.qty+=e.indexQty;
- }
+  for(const r of byProduct.get(p.id)){
+    if(r.indexUnit!==p.indexUnit||!(r.indexQty>0)||!(r.sum>0))continue;
+    const sku=[p.id,norm(r.supplier),norm(r.name),r.indexUnit].join('\u0000');
+    if(!daily.has(r.dateIso))daily.set(r.dateIso,new Map());
+    const day=daily.get(r.dateIso);
+    if(!day.has(sku))day.set(sku,{productId:p.id,sku,sum:0,qty:0});
+    const v=day.get(sku);v.sum+=r.sum;v.qty+=r.indexQty;
+  }
 }
-const lastPrices=new Map();
+const lastSkuPrices=new Map();
+const activeProductIds=new Set();
 const points=[];
 let value=100;
-for(const [dateIso,changes] of [...updatesByDay].sort((a,b)=>a[0].localeCompare(b[0]))){
- const knownBefore=lastPrices.size,ratios=[],newlyAdded=[];
- for(const [id,change] of changes){
-   const price=change.sum/change.qty;
-   if(!(price>0)||!Number.isFinite(price))throw new Error('MIX_INVALID_PRICE');
-   const prev=lastPrices.get(id);
-   if(prev!==undefined)ratios.push({id,ratio:price/prev});
-   else newlyAdded.push(id);
- }
- // Equal-weight chain-linking: unchanged known products contribute 1. Newly
- // observed products join at their first price without moving the index.
- if(knownBefore){
-   let totalRelative=knownBefore;
-   for(const x of ratios)totalRelative+=x.ratio-1;
-   value*=totalRelative/knownBefore;
- }
- for(const [id,change] of changes)lastPrices.set(id,change.sum/change.qty);
- if(!Number.isFinite(value)||value<=0)throw new Error('MIX_INDEX_NONFINITE');
- points.push({date:dateIso.slice(8,10)+'.'+dateIso.slice(5,7)+'.'+dateIso.slice(0,4),
-   dateIso,value:round2(value),coverage:lastPrices.size,
-   compared:ratios.length,newProducts:newlyAdded.length,totalProducts:PRODUCTS.length});
+for(const [dateIso,day] of [...daily].sort((a,b)=>a[0].localeCompare(b[0]))){
+  const productsBefore=activeProductIds.size;
+  const comparableByProduct=new Map();
+  let comparableSkus=0,newSkus=0;
+  for(const [sku,item] of day){
+    const price=item.sum/item.qty;
+    if(!(price>0)||!Number.isFinite(price))throw new Error('MIX_INDEX_INVALID_SKU_PRICE');
+    const previous=lastSkuPrices.get(sku);
+    if(previous!==undefined){
+      const ratio=price/previous;
+      if(!(ratio>0)||!Number.isFinite(ratio))throw new Error('MIX_INDEX_INVALID_SKU_RATIO');
+      if(!comparableByProduct.has(item.productId))comparableByProduct.set(item.productId,[]);
+      comparableByProduct.get(item.productId).push(ratio);
+      comparableSkus++;
+    }else newSkus++;
+  }
+  // Geometric mean across independently comparable SKUs of one product.
+  // Arithmetic equal-weight mean across the already observed 30 product families.
+  // Unchanged products contribute 1; a new SKU begins at its first verified
+  // purchase with ratio 1, never generating a synthetic price jump.
+  if(productsBefore>0){
+    let deviation=0;
+    for(const ratios of comparableByProduct.values()){
+      const rel=Math.exp(ratios.reduce((sum,ratio)=>sum+Math.log(ratio),0)/ratios.length);
+      deviation+=rel-1;
+    }
+    const factor=1+deviation/productsBefore;
+    if(!(factor>0)||!Number.isFinite(factor))throw new Error('MIX_INDEX_INVALID_DAY_FACTOR');
+    value*=factor;
+  }
+  for(const [sku,item] of day){
+    lastSkuPrices.set(sku,item.sum/item.qty);
+    activeProductIds.add(item.productId);
+  }
+  if(!(value>0)||!Number.isFinite(value))throw new Error('MIX_INDEX_NONFINITE');
+  points.push({date:dateIso.slice(8,10)+'.'+dateIso.slice(5,7)+'.'+dateIso.slice(0,4),
+    dateIso,value:round2(value),coverage:activeProductIds.size,
+    compared:comparableSkus,comparedProducts:comparableByProduct.size,
+    newProducts:activeProductIds.size-productsBefore,newSkus,totalProducts:PRODUCTS.length});
 }
 const suppliers=[...new Set(entries.map(x=>x.supplier))].sort((a,b)=>a.localeCompare(b,'ru'));
 const output={
  schemaVersion:1,generatedAt:data.generatedAt,source:'DocsInBox',start:data.from,
- methodology:'Индекс Микс: цепной индекс с базой 100; равный вес уже известных товаров. При покупке цена товара обновляется, отсутствующие покупки сохраняют предыдущую цену. Новые товары включаются без скачка индекса. Сравнение только в сопоставимых единицах. Разные марки и сорта могут влиять на приблизительную оценку.',
+ methodology:'Индекс Микс: база 100, равный вес каждой из 30 товарных групп. Индекс изменяется только при повторной закупке одной и той же номенклатуры у того же поставщика в сопоставимой единице. Разные сорта, бренды, упаковки и поставщики не сравниваются между собой для расчёта изменения цены. При отсутствии повторной закупки предыдущее значение сохраняется, новые позиции включаются без скачка. История показывает все найденные товары и поставщиков.',
  groups:GROUPS,products,suppliers,
  stats:{selectedProducts:PRODUCTS.length,productsWithData:products.filter(p=>p.count>0).length,
    indexedProducts:indexedProducts.length,suppliers:suppliers.length,
