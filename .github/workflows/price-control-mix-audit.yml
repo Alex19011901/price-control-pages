@@ -1,0 +1,41 @@
+name: Price Control Mix Diagnostic
+on:
+  push:
+    paths:
+      - "price-control/mix_audit.js"
+      - ".github/workflows/price-control-mix-audit.yml"
+permissions:
+  contents: read
+jobs:
+  audit:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+      - name: Install browser tools
+        run: |
+          npm init -y >/dev/null 2>&1
+          npm install playwright@1.55.0 >/dev/null 2>&1
+          CHROME_BIN="$(command -v google-chrome || command -v google-chrome-stable || true)"
+          if [ -n "$CHROME_BIN" ]; then
+            echo "MIX_CHROME_EXECUTABLE=$CHROME_BIN" >> "$GITHUB_ENV"
+          else
+            npx playwright install --with-deps chromium
+          fi
+      - name: Authenticate for read-only audit
+        env:
+          DXBX_STORAGE_STATE: ${{ secrets.DXBX_STORAGE_STATE }}
+          DXBX_LOGIN: ${{ secrets.DXBX_LOGIN }}
+          DXBX_PASSWORD: ${{ secrets.DXBX_PASSWORD }}
+        run: node price-control/prepare_dxbx_auth.js /tmp/price-control-mix-audit-auth.json
+      - name: Audit butter, shrimp and eggs from actual invoices
+        env:
+          DOCSINBOX_STORAGE_STATE: /tmp/price-control-mix-audit-auth.json
+          MIX_CHROME_EXECUTABLE: ${{ env.MIX_CHROME_EXECUTABLE }}
+        run: node price-control/mix_audit.js
+      - name: Remove authentication state
+        if: always()
+        run: rm -f /tmp/price-control-mix-audit-auth.json /tmp/price-control-mix-audit-auth.json.*.tmp
