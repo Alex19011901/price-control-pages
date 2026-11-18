@@ -21,7 +21,7 @@ permissions:
 
 concurrency:
   group: price-control-mix-refresh
-  cancel-in-progress: false
+  cancel-in-progress: true
 
 jobs:
   mix:
@@ -45,11 +45,18 @@ jobs:
           node --check price-control/mix-widget.js
           node price-control/mix_catalog.js
 
-      - name: Install Playwright
+      - name: Install Playwright and find hosted Chrome
         run: |
           npm init -y >/dev/null 2>&1
           npm install playwright@1.55.0 >/dev/null 2>&1
-          npx playwright install --with-deps chromium
+          CHROME_BIN="$(command -v google-chrome || command -v google-chrome-stable || true)"
+          if [ -n "$CHROME_BIN" ]; then
+            echo "Using hosted Google Chrome"
+            echo "MIX_CHROME_EXECUTABLE=$CHROME_BIN" >> "$GITHUB_ENV"
+          else
+            echo "Hosted Chrome unavailable; installing Playwright Chromium"
+            npx playwright install --with-deps chromium
+          fi
 
       - name: Restore authenticated DocsInBox session
         env:
@@ -61,6 +68,7 @@ jobs:
       - name: Scan all suppliers and retain selected Mix items
         env:
           DOCSINBOX_STORAGE_STATE: /tmp/price-control-mix-auth.json
+          MIX_CHROME_EXECUTABLE: ${{ env.MIX_CHROME_EXECUTABLE }}
         run: node price-control/mix_scan.js price-control/mix_receipts.json
 
       - name: Build Mix history and price index
