@@ -6,6 +6,52 @@ const id=k=>document.getElementById(k);
 const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const fmt=(v,n=2)=>v==null||!Number.isFinite(Number(v))?'—':Number(v).toLocaleString('ru-RU',{maximumFractionDigits:n});
 const svg=(tag,attrs={},value)=>{const x=document.createElementNS(NS,tag);Object.entries(attrs).forEach(([k,v])=>x.setAttribute(k,String(v)));if(value!=null)x.textContent=String(value);return x};
+
+const DUCK_SKIN_IDS=new Set(['duck_fillet_oz500','duck_fillet_oz400','duck_fillet_myasko','duck_fillet_china']);
+function duckSkinOther(row){
+ const name=String(row.name||'').toLowerCase().replace(/ё/g,'е');
+ return !/(?:без\s+кожи|б\/к)/.test(name)&&/(?:на\s+коже|с\s+кожей|н\/к)/.test(name);
+}
+// Combine only the visible purchase-history rows, preserving exact SKU indexing.
+function tableProducts(){
+ const all=state.products;
+ const other=all.find(p=>p.id==='duck_fillet_other');
+ const duck=all.filter(p=>DUCK_SKIN_IDS.has(p.id));
+ const history=duck.flatMap(p=>p.deliveries)
+   .concat(other?other.deliveries.filter(duckSkinOther):[])
+   .sort((a,b)=>b.dateIso.localeCompare(a.dateIso)||a.supplier.localeCompare(b.supplier,'ru')||a.invoice.localeCompare(b.invoice,'ru'));
+ let inserted=false;
+ return all.flatMap(p=>{
+   if(DUCK_SKIN_IDS.has(p.id)){
+     if(inserted)return [];
+     inserted=true;
+     return [{id:'duck_fillet_skin',label:'Филе утки на коже',group:p.group,
+       deliveries:history,searchLabels:duck.map(x=>x.label).join(' ')}];
+   }
+   if(p.id==='duck_fillet_other'){
+     const remaining=p.deliveries.filter(row=>!duckSkinOther(row));
+     return remaining.length?[{...p,deliveries:remaining}]:[];
+   }
+   return [p];
+ });
+}
+// Box prices are comparable per kg only when the box's exact weight is printed.
+function boxWeightKg(row){
+ const u=String(row.unit||'').toLowerCase().replace(/ё/g,'е').replace(/\./g,'').trim();
+ if(!['кор','короб','коробка','коробки','ящик'].includes(u))return null;
+ const name=String(row.name||'').toLowerCase().replace(/ё/g,'е').replace(/\u00a0/g,' ');
+ const matches=[...name.matchAll(/(\d+(?:[.,]\d+)?)\s*кг\s*\/\s*(?:кор(?:обк[ауеи])?|монолит|ящик)(?=$|[^а-яa-z])/g)];
+ if(matches.length!==1)return null;
+ const weight=Number(matches[0][1].replace(',','.'));
+ return Number.isFinite(weight)&&weight>0?weight:null;
+}
+function visiblePrice(row){
+ const weight=boxWeightKg(row),sum=Number(row.sum),qty=Number(row.qty);
+ if(weight&&Number.isFinite(sum)&&qty>0)
+   return {fact:sum/(qty*weight),unit:'кг',boxKg:weight};
+ return {fact:row.displayFact==null?row.fact:row.displayFact,
+   unit:row.displayUnit||row.unit,boxKg:null};
+}
 function install(){
  if(id('mixCard'))return;
  const style=document.createElement('style');style.id='mixStyles';
@@ -51,7 +97,7 @@ function install(){
  '<div class="mix-table-scroll"><table class="mix-table"><thead><tr>'+
  '<th>Товар</th><th>Последняя закупка</th><th>Пред. 1</th><th>Пред. 2</th><th>Пред. 3</th><th>Пред. 4</th><th>Пред. 5</th>'+
  '</tr></thead><tbody id="mixRows"><tr><td colspan="7">Загрузка истории…</td></tr></tbody></table></div>'+
- '<div class="mix-note">История закупок DocsInBox по всем поставщикам. В каждом столбце дата, фактическая цена и поставщик; номер накладной и полное название видны при наведении. Несколько строк одного товара в одной накладной объединяются по сумме и количеству. Яйца показываются по цене за 1 шт; креветки — за 1 кг при известной фасовке. Для остальных товаров единица из исходной накладной.</div>';
+ '<div class="mix-note">История закупок DocsInBox по всем поставщикам. В каждом столбце дата, фактическая цена и поставщик; номер накладной и полное название видны при наведении. Несколько строк одного товара в одной накладной объединяются по сумме и количеству. Яйца показываются по цене за 1 шт; креветки и коробки с указанным весом — за 1 кг. Варианты филе утки на коже собраны в одну строку, а для остальных товаров сохраняется единица накладной.</div>';
  const b=document.createElement('section');b.id='mixIndexCard';b.className='card mix-index-card';
  b.innerHTML=
  '<div class="mix-title"><h2>Индекс Микс</h2><span class="mix-muted">База 100</span></div>'+
@@ -65,9 +111,13 @@ function install(){
 }
 function cell(row){
  if(!row)return '<td class="mix-empty">—</td>';
- const title=[row.date,row.supplier,row.invoice,row.name,'В накладной: '+row.qty+' '+row.unit+' на '+fmt(row.sum)+' ₽',(row.displayFact!=null?'Цена за '+row.displayUnit+': '+fmt(row.displayFact)+' ₽':'')].filter(Boolean).join(' · ');
+ const shown=visiblePrice(row);
+ const info=shown.boxKg!=null?'Вес коробки: '+fmt(shown.boxKg)+' кг · Цена за кг: '+fmt(shown.fact)+' ₽':
+   row.displayFact!=null?'Цена за '+shown.unit+': '+fmt(shown.fact)+' ₽':'';
+ const title=[row.date,row.supplier,row.invoice,row.name,
+   'В накладной: '+row.qty+' '+row.unit+' на '+fmt(row.sum)+' ₽',info].filter(Boolean).join(' · ');
  return '<td title="'+esc(title)+'"><span class="mix-date">'+esc(row.date.slice(0,5))+'</span>'+
- '<div class="mix-price">'+fmt(row.displayFact==null?row.fact:row.displayFact)+' ₽/'+esc(row.displayUnit||row.unit)+'</div>'+
+ '<div class="mix-price">'+fmt(shown.fact)+' ₽/'+esc(shown.unit)+'</div>'+
  '<span class="mix-supplier">'+esc(row.supplier)+'</span></td>';
 }
 function renderTable(){
@@ -76,7 +126,7 @@ function renderTable(){
  let html='',found=0;
  for(const group of state.groups){
   if(gsel&&group.id!==gsel)continue;
-  const products=state.products.filter(p=>p.group===group.id&&p.label.toLowerCase().replace(/ё/g,'е').includes(query));
+  const products=tableProducts().filter(p=>p.group===group.id&&[p.label,p.searchLabels||''].join(' ').toLowerCase().replace(/ё/g,'е').includes(query));
   if(!products.length)continue;
   html+='<tr class="mix-group-row"><td colspan="7">'+esc(group.label)+'</td></tr>';
   for(const p of products){
