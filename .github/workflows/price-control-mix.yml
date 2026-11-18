@@ -1,0 +1,106 @@
+name: Price Control Mix
+
+on:
+  push:
+    paths:
+      - ".github/workflows/price-control-mix.yml"
+      - "price-control/mix_catalog.js"
+      - "price-control/mix_scan.js"
+      - "price-control/mix_build.js"
+  workflow_run:
+    workflows:
+      - Price Control Public Refresh
+    types:
+      - completed
+  schedule:
+    - cron: "15 10 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: price-control-mix-refresh
+  cancel-in-progress: false
+
+jobs:
+  mix:
+    if: github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 35
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Validate Mix catalog and JavaScript
+        run: |
+          node --check price-control/mix_catalog.js
+          node --check price-control/mix_scan.js
+          node --check price-control/mix_build.js
+          node --check price-control/mix-widget.js
+          node price-control/mix_catalog.js
+
+      - name: Install Playwright
+        run: |
+          npm init -y >/dev/null 2>&1
+          npm install playwright@1.55.0 >/dev/null 2>&1
+          npx playwright install --with-deps chromium
+
+      - name: Restore authenticated DocsInBox session
+        env:
+          DXBX_STORAGE_STATE: ${{ secrets.DXBX_STORAGE_STATE }}
+          DXBX_LOGIN: ${{ secrets.DXBX_LOGIN }}
+          DXBX_PASSWORD: ${{ secrets.DXBX_PASSWORD }}
+        run: node price-control/prepare_dxbx_auth.js /tmp/price-control-mix-auth.json
+
+      - name: Scan all suppliers and retain selected Mix items
+        env:
+          DOCSINBOX_STORAGE_STATE: /tmp/price-control-mix-auth.json
+        run: node price-control/mix_scan.js price-control/mix_receipts.json
+
+      - name: Build Mix history and price index
+        run: node price-control/mix_build.js price-control/mix_receipts.json price-control/mix_data.json
+
+      - name: Validate Mix data before publishing
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          raw=json.loads(Path("price-control/mix_receipts.json").read_text())
+          data=json.loads(Path("price-control/mix_data.json").read_text())
+          assert raw["schemaVersion"]==1 and raw["invoiceErrors"]==0
+          assert len(data["products"])==30 and len(data["groups"])==6
+          assert len({p["id"] for p in data["products"]})==30
+          assert data["stats"]["selectedProducts"]==30
+          assert data["stats"]["matchedDeliveries"]>=0
+          assert all(p["group"] in {g["id"] for g in data["groups"]} for p in data["products"])
+          points=data["index"]["points"]
+          assert all(p["value"]>0 and p["coverage"]>0 for p in points)
+          assert all(a["dateIso"]<b["dateIso"] for a,b in zip(points,points[1:]))
+          assert all(len(p["deliveries"])==p["count"] for p in data["products"])
+          if raw["invoices"]:
+              assert points and data["stats"]["suppliers"]>0
+          print("MIX_DATA_VERIFIED",data["stats"], "points",len(points))
+          PY
+
+      - name: Save Mix data
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add price-control/mix_receipts.json price-control/mix_data.json
+          if git diff --cached --quiet; then
+            echo "No Mix changes"
+          else
+            git commit -m "Update all-supplier Mix purchase history and index"
+            git pull --rebase origin main
+            git push origin main
+          fi
+
+      - name: Clean up session
+        if: always()
+        run: rm -f /tmp/price-control-mix-auth.json /tmp/price-control-mix-auth.json.*.tmp
