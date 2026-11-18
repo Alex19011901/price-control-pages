@@ -65,9 +65,9 @@ function install(){
 }
 function cell(row){
  if(!row)return '<td class="mix-empty">—</td>';
- const title=[row.date,row.supplier,row.invoice,row.name,'Количество '+row.qty+' '+row.unit].join(' · ');
+ const title=[row.date,row.supplier,row.invoice,row.name,'Количество '+row.qty+' '+row.unit,'Цена в накладной '+fmt(row.fact)+' ₽/'+row.unit].join(' · ');
  return '<td title="'+esc(title)+'"><span class="mix-date">'+esc(row.date.slice(0,5))+'</span>'+
- '<div class="mix-price">'+fmt(row.fact)+' ₽/'+esc(row.unit)+'</div>'+
+ '<div class="mix-price">'+fmt(row.displayFact==null?row.fact:row.displayFact)+' ₽/'+esc(row.displayUnit||row.unit)+'</div>'+
  '<span class="mix-supplier">'+esc(row.supplier)+'</span></td>';
 }
 function renderTable(){

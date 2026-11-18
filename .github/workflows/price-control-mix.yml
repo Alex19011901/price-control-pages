@@ -83,15 +83,22 @@ jobs:
           raw=json.loads(Path("price-control/mix_receipts.json").read_text())
           data=json.loads(Path("price-control/mix_data.json").read_text())
           assert raw["schemaVersion"]==1 and raw["invoiceErrors"]==0
-          assert len(data["products"])==30 and len(data["groups"])==6
-          assert len({p["id"] for p in data["products"]})==30
-          assert data["stats"]["selectedProducts"]==30
+          assert len(data["products"])==31 and len(data["groups"])==6
+          assert len({p["id"] for p in data["products"]})==31
+          assert data["stats"]["selectedProducts"]==31
           assert data["stats"]["matchedDeliveries"]>=0
           assert all(p["group"] in {g["id"] for g in data["groups"]} for p in data["products"])
           points=data["index"]["points"]
           assert all(p["value"]>0 and p["coverage"]>0 for p in points)
           assert all(a["dateIso"]<b["dateIso"] for a,b in zip(points,points[1:]))
           assert all(len(p["deliveries"])==p["count"] for p in data["products"])
+          products={p["id"]:p for p in data["products"]}
+          assert any(r["date"]=="10.11.2026" for r in products["butter_450"]["deliveries"])
+          assert any(r["date"]=="22.10.2026" for r in products["butter_330"]["deliveries"])
+          assert all(any(r["date"]==day for r in products["tiger_shrimp"]["deliveries"]) for day in ("12.11.2026","16.10.2026","06.10.2026"))
+          egg_pack=[r for r in products["chicken_egg"]["deliveries"] if r["name"].startswith("180ШТ")]
+          assert egg_pack and all(r.get("displayUnit")=="шт" and abs(r["displayFact"]-r["sum"]/r["indexQty"])<0.011 for r in egg_pack)
+          assert all(r.get("displayUnit")=="шт" for r in products["quail_egg"]["deliveries"] if r.get("indexUnit")=="шт")
           if raw["invoices"]:
               assert points and data["stats"]["suppliers"]>0
           print("MIX_DATA_VERIFIED",data["stats"], "points",len(points))

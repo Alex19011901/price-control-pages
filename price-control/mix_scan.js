@@ -9,13 +9,14 @@ const AUTH=process.env.DOCSINBOX_STORAGE_STATE;
 const OUT=process.argv[2]||path.join(__dirname,'mix_receipts.json');
 const MIN_DATE='2026-01-01';
 const RECHECK_DAYS=45;
+const CATALOG_REVISION=2; // Classifier changes require full historical rescan once.
 const WORKERS=5;
 if(!AUTH||!fs.existsSync(AUTH))throw new Error('DOCSINBOX_AUTH_MISSING');
 const old=fs.existsSync(OUT)?JSON.parse(fs.readFileSync(OUT,'utf8')):null;
 function pastDays(isoDate,days){
   return new Date(Date.parse(isoDate+'T12:00:00Z')-days*86400000).toISOString().slice(0,10);
 }
-const START=old?.lastSupplyIso?([MIN_DATE,pastDays(old.lastSupplyIso,RECHECK_DAYS)].sort().at(-1)):MIN_DATE;
+const START=(old?.catalogRevision===CATALOG_REVISION&&old?.lastSupplyIso)?([MIN_DATE,pastDays(old.lastSupplyIso,RECHECK_DAYS)].sort().at(-1)):MIN_DATE;
 function versionOrder(a,b){
   const av=Number.isFinite(a.version)?a.version:-1;
   const bv=Number.isFinite(b.version)?b.version:-1;
@@ -153,7 +154,7 @@ function num(s){
     if(keys.length!==new Set(keys).size)throw new Error('MIX_DUPLICATE_INVOICE');
     const lastSupplyIso=supplies.map(s=>iso(s.date)).filter(Boolean).sort().at(-1)||old?.lastSupplyIso||START;
     const payload={
-      schemaVersion:1,generatedAt:new Date().toISOString(),from:MIN_DATE,
+      schemaVersion:1,catalogRevision:CATALOG_REVISION,generatedAt:new Date().toISOString(),from:MIN_DATE,
       scanStart:START,lastSupplyIso,
       products:PRODUCTS.length,suppliesScanned:supplies.length,invoicesScanned:scanned,
       invoiceErrors:0,nonItemDocuments:nonItemDocs.length,

@@ -15,14 +15,20 @@ function normalizeIndexQty(r,id){
   if(u==='л'||u==='литр'||u==='литры')return{u:'л',qty};
   if(u==='мл')return{u:'л',qty:qty/1000};
   // For package goods, convert only exact printed content. Never guess volume/weight.
-  if(['шт','упак','уп','пак','бут','бутылка','банка'].includes(u)){
+  if(['шт','штука','штуки','упак','упаковка','уп','пак','бут','бутылка','банка'].includes(u)){
     const eggs=id==='chicken_egg'||id==='quail_egg';
     if(eggs){
-      if(u==='шт'&&!/(?:\d+)\s*шт\s*\/\s*уп/.test(name))return{u:'шт',qty};
-      if(u!=='шт'){
-        const m=name.match(/(\d{1,3})\s*шт(?:ук)?(?:\/\s*уп|(?:\s|$))/);
-        if(m&&Number(m[1])>=2&&Number(m[1])<=360)return{u:'шт',qty:qty*Number(m[1])};
+      // Metro may sell a whole 180-piece carton with invoice count=1 "шт".
+      // Interfood sometimes writes "360шт" but counts individual eggs.
+      const prefix=name.match(/^\s*(\d{2,4})\s*шт(?=\s|[,;/()]|$)/);
+      const pack=name.match(/(\d{1,4})\s*шт(?:ук)?\s*\/\s*уп(?:ак|аковк(?:а|у|и)?)?/);
+      const pieces=prefix?Number(prefix[1]):pack?Number(pack[1]):null;
+      const isPiece=['шт','штука','штуки'].includes(u);
+      if(isPiece){
+        if(pieces>=2&&pieces<=360&&qty<pieces)return{u:'шт',qty:qty*pieces};
+        return{u:'шт',qty};
       }
+      if(pieces>=2&&pieces<=360)return{u:'шт',qty:qty*pieces};
       return null;
     }
     // No conversion for composite packs (6x1л, 12*500г, etc.)
@@ -68,6 +74,9 @@ const entries=[...grouped.values()].map(x=>{
    productId:x.productId,date:x.date,dateIso:x.dateIso,supplier:x.supplier,
    invoice:x.invoice,qty:round2(x.qty),sum:round2(x.sum),unit:x.unit,
    fact:round2(x.sum/x.qty),name,
+   // Actual price per egg; for shrimp, normalized price per kilogram.
+   displayFact:((x.productId==='chicken_egg'||x.productId==='quail_egg'||x.productId==='tiger_shrimp')&&n&&n.qty>0)?round2(x.sum/n.qty):null,
+   displayUnit:((x.productId==='chicken_egg'||x.productId==='quail_egg'||x.productId==='tiger_shrimp')&&n&&n.qty>0)?n.u:null,
    indexUnit:n?.u||null,indexQty:n?Number(n.qty.toFixed(6)):null
  };
 }).sort(byDateAsc);
