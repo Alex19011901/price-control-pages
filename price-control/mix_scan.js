@@ -63,7 +63,7 @@ function num(s){
       }
     }
     console.log('MIX_SCAN start='+START+' supplies='+supplies.length+' invoices='+tasks.length);
-    const docs=[],errors=[];
+    const docs=[],errors=[],nonItemDocs=[];
     let next=0,scanned=0;
     async function parse(page,task){
       const {supply,invoice}=task;
@@ -119,9 +119,16 @@ function num(s){
           try{await parse(page,task);error=null;break;}
           catch(err){error=err;if(attempt===0)await page.waitForTimeout(400);}
         }
-        if(error)errors.push({date:task.supply.date,supplier:task.supply.supplier,invoice:task.invoice.number,error:String(error.message||error).slice(0,150)});
+        if(error){
+          const reason=String(error.message||error).slice(0,150);
+          const item={date:task.supply.date,supplier:task.supply.supplier,invoice:task.invoice.number,error:reason};
+          // Utility/service documents can have no product-table rows. Log
+          // separately; never treat them as food deliveries or fabricate lines.
+          if(reason==='MIX_NO_INVOICE_ROWS')nonItemDocs.push(item);
+          else errors.push(item);
+        }
         scanned++;
-        if(scanned%100===0||scanned===tasks.length)console.log('MIX_SCAN_PROGRESS',scanned,'/',tasks.length,'errors',errors.length);
+        if(scanned%100===0||scanned===tasks.length)console.log('MIX_SCAN_PROGRESS',scanned,'/',tasks.length,'errors',errors.length,'nonItemDocs',nonItemDocs.length);
       }
       await page.close();
     }
@@ -146,11 +153,13 @@ function num(s){
       schemaVersion:1,generatedAt:new Date().toISOString(),from:MIN_DATE,
       scanStart:START,lastSupplyIso,
       products:PRODUCTS.length,suppliesScanned:supplies.length,invoicesScanned:scanned,
-      invoiceErrors:0,matchedInvoices:invoices.length,
+      invoiceErrors:0,nonItemDocuments:nonItemDocs.length,
+      nonItemSuppliers:[...new Set(nonItemDocs.map(x=>x.supplier))].sort((a,b)=>a.localeCompare(b,'ru')),
+      matchedInvoices:invoices.length,
       invoices
     };
     fs.writeFileSync(OUT,JSON.stringify(payload,null,2)+'\n');
-    console.log('MIX_SCAN_OK',JSON.stringify({scanStart:START,lastSupplyIso,matchedInvoices:invoices.length,items:invoices.reduce((n,d)=>n+d.items.length,0),suppliers:new Set(invoices.map(d=>d.supplier)).size}));
+    console.log('MIX_SCAN_OK',JSON.stringify({scanStart:START,lastSupplyIso,matchedInvoices:invoices.length,items:invoices.reduce((n,d)=>n+d.items.length,0),suppliers:new Set(invoices.map(d=>d.supplier)).size,nonItemDocs:nonItemDocs.length,nonItemSuppliers:[...new Set(nonItemDocs.map(x=>x.supplier))]}));
   }finally{
     await context.close();
     await browser.close();
