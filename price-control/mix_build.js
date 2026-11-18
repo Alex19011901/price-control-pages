@@ -54,7 +54,25 @@ function byDateAsc(a,b){
  return a.dateIso.localeCompare(b.dateIso)||a.supplier.localeCompare(b.supplier,'ru')||a.invoice.localeCompare(b.invoice,'ru');
 }
 const grouped=new Map();
-for(const invoice of data.invoices){
+// Global Foods publishes identical invoice numbers/dates via two aliases:
+// "ТД ГЛОБАЛ ФУДС" and "Торговый дом Глобал Фудс".
+function supplierIdentity(s){
+ const n=norm(s);
+ return n.includes('глобал фудс')?'global-foods-alias':n;
+}
+function sourceVersion(d){const v=Number(d.version);return Number.isFinite(v)?v:-1;}
+function detailScore(d){return (d.items||[]).reduce((n,x)=>n+String(x.name||'').length,0);}
+const uniqueInvoices=new Map();
+for(const d of data.invoices){
+ const key=[iso(d.date),String(d.invoice||''),supplierIdentity(d.supplier)].join('\u0000');
+ const prev=uniqueInvoices.get(key);
+ if(!prev||sourceVersion(d)>sourceVersion(prev)||
+   (sourceVersion(d)===sourceVersion(prev)&&detailScore(d)>detailScore(prev)))
+      uniqueInvoices.set(key,d);
+}
+const distinctInvoices=[...uniqueInvoices.values()];
+const duplicateDocumentsRemoved=data.invoices.length-distinctInvoices.length;
+for(const invoice of distinctInvoices){
  const date=String(invoice.date||''),dateIso=iso(date),supplier=String(invoice.supplier||'').trim(),number=String(invoice.invoice||'').trim();
  if(!dateIso||!supplier||!number)throw new Error('MIX_BAD_INVOICE');
  for(const item of invoice.items||[]){
@@ -155,11 +173,12 @@ for(const [dateIso,day] of [...daily].sort((a,b)=>a[0].localeCompare(b[0]))){
 const suppliers=[...new Set(entries.map(x=>x.supplier))].sort((a,b)=>a.localeCompare(b,'ru'));
 const output={
  schemaVersion:1,generatedAt:data.generatedAt,source:'DocsInBox',start:data.from,
- methodology:'Индекс Микс: база 100, равный вес каждой из 30 товарных групп. Индекс изменяется только при повторной закупке одной и той же номенклатуры у того же поставщика в сопоставимой единице. Разные сорта, бренды, упаковки и поставщики не сравниваются между собой для расчёта изменения цены. При отсутствии повторной закупки предыдущее значение сохраняется, новые позиции включаются без скачка. История показывает все найденные товары и поставщиков.',
+ methodology:'Индекс Микс: база 100, равный вес каждой из выбранных товарных групп. Индекс изменяется только при повторной закупке одной и той же номенклатуры у того же поставщика в сопоставимой единице. Разные сорта, бренды, упаковки и поставщики не сравниваются между собой для расчёта изменения цены. При отсутствии повторной закупки предыдущее значение сохраняется, новые позиции включаются без скачка. История показывает все найденные товары и поставщиков.',
  groups:GROUPS,products,suppliers,
  stats:{selectedProducts:PRODUCTS.length,productsWithData:products.filter(p=>p.count>0).length,
    indexedProducts:indexedProducts.length,suppliers:suppliers.length,
-   matchedDeliveries:entries.length,matchedInvoices:data.matchedInvoices,
+   matchedDeliveries:entries.length,matchedInvoices:distinctInvoices.length,
+   rawMatchedInvoices:data.matchedInvoices,duplicateDocumentsRemoved,
    lastSupplyIso:data.lastSupplyIso,scanStart:data.scanStart},
  index:{baseDate:points[0]?.date||null,base:100,current:points.at(-1)?.value??null,
    coverage:points.at(-1)?.coverage||0,productsWithNoIndex:products.filter(x=>!x.indexUnit).map(x=>x.id),

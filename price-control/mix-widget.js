@@ -51,7 +51,7 @@ function install(){
  '<div class="mix-table-scroll"><table class="mix-table"><thead><tr>'+
  '<th>Товар</th><th>Последняя закупка</th><th>Пред. 1</th><th>Пред. 2</th><th>Пред. 3</th><th>Пред. 4</th><th>Пред. 5</th>'+
  '</tr></thead><tbody id="mixRows"><tr><td colspan="7">Загрузка истории…</td></tr></tbody></table></div>'+
- '<div class="mix-note">История закупок DocsInBox по всем поставщикам. В каждом столбце дата, фактическая цена и поставщик; номер накладной и полное название видны при наведении. Несколько строк одного товара в одной накладной объединяются по сумме и количеству. Единицы цены исходные: кг, л, шт или упаковка.</div>';
+ '<div class="mix-note">История закупок DocsInBox по всем поставщикам. В каждом столбце дата, фактическая цена и поставщик; номер накладной и полное название видны при наведении. Несколько строк одного товара в одной накладной объединяются по сумме и количеству. Яйца показываются по цене за 1 шт; креветки — за 1 кг при известной фасовке. Для остальных товаров единица из исходной накладной.</div>';
  const b=document.createElement('section');b.id='mixIndexCard';b.className='card mix-index-card';
  b.innerHTML=
  '<div class="mix-title"><h2>Индекс Микс</h2><span class="mix-muted">База 100</span></div>'+
@@ -65,7 +65,7 @@ function install(){
 }
 function cell(row){
  if(!row)return '<td class="mix-empty">—</td>';
- const title=[row.date,row.supplier,row.invoice,row.name,'Количество '+row.qty+' '+row.unit,'Цена в накладной '+fmt(row.fact)+' ₽/'+row.unit].join(' · ');
+ const title=[row.date,row.supplier,row.invoice,row.name,'В накладной: '+row.qty+' '+row.unit+' на '+fmt(row.sum)+' ₽',(row.displayFact!=null?'Цена за '+row.displayUnit+': '+fmt(row.displayFact)+' ₽':'')].filter(Boolean).join(' · ');
  return '<td title="'+esc(title)+'"><span class="mix-date">'+esc(row.date.slice(0,5))+'</span>'+
  '<div class="mix-price">'+fmt(row.displayFact==null?row.fact:row.displayFact)+' ₽/'+esc(row.displayUnit||row.unit)+'</div>'+
  '<span class="mix-supplier">'+esc(row.supplier)+'</span></td>';

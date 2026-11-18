@@ -99,6 +99,8 @@ jobs:
           egg_pack=[r for r in products["chicken_egg"]["deliveries"] if r["name"].startswith("180ШТ")]
           assert egg_pack and all(r.get("displayUnit")=="шт" and abs(r["displayFact"]-r["sum"]/r["indexQty"])<0.011 for r in egg_pack)
           assert all(r.get("displayUnit")=="шт" for r in products["quail_egg"]["deliveries"] if r.get("indexUnit")=="шт")
+          assert data["stats"]["duplicateDocumentsRemoved"] >= 0
+          assert len([r for r in products["tiger_shrimp"]["deliveries"] if r["date"]=="06.10.2026" and r["invoice"]=="ТД0610/0266"])==1
           if raw["invoices"]:
               assert points and data["stats"]["suppliers"]>0
           print("MIX_DATA_VERIFIED",data["stats"], "points",len(points))
