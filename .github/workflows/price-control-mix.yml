@@ -7,6 +7,7 @@ on:
       - "price-control/mix_catalog.js"
       - "price-control/mix_scan.js"
       - "price-control/mix_build.js"
+      - "price-control/prepare_dxbx_auth.js"
   workflow_run:
     workflows:
       - Price Control Public Refresh
