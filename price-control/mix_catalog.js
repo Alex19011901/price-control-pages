@@ -1,0 +1,91 @@
+'use strict';
+// «Виджет Микс»: только явные варианты названий выбранных товарных групп.
+// Не используется для сравнения с прайсами и расчета переплат.
+const GROUPS=[
+  {id:'meat',label:'Мясо и птица'},
+  {id:'seafood',label:'Рыба и морепродукты'},
+  {id:'dairy',label:'Молочные продукты и сыры'},
+  {id:'eggs',label:'Яйца'},
+  {id:'oils',label:'Масла и соусы'},
+  {id:'grocery',label:'Бакалея и заморозка'}
+];
+const PRODUCTS=[
+  {id:'chicken_legs',label:'Куриные окорочка',group:'meat',re:/окорочк/,exclude:/индюш|индейк|утин|утк|свин|свиной|говяж/},
+  {id:'chicken_nuggets',label:'Курица — нагетсы',group:'meat',re:/наг[г]?етс|наг[г]?еттс|наг[г]?етт/,exclude:/рыбн|веган|растительн/},
+  {id:'chicken_fillet',label:'Курица — филе',group:'meat',re:/(?:куриц|курин|цыплен|бройлер).{0,80}филе|филе.{0,80}(?:куриц|курин|цыплен|бройлер)/,exclude:/индюш|индейк|утк/},
+  {id:'chicken_wings',label:'Курица — крылья',group:'meat',re:/(?:куриц|курин|цыплен).{0,60}крыл|крыл.{0,60}(?:куриц|курин|цыплен)/,exclude:/утк|индейк|индюш/},
+  {id:'beef_topside',label:'Говядина — оковалок',group:'meat',re:/оковалок/},
+  {id:'beef_eye',label:'Говядина — глазной мускул',group:'meat',re:/глазн.{0,35}мускул/},
+  {id:'beef_tongue',label:'Говядина — язык',group:'meat',re:/язык.{0,60}говяж|говяж.{0,60}язык|язык.{0,60}говядин|говядин.{0,60}язык/,exclude:/свин|баран|теляч/},
+
+  {id:'tiger_shrimp',label:'Креветки тигровые',group:'seafood',re:/креветк.{0,70}тигров|тигров.{0,70}креветк/},
+  {id:'canned_tuna',label:'Тунец консервированный',group:'seafood',re:/тун[е]ц.{0,100}(?:консерв|в собств|в масле|ж\/б|банка|в с\/с)|(?:консерв|ж\/б).{0,60}тун[е]ц/},
+  {id:'red_caviar',label:'Икра красная',group:'seafood',re:/икра.{0,35}(?:красн|лосос|горбуш|кет[аы]|нерк)|(?:лосос|горбуш|нерк).{0,35}икра/},
+  {id:'canned_salmon',label:'Горбуша консервированная',group:'seafood',re:/горбуш.{0,100}(?:консерв|в собств|в с\/с|натурал|ж\/б|банка)|(?:консерв|ж\/б).{0,60}горбуш/},
+
+  {id:'brie_camembert',label:'Сыр бри / камамбер',group:'dairy',re:/(?:сыр.{0,50}(?:бри|камамбер|камембер))|(?:камамбер|камембер).{0,50}сыр|(?:^|[^\p{L}])бри(?:[^\p{L}]|$)/u},
+  {id:'gouda',label:'Сыр гауда',group:'dairy',re:/гауд[аы]/},
+  {id:'feta',label:'Брынза / фета',group:'dairy',re:/брынз|фет[аы]/,exclude:/фетучин/},
+  {id:'mozzarella_125',label:'Сыр моцарелла 125 г',group:'dairy',re:/(?:моцар|моццар|моцц|mozz).{0,110}125\s*(?:г|гр|g|грамм)/},
+  {id:'mozzarella_mini_150',label:'Сыр моцарелла мини 150 г',group:'dairy',re:/(?:моцар|моцц|mozz).{0,100}(?:мини|mini).{0,60}150\s*(?:г|гр|g)|(?:мини|mini).{0,55}(?:моцар|моцц|mozz).{0,100}150\s*(?:г|гр|g)/},
+  {id:'cream_33',label:'Сливки 33%',group:'dairy',re:/сливк.{0,90}33\s*%/},
+  {id:'cream_10',label:'Сливки 10%',group:'dairy',re:/сливк.{0,90}10\s*%/},
+  {id:'milk',label:'Молоко',group:'dairy',re:/молок[оа]/,exclude:/сухое|сгущ|кокос|миндал|соев|овсян|шоколад|безлактозн|козь[е]|смес[ьи]/},
+  {id:'butter_450',label:'Масло сливочное 450 г',group:'dairy',re:/масло.{0,40}сливочн.{0,100}450\s*(?:г|гр|g|грамм)/},
+
+  {id:'chicken_egg',label:'Яйцо куриное',group:'eggs',re:/яйц[оаыу]|яиц/,exclude:/перепел|икра|порошок|меланж|сухое|страус/},
+  {id:'quail_egg',label:'Яйцо перепелиное',group:'eggs',re:/перепел.{0,50}(?:яйц|яиц)|(?:яйц|яиц).{0,50}перепел/},
+
+  {id:'vegetable_oil',label:'Масло растительное',group:'oils',re:/масло.{0,45}(?:растительн|подсолнечн)|(?:растительн|подсолнечн).{0,45}масло/,exclude:/фритюр|кунжут|сливочн/},
+  {id:'frying_oil',label:'Масло фритюрное',group:'oils',re:/фритюр.{0,50}масло|масло.{0,50}фритюр/},
+  {id:'sesame_oil',label:'Масло кунжутное',group:'oils',re:/масло.{0,55}кунжут|кунжут.{0,55}масло/},
+  {id:'mayonnaise',label:'Майонез',group:'oils',re:/майонез/},
+  {id:'soy_sauce',label:'Соус соевый',group:'oils',re:/соус.{0,40}соев|соев.{0,40}соус/},
+
+  {id:'cube_sugar',label:'Сахар кусковой',group:'grocery',re:/сахар.{0,70}(?:кусков|рафинад)|рафинад.{0,70}сахар/},
+  {id:'puff_pastry',label:'Тесто слоёное',group:'grocery',re:/тест[оа].{0,55}слоен|слоен.{0,55}тест[оа]/},
+  {id:'frozen_peas',label:'Горошек с/м',group:'grocery',re:/горош[е]к.{0,100}(?:с\/м|заморож|быстрозам|свежеморож)|(?:заморож|с\/м).{0,90}горош[е]к/}
+];
+function norm(s){return String(s||'').toLowerCase().replace(/ё/g,'е').replace(/\u00a0/g,' ').replace(/\s+/g,' ').trim();}
+function classify(name){
+  const n=norm(name);
+  const found=PRODUCTS.filter(p=>p.re.test(n)&&!(p.exclude&&p.exclude.test(n)));
+  if(found.length>1)throw new Error('MIX_AMBIGUOUS_PRODUCT: '+name+' => '+found.map(p=>p.id).join(','));
+  return found[0]||null;
+}
+function iso(ru){const m=String(ru||'').match(/^(\d{2})\.(\d{2})\.(\d{4})$/);return m?m[3]+'-'+m[2]+'-'+m[1]:'';}
+function round2(n){return Math.round((Number(n)+Number.EPSILON)*100)/100;}
+function unit(s){return norm(s).replace(/[.]/g,'');}
+module.exports={GROUPS,PRODUCTS,klassify:classify,classify,iso,round2,unit,norm};
+if(require.main===module){
+  const assert=require('node:assert/strict');
+  assert.equal(PRODUCTS.length,30);
+  assert.equal(new Set(PRODUCTS.map(p=>p.id)).size,30);
+  const yes=[
+    ['Яйцо Мытое С1 (дезинфицированное),шт','chicken_egg'],
+    ['Яйцо перепелиное 20 шт/уп,упак','quail_egg'],
+    ['Окорочка куриные замороженные,кг','chicken_legs'],
+    ['Окорочка,кг','chicken_legs'],
+    ['Филе куриное грудки,кг','chicken_fillet'],
+    ['Масло растительное Золотая семечка 1л,шт','vegetable_oil'],
+    ['Масло фритюрное,л','frying_oil'],
+    ['Сыр Бри 125г,шт','brie_camembert'],
+    ['Сыр Камамбер 150 г,шт','brie_camembert'],
+    ['Сыр Гауда,кг','gouda'],
+    ['Брынза Фета,кг','feta'],
+    ['Моцарелла мини 150г,шт','mozzarella_mini_150'],
+    ['Моцарелла 125 г,шт','mozzarella_125'],
+    ['Сливки 33% 1л,шт','cream_33'],
+    ['Масло сливочное 450 гр,шт','butter_450'],
+    ['Куриные наггетсы,кг','chicken_nuggets'],
+    ['Масло кунжутное 0,5л,шт','sesame_oil'],
+    ['Сахар кусковой 1кг,шт','cube_sugar'],
+    ['Тесто слоеное бездрожжевое 500г,шт','puff_pastry'],
+    ['Зеленый горошек с/м,кг','frozen_peas'],
+    ['Глазной мускул б/к,кг','beef_eye']
+  ];
+  for(const [name,id] of yes)assert.equal(classify(name)?.id,id,name);
+  for(const name of ['Масло сливочное 200г,шт','Горошек сладкий 250г,шт','Авокадо Хаас,кг','Сметана 20%,шт','Тунец свежемороженный,кг','Сыр моцарелла 200 г,шт'])
+    assert.equal(classify(name),null,name);
+  console.log('MIX_CATALOG_OK',PRODUCTS.length,yes.length);
+}
