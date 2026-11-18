@@ -69,7 +69,10 @@ async function authenticate(env, chromium) {
   const usable = hasUsableSession(state);
   if (!usable && !credentialsPresent) fail('DXBX_LOGIN_SECRETS_REQUIRED');
 
-  const browser = await chromium.launch({headless: true});
+  const browser = await chromium.launch({
+    headless: true,
+    ...(env.MIX_CHROME_EXECUTABLE ? {executablePath: env.MIX_CHROME_EXECUTABLE} : {})
+  });
   let context;
   try {
     if (usable) {
