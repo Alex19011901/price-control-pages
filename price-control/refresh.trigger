@@ -1,2 +1,4 @@
 2026-11-19
 Rebuild Price Control for Aish Garden (ООО «АЙШ ГАРДЕН») 19.11.2026: invoice УТАГ0003351, thirteen verified receipt rows, compare only safely exact SKU+unit prices from attached ПРАЙС-2.xlsx dated 17.11.2026 (3 matches, 10 unmatched), separately retain 18.11 invoice УТАГ0003335 (22 rows, 11 matched, 11 unmatched), and all older periods unchanged. Run purchase control refresh using the 19 Nov exact invoice-price slice; do not reapply Paradis prices.
+
+Confirmed publish/index rebuild fix: 19 Nov period must remain reproducible and preserve closed 18 Nov data.
