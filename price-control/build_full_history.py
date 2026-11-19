@@ -395,7 +395,10 @@ if _candidate["week"]["key"] in {"2026-10-04", "2026-10-08", "2026-10-14", "2026
         # 18 Nov or the historic Paradis/Interfood price index.
         aish_index = _full["indexGroups"]["aish_garden"]
         assert aish_index["baseKey"] == "2026-11-18"
-        assert [point["key"] for point in aish_index["points"]] == ["2026-11-18"]
+        assert aish_index["points"][0]["key"] == "2026-11-18"
+        assert all(point["key"] in {"2026-11-18", "2026-11-19"} for point in aish_index["points"])
+        # Reconstruct from the verified baseline, even on a repeat build.
+        aish_index["points"] = [aish_index["points"][0]]
         prev_aish = next(p for p in _old if p["key"] == "2026-11-18")
         factor, common = _weighted_index_change(prev_aish, _current)
         prior_val = aish_index["points"][-1]["value"]
@@ -408,7 +411,7 @@ if _candidate["week"]["key"] in {"2026-10-04", "2026-10-08", "2026-10-14", "2026
             "includedProducts": len(_fresh_produce_price_qty_map(_current)),
             **({"noComparableProducts": True} if factor is None else {}),
         })
-        aish_index["previousCommonProducts"] = aish_index.get("commonProducts")
+        aish_index["previousCommonProducts"] = None
         aish_index["commonProducts"] = common
         aish_index["current"] = value
         aish_index["prevChange"] = round((factor - 1) * 100, 1) if factor is not None else None
