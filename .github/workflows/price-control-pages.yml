@@ -82,7 +82,14 @@ jobs:
           assert index["scopeLabel"] == "Фрукты / овощи / салаты"
           assert all(p.get("includedProducts", 0) >= p.get("commonProducts", 0)
                      for p in index["points"][1:]), "Invalid produce count metadata"
-          expected_keys = sorted(p["key"] for p in old_periods)
+          expected_keys = sorted(p["key"] for p in old_periods if p.get("indexGroup") in {"paradis", "interfood"})
+          # The new Aish Garden supplier has its own base and must not be
+          # inserted into the historical Paradis/Interfood index.
+          independent = [p for p in old_periods if p.get("indexGroup") == "aish_garden"]
+          if independent:
+              separate_index = original["indexGroups"]["aish_garden"]
+              assert [p["key"] for p in separate_index["points"]] == sorted(p["key"] for p in independent)
+              assert separate_index["baseKey"] == independent[0]["key"]
           keys = [p["key"] for p in index["points"]]
           assert keys == expected_keys, "Missing or duplicate index period"
           assert index["current"] == index["points"][-1]["value"]
