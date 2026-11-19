@@ -1,2 +1,2 @@
-2026-11-17T16:15:00+03:00
-Load DocsInBox Paradis invoices ПЭ-40833 (16.11.2026) and ПЭ-41036 (17.11.2026) using uploaded ресторан светлый.xlsx, valid 13.11.2026. Strict name+unit matching; four unmatched keys retained; preserve all previously closed periods and price/overpay calculations.
+2026-11-19
+Price Control: new supplier ООО «АЙШ ГАРДЕН» replacing Paradis from 18 November 2026. Fetch DocsInBox invoice УТАГ0003335 for 18.11.2026 and compare against user-provided ПРАЙС-2.xlsx dated 17.11.2026, with 11 exact name+unit price matches and 11 explicitly unmatched rows. Never use Paradis prices for this invoice. Keep all closed periods unchanged, preserve supplier-separated index, and refresh the Mix widget through the successful public-refresh workflow dependency.
