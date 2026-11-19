@@ -110,7 +110,26 @@ function loadInvoicePriceSlices() {
 
 (async () => {
   const todayMoscow = new Date(Date.now() + 3 * 60 * 60 * 1000).toISOString().slice(0, 10);
-  const cfg = todayMoscow >= SWITCH_1116 ? {
+  const cfg = todayMoscow >= '2026-11-18' ? {
+    // New supplier: require exact per-invoice price slices from 17 Nov Excel.
+    // Never use a former Paradis price table for Aish Garden.
+    priceFile: null,
+    weekKey: '2026-11-18',
+    startIso: '2026-11-18',
+    endIso: '2026-11-18',
+    startRu: '18.11.2026',
+    endRu: '18.11.2026',
+    label: 'Поставка 18.11',
+    priceDocumentDate: '17.11.2026',
+    displayPriceDocumentDate: '17.11.2026',
+    validFrom: '18.11.2026',
+    supplierNeedle: 'айш гарден',
+    supplierLabel: 'Айш Гарден',
+    indexGroup: 'aish_garden',
+    requiredInvoice: 'УТАГ0003335',
+    requireInvoiceSlices: true,
+    sumPositiveRowImpacts: true
+  } : todayMoscow >= SWITCH_1116 ? {
     priceFile: PRICE_0910_FILE,
     weekKey: '2026-11-16',
     startIso: '2026-11-16',
@@ -396,15 +415,20 @@ function loadInvoicePriceSlices() {
 
   if (!AUTH) throw new Error('DOCSINBOX_AUTH_PATH_MISSING');
   if (!fs.existsSync(AUTH)) throw new Error('DOCSINBOX_AUTH_MISSING');
-  if (!fs.existsSync(cfg.priceFile)) throw new Error('PRICE_PAYLOAD_MISSING:' + cfg.priceFile);
-  const priceDoc = JSON.parse(fs.readFileSync(cfg.priceFile, 'utf8'));
-  if (!Array.isArray(priceDoc.rows) || !priceDoc.rows.length) throw new Error('PRICE_PAYLOAD_EMPTY');
-  if (cfg.validOn) {
-    if (priceDoc.valid_on !== cfg.validOn) throw new Error('OLD_PRICE_DATE_MISMATCH');
-  } else if (priceDoc.documentDate !== cfg.priceDocumentDate || priceDoc.validFrom !== cfg.validFrom) {
-    throw new Error('PRICE_DATE_MISMATCH');
+  let priceMap = new Map();
+  if (cfg.priceFile) {
+    if (!fs.existsSync(cfg.priceFile)) throw new Error('PRICE_PAYLOAD_MISSING:' + cfg.priceFile);
+    const priceDoc = JSON.parse(fs.readFileSync(cfg.priceFile, 'utf8'));
+    if (!Array.isArray(priceDoc.rows) || !priceDoc.rows.length) throw new Error('PRICE_PAYLOAD_EMPTY');
+    if (cfg.validOn) {
+      if (priceDoc.valid_on !== cfg.validOn) throw new Error('OLD_PRICE_DATE_MISMATCH');
+    } else if (priceDoc.documentDate !== cfg.priceDocumentDate || priceDoc.validFrom !== cfg.validFrom) {
+      throw new Error('PRICE_DATE_MISMATCH');
+    }
+    priceMap = buildPriceMap(priceDoc);
+  } else if (!cfg.requireInvoiceSlices) {
+    throw new Error('PRICE_SOURCE_REQUIRED');
   }
-  const priceMap = buildPriceMap(priceDoc);
   const invoicePriceSlices = loadInvoicePriceSlices();
 
   const browser = await chromium.launch({ headless: true });
@@ -448,7 +472,7 @@ function loadInvoicePriceSlices() {
       sample: all.slice(0, 5).map(s => ({ date: s.date, supplier: s.supplier?.name || '', invoices: (s.invoices || []).length })),
       selected
     };
-  }, {supplierNeedle: SUPPLIER, startIso: cfg.startIso, endIso: cfg.endIso});
+  }, {supplierNeedle: cfg.supplierNeedle || SUPPLIER, startIso: cfg.startIso, endIso: cfg.endIso});
 
   const selected = selection.selected || [];
   const docs = [];
@@ -531,6 +555,9 @@ function loadInvoicePriceSlices() {
     }
   }
   const activeDocs = [...latestByNumber.values()].map(x => x.doc);
+  if (cfg.requiredInvoice && !activeDocs.some(d => d.number === cfg.requiredInvoice)) {
+    throw new Error('REQUIRED_SUPPLIER_INVOICE_MISSING:' + cfg.requiredInvoice);
+  }
   const droppedVersions = docs.length - activeDocs.length;
   if (droppedVersions > 0) console.log('Older invoice versions skipped:', droppedVersions);
 
@@ -619,14 +646,14 @@ function loadInvoicePriceSlices() {
     week: {
       key: cfg.weekKey,
       label: cfg.label,
-      supplier: 'Парадис Экзотика',
+      supplier: cfg.supplierLabel || 'Парадис Экзотика',
       start: cfg.startRu,
       end: cfg.endRu,
       docs: activeDocs.length,
       rows: rowsData.length,
       above, below, equal, unmatched, overpay,
       priceDocumentDate: cfg.displayPriceDocumentDate || cfg.priceDocumentDate,
-      indexGroup: 'paradis',
+      indexGroup: cfg.indexGroup || 'paradis',
       rowsData
     }
   };
