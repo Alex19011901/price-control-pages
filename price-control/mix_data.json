@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-18T18:52:38.257Z",
+  "generatedAt": "2026-11-19T10:41:47.459Z",
   "source": "DocsInBox",
   "start": "2026-01-01",
   "methodology": "Индекс Микс: база 100, равный вес каждой из выбранных товарных групп. Индекс изменяется только при повторной закупке одной и той же номенклатуры у того же поставщика в сопоставимой единице. Разные сорта, бренды, упаковки и поставщики не сравниваются между собой для расчёта изменения цены. При отсутствии повторной закупки предыдущее значение сохраняется, новые позиции включаются без скачка. История показывает все найденные товары и поставщиков.",
@@ -13328,6 +13328,22 @@
       "deliveries": [
         {
           "productId": "vegetable_oil",
+          "date": "19.11.2026",
+          "dateIso": "2026-11-19",
+          "supplier": "ООО \"АЙШ ГАРДЕН\"",
+          "invoice": "УТАГ0003351",
+          "qty": 30,
+          "sum": 5334,
+          "unit": "шт",
+          "fact": 177.8,
+          "name": "Масло подсолнечное раф. 0,9 л.,шт. (00000000548)",
+          "displayFact": null,
+          "displayUnit": null,
+          "indexUnit": "л",
+          "indexQty": 27
+        },
+        {
+          "productId": "vegetable_oil",
           "date": "14.11.2026",
           "dateIso": "2026-11-14",
           "supplier": "ООО \"МЕТРО Кэш энд Керри\"",
@@ -14063,8 +14079,8 @@
           "indexQty": 27
         }
       ],
-      "count": 46,
-      "indexedDeliveries": 43
+      "count": 47,
+      "indexedDeliveries": 44
     },
     {
       "id": "frying_oil",
@@ -14072,6 +14088,22 @@
       "group": "oils",
       "indexUnit": "л",
       "deliveries": [
+        {
+          "productId": "frying_oil",
+          "date": "19.11.2026",
+          "dateIso": "2026-11-19",
+          "supplier": "ООО \"АЙШ ГАРДЕН\"",
+          "invoice": "УТАГ0003351",
+          "qty": 1,
+          "sum": 1905,
+          "unit": "шт",
+          "fact": 1905,
+          "name": "Масло фритюрное <Городок> 10 л.,шт (00000000561)",
+          "displayFact": null,
+          "displayUnit": null,
+          "indexUnit": "л",
+          "indexQty": 10
+        },
         {
           "productId": "frying_oil",
           "date": "12.11.2026",
@@ -14809,8 +14841,8 @@
           "indexQty": 20
         }
       ],
-      "count": 46,
-      "indexedDeliveries": 46
+      "count": 47,
+      "indexedDeliveries": 47
     },
     {
       "id": "sesame_oil",
@@ -16006,6 +16038,22 @@
       "deliveries": [
         {
           "productId": "puff_pastry",
+          "date": "19.11.2026",
+          "dateIso": "2026-11-19",
+          "supplier": "ООО \"АЙШ ГАРДЕН\"",
+          "invoice": "УТАГ0003351",
+          "qty": 2,
+          "sum": 508,
+          "unit": "шт",
+          "fact": 254,
+          "name": "Тесто слоеное бездрожжевое <Звездный> 1 кг,шт (00000000621)",
+          "displayFact": null,
+          "displayUnit": null,
+          "indexUnit": "кг",
+          "indexQty": 2
+        },
+        {
+          "productId": "puff_pastry",
           "date": "05.11.2026",
           "dateIso": "2026-11-05",
           "supplier": "ООО \"Парадис Экзотика\"",
@@ -16437,8 +16485,8 @@
           "indexQty": 3
         }
       ],
-      "count": 27,
-      "indexedDeliveries": 27
+      "count": 28,
+      "indexedDeliveries": 28
     },
     {
       "id": "frozen_peas",
@@ -16446,6 +16494,22 @@
       "group": "grocery",
       "indexUnit": "кг",
       "deliveries": [
+        {
+          "productId": "frozen_peas",
+          "date": "19.11.2026",
+          "dateIso": "2026-11-19",
+          "supplier": "ООО \"АЙШ ГАРДЕН\"",
+          "invoice": "УТАГ0003351",
+          "qty": 0.8,
+          "sum": 162.56,
+          "unit": "кг",
+          "fact": 203.2,
+          "name": "Горошек зеленый с/м,кг. (00000003057)",
+          "displayFact": null,
+          "displayUnit": null,
+          "indexUnit": "кг",
+          "indexQty": 0.8
+        },
         {
           "productId": "frozen_peas",
           "date": "30.10.2026",
@@ -16783,8 +16847,8 @@
           "indexQty": 2
         }
       ],
-      "count": 21,
-      "indexedDeliveries": 21
+      "count": 22,
+      "indexedDeliveries": 22
     },
     {
       "id": "semola",
@@ -20227,11 +20291,11 @@
     "productsWithData": 66,
     "indexedProducts": 66,
     "suppliers": 15,
-    "matchedDeliveries": 1219,
-    "matchedInvoices": 471,
-    "rawMatchedInvoices": 514,
+    "matchedDeliveries": 1223,
+    "matchedInvoices": 472,
+    "rawMatchedInvoices": 515,
     "duplicateDocumentsRemoved": 43,
-    "lastSupplyIso": "2026-11-18",
+    "lastSupplyIso": "2026-11-19",
     "scanStart": "2026-10-04"
   },
   "index": {
@@ -22749,6 +22813,17 @@
         "comparedProducts": 0,
         "newProducts": 0,
         "newSkus": 7,
+        "totalProducts": 67
+      },
+      {
+        "date": "19.11.2026",
+        "dateIso": "2026-11-19",
+        "value": 109.33,
+        "coverage": 66,
+        "compared": 0,
+        "comparedProducts": 0,
+        "newProducts": 0,
+        "newSkus": 4,
         "totalProducts": 67
       }
     ]
