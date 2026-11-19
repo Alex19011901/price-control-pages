@@ -67,7 +67,7 @@ function num(s){
       }
     }
     console.log('MIX_SCAN start='+START+' supplies='+supplies.length+' invoices='+tasks.length);
-    const docs=[],errors=[],nonItemDocs=[],auditAish1811=[];
+    const docs=[],errors=[],nonItemDocs=[];
     let next=0,scanned=0;
     async function parse(page,task){
       const {supply,invoice}=task;
@@ -101,10 +101,6 @@ function num(s){
         return{title,rows};
       });
       if(!detail.rows.length)throw new Error('MIX_NO_INVOICE_ROWS');
-      // One-time verification of the 18 Nov invoice before matching to the new supplier list.
-      if(supply.date==='18.11.2026'&&/айш гарден/i.test(supply.supplier.toLowerCase())){
-        auditAish1811.push({date:supply.date,supplier:supply.supplier,invoice:invoice.number||supply.number,items:detail.rows});
-      }
       const version=detail.title.match(/\(вер\.(\d+)\)/i);
       const items=[];
       for(const row of detail.rows){
@@ -164,7 +160,6 @@ function num(s){
       invoiceErrors:0,nonItemDocuments:nonItemDocs.length,
       nonItemSuppliers:[...new Set(nonItemDocs.map(x=>x.supplier))].sort((a,b)=>a.localeCompare(b,'ru')),
       matchedInvoices:invoices.length,
-      auditAish1811,
       invoices
     };
     fs.writeFileSync(OUT,JSON.stringify(payload,null,2)+'\n');
