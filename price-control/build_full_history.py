@@ -278,7 +278,7 @@ def slice_period_date(src, *, date_ru, key, label, start, end, price_date):
 # October periods use confirmed invoice slices only.
 # Preserve every closed period and its calculations instead of rebuilding them.
 _candidate = load_json(PC / "current.json")
-if _candidate["week"]["key"] in {"2026-10-04", "2026-10-08", "2026-10-14", "2026-10-16", "2026-10-19", "2026-10-22", "2026-10-23", "2026-10-27", "2026-10-30", "2026-10-31", "2026-11-05", "2026-11-10", "2026-11-13", "2026-11-14", "2026-11-16"}:
+if _candidate["week"]["key"] in {"2026-10-04", "2026-10-08", "2026-10-14", "2026-10-16", "2026-10-19", "2026-10-22", "2026-10-23", "2026-10-27", "2026-10-30", "2026-10-31", "2026-11-05", "2026-11-10", "2026-11-13", "2026-11-14", "2026-11-16", "2026-11-18"}:
     _current = _candidate["week"]
     validate_period(_current)
     _full = load_json(PC / "full.json")
@@ -298,6 +298,7 @@ if _candidate["week"]["key"] in {"2026-10-04", "2026-10-08", "2026-10-14", "2026
         "2026-11-13": "2026-11-10",
         "2026-11-14": "2026-11-13",
         "2026-11-16": "2026-11-14",
+        "2026-11-18": "2026-11-16",
     }[_current["key"]]
     _allowed_current_keys = {_previous_key, _current["key"]}
     if _current["key"] == "2026-10-23":
@@ -371,6 +372,23 @@ if _candidate["week"]["key"] in {"2026-10-04", "2026-10-08", "2026-10-14", "2026
     _combined_index = build_combined_price_index(_full["periods"])
     _full["indexGroups"]["paradis"] = _combined_index
     _full["indexGroups"]["interfood"] = _combined_index
+    if _current["key"] == "2026-11-18":
+        # New supplier, new base. Never chain price movements to Paradis.
+        _aish_included = len(_fresh_produce_price_qty_map(_current))
+        _full["indexGroups"]["aish_garden"] = {
+            "supplier": "Айш Гарден",
+            "scope": "fresh_produce",
+            "scopeLabel": "Фрукты / овощи / салаты",
+            "baseKey": "2026-11-18",
+            "baseLabel": "18.11",
+            "points": [{"key": "2026-11-18", "label": "18.11",
+                        "value": 100.0, "includedProducts": _aish_included}],
+            "current": 100.0,
+            "prevChange": None,
+            "periodChange": 0.0,
+            "commonProducts": None,
+            "previousCommonProducts": None,
+        }
     (PC / "full.json").write_text(json.dumps(_full, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     print("FULL_DATA_OK", json.dumps({"currentKey": _current["key"], "rows": _current["rows"], "overpay": _current["overpay"], "preservedPeriods": len(_old)}, ensure_ascii=False))
     raise SystemExit(0)
