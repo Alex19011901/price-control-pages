@@ -110,7 +110,24 @@ function loadInvoicePriceSlices() {
 
 (async () => {
   const todayMoscow = new Date(Date.now() + 3 * 60 * 60 * 1000).toISOString().slice(0, 10);
-  const cfg = todayMoscow >= '2026-11-18' ? {
+  const cfg = todayMoscow >= '2026-11-19' ? {
+    priceFile: null,
+    weekKey: '2026-11-19',
+    startIso: '2026-11-19',
+    endIso: '2026-11-19',
+    startRu: '19.11.2026',
+    endRu: '19.11.2026',
+    label: 'Поставка 19.11',
+    priceDocumentDate: '17.11.2026',
+    displayPriceDocumentDate: '17.11.2026',
+    validFrom: '18.11.2026',
+    supplierNeedle: 'айш гарден',
+    supplierLabel: 'Айш Гарден',
+    indexGroup: 'aish_garden',
+    requiredInvoice: 'УТАГ0003351',
+    requireInvoiceSlices: true,
+    sumPositiveRowImpacts: true
+  } : todayMoscow >= '2026-11-18' ? {
     // New supplier: require exact per-invoice price slices from 17 Nov Excel.
     // Never use a former Paradis price table for Aish Garden.
     priceFile: null,
