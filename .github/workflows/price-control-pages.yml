@@ -89,7 +89,7 @@ jobs:
           if independent:
               separate_index = original["indexGroups"]["aish_garden"]
               assert [p["key"] for p in separate_index["points"]] == sorted(p["key"] for p in independent)
-              assert separate_index["baseKey"] == independent[0]["key"]
+              assert separate_index["baseKey"] == min(p["key"] for p in independent), "Independent supplier index must start at the earliest date"
           keys = [p["key"] for p in index["points"]]
           assert keys == expected_keys, "Missing or duplicate index period"
           assert index["current"] == index["points"][-1]["value"]
