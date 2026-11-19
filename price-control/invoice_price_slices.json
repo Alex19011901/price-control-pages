@@ -4427,6 +4427,79 @@
           "unmatched": true
         }
       ]
+    },
+    {
+      "invoice": "УТАГ0003351",
+      "supplyDate": "19.11.2026",
+      "source": "ПРАЙС-2.xlsx",
+      "sourceValidDate": "17.11.2026",
+      "rows": [
+        {
+          "name": "Брокколи свежие",
+          "unit": "кг.",
+          "unmatched": true
+        },
+        {
+          "name": "Капуста цветная",
+          "unit": "кг.",
+          "price": 190.5
+        },
+        {
+          "name": "Клубника свежая",
+          "unit": "кг.",
+          "unmatched": true
+        },
+        {
+          "name": "Масло подсолнечное раф. 0,9 л.",
+          "unit": "шт.",
+          "unmatched": true
+        },
+        {
+          "name": "Сахарная пудра 1 кг",
+          "unit": "шт",
+          "price": 177.8
+        },
+        {
+          "name": "Томаты на ветке",
+          "unit": "кг.",
+          "unmatched": true
+        },
+        {
+          "name": "Томаты черри (красные) 250 гр.",
+          "unit": "шт.",
+          "unmatched": true
+        },
+        {
+          "name": "Шампиньоны",
+          "unit": "кг.",
+          "unmatched": true
+        },
+        {
+          "name": "Брокколи с/м",
+          "unit": "кг.",
+          "unmatched": true
+        },
+        {
+          "name": "Горошек зеленый с/м",
+          "unit": "кг.",
+          "unmatched": true
+        },
+        {
+          "name": "Тесто слоеное бездрожжевое <Звездный> 1 кг",
+          "unit": "шт",
+          "unmatched": true
+        },
+        {
+          "name": "Масло фритюрное <Городок> 10 л.",
+          "unit": "шт",
+          "price": 1905
+        },
+        {
+          "name": "Вешенки",
+          "unit": "кг.",
+          "unmatched": true
+        }
+      ]
     }
   ]
 }
