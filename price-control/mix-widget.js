@@ -72,6 +72,10 @@ function install(){
  '.mix-group-row td{background:#182838;color:#dce8f5;font-weight:800;text-align:left!important}',
  '.mix-prod{font-weight:700}.mix-price{font-weight:700}',
  '.mix-date,.mix-supplier{font-size:10px;color:var(--muted)}',
+ '.mix-date.mix-date-today,.mix-date.mix-date-yesterday,.mix-date.mix-date-before-yesterday{display:inline-block;padding:2px 5px;border-radius:4px;font-weight:800}',
+ '.mix-date.mix-date-today{background:#174b31;color:#a5f2c0}',
+ '.mix-date.mix-date-yesterday{background:#594316;color:#ffe78a}',
+ '.mix-date.mix-date-before-yesterday{background:#442758;color:#e8bdff}',
  '.mix-supplier{display:block;text-overflow:ellipsis;overflow:hidden;white-space:nowrap;margin-top:3px;max-width:135px;color:#aebdd0}',
  '.mix-empty{color:var(--muted)}',
  '.mix-stats{display:flex;gap:28px;flex-wrap:wrap;margin:10px 0}',
@@ -109,20 +113,33 @@ function install(){
  anchor.insertAdjacentElement('afterend',a);a.insertAdjacentElement('afterend',b);
  for(const k of ['mixGroup','mixSupplier','mixSearch'])id(k).addEventListener(k==='mixSearch'?'input':'change',renderTable);
 }
-function cell(row){
+// Dates are highlighted only in the Last Purchase column, based on Moscow's current date.
+function moscowTodayIso(){
+ const parts=new Intl.DateTimeFormat('en-US',{timeZone:'Europe/Moscow',year:'numeric',month:'2-digit',day:'2-digit'}).formatToParts(new Date());
+ const get=kind=>parts.find(p=>p.type===kind)?.value;
+ return get('year')+'-'+get('month')+'-'+get('day');
+}
+function recentDateClass(iso,today){
+ if(!/^\d{4}-\d{2}-\d{2}$/.test(String(iso||'')))return '';
+ const dayDiff=Math.round((Date.parse(today+'T00:00:00Z')-Date.parse(iso+'T00:00:00Z'))/86400000);
+ return dayDiff===0?'mix-date-today':dayDiff===1?'mix-date-yesterday':dayDiff===2?'mix-date-before-yesterday':'';
+}
+function cell(row,isLatest=false,today=''){
  if(!row)return '<td class="mix-empty">—</td>';
  const shown=visiblePrice(row);
  const info=shown.boxKg!=null?'Вес коробки: '+fmt(shown.boxKg)+' кг · Цена за кг: '+fmt(shown.fact)+' ₽':
    row.displayFact!=null?'Цена за '+shown.unit+': '+fmt(shown.fact)+' ₽':'';
  const title=[row.date,row.supplier,row.invoice,row.name,
    'В накладной: '+row.qty+' '+row.unit+' на '+fmt(row.sum)+' ₽',info].filter(Boolean).join(' · ');
- return '<td title="'+esc(title)+'"><span class="mix-date">'+esc(row.date.slice(0,5))+'</span>'+
+ const dateClass=isLatest?recentDateClass(row.dateIso,today):'';
+ return '<td title="'+esc(title)+'"><span class="mix-date'+(dateClass?' '+dateClass:'')+'">'+esc(row.date.slice(0,5))+'</span>'+
  '<div class="mix-price">'+fmt(shown.fact)+' ₽/'+esc(shown.unit)+'</div>'+
  '<span class="mix-supplier">'+esc(row.supplier)+'</span></td>';
 }
 function renderTable(){
  if(!state)return;
  const gsel=id('mixGroup').value,ssel=id('mixSupplier').value,query=id('mixSearch').value.toLowerCase().replace(/ё/g,'е').trim();
+ const today=moscowTodayIso();
  let html='',found=0;
  for(const group of state.groups){
   if(gsel&&group.id!==gsel)continue;
@@ -132,7 +149,7 @@ function renderTable(){
   for(const p of products){
    const entries=p.deliveries.filter(r=>!ssel||r.supplier===ssel);
    html+='<tr><td><div class="mix-prod">'+esc(p.label)+'</div><div class="mix-date">'+entries.length+' поставок</div></td>';
-   for(let i=0;i<=MAX;i++)html+=cell(entries[i]);
+   for(let i=0;i<=MAX;i++)html+=cell(entries[i],i===0,today);
    html+='</tr>';found++;
   }
  }
@@ -185,6 +202,9 @@ async function load(){
 }
 function init(){
  install();
+ // An open dashboard also rolls the highlight window forward at midnight Moscow time.
+ let previousDay=moscowTodayIso();
+ setInterval(()=>{const day=moscowTodayIso();if(day!==previousDay){previousDay=day;renderTable();}},60000);
  load().catch(e=>{
   if(id('mixRows'))id('mixRows').innerHTML='<tr><td colspan="7" class="mix-empty">Данные Микс пока недоступны: '+esc(e.message)+'</td></tr>';
   if(id('mixUpdated'))id('mixUpdated').textContent='Ожидается обновление';
