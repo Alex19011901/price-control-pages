@@ -4319,7 +4319,9 @@
         {
           "name": "Ананас, сорт <Голд>",
           "unit": "кг.",
-          "unmatched": true
+          "price": 304.8,
+          "priceSourceName": "Ананас голд",
+          "sourceRow": 95
         },
         {
           "name": "Апельсины",
@@ -4334,12 +4336,16 @@
         {
           "name": "Виноград красный <Ред Глоб>",
           "unit": "кг.",
-          "unmatched": true
+          "price": 355.6,
+          "priceSourceName": "Виноград Ред Глоб",
+          "sourceRow": 114
         },
         {
           "name": "Горбуша консервированная 245 гр.",
           "unit": "шт",
-          "unmatched": true
+          "price": 228.6,
+          "priceSourceName": "Горбуша консервированная 245 г",
+          "sourceRow": 186
         },
         {
           "name": "Картофель",
@@ -4369,12 +4375,16 @@
         {
           "name": "Перец сладкий (красный)",
           "unit": "кг.",
-          "unmatched": true
+          "price": 228.6,
+          "priceSourceName": "Перец красный",
+          "sourceRow": 40
         },
         {
           "name": "Перец сладкий (желтый)",
           "unit": "кг.",
-          "unmatched": true
+          "price": 228.6,
+          "priceSourceName": "Перец желтый",
+          "sourceRow": 38
         },
         {
           "name": "Петрушка листовая",
@@ -4394,7 +4404,11 @@
         {
           "name": "Руккола 125 гр.",
           "unit": "шт.",
-          "unmatched": true
+          "price": 206.38,
+          "priceSourceName": "Салат руккола 125 гр",
+          "sourceRow": 68,
+          "sourceUnit": "кг",
+          "formula": "1651 ₽/кг * 0.125 кг = 206.375 ₽ ≈ 206.38 ₽/шт"
         },
         {
           "name": "Салат Айсберг",
@@ -4409,7 +4423,9 @@
         {
           "name": "Укроп свежий",
           "unit": "кг.",
-          "unmatched": true
+          "price": 355.6,
+          "priceSourceName": "Укроп",
+          "sourceRow": 15
         },
         {
           "name": "Чеснок",
@@ -4437,7 +4453,9 @@
         {
           "name": "Брокколи свежие",
           "unit": "кг.",
-          "unmatched": true
+          "price": 317.5,
+          "priceSourceName": "Капуста брокколи",
+          "sourceRow": 21
         },
         {
           "name": "Капуста цветная",
@@ -4447,7 +4465,9 @@
         {
           "name": "Клубника свежая",
           "unit": "кг.",
-          "unmatched": true
+          "price": 3302,
+          "priceSourceName": "Клубника",
+          "sourceRow": 116
         },
         {
           "name": "Масло подсолнечное раф. 0,9 л.",
@@ -4467,22 +4487,32 @@
         {
           "name": "Томаты черри (красные) 250 гр.",
           "unit": "шт.",
-          "unmatched": true
+          "price": 158.75,
+          "priceSourceName": "Помидоры Черри красные 250 гр",
+          "sourceRow": 47,
+          "sourceUnit": "кг",
+          "formula": "635 ₽/кг * 0.25 кг = 158.75 ₽/шт"
         },
         {
           "name": "Шампиньоны",
           "unit": "кг.",
-          "unmatched": true
+          "price": 254,
+          "priceSourceName": "Грибы шампиньоны",
+          "sourceRow": 10
         },
         {
           "name": "Брокколи с/м",
           "unit": "кг.",
-          "unmatched": true
+          "price": 203.2,
+          "priceSourceName": "Капуста брокколи с/м (вес)",
+          "sourceRow": 504
         },
         {
           "name": "Горошек зеленый с/м",
           "unit": "кг.",
-          "unmatched": true
+          "price": 203.2,
+          "priceSourceName": "Горошек зеленый с/м (вес)",
+          "sourceRow": 503
         },
         {
           "name": "Тесто слоеное бездрожжевое <Звездный> 1 кг",
