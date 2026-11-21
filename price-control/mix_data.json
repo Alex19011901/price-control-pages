@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-20T18:38:16.022Z",
+  "generatedAt": "2026-11-21T17:31:37.392Z",
   "source": "DocsInBox",
   "start": "2026-01-01",
   "methodology": "Индекс Микс: база 100, равный вес каждой из выбранных товарных групп. Индекс изменяется только при повторной закупке одной и той же номенклатуры у того же поставщика в сопоставимой единице. Разные сорта, бренды, упаковки и поставщики не сравниваются между собой для расчёта изменения цены. При отсутствии повторной закупки предыдущее значение сохраняется, новые позиции включаются без скачка. История показывает все найденные товары и поставщиков.",
@@ -5311,7 +5311,7 @@
           "date": "18.11.2026",
           "dateIso": "2026-11-18",
           "supplier": "ООО \"АЙШ ГАРДЕН\"",
-          "invoice": "УТАГ0003335",
+          "invoice": "3335",
           "qty": 4,
           "sum": 914.4,
           "unit": "шт",
@@ -7624,6 +7624,22 @@
       "deliveries": [
         {
           "productId": "mozzarella_mini_150",
+          "date": "21.11.2026",
+          "dateIso": "2026-11-21",
+          "supplier": "ООО \"АЙШ ГАРДЕН\"",
+          "invoice": "УТАГ0003367",
+          "qty": 1,
+          "sum": 228.6,
+          "unit": "шт",
+          "fact": 228.6,
+          "name": "Сыр <Моцарелла мини> 150 гр.,шт. (00000001225)",
+          "displayFact": null,
+          "displayUnit": null,
+          "indexUnit": "кг",
+          "indexQty": 0.15
+        },
+        {
+          "productId": "mozzarella_mini_150",
           "date": "02.11.2026",
           "dateIso": "2026-11-02",
           "supplier": "ООО \"Парадис Экзотика\"",
@@ -8247,8 +8263,8 @@
           "indexQty": 0.75
         }
       ],
-      "count": 39,
-      "indexedDeliveries": 39
+      "count": 40,
+      "indexedDeliveries": 40
     },
     {
       "id": "cream_33",
@@ -13328,10 +13344,26 @@
       "deliveries": [
         {
           "productId": "vegetable_oil",
+          "date": "21.11.2026",
+          "dateIso": "2026-11-21",
+          "supplier": "ТЦ№ 19, ООО \"МЕТРО КЭШ ЭНД КЕРРИ\"",
+          "invoice": "9610924870199",
+          "qty": 15,
+          "sum": 2310,
+          "unit": "шт",
+          "fact": 154,
+          "name": "1Л МАСЛО ПОДСОЛНЕЧНОЕ ОЛЕЙНА,ШТ (146992)",
+          "displayFact": null,
+          "displayUnit": null,
+          "indexUnit": "л",
+          "indexQty": 15
+        },
+        {
+          "productId": "vegetable_oil",
           "date": "19.11.2026",
           "dateIso": "2026-11-19",
           "supplier": "ООО \"АЙШ ГАРДЕН\"",
-          "invoice": "УТАГ0003351",
+          "invoice": "3351",
           "qty": 30,
           "sum": 5334,
           "unit": "шт",
@@ -14079,8 +14111,8 @@
           "indexQty": 27
         }
       ],
-      "count": 47,
-      "indexedDeliveries": 44
+      "count": 48,
+      "indexedDeliveries": 45
     },
     {
       "id": "frying_oil",
@@ -14090,10 +14122,26 @@
       "deliveries": [
         {
           "productId": "frying_oil",
+          "date": "21.11.2026",
+          "dateIso": "2026-11-21",
+          "supplier": "ТЦ№ 19, ООО \"МЕТРО КЭШ ЭНД КЕРРИ\"",
+          "invoice": "9610924870199",
+          "qty": 2,
+          "sum": 3038,
+          "unit": "шт",
+          "fact": 1519,
+          "name": "10Л МАСЛО ПОДСОЛНЕЧ PECHAGIN PROFESSIONAL Д/ФРИТЮРА,ШТ (132233)",
+          "displayFact": null,
+          "displayUnit": null,
+          "indexUnit": "л",
+          "indexQty": 20
+        },
+        {
+          "productId": "frying_oil",
           "date": "19.11.2026",
           "dateIso": "2026-11-19",
           "supplier": "ООО \"АЙШ ГАРДЕН\"",
-          "invoice": "УТАГ0003351",
+          "invoice": "3351",
           "qty": 1,
           "sum": 1905,
           "unit": "шт",
@@ -14841,8 +14889,8 @@
           "indexQty": 20
         }
       ],
-      "count": 47,
-      "indexedDeliveries": 47
+      "count": 48,
+      "indexedDeliveries": 48
     },
     {
       "id": "sesame_oil",
@@ -15052,6 +15100,22 @@
       "group": "oils",
       "indexUnit": "л",
       "deliveries": [
+        {
+          "productId": "mayonnaise",
+          "date": "21.11.2026",
+          "dateIso": "2026-11-21",
+          "supplier": "ТЦ№ 19, ООО \"МЕТРО КЭШ ЭНД КЕРРИ\"",
+          "invoice": "9610924870199",
+          "qty": 1,
+          "sum": 1938.99,
+          "unit": "шт",
+          "fact": 1938.99,
+          "name": "10Л МАЙОНЕЗ 78% METRO CHEF ПРОВАНСАЛЬ,ШТ (121963)",
+          "displayFact": null,
+          "displayUnit": null,
+          "indexUnit": "л",
+          "indexQty": 10
+        },
         {
           "productId": "mayonnaise",
           "date": "10.11.2026",
@@ -15469,8 +15533,8 @@
           "indexQty": 20
         }
       ],
-      "count": 26,
-      "indexedDeliveries": 24
+      "count": 27,
+      "indexedDeliveries": 25
     },
     {
       "id": "soy_sauce",
@@ -16038,10 +16102,26 @@
       "deliveries": [
         {
           "productId": "puff_pastry",
+          "date": "21.11.2026",
+          "dateIso": "2026-11-21",
+          "supplier": "ООО \"АЙШ ГАРДЕН\"",
+          "invoice": "УТАГ0003367",
+          "qty": 3,
+          "sum": 762,
+          "unit": "шт",
+          "fact": 254,
+          "name": "Тесто слоеное бездрожжевое <Звездный> 1 кг,шт (00000000621)",
+          "displayFact": null,
+          "displayUnit": null,
+          "indexUnit": "кг",
+          "indexQty": 3
+        },
+        {
+          "productId": "puff_pastry",
           "date": "19.11.2026",
           "dateIso": "2026-11-19",
           "supplier": "ООО \"АЙШ ГАРДЕН\"",
-          "invoice": "УТАГ0003351",
+          "invoice": "3351",
           "qty": 2,
           "sum": 508,
           "unit": "шт",
@@ -16485,8 +16565,8 @@
           "indexQty": 3
         }
       ],
-      "count": 28,
-      "indexedDeliveries": 28
+      "count": 29,
+      "indexedDeliveries": 29
     },
     {
       "id": "frozen_peas",
@@ -16499,7 +16579,7 @@
           "date": "19.11.2026",
           "dateIso": "2026-11-19",
           "supplier": "ООО \"АЙШ ГАРДЕН\"",
-          "invoice": "УТАГ0003351",
+          "invoice": "3351",
           "qty": 0.8,
           "sum": 162.56,
           "unit": "кг",
@@ -20291,12 +20371,12 @@
     "productsWithData": 66,
     "indexedProducts": 66,
     "suppliers": 15,
-    "matchedDeliveries": 1223,
-    "matchedInvoices": 472,
-    "rawMatchedInvoices": 515,
+    "matchedDeliveries": 1228,
+    "matchedInvoices": 474,
+    "rawMatchedInvoices": 517,
     "duplicateDocumentsRemoved": 43,
-    "lastSupplyIso": "2026-11-20",
-    "scanStart": "2026-10-05"
+    "lastSupplyIso": "2026-11-21",
+    "scanStart": "2026-10-06"
   },
   "index": {
     "baseDate": "11.01.2026",
@@ -22822,6 +22902,17 @@
         "coverage": 66,
         "compared": 0,
         "comparedProducts": 0,
+        "newProducts": 0,
+        "newSkus": 4,
+        "totalProducts": 67
+      },
+      {
+        "date": "21.11.2026",
+        "dateIso": "2026-11-21",
+        "value": 109.33,
+        "coverage": 66,
+        "compared": 1,
+        "comparedProducts": 1,
         "newProducts": 0,
         "newSkus": 4,
         "totalProducts": 67

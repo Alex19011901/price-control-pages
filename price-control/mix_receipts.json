@@ -1,20 +1,20 @@
 {
   "schemaVersion": 1,
   "catalogRevision": 5,
-  "generatedAt": "2026-11-20T18:38:16.022Z",
+  "generatedAt": "2026-11-21T17:31:37.392Z",
   "from": "2026-01-01",
-  "scanStart": "2026-10-05",
-  "lastSupplyIso": "2026-11-20",
+  "scanStart": "2026-10-06",
+  "lastSupplyIso": "2026-11-21",
   "products": 67,
-  "suppliesScanned": 121,
-  "invoicesScanned": 146,
+  "suppliesScanned": 122,
+  "invoicesScanned": 147,
   "invoiceErrors": 0,
   "nonItemDocuments": 3,
   "nonItemSuppliers": [
     "АКЦИОНЕРНОЕ ОБЩЕСТВО \"МОСВОДОКАНАЛ\"",
     "ООО \"УК Система\""
   ],
-  "matchedInvoices": 515,
+  "matchedInvoices": 517,
   "invoices": [
     {
       "date": "11.01.2026",
@@ -14915,7 +14915,7 @@
     {
       "date": "18.11.2026",
       "supplier": "ООО \"АЙШ ГАРДЕН\"",
-      "invoice": "УТАГ0003335",
+      "invoice": "3335",
       "version": 1,
       "items": [
         {
@@ -14995,7 +14995,7 @@
     {
       "date": "19.11.2026",
       "supplier": "ООО \"АЙШ ГАРДЕН\"",
-      "invoice": "УТАГ0003351",
+      "invoice": "3351",
       "version": 1,
       "items": [
         {
@@ -15029,6 +15029,62 @@
           "unit": "шт",
           "qty": 1,
           "sum": 1905
+        }
+      ]
+    },
+    {
+      "date": "21.11.2026",
+      "supplier": "ООО \"АЙШ ГАРДЕН\"",
+      "invoice": "УТАГ0003367",
+      "version": 2,
+      "items": [
+        {
+          "line": 14,
+          "productId": "mozzarella_mini_150",
+          "name": "Сыр <Моцарелла мини> 150 гр.,шт. (00000001225)",
+          "unit": "шт.",
+          "qty": 1,
+          "sum": 228.6
+        },
+        {
+          "line": 15,
+          "productId": "puff_pastry",
+          "name": "Тесто слоеное бездрожжевое <Звездный> 1 кг,шт (00000000621)",
+          "unit": "шт",
+          "qty": 3,
+          "sum": 762
+        }
+      ]
+    },
+    {
+      "date": "21.11.2026",
+      "supplier": "ТЦ№ 19, ООО \"МЕТРО КЭШ ЭНД КЕРРИ\"",
+      "invoice": "9610924870199",
+      "version": 1,
+      "items": [
+        {
+          "line": 2,
+          "productId": "mayonnaise",
+          "name": "10Л МАЙОНЕЗ 78% METRO CHEF ПРОВАНСАЛЬ,ШТ (121963)",
+          "unit": "ШТ",
+          "qty": 1,
+          "sum": 1938.99
+        },
+        {
+          "line": 3,
+          "productId": "frying_oil",
+          "name": "10Л МАСЛО ПОДСОЛНЕЧ PECHAGIN PROFESSIONAL Д/ФРИТЮРА,ШТ (132233)",
+          "unit": "ШТ",
+          "qty": 2,
+          "sum": 3038
+        },
+        {
+          "line": 4,
+          "productId": "vegetable_oil",
+          "name": "1Л МАСЛО ПОДСОЛНЕЧНОЕ ОЛЕЙНА,ШТ (146992)",
+          "unit": "ШТ",
+          "qty": 15,
+          "sum": 2310
         }
       ]
     }
