@@ -1,20 +1,20 @@
 {
   "schemaVersion": 1,
   "catalogRevision": 5,
-  "generatedAt": "2026-11-21T17:31:37.392Z",
+  "generatedAt": "2026-11-22T17:50:55.977Z",
   "from": "2026-01-01",
-  "scanStart": "2026-10-06",
+  "scanStart": "2026-10-07",
   "lastSupplyIso": "2026-11-21",
   "products": 67,
-  "suppliesScanned": 122,
-  "invoicesScanned": 147,
+  "suppliesScanned": 118,
+  "invoicesScanned": 142,
   "invoiceErrors": 0,
   "nonItemDocuments": 3,
   "nonItemSuppliers": [
     "АКЦИОНЕРНОЕ ОБЩЕСТВО \"МОСВОДОКАНАЛ\"",
     "ООО \"УК Система\""
   ],
-  "matchedInvoices": 517,
+  "matchedInvoices": 518,
   "invoices": [
     {
       "date": "11.01.2026",
@@ -15035,8 +15035,32 @@
     {
       "date": "21.11.2026",
       "supplier": "ООО \"АЙШ ГАРДЕН\"",
+      "invoice": "3367",
+      "version": 1,
+      "items": [
+        {
+          "line": 14,
+          "productId": "mozzarella_mini_150",
+          "name": "Сыр <Моцарелла мини> 150 гр.,шт. (00000001225)",
+          "unit": "шт.",
+          "qty": 1,
+          "sum": 228.6
+        },
+        {
+          "line": 15,
+          "productId": "puff_pastry",
+          "name": "Тесто слоеное бездрожжевое <Звездный> 1 кг,шт (00000000621)",
+          "unit": "шт",
+          "qty": 3,
+          "sum": 762
+        }
+      ]
+    },
+    {
+      "date": "21.11.2026",
+      "supplier": "ООО \"АЙШ ГАРДЕН\"",
       "invoice": "УТАГ0003367",
-      "version": 2,
+      "version": 1,
       "items": [
         {
           "line": 14,

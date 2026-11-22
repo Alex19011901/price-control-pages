@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-21T17:31:37.392Z",
+  "generatedAt": "2026-11-22T17:50:55.977Z",
   "source": "DocsInBox",
   "start": "2026-01-01",
   "methodology": "Индекс Микс: база 100, равный вес каждой из выбранных товарных групп. Индекс изменяется только при повторной закупке одной и той же номенклатуры у того же поставщика в сопоставимой единице. Разные сорта, бренды, упаковки и поставщики не сравниваются между собой для расчёта изменения цены. При отсутствии повторной закупки предыдущее значение сохраняется, новые позиции включаются без скачка. История показывает все найденные товары и поставщиков.",
@@ -7640,6 +7640,22 @@
         },
         {
           "productId": "mozzarella_mini_150",
+          "date": "21.11.2026",
+          "dateIso": "2026-11-21",
+          "supplier": "ООО \"АЙШ ГАРДЕН\"",
+          "invoice": "3367",
+          "qty": 1,
+          "sum": 228.6,
+          "unit": "шт",
+          "fact": 228.6,
+          "name": "Сыр <Моцарелла мини> 150 гр.,шт. (00000001225)",
+          "displayFact": null,
+          "displayUnit": null,
+          "indexUnit": "кг",
+          "indexQty": 0.15
+        },
+        {
+          "productId": "mozzarella_mini_150",
           "date": "02.11.2026",
           "dateIso": "2026-11-02",
           "supplier": "ООО \"Парадис Экзотика\"",
@@ -8263,8 +8279,8 @@
           "indexQty": 0.75
         }
       ],
-      "count": 40,
-      "indexedDeliveries": 40
+      "count": 41,
+      "indexedDeliveries": 41
     },
     {
       "id": "cream_33",
@@ -16118,6 +16134,22 @@
         },
         {
           "productId": "puff_pastry",
+          "date": "21.11.2026",
+          "dateIso": "2026-11-21",
+          "supplier": "ООО \"АЙШ ГАРДЕН\"",
+          "invoice": "3367",
+          "qty": 3,
+          "sum": 762,
+          "unit": "шт",
+          "fact": 254,
+          "name": "Тесто слоеное бездрожжевое <Звездный> 1 кг,шт (00000000621)",
+          "displayFact": null,
+          "displayUnit": null,
+          "indexUnit": "кг",
+          "indexQty": 3
+        },
+        {
+          "productId": "puff_pastry",
           "date": "19.11.2026",
           "dateIso": "2026-11-19",
           "supplier": "ООО \"АЙШ ГАРДЕН\"",
@@ -16565,8 +16597,8 @@
           "indexQty": 3
         }
       ],
-      "count": 29,
-      "indexedDeliveries": 29
+      "count": 30,
+      "indexedDeliveries": 30
     },
     {
       "id": "frozen_peas",
@@ -20371,12 +20403,12 @@
     "productsWithData": 66,
     "indexedProducts": 66,
     "suppliers": 15,
-    "matchedDeliveries": 1228,
-    "matchedInvoices": 474,
-    "rawMatchedInvoices": 517,
+    "matchedDeliveries": 1230,
+    "matchedInvoices": 475,
+    "rawMatchedInvoices": 518,
     "duplicateDocumentsRemoved": 43,
     "lastSupplyIso": "2026-11-21",
-    "scanStart": "2026-10-06"
+    "scanStart": "2026-10-07"
   },
   "index": {
     "baseDate": "11.01.2026",
