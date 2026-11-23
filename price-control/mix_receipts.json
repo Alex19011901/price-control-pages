@@ -1,20 +1,20 @@
 {
   "schemaVersion": 1,
   "catalogRevision": 5,
-  "generatedAt": "2026-11-22T17:50:55.977Z",
+  "generatedAt": "2026-11-23T22:04:18.977Z",
   "from": "2026-01-01",
   "scanStart": "2026-10-07",
-  "lastSupplyIso": "2026-11-21",
+  "lastSupplyIso": "2026-11-23",
   "products": 67,
-  "suppliesScanned": 118,
-  "invoicesScanned": 142,
+  "suppliesScanned": 121,
+  "invoicesScanned": 147,
   "invoiceErrors": 0,
   "nonItemDocuments": 3,
   "nonItemSuppliers": [
     "АКЦИОНЕРНОЕ ОБЩЕСТВО \"МОСВОДОКАНАЛ\"",
     "ООО \"УК Система\""
   ],
-  "matchedInvoices": 518,
+  "matchedInvoices": 520,
   "invoices": [
     {
       "date": "11.01.2026",
@@ -15109,6 +15109,94 @@
           "unit": "ШТ",
           "qty": 15,
           "sum": 2310
+        }
+      ]
+    },
+    {
+      "date": "23.11.2026",
+      "supplier": "ООО \"АЙШ ГАРДЕН\"",
+      "invoice": "УТАГ0003391",
+      "version": 1,
+      "items": [
+        {
+          "line": 12,
+          "productId": "quail_egg",
+          "name": "Яйцо перепелиное (20 шт.),яч. (00000000862)",
+          "unit": "яч.",
+          "qty": 1,
+          "sum": 177.8
+        }
+      ]
+    },
+    {
+      "date": "23.11.2026",
+      "supplier": "ТЦ№ 19, ООО \"МЕТРО КЭШ ЭНД КЕРРИ\"",
+      "invoice": "9610932010199",
+      "version": 1,
+      "items": [
+        {
+          "line": 4,
+          "productId": "wheat_flour",
+          "name": "10КГ МУКА METRO CHEF ПШЕНИЧНАЯ ХЛЕБОПЕКАРНАЯ В/С,ШТ (119027)",
+          "unit": "ШТ",
+          "qty": 1,
+          "sum": 519
+        },
+        {
+          "line": 6,
+          "productId": "cube_sugar",
+          "name": "1КГ САХАР RIOBA ТРОСТНИКОВЫЙ КУСКОВОЙ,ШТ (121623)",
+          "unit": "ШТ",
+          "qty": 2,
+          "sum": 598
+        },
+        {
+          "line": 10,
+          "productId": "chicken_egg",
+          "name": "180ШТ ЯЙЦО КУРИНОЕ С1 METRO CHEF МЫТОЕ ДЕЗИНФИЦИР,ШТ (137836)",
+          "unit": "ШТ",
+          "qty": 2,
+          "sum": 3798
+        },
+        {
+          "line": 17,
+          "productId": "pizza_sausages",
+          "name": "~1,25КГ СОСИСКИ ЧЕРКИЗОВО ВЕНСКИЕ,КГ (261201)",
+          "unit": "КГ",
+          "qty": 8.535,
+          "sum": 3917.57
+        },
+        {
+          "line": 18,
+          "productId": "cube_sugar",
+          "name": "500Г САХАР МИСТРАЛЬ КОРИЧНЕВЫЙ КУСКОВОЙ,ШТ (269413)",
+          "unit": "ШТ",
+          "qty": 16,
+          "sum": 7214.4
+        },
+        {
+          "line": 19,
+          "productId": "milk",
+          "name": "950Г МОЛОКО У/ПАСТ 3,2% ДОМИК В ДЕРЕВНЕ БЗМЖ,ШТ (317126)",
+          "unit": "ШТ",
+          "qty": 24,
+          "sum": 2157.6
+        },
+        {
+          "line": 20,
+          "productId": "butter_450",
+          "name": "450Г МАСЛО СЛИВОЧНОЕ 82,5% METRO CHEF ТРАДИЦИОННОЕ ГОСТ БЗМЖ,ШТ (347030)",
+          "unit": "ШТ",
+          "qty": 24,
+          "sum": 11256
+        },
+        {
+          "line": 21,
+          "productId": "cream_33",
+          "name": "1КГ СЛИВКИ У/ПАСТ 33% ПЕТМОЛ Д/ВЗБИВАНИЯ БЗМЖ,ШТ (387199)",
+          "unit": "ШТ",
+          "qty": 24,
+          "sum": 10536
         }
       ]
     }

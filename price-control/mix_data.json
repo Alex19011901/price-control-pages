@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-22T17:50:55.977Z",
+  "generatedAt": "2026-11-23T22:04:18.977Z",
   "source": "DocsInBox",
   "start": "2026-01-01",
   "methodology": "Индекс Микс: база 100, равный вес каждой из выбранных товарных групп. Индекс изменяется только при повторной закупке одной и той же номенклатуры у того же поставщика в сопоставимой единице. Разные сорта, бренды, упаковки и поставщики не сравниваются между собой для расчёта изменения цены. При отсутствии повторной закупки предыдущее значение сохраняется, новые позиции включаются без скачка. История показывает все найденные товары и поставщиков.",
@@ -4420,6 +4420,22 @@
       "deliveries": [
         {
           "productId": "pizza_sausages",
+          "date": "23.11.2026",
+          "dateIso": "2026-11-23",
+          "supplier": "ТЦ№ 19, ООО \"МЕТРО КЭШ ЭНД КЕРРИ\"",
+          "invoice": "9610932010199",
+          "qty": 8.54,
+          "sum": 3917.57,
+          "unit": "кг",
+          "fact": 459,
+          "name": "~1,25КГ СОСИСКИ ЧЕРКИЗОВО ВЕНСКИЕ,КГ (261201)",
+          "displayFact": null,
+          "displayUnit": null,
+          "indexUnit": "кг",
+          "indexQty": 8.535
+        },
+        {
+          "productId": "pizza_sausages",
           "date": "17.11.2026",
           "dateIso": "2026-11-17",
           "supplier": "ООО \"Парадис Экзотика\"",
@@ -4691,8 +4707,8 @@
           "indexQty": 4.73
         }
       ],
-      "count": 17,
-      "indexedDeliveries": 17
+      "count": 18,
+      "indexedDeliveries": 18
     },
     {
       "id": "tiger_shrimp",
@@ -8290,6 +8306,22 @@
       "deliveries": [
         {
           "productId": "cream_33",
+          "date": "23.11.2026",
+          "dateIso": "2026-11-23",
+          "supplier": "ТЦ№ 19, ООО \"МЕТРО КЭШ ЭНД КЕРРИ\"",
+          "invoice": "9610932010199",
+          "qty": 24,
+          "sum": 10536,
+          "unit": "шт",
+          "fact": 439,
+          "name": "1КГ СЛИВКИ У/ПАСТ 33% ПЕТМОЛ Д/ВЗБИВАНИЯ БЗМЖ,ШТ (387199)",
+          "displayFact": null,
+          "displayUnit": null,
+          "indexUnit": "кг",
+          "indexQty": 24
+        },
+        {
+          "productId": "cream_33",
           "date": "12.11.2026",
           "dateIso": "2026-11-12",
           "supplier": "ООО \"МЕТРО Кэш энд Керри\"",
@@ -8865,8 +8897,8 @@
           "indexQty": 12
         }
       ],
-      "count": 36,
-      "indexedDeliveries": 32
+      "count": 37,
+      "indexedDeliveries": 33
     },
     {
       "id": "cream_10",
@@ -9140,6 +9172,22 @@
       "group": "dairy",
       "indexUnit": "л",
       "deliveries": [
+        {
+          "productId": "milk",
+          "date": "23.11.2026",
+          "dateIso": "2026-11-23",
+          "supplier": "ТЦ№ 19, ООО \"МЕТРО КЭШ ЭНД КЕРРИ\"",
+          "invoice": "9610932010199",
+          "qty": 24,
+          "sum": 2157.6,
+          "unit": "шт",
+          "fact": 89.9,
+          "name": "950Г МОЛОКО У/ПАСТ 3,2% ДОМИК В ДЕРЕВНЕ БЗМЖ,ШТ (317126)",
+          "displayFact": null,
+          "displayUnit": null,
+          "indexUnit": "кг",
+          "indexQty": 22.8
+        },
         {
           "productId": "milk",
           "date": "11.11.2026",
@@ -10277,7 +10325,7 @@
           "indexQty": 24
         }
       ],
-      "count": 71,
+      "count": 72,
       "indexedDeliveries": 62
     },
     {
@@ -10286,6 +10334,22 @@
       "group": "dairy",
       "indexUnit": "кг",
       "deliveries": [
+        {
+          "productId": "butter_450",
+          "date": "23.11.2026",
+          "dateIso": "2026-11-23",
+          "supplier": "ТЦ№ 19, ООО \"МЕТРО КЭШ ЭНД КЕРРИ\"",
+          "invoice": "9610932010199",
+          "qty": 24,
+          "sum": 11256,
+          "unit": "шт",
+          "fact": 469,
+          "name": "450Г МАСЛО СЛИВОЧНОЕ 82,5% METRO CHEF ТРАДИЦИОННОЕ ГОСТ БЗМЖ,ШТ (347030)",
+          "displayFact": null,
+          "displayUnit": null,
+          "indexUnit": "кг",
+          "indexQty": 10.8
+        },
         {
           "productId": "butter_450",
           "date": "10.11.2026",
@@ -10575,8 +10639,8 @@
           "indexQty": 5.4
         }
       ],
-      "count": 18,
-      "indexedDeliveries": 18
+      "count": 19,
+      "indexedDeliveries": 19
     },
     {
       "id": "butter_330",
@@ -11580,6 +11644,22 @@
       "deliveries": [
         {
           "productId": "chicken_egg",
+          "date": "23.11.2026",
+          "dateIso": "2026-11-23",
+          "supplier": "ТЦ№ 19, ООО \"МЕТРО КЭШ ЭНД КЕРРИ\"",
+          "invoice": "9610932010199",
+          "qty": 2,
+          "sum": 3798,
+          "unit": "шт",
+          "fact": 1899,
+          "name": "180ШТ ЯЙЦО КУРИНОЕ С1 METRO CHEF МЫТОЕ ДЕЗИНФИЦИР,ШТ (137836)",
+          "displayFact": 10.55,
+          "displayUnit": "шт",
+          "indexUnit": "шт",
+          "indexQty": 360
+        },
+        {
+          "productId": "chicken_egg",
           "date": "18.11.2026",
           "dateIso": "2026-11-18",
           "supplier": "ТЦ№ 19, ООО \"МЕТРО КЭШ ЭНД КЕРРИ\"",
@@ -12507,8 +12587,8 @@
           "indexQty": 180
         }
       ],
-      "count": 58,
-      "indexedDeliveries": 58
+      "count": 59,
+      "indexedDeliveries": 59
     },
     {
       "id": "quail_egg",
@@ -12516,6 +12596,22 @@
       "group": "eggs",
       "indexUnit": "шт",
       "deliveries": [
+        {
+          "productId": "quail_egg",
+          "date": "23.11.2026",
+          "dateIso": "2026-11-23",
+          "supplier": "ООО \"АЙШ ГАРДЕН\"",
+          "invoice": "УТАГ0003391",
+          "qty": 1,
+          "sum": 177.8,
+          "unit": "яч",
+          "fact": 177.8,
+          "name": "Яйцо перепелиное (20 шт.),яч. (00000000862)",
+          "displayFact": null,
+          "displayUnit": null,
+          "indexUnit": null,
+          "indexQty": null
+        },
         {
           "productId": "quail_egg",
           "date": "17.11.2026",
@@ -13349,7 +13445,7 @@
           "indexQty": 20
         }
       ],
-      "count": 52,
+      "count": 53,
       "indexedDeliveries": 52
     },
     {
@@ -15980,6 +16076,38 @@
       "deliveries": [
         {
           "productId": "cube_sugar",
+          "date": "23.11.2026",
+          "dateIso": "2026-11-23",
+          "supplier": "ТЦ№ 19, ООО \"МЕТРО КЭШ ЭНД КЕРРИ\"",
+          "invoice": "9610932010199",
+          "qty": 16,
+          "sum": 7214.4,
+          "unit": "шт",
+          "fact": 450.9,
+          "name": "500Г САХАР МИСТРАЛЬ КОРИЧНЕВЫЙ КУСКОВОЙ,ШТ (269413)",
+          "displayFact": null,
+          "displayUnit": null,
+          "indexUnit": "кг",
+          "indexQty": 8
+        },
+        {
+          "productId": "cube_sugar",
+          "date": "23.11.2026",
+          "dateIso": "2026-11-23",
+          "supplier": "ТЦ№ 19, ООО \"МЕТРО КЭШ ЭНД КЕРРИ\"",
+          "invoice": "9610932010199",
+          "qty": 2,
+          "sum": 598,
+          "unit": "шт",
+          "fact": 299,
+          "name": "1КГ САХАР RIOBA ТРОСТНИКОВЫЙ КУСКОВОЙ,ШТ (121623)",
+          "displayFact": null,
+          "displayUnit": null,
+          "indexUnit": "кг",
+          "indexQty": 2
+        },
+        {
+          "productId": "cube_sugar",
           "date": "19.10.2026",
           "dateIso": "2026-10-19",
           "supplier": "ООО \"Парадис Экзотика\"",
@@ -16107,8 +16235,8 @@
           "indexQty": 7.5
         }
       ],
-      "count": 8,
-      "indexedDeliveries": 8
+      "count": 10,
+      "indexedDeliveries": 10
     },
     {
       "id": "puff_pastry",
@@ -17204,6 +17332,22 @@
       "deliveries": [
         {
           "productId": "wheat_flour",
+          "date": "23.11.2026",
+          "dateIso": "2026-11-23",
+          "supplier": "ТЦ№ 19, ООО \"МЕТРО КЭШ ЭНД КЕРРИ\"",
+          "invoice": "9610932010199",
+          "qty": 1,
+          "sum": 519,
+          "unit": "шт",
+          "fact": 519,
+          "name": "10КГ МУКА METRO CHEF ПШЕНИЧНАЯ ХЛЕБОПЕКАРНАЯ В/С,ШТ (119027)",
+          "displayFact": null,
+          "displayUnit": null,
+          "indexUnit": "кг",
+          "indexQty": 10
+        },
+        {
+          "productId": "wheat_flour",
           "date": "18.11.2026",
           "dateIso": "2026-11-18",
           "supplier": "ТЦ№ 19, ООО \"МЕТРО КЭШ ЭНД КЕРРИ\"",
@@ -17619,8 +17763,8 @@
           "indexQty": 60
         }
       ],
-      "count": 26,
-      "indexedDeliveries": 26
+      "count": 27,
+      "indexedDeliveries": 27
     },
     {
       "id": "almond_flakes",
@@ -20403,11 +20547,11 @@
     "productsWithData": 66,
     "indexedProducts": 66,
     "suppliers": 15,
-    "matchedDeliveries": 1230,
-    "matchedInvoices": 475,
-    "rawMatchedInvoices": 518,
+    "matchedDeliveries": 1239,
+    "matchedInvoices": 477,
+    "rawMatchedInvoices": 520,
     "duplicateDocumentsRemoved": 43,
-    "lastSupplyIso": "2026-11-21",
+    "lastSupplyIso": "2026-11-23",
     "scanStart": "2026-10-07"
   },
   "index": {
@@ -22947,6 +23091,17 @@
         "comparedProducts": 1,
         "newProducts": 0,
         "newSkus": 4,
+        "totalProducts": 67
+      },
+      {
+        "date": "23.11.2026",
+        "dateIso": "2026-11-23",
+        "value": 109.33,
+        "coverage": 66,
+        "compared": 1,
+        "comparedProducts": 1,
+        "newProducts": 0,
+        "newSkus": 6,
         "totalProducts": 67
       }
     ]
