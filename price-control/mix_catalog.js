@@ -73,6 +73,7 @@ const PRODUCTS=[
   {id:'teriyaki',label:'Соус терияки',group:'oils',re:/терияк|teriyaki/},
 
   {id:'cube_sugar',label:'Сахар кусковой',group:'grocery',re:/сахар.{0,70}(?:кусков|рафинад)|рафинад.{0,70}сахар/},
+  {id:'aro_crystal_sugar',label:'Сахар кристаллический ARO',group:'grocery',displayOnly:true,re:/\(\s*210381\s*\)$/,require:/сахар.*(?:aro|аро).*кристаллич/},
   {id:'puff_pastry',label:'Тесто слоёное',group:'grocery',re:/тест[оа].{0,55}слоен|слоен.{0,55}тест[оа]/},
   {id:'frozen_peas',label:'Горошек с/м',group:'grocery',re:/горош[е]к.{0,100}(?:с\/м|заморож|быстрозам|свежеморож)|(?:заморож|с\/м).{0,90}горош[е]к/},
   {id:'semola',label:'Мука семола / семолина',group:'grocery',re:/семол|semol|мук.{0,50}(?:тверд|тв[её]рд).{0,15}сорт/},
@@ -98,8 +99,8 @@ function unit(s){return norm(s).replace(/[.]/g,'');}
 module.exports={GROUPS,PRODUCTS,klassify:classify,classify,iso,round2,unit,norm};
 if(require.main===module){
   const assert=require('node:assert/strict');
-  assert.equal(PRODUCTS.length,67);
-  assert.equal(new Set(PRODUCTS.map(p=>p.id)).size,67);
+  assert.equal(PRODUCTS.length,68);
+  assert.equal(new Set(PRODUCTS.map(p=>p.id)).size,68);
   const yes=[
     ['Яйцо Мытое С1 (дезинфицированное),шт','chicken_egg'],
     ['Яйцо перепелиное 20 шт/уп,упак','quail_egg'],
@@ -127,6 +128,8 @@ if(require.main===module){
     ['Куриные наггетсы,кг','chicken_nuggets'],
     ['Масло кунжутное 0,5л,шт','sesame_oil'],
     ['Сахар кусковой 1кг,шт','cube_sugar'],
+    ['5КГ САХАР ARO БЕЛЫЙ КРИСТАЛЛИЧЕСКИЙ ТС2,шт (210381)','aro_crystal_sugar'],
+    ['1КГ САХАР ARO БЕЛЫЙ КУСКОВОЙ,ШТ (248021)','cube_sugar'],
     ['Тесто слоеное бездрожжевое 500г,шт','puff_pastry'],
     ['Зеленый горошек с/м,кг','frozen_peas'],
     ['Глазной мускул б/к,кг','beef_eye'],

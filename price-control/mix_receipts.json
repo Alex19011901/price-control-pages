@@ -5,7 +5,7 @@
   "from": "2026-01-01",
   "scanStart": "2026-10-10",
   "lastSupplyIso": "2026-11-24",
-  "products": 67,
+  "products": 68,
   "suppliesScanned": 112,
   "invoicesScanned": 138,
   "invoiceErrors": 0,
@@ -13199,6 +13199,14 @@
           "sum": 2049
         },
         {
+          "line": 5,
+          "productId": "aro_crystal_sugar",
+          "name": "5КГ САХАР ARO БЕЛЫЙ КРИСТАЛЛИЧЕСКИЙ ТС2,шт (210381)",
+          "unit": "ШТ",
+          "qty": 4,
+          "sum": 1756
+        },
+        {
           "line": 11,
           "productId": "wheat_flour",
           "name": "10КГ МУКА MAMMA MIA PIZZA ДЛЯ ПИЦЦЫ В/С,ШТ (646913)",
@@ -13671,6 +13679,14 @@
       "version": 1,
       "items": [
         {
+          "line": 2,
+          "productId": "aro_crystal_sugar",
+          "name": "5КГ САХАР ARO БЕЛЫЙ КРИСТАЛЛИЧЕСКИЙ ТС2,шт (210381)",
+          "unit": "ШТ",
+          "qty": 4,
+          "sum": 1756
+        },
+        {
           "line": 3,
           "productId": "cream_33",
           "name": "1КГ СЛИВКИ У/ПАСТ 33% ЭКОНИВА PROF LINE Д/ВЗБИВАНИЯ БЗМЖ,ШТ (239285)",
@@ -14095,6 +14111,14 @@
           "sum": 2885.05
         },
         {
+          "line": 5,
+          "productId": "aro_crystal_sugar",
+          "name": "5КГ САХАР ARO БЕЛЫЙ КРИСТАЛЛИЧЕСКИЙ ТС2,шт (210381)",
+          "unit": "ШТ",
+          "qty": 2,
+          "sum": 878
+        },
+        {
           "line": 6,
           "productId": "cream_33",
           "name": "1КГ СЛИВКИ У/ПАСТ 33% ПЕТМОЛ Д/ВЗБИВАНИЯ БЗМЖ,ШТ (387199)",
@@ -14415,6 +14439,14 @@
           "sum": 653.94
         },
         {
+          "line": 6,
+          "productId": "aro_crystal_sugar",
+          "name": "5КГ САХАР ARO БЕЛЫЙ КРИСТАЛЛИЧЕСКИЙ ТС2,шт (210381)",
+          "unit": "ШТ",
+          "qty": 2,
+          "sum": 878
+        },
+        {
           "line": 8,
           "productId": "green_olives",
           "name": "850Г ОЛИВКИ FEDERICI СУПЕРГИГАНТ С КОСТОЧКОЙ,ШТ (236617)",
@@ -14629,6 +14661,14 @@
           "unit": "ШТ",
           "qty": 2,
           "sum": 1398
+        },
+        {
+          "line": 4,
+          "productId": "aro_crystal_sugar",
+          "name": "5КГ САХАР ARO БЕЛЫЙ КРИСТАЛЛИЧЕСКИЙ ТС2,шт (210381)",
+          "unit": "ШТ",
+          "qty": 4,
+          "sum": 1756
         }
       ]
     },

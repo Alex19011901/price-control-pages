@@ -7,6 +7,8 @@ const OUT=process.argv[3]||path.join(__dirname,'mix_data.json');
 const data=JSON.parse(fs.readFileSync(INPUT,'utf8'));
 if(data.schemaVersion!==1||!Array.isArray(data.invoices)||data.invoiceErrors!==0)throw new Error('MIX_INVALID_RECEIPTS');
 const knownIds=new Set(PRODUCTS.map(p=>p.id));
+const indexProductCount=PRODUCTS.filter(p=>!p.displayOnly).length;
+const displayOnlyIds=new Set(PRODUCTS.filter(p=>p.displayOnly).map(p=>p.id));
 function normalizeIndexQty(r,id){
   const qty=Number(r.qty),u=unit(r.unit),name=String(r.name||'').toLowerCase().replace(/ё/g,'е');
   if(!Number.isFinite(qty)||qty<=0)return null;
@@ -150,7 +152,7 @@ const entries=[...grouped.values()].map(x=>{
  const n=normalizeIndexQty({name,qty:x.qty,unit:x.unit},x.productId);
  // Flour and lump sugar: a package has an exact declared weight, so display
  // the actual price per kg. Butter is deliberately left per pack, as approved.
- const flourOrSugar=(x.productId==='wheat_flour'||x.productId==='cube_sugar')&&n?.u==='кг';
+ const flourOrSugar=(x.productId==='wheat_flour'||x.productId==='cube_sugar'||x.productId==='aro_crystal_sugar')&&n?.u==='кг';
  const normalizedDisplay=(x.productId==='chicken_egg'||x.productId==='quail_egg'||x.productId==='tiger_shrimp'||flourOrSugar)&&n&&n.qty>0;
  const mozzaPieces=x.productId==='mozzarella_125'&&['шт','штука','штуки'].includes(x.unit)?mozzarella125Pieces(name):null;
  const mozzaTotalPieces=mozzaPieces&&x.qty>0?x.qty*mozzaPieces:null;
@@ -173,10 +175,10 @@ const products=PRODUCTS.map(p=>{
  // Keep only comparable units in the aggregate index. Never mix pieces, kg and liters.
  const counts=new Map();
  for(const r of deliveries)if(r.indexUnit&&r.indexQty>0)counts.set(r.indexUnit,(counts.get(r.indexUnit)||0)+1);
- const dominant=[...counts].sort((a,b)=>b[1]-a[1]||a[0].localeCompare(b[0]))[0]?.[0]||null;
+ const dominant=p.displayOnly?null:[...counts].sort((a,b)=>b[1]-a[1]||a[0].localeCompare(b[0]))[0]?.[0]||null;
  return {id:p.id,label:p.label,group:p.group,indexUnit:dominant,
    deliveries:[...deliveries].reverse(),count:deliveries.length,
-   indexedDeliveries:deliveries.filter(r=>r.indexUnit===dominant).length};
+   indexedDeliveries:p.displayOnly?0:deliveries.filter(r=>r.indexUnit===dominant).length};
 });
 const indexedProducts=products.filter(p=>p.indexUnit&&p.indexedDeliveries>0);
 // Only compare identical catalog rows from the same supplier in the same
@@ -236,7 +238,7 @@ for(const [dateIso,day] of [...daily].sort((a,b)=>a[0].localeCompare(b[0]))){
   points.push({date:dateIso.slice(8,10)+'.'+dateIso.slice(5,7)+'.'+dateIso.slice(0,4),
     dateIso,value:round2(value),coverage:activeProductIds.size,
     compared:comparableSkus,comparedProducts:comparableByProduct.size,
-    newProducts:activeProductIds.size-productsBefore,newSkus,totalProducts:PRODUCTS.length});
+    newProducts:activeProductIds.size-productsBefore,newSkus,totalProducts:indexProductCount});
 }
 const suppliers=[...new Set(entries.map(x=>x.supplier))].sort((a,b)=>a.localeCompare(b,'ru'));
 const output={
@@ -249,7 +251,7 @@ const output={
    rawMatchedInvoices:data.matchedInvoices,duplicateDocumentsRemoved,
    lastSupplyIso:data.lastSupplyIso,scanStart:data.scanStart},
  index:{baseDate:points[0]?.date||null,base:100,current:points.at(-1)?.value??null,
-   coverage:points.at(-1)?.coverage||0,productsWithNoIndex:products.filter(x=>!x.indexUnit).map(x=>x.id),
+   coverage:points.at(-1)?.coverage||0,productsWithNoIndex:products.filter(x=>!x.indexUnit&&!displayOnlyIds.has(x.id)).map(x=>x.id),
    points}
 };
 fs.writeFileSync(OUT,JSON.stringify(output,null,2)+'\n');

@@ -83,9 +83,9 @@ jobs:
           raw=json.loads(Path("price-control/mix_receipts.json").read_text())
           data=json.loads(Path("price-control/mix_data.json").read_text())
           assert raw["schemaVersion"]==1 and raw["invoiceErrors"]==0
-          assert len(data["products"])==67 and len(data["groups"])==8
-          assert len({p["id"] for p in data["products"]})==67
-          assert data["stats"]["selectedProducts"]==67
+          assert len(data["products"])==68 and len(data["groups"])==8
+          assert len({p["id"] for p in data["products"]})==68
+          assert data["stats"]["selectedProducts"]==68
           groups={g["id"] for g in data["groups"]}
           assert "olives_black" in groups and "olives_green" in groups
           assert next(p for p in data["products"] if p["id"]=="black_olives")["group"]=="olives_black"
@@ -98,6 +98,11 @@ jobs:
           assert tray and all(r["displayUnit"]=="шт" and r["displayFact"]==8.89 for r in tray)
           cube=next(p for p in data["products"] if p["id"]=="cube_sugar")
           assert all(r["displayUnit"]=="кг" and r["displayFact"] is not None for r in cube["deliveries"])
+          crystal=next(p for p in data["products"] if p["id"]=="aro_crystal_sugar")
+          assert crystal["indexUnit"] is None and crystal["indexedDeliveries"]==0
+          assert all(r["displayUnit"]=="кг" and r["displayFact"] is not None and "(210381)" in r["name"] for r in crystal["deliveries"])
+          assert all(any(r["date"]==day for r in crystal["deliveries"]) for day in ("06.10.2026","14.10.2026","23.10.2026","02.11.2026","07.11.2026"))
+          assert all(p["totalProducts"]==67 for p in data["index"]["points"])
           pea=next(p for p in data["products"] if p["id"]=="frozen_peas")
           latest=pea["deliveries"][0]
           assert latest["date"]=="19.11.2026" and latest["unit"]=="кг" and latest["qty"]==0.8
