@@ -14,6 +14,13 @@ function normalizeIndexQty(r,id){
   if(u==='г'||u==='гр')return{u:'кг',qty:qty/1000};
   if(u==='л'||u==='литр'||u==='литры')return{u:'л',qty};
   if(u==='мл')return{u:'л',qty:qty/1000};
+  // DocsInBox can call a tray 'яч.' while specifying its exact egg count.
+  // Only multiply when the receipt explicitly says how many eggs are in it.
+  if(id==='quail_egg'&&u==='яч'){
+    const tray=name.match(/\(\s*(\d{1,3})\s*шт\.?\s*\)/);
+    const pieces=tray?Number(tray[1]):null;
+    return pieces>=2&&pieces<=360?{u:'шт',qty:qty*pieces}:null;
+  }
   // For package goods, convert only exact printed content. Never guess volume/weight.
   if(['шт','штука','штуки','упак','упаковка','уп','пак','бут','бутылка','банка'].includes(u)){
     const eggs=id==='chicken_egg'||id==='quail_egg';
@@ -114,6 +121,18 @@ for(const invoice of distinctInvoices){
    const g=grouped.get(key);g.qty+=q;g.sum+=sum;g.names.add(String(item.name||''));
  }
 }
+// Special invoice convention: one 3 kg wholesale pack contains 24 individual
+// mozzarella portions of 125 g. Show the price per 125 g piece, while leaving
+// the original package-level SKU index and the original invoice totals intact.
+function mozzarella125Pieces(name){
+ const s=String(name||'').toLowerCase().replace(/ё/g,'е').replace(/\u00a0/g,' ');
+ if(!/125\s*(?:гр|г|g)(?=$|[^а-яa-z])/.test(s))return null;
+ const packs=[...s.matchAll(/(?:^|[\s,(])уп\.?\s*(\d+(?:[.,]\d+)?)\s*(кг|гр|г)(?=$|[^а-яa-z])/g)];
+ if(packs.length!==1)return null;
+ const x=packs[0],massG=Number(x[1].replace(',','.'))*(x[2]==='кг'?1000:1);
+ const count=massG/125;
+ return Number.isInteger(count)&&count>=2&&count<=240?count:null;
+}
 const entries=[...grouped.values()].map(x=>{
  const name=[...x.names].sort((a,b)=>a.localeCompare(b,'ru'))[0];
  const n=normalizeIndexQty({name,qty:x.qty,unit:x.unit},x.productId);
@@ -121,13 +140,15 @@ const entries=[...grouped.values()].map(x=>{
  // the actual price per kg. Butter is deliberately left per pack, as approved.
  const flourOrSugar=(x.productId==='wheat_flour'||x.productId==='cube_sugar')&&n?.u==='кг';
  const normalizedDisplay=(x.productId==='chicken_egg'||x.productId==='quail_egg'||x.productId==='tiger_shrimp'||flourOrSugar)&&n&&n.qty>0;
+ const mozzaPieces=x.productId==='mozzarella_125'&&['шт','штука','штуки'].includes(x.unit)?mozzarella125Pieces(name):null;
+ const mozzaTotalPieces=mozzaPieces&&x.qty>0?x.qty*mozzaPieces:null;
  return{
    productId:x.productId,date:x.date,dateIso:x.dateIso,supplier:x.supplier,
    invoice:x.invoice,qty:round2(x.qty),sum:round2(x.sum),unit:x.unit,
    fact:round2(x.sum/x.qty),name,
    // Actual price per egg; shrimp as before; flour/sugar per confirmed kg.
-   displayFact:normalizedDisplay?round2(x.sum/n.qty):null,
-   displayUnit:normalizedDisplay?n.u:null,
+   displayFact:mozzaTotalPieces?round2(x.sum/mozzaTotalPieces):normalizedDisplay?round2(x.sum/n.qty):null,
+   displayUnit:mozzaTotalPieces?'шт':normalizedDisplay?n.u:null,
    indexUnit:n?.u||null,indexQty:n?Number(n.qty.toFixed(6)):null
  };
 }).sort(byDateAsc);

@@ -7,7 +7,9 @@ const GROUPS=[
   {id:'dairy',label:'Молочные продукты и сыры'},
   {id:'eggs',label:'Яйца'},
   {id:'oils',label:'Масла и соусы'},
-  {id:'grocery',label:'Бакалея и заморозка'}
+  {id:'grocery',label:'Бакалея и заморозка'},
+  {id:'olives_black',label:'Маслины'},
+  {id:'olives_green',label:'Оливки'}
 ];
 const PRODUCTS=[
   {id:'chicken_legs',label:'Куриные окорочка',group:'meat',re:/окорочк/,exclude:/индюш|индейк|утин|утк|свин|свиной|говяж/},
@@ -77,8 +79,8 @@ const PRODUCTS=[
   {id:'wheat_flour',label:'Мука пшеничная',group:'grocery',re:/мук.{0,100}(?:пшенич|в\/с|высш|для пицц|pizza)|(?:пшенич|пицц).{0,50}мука/,exclude:/семол|semol|тв[её]рд.{0,25}сорт|темпур|кляр|миндал|рисов/},
   {id:'almond_flakes',label:'Миндальные лепестки / резаный миндаль',group:'grocery',re:/миндал.{0,50}(?:лепест|резан)|(?:лепест|резан).{0,50}миндал/},
   {id:'sweet_peas',label:'Горошек сладкий',group:'grocery',re:/горош.{0,45}(?:сладк|сахарн)|(?:сладк|сахарн).{0,40}горош/,exclude:/перец|специ|с\/м|заморож/},
-  {id:'black_olives',label:'Маслины / чёрные оливки',group:'grocery',re:/маслин|оливк.{0,35}черн|черн.{0,35}оливк/,exclude:/оливков.{0,25}масл|масло.{0,40}оливков/},
-  {id:'green_olives',label:'Оливки (зелёные и прочие)',group:'grocery',re:/оливк/,exclude:/маслин|черн|оливков.{0,25}масл|масло.{0,40}оливков/},
+  {id:'black_olives',label:'Маслины',group:'olives_black',re:/маслин|оливк.{0,35}черн|черн.{0,35}оливк/,exclude:/оливков.{0,25}масл|масло.{0,40}оливков/},
+  {id:'green_olives',label:'Оливки',group:'olives_green',re:/оливк/,exclude:/маслин|черн|оливков.{0,25}масл|масло.{0,40}оливков/},
   {id:'buckwheat',label:'Крупа гречневая',group:'grocery',re:/гречк|гречнев/,exclude:/греческ|сиртак|мед|гречишн|пшенич/},
   {id:'walnut',label:'Орех грецкий',group:'grocery',re:/грецк.{0,30}орех|орех.{0,30}грецк/},
   {id:'artichokes',label:'Артишоки',group:'grocery',re:/артишок|artichok|artichoke/},
