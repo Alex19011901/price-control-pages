@@ -1,0 +1,70 @@
+name: Price Control Produce
+on:
+  push:
+    paths:
+      - ".github/workflows/price-control-produce.yml"
+      - "price-control/produce-core.js"
+      - "price-control/produce_scan.js"
+      - "price-control/produce_test.js"
+  workflow_run:
+    workflows:
+      - Price Control Mix
+    types:
+      - completed
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: price-control-mix-refresh
+  cancel-in-progress: false
+jobs:
+  produce:
+    if: github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+      - name: Check fresh produce catalog and archived history
+        run: |
+          node --check price-control/produce-core.js
+          node --check price-control/produce_scan.js
+          node --check price-control/produce-widget.js
+          node price-control/produce_test.js
+      - name: Install Playwright
+        run: |
+          npm init -y >/dev/null 2>&1
+          npm install playwright@1.55.0 >/dev/null 2>&1
+          CHROME_BIN="$(command -v google-chrome || command -v google-chrome-stable || true)"
+          if [ -n "$CHROME_BIN" ]; then
+            echo "MIX_CHROME_EXECUTABLE=$CHROME_BIN" >> "$GITHUB_ENV"
+          else
+            npx playwright install --with-deps chromium
+          fi
+      - name: Restore authenticated DocsInBox session
+        env:
+          DXBX_STORAGE_STATE: ${{ secrets.DXBX_STORAGE_STATE }}
+          DXBX_LOGIN: ${{ secrets.DXBX_LOGIN }}
+          DXBX_PASSWORD: ${{ secrets.DXBX_PASSWORD }}
+        run: node price-control/prepare_dxbx_auth.js /tmp/price-control-produce-auth.json
+      - name: Read fresh produce purchases from all suppliers
+        env:
+          DOCSINBOX_STORAGE_STATE: /tmp/price-control-produce-auth.json
+          MIX_CHROME_EXECUTABLE: ${{ env.MIX_CHROME_EXECUTABLE }}
+        run: node price-control/produce_scan.js price-control/produce_receipts.json
+      - name: Validate produce history
+        run: node price-control/produce_test.js
+      - name: Save only produce receipts
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add price-control/produce_receipts.json
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -m "Update verified fresh produce receipt history"
+          git pull --rebase origin main
+          git push origin HEAD:main
+      - name: Clean up session
+        if: always()
+        run: rm -f /tmp/price-control-produce-auth.json /tmp/price-control-produce-auth.json.*.tmp

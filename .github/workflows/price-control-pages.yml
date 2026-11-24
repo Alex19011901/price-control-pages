@@ -18,11 +18,16 @@ on:
       - "price-control/purchase-history-widget.js"
       - "price-control/mix_data.json"
       - "price-control/mix-widget.js"
+      - "price-control/produce-core.js"
+      - "price-control/produce-widget.js"
+      - "price-control/produce_receipts.json"
+      - "price-control/produce_test.js"
   workflow_run:
     workflows:
       - Price Control Public Refresh
       - Price Control Purchase History
       - Price Control Mix
+      - Price Control Produce
     types:
       - completed
   workflow_dispatch:
@@ -127,6 +132,12 @@ jobs:
           cp price-control/tracked-products-widget.js public-site/tracked-products-widget.js
           cp price-control/purchase-history-widget.js public-site/purchase-history-widget.js
           cp price-control/mix-widget.js public-site/mix-widget.js
+          cp price-control/produce-core.js public-site/produce-core.js
+          cp price-control/produce-widget.js public-site/produce-widget.js
+          if [ -f price-control/produce_receipts.json ]; then
+            cp price-control/produce_receipts.json public-site/produce_receipts.json
+          fi
+          node price-control/produce_test.js
           if [ -f price-control/mix_data.json ]; then
             cp price-control/mix_data.json public-site/mix_data.json
           fi
@@ -145,6 +156,10 @@ jobs:
           ]
           if Path("public-site/mix_data.json").exists():
               widget_scripts.append(f'<script src="./mix-widget.js?v={version[:12]}"></script>')
+          widget_scripts.extend([
+              f'<script src="./produce-core.js?v={version[:12]}"></script>',
+              f'<script src="./produce-widget.js?v={version[:12]}"></script>',
+          ])
 
 
           class RefreshLinkParser(HTMLParser):
@@ -180,6 +195,8 @@ jobs:
                   raise SystemExit("Purchase History widget missing")
               if Path("public-site/mix_data.json").exists() and path.name != "price-control-trigger.html" and "mix-widget.js" not in html:
                   raise SystemExit("Mix widget missing")
+              if path.name != "price-control-trigger.html" and ("produce-core.js" not in html or "produce-widget.js" not in html):
+                  raise SystemExit("Produce widget missing")
 
               path.write_text(html, encoding="utf-8")
 
@@ -195,6 +212,8 @@ jobs:
           payload_names = ["current.json", "full.json", "purchase_history.json", "tracked_products.json"]
           if Path("public-site/mix_data.json").exists():
               payload_names.append("mix_data.json")
+          if Path("public-site/produce_receipts.json").exists():
+              payload_names.append("produce_receipts.json")
           for name in payload_names:
               original = Path("price-control", name).read_bytes()
               if original != Path("public-site", name).read_bytes():
