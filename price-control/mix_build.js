@@ -117,13 +117,17 @@ for(const invoice of distinctInvoices){
 const entries=[...grouped.values()].map(x=>{
  const name=[...x.names].sort((a,b)=>a.localeCompare(b,'ru'))[0];
  const n=normalizeIndexQty({name,qty:x.qty,unit:x.unit},x.productId);
+ // Flour and lump sugar: a package has an exact declared weight, so display
+ // the actual price per kg. Butter is deliberately left per pack, as approved.
+ const flourOrSugar=(x.productId==='wheat_flour'||x.productId==='cube_sugar')&&n?.u==='кг';
+ const normalizedDisplay=(x.productId==='chicken_egg'||x.productId==='quail_egg'||x.productId==='tiger_shrimp'||flourOrSugar)&&n&&n.qty>0;
  return{
    productId:x.productId,date:x.date,dateIso:x.dateIso,supplier:x.supplier,
    invoice:x.invoice,qty:round2(x.qty),sum:round2(x.sum),unit:x.unit,
    fact:round2(x.sum/x.qty),name,
-   // Actual price per egg; for shrimp, normalized price per kilogram.
-   displayFact:((x.productId==='chicken_egg'||x.productId==='quail_egg'||x.productId==='tiger_shrimp')&&n&&n.qty>0)?round2(x.sum/n.qty):null,
-   displayUnit:((x.productId==='chicken_egg'||x.productId==='quail_egg'||x.productId==='tiger_shrimp')&&n&&n.qty>0)?n.u:null,
+   // Actual price per egg; shrimp as before; flour/sugar per confirmed kg.
+   displayFact:normalizedDisplay?round2(x.sum/n.qty):null,
+   displayUnit:normalizedDisplay?n.u:null,
    indexUnit:n?.u||null,indexQty:n?Number(n.qty.toFixed(6)):null
  };
 }).sort(byDateAsc);
