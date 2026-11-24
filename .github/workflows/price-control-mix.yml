@@ -100,7 +100,9 @@ jobs:
           assert all(r["displayUnit"]=="кг" and r["displayFact"] is not None for r in cube["deliveries"])
           pea=next(p for p in data["products"] if p["id"]=="frozen_peas")
           latest=pea["deliveries"][0]
-          assert latest["date"]=="19.11.2026" and latest["unit"]=="кг" and latest["displayUnit"] is None
+          assert latest["date"]=="19.11.2026" and latest["unit"]=="кг" and latest["qty"]==0.8
+          assert latest["sum"]==162.56 and latest["displayUnit"]=="шт" and latest["displayFact"]==81.28
+          assert latest["displayPack"]=="2 пачки по 400 г" and latest["indexUnit"]=="кг" and latest["indexQty"]==0.8
           for butter_id in ("butter_450","butter_330"):
               butter=next(p for p in data["products"] if p["id"]==butter_id)
               assert all(r["displayFact"] is None for r in butter["deliveries"])

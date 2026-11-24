@@ -133,6 +133,18 @@ function mozzarella125Pieces(name){
  const count=massG/125;
  return Number.isInteger(count)&&count>=2&&count<=240?count:null;
 }
+// User-confirmed DocsInBox exception for 19 Nov Aish Garden:
+// "Горошек зеленый с/м" 0.8 kg = two retail 400 g packs.
+ // Convert only the DISPLAY; keep the source kg/qty/sum and the index as-is.
+function confirmedFrozenPeaPacks(x,name){
+  const document=String(x.invoice||'').toUpperCase().replace(/\s+/g,'');
+  const correctDocument=/^(?:УТАГ0*)?3351$/.test(document);
+  if(x.productId!=='frozen_peas'||x.dateIso!=='2026-11-19'||
+    !norm(x.supplier).includes('айш гарден')||!correctDocument||
+    !name.includes('(00000003057)')||x.unit!=='кг'||
+    round2(x.qty)!==0.8||round2(x.sum)!==162.56)return null;
+  return {pieces:2,gramsPerPack:400};
+}
 const entries=[...grouped.values()].map(x=>{
  const name=[...x.names].sort((a,b)=>a.localeCompare(b,'ru'))[0];
  const n=normalizeIndexQty({name,qty:x.qty,unit:x.unit},x.productId);
@@ -142,13 +154,15 @@ const entries=[...grouped.values()].map(x=>{
  const normalizedDisplay=(x.productId==='chicken_egg'||x.productId==='quail_egg'||x.productId==='tiger_shrimp'||flourOrSugar)&&n&&n.qty>0;
  const mozzaPieces=x.productId==='mozzarella_125'&&['шт','штука','штуки'].includes(x.unit)?mozzarella125Pieces(name):null;
  const mozzaTotalPieces=mozzaPieces&&x.qty>0?x.qty*mozzaPieces:null;
+ const peaPacks=confirmedFrozenPeaPacks(x,name);
  return{
    productId:x.productId,date:x.date,dateIso:x.dateIso,supplier:x.supplier,
    invoice:x.invoice,qty:round2(x.qty),sum:round2(x.sum),unit:x.unit,
    fact:round2(x.sum/x.qty),name,
    // Actual price per egg; shrimp as before; flour/sugar per confirmed kg.
-   displayFact:mozzaTotalPieces?round2(x.sum/mozzaTotalPieces):normalizedDisplay?round2(x.sum/n.qty):null,
-   displayUnit:mozzaTotalPieces?'шт':normalizedDisplay?n.u:null,
+   displayFact:peaPacks?round2(x.sum/peaPacks.pieces):mozzaTotalPieces?round2(x.sum/mozzaTotalPieces):normalizedDisplay?round2(x.sum/n.qty):null,
+   displayUnit:peaPacks?'шт':mozzaTotalPieces?'шт':normalizedDisplay?n.u:null,
+   displayPack:peaPacks?'2 пачки по 400 г':null,
    indexUnit:n?.u||null,indexQty:n?Number(n.qty.toFixed(6)):null
  };
 }).sort(byDateAsc);

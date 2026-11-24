@@ -130,7 +130,8 @@ function cell(row,isLatest=false,today=''){
  const info=shown.boxKg!=null?'Вес коробки: '+fmt(shown.boxKg)+' кг · Цена за кг: '+fmt(shown.fact)+' ₽':
    row.displayFact!=null?'Цена за '+shown.unit+': '+fmt(shown.fact)+' ₽':'';
  const title=[row.date,row.supplier,row.invoice,row.name,
-   'В накладной: '+row.qty+' '+row.unit+' на '+fmt(row.sum)+' ₽',info].filter(Boolean).join(' · ');
+   'В накладной: '+row.qty+' '+row.unit+' на '+fmt(row.sum)+' ₽',
+   row.displayPack?'Подтверждено: '+row.displayPack:null,info].filter(Boolean).join(' · ');
  const dateClass=isLatest?recentDateClass(row.dateIso,today):'';
  return '<td title="'+esc(title)+'"><span class="mix-date'+(dateClass?' '+dateClass:'')+'">'+esc(row.date.slice(0,5))+'</span>'+
  '<div class="mix-price">'+fmt(shown.fact)+' ₽/'+esc(shown.unit)+'</div>'+
