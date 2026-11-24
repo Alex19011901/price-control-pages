@@ -8,6 +8,30 @@ const fmt=(v,n=2)=>v==null||!Number.isFinite(Number(v))?'—':Number(v).toLocale
 const svg=(tag,attrs={},value)=>{const x=document.createElementNS(NS,tag);Object.entries(attrs).forEach(([k,v])=>x.setAttribute(k,String(v)));if(value!=null)x.textContent=String(value);return x};
 
 const DUCK_SKIN_IDS=new Set(['duck_fillet_oz500','duck_fillet_oz400','duck_fillet_myasko','duck_fillet_china']);
+// Size-specific Mix table display only; raw receipts and index remain untouched.
+const OLIVE_PRODUCT_IDS=new Set(['black_olives','green_olives']);
+const OLIVE_GROUP_IDS=new Set(['olives_black','olives_green']);
+const OLIVE_VIEW_GROUPS=[
+ {id:'olives_850',label:'Оливки и маслины 850 г'},
+ {id:'olives_300',label:'Оливки 300 г'}
+];
+function exactOliveSize(name,grams){
+ const s=String(name||'').toLowerCase().replace(/ё/g,'е');
+ return new RegExp('(?:^|[^\\d])'+grams+'\\s*г(?:р(?:амм)?)?(?=$|[^а-яa-z])').test(s);
+}
+function oliveTableProducts(all){
+ const receipts=all.filter(p=>OLIVE_PRODUCT_IDS.has(p.id)).flatMap(p=>p.deliveries);
+ const byDate=(a,b)=>b.dateIso.localeCompare(a.dateIso)||
+   a.supplier.localeCompare(b.supplier,'ru')||a.invoice.localeCompare(b.invoice,'ru');
+ const big=receipts.filter(r=>exactOliveSize(r.name,850))
+   .map(r=>({...r,displayFact:r.fact,displayUnit:'банка'})).sort(byDate);
+ const small=receipts.filter(r=>exactOliveSize(r.name,300)&&/оливк/i.test(r.name))
+   .map(r=>({...r,displayFact:r.fact,displayUnit:'шт'})).sort(byDate);
+ return [
+  {id:'olive_850_view',label:'Оливки и маслины 850 г',group:'olives_850',deliveries:big},
+  {id:'olive_300_view',label:'Оливки 300 г',group:'olives_300',deliveries:small}
+ ];
+}
 function duckSkinOther(row){
  const name=String(row.name||'').toLowerCase().replace(/ё/g,'е');
  return !/(?:без\s+кожи|б\/к)/.test(name)&&/(?:на\s+коже|с\s+кожей|н\/к)/.test(name);
@@ -15,6 +39,7 @@ function duckSkinOther(row){
 // Combine only the visible purchase-history rows, preserving exact SKU indexing.
 function tableProducts(){
  const all=state.products;
+ const oliveProducts=oliveTableProducts(all);
  const other=all.find(p=>p.id==='duck_fillet_other');
  const duck=all.filter(p=>DUCK_SKIN_IDS.has(p.id));
  const history=duck.flatMap(p=>p.deliveries)
@@ -32,6 +57,8 @@ function tableProducts(){
      const remaining=p.deliveries.filter(row=>!duckSkinOther(row));
      return remaining.length?[{...p,deliveries:remaining}]:[];
    }
+   if(p.id==='black_olives')return oliveProducts;
+   if(p.id==='green_olives')return [];
    if(p.id==='cube_sugar'){
      // Display only the user-selected ARO sugar SKU, never mixing brands
      // or their separate pack sizes in the visible purchase history.
@@ -108,7 +135,7 @@ function install(){
  '<div class="mix-table-scroll"><table class="mix-table"><thead><tr>'+
  '<th>Товар</th><th>Последняя закупка</th><th>Пред. 1</th><th>Пред. 2</th><th>Пред. 3</th><th>Пред. 4</th><th>Пред. 5</th>'+
  '</tr></thead><tbody id="mixRows"><tr><td colspan="7">Загрузка истории…</td></tr></tbody></table></div>'+
- '<div class="mix-note">История закупок DocsInBox по всем поставщикам. В каждом столбце дата, фактическая цена и поставщик; номер накладной и полное название видны при наведении. Несколько строк одного товара в одной накладной объединяются по сумме и количеству. Яйца показываются по цене за 1 шт; креветки и коробки с указанным весом — за 1 кг. Варианты филе утки на коже собраны в одну строку, а для остальных товаров сохраняется единица накладной. Для кускового сахара показываются только закупки ARO, цена за 1 кг.</div>';
+ '<div class="mix-note">История закупок DocsInBox по всем поставщикам. В каждом столбце дата, фактическая цена и поставщик; номер накладной и полное название видны при наведении. Несколько строк одного товара в одной накладной объединяются по сумме и количеству. Яйца показываются по цене за 1 шт; креветки и коробки с указанным весом — за 1 кг. Варианты филе утки на коже собраны в одну строку, а для остальных товаров сохраняется единица накладной. Для кускового сахара показываются только закупки ARO, цена за 1 кг. Оливки и маслины показаны только в категориях 850 г (за банку) и оливки 300 г (за штуку). Фасовки другого веса здесь не показываются.</div>';
  const b=document.createElement('section');b.id='mixIndexCard';b.className='card mix-index-card';
  b.innerHTML=
  '<div class="mix-title"><h2>Индекс Микс</h2><span class="mix-muted">База 100</span></div>'+
@@ -201,8 +228,8 @@ async function load(){
  if(!r.ok)throw new Error('HTTP '+r.status);
  const j=await r.json();
  if(!Array.isArray(j.products)||!Array.isArray(j.groups)||!j.index)throw new Error('Неверный формат данных');
- state=j;
- id('mixGroup').innerHTML='<option value="">Все категории</option>'+j.groups.map(g=>'<option value="'+esc(g.id)+'">'+esc(g.label)+'</option>').join('');
+ state={...j,groups:[...j.groups.filter(g=>!OLIVE_GROUP_IDS.has(g.id)),...OLIVE_VIEW_GROUPS]};
+ id('mixGroup').innerHTML='<option value="">Все категории</option>'+state.groups.map(g=>'<option value="'+esc(g.id)+'">'+esc(g.label)+'</option>').join('');
  id('mixSupplier').innerHTML='<option value="">Все поставщики</option>'+j.suppliers.map(s=>'<option value="'+esc(s)+'">'+esc(s)+'</option>').join('');
  id('mixUpdated').textContent='По '+(j.stats.lastSupplyIso||'—');
  id('mixMeta').textContent='Выбрано '+j.stats.selectedProducts+' · с закупками '+j.stats.productsWithData+' · поставщиков '+j.stats.suppliers+' · записей '+j.stats.matchedDeliveries;
