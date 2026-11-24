@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-24T10:27:21.484Z",
+  "generatedAt": "2026-11-24T12:49:33.804Z",
   "source": "DocsInBox",
   "start": "2026-01-01",
   "methodology": "Индекс Микс: база 100, равный вес каждой из выбранных товарных групп. Индекс изменяется только при повторной закупке одной и той же номенклатуры у того же поставщика в сопоставимой единице. Разные сорта, бренды, упаковки и поставщики не сравниваются между собой для расчёта изменения цены. При отсутствии повторной закупки предыдущее значение сохраняется, новые позиции включаются без скачка. История показывает все найденные товары и поставщиков.",
@@ -28,6 +28,14 @@
     {
       "id": "grocery",
       "label": "Бакалея и заморозка"
+    },
+    {
+      "id": "olives_black",
+      "label": "Маслины"
+    },
+    {
+      "id": "olives_green",
+      "label": "Оливки"
     }
   ],
   "products": [
@@ -7335,8 +7343,8 @@
           "unit": "шт",
           "fact": 2805,
           "name": "Сыр Моцарелла 125 г (Mozzarella) уп.3кг,шт (УН-00000249)",
-          "displayFact": null,
-          "displayUnit": null,
+          "displayFact": 116.88,
+          "displayUnit": "шт",
           "indexUnit": "шт",
           "indexQty": 2
         },
@@ -7383,8 +7391,8 @@
           "unit": "шт",
           "fact": 2805,
           "name": "Сыр Моцарелла 125 г (Mozzarella) уп.3кг,шт (УН-00000249)",
-          "displayFact": null,
-          "displayUnit": null,
+          "displayFact": 116.88,
+          "displayUnit": "шт",
           "indexUnit": "шт",
           "indexQty": 2
         },
@@ -7399,8 +7407,8 @@
           "unit": "шт",
           "fact": 2805,
           "name": "Сыр Моцарелла 125 г (Mozzarella) уп.3кг,шт (УН-00000249)",
-          "displayFact": null,
-          "displayUnit": null,
+          "displayFact": 116.88,
+          "displayUnit": "шт",
           "indexUnit": "шт",
           "indexQty": 3
         },
@@ -7431,8 +7439,8 @@
           "unit": "шт",
           "fact": 2805,
           "name": "Сыр Моцарелла 125 г (Mozzarella) уп.3кг,шт (УН-00000249)",
-          "displayFact": null,
-          "displayUnit": null,
+          "displayFact": 116.88,
+          "displayUnit": "шт",
           "indexUnit": "шт",
           "indexQty": 3
         },
@@ -7463,8 +7471,8 @@
           "unit": "шт",
           "fact": 2805,
           "name": "Сыр Моцарелла 125 г (Mozzarella) уп.3кг,шт (УН-00000249)",
-          "displayFact": null,
-          "displayUnit": null,
+          "displayFact": 116.88,
+          "displayUnit": "шт",
           "indexUnit": "шт",
           "indexQty": 4
         },
@@ -7479,8 +7487,8 @@
           "unit": "шт",
           "fact": 2550,
           "name": "Сыр Моцарелла 125 г (Mozzarella) уп.3кг,шт (УН-00000249)",
-          "displayFact": null,
-          "displayUnit": null,
+          "displayFact": 106.25,
+          "displayUnit": "шт",
           "indexUnit": "шт",
           "indexQty": 3
         },
@@ -7495,8 +7503,8 @@
           "unit": "шт",
           "fact": 2805,
           "name": "Сыр Моцарелла 125г (Mozzarella) уп.3кг БОН ЛАТТЕ,шт (УН-00000249)",
-          "displayFact": null,
-          "displayUnit": null,
+          "displayFact": 116.88,
+          "displayUnit": "шт",
           "indexUnit": "шт",
           "indexQty": 3
         },
@@ -7607,8 +7615,8 @@
           "unit": "шт",
           "fact": 2805,
           "name": "Сыр Моцарелла 125г (Mozzarella) уп.3кг БОН ЛАТТЕ,шт (УН-00000249)",
-          "displayFact": null,
-          "displayUnit": null,
+          "displayFact": 116.88,
+          "displayUnit": "шт",
           "indexUnit": "шт",
           "indexQty": 3
         },
@@ -7623,8 +7631,8 @@
           "unit": "шт",
           "fact": 2805,
           "name": "Сыр Моцарелла 125г (Mozzarella) уп.3кг БОН ЛАТТЕ,шт (УН-00000249)",
-          "displayFact": null,
-          "displayUnit": null,
+          "displayFact": 116.88,
+          "displayUnit": "шт",
           "indexUnit": "шт",
           "indexQty": 2
         },
@@ -12671,10 +12679,10 @@
           "unit": "яч",
           "fact": 177.8,
           "name": "Яйцо перепелиное (20 шт.),яч. (00000000862)",
-          "displayFact": null,
-          "displayUnit": null,
-          "indexUnit": null,
-          "indexQty": null
+          "displayFact": 8.89,
+          "displayUnit": "шт",
+          "indexUnit": "шт",
+          "indexQty": 20
         },
         {
           "productId": "quail_egg",
@@ -13510,7 +13518,7 @@
         }
       ],
       "count": 53,
-      "indexedDeliveries": 52
+      "indexedDeliveries": 53
     },
     {
       "id": "vegetable_oil",
@@ -18572,8 +18580,8 @@
     },
     {
       "id": "black_olives",
-      "label": "Маслины / чёрные оливки",
-      "group": "grocery",
+      "label": "Маслины",
+      "group": "olives_black",
       "indexUnit": "кг",
       "deliveries": [
         {
@@ -19110,8 +19118,8 @@
     },
     {
       "id": "green_olives",
-      "label": "Оливки (зелёные и прочие)",
-      "group": "grocery",
+      "label": "Оливки",
+      "group": "olives_green",
       "indexUnit": "кг",
       "deliveries": [
         {
@@ -23149,7 +23157,7 @@
         "compared": 1,
         "comparedProducts": 1,
         "newProducts": 0,
-        "newSkus": 6,
+        "newSkus": 7,
         "totalProducts": 67
       },
       {
