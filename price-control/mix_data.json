@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-24T09:29:04.549Z",
+  "generatedAt": "2026-11-24T09:32:10.699Z",
   "source": "DocsInBox",
   "start": "2026-01-01",
   "methodology": "Индекс Микс: база 100, равный вес каждой из выбранных товарных групп. Индекс изменяется только при повторной закупке одной и той же номенклатуры у того же поставщика в сопоставимой единице. Разные сорта, бренды, упаковки и поставщики не сравниваются между собой для расчёта изменения цены. При отсутствии повторной закупки предыдущее значение сохраняется, новые позиции включаются без скачка. История показывает все найденные товары и поставщиков.",
@@ -12678,22 +12678,6 @@
         },
         {
           "productId": "quail_egg",
-          "date": "23.11.2026",
-          "dateIso": "2026-11-23",
-          "supplier": "ООО \"АЙШ ГАРДЕН\"",
-          "invoice": "3391",
-          "qty": 1,
-          "sum": 177.8,
-          "unit": "яч",
-          "fact": 177.8,
-          "name": "Яйцо перепелиное (20 шт.),яч. (00000000862)",
-          "displayFact": null,
-          "displayUnit": null,
-          "indexUnit": null,
-          "indexQty": null
-        },
-        {
-          "productId": "quail_egg",
           "date": "17.11.2026",
           "dateIso": "2026-11-17",
           "supplier": "ООО \"Парадис Экзотика\"",
@@ -13525,7 +13509,7 @@
           "indexQty": 20
         }
       ],
-      "count": 54,
+      "count": 53,
       "indexedDeliveries": 52
     },
     {
@@ -20611,12 +20595,12 @@
     "productsWithData": 66,
     "indexedProducts": 66,
     "suppliers": 15,
-    "matchedDeliveries": 1243,
-    "matchedInvoices": 478,
+    "matchedDeliveries": 1242,
+    "matchedInvoices": 477,
     "rawMatchedInvoices": 522,
-    "duplicateDocumentsRemoved": 44,
+    "duplicateDocumentsRemoved": 45,
     "lastSupplyIso": "2026-11-24",
-    "scanStart": "2026-10-09"
+    "scanStart": "2026-10-10"
   },
   "index": {
     "baseDate": "11.01.2026",

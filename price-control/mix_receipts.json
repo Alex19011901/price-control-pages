@@ -1,13 +1,13 @@
 {
   "schemaVersion": 1,
   "catalogRevision": 5,
-  "generatedAt": "2026-11-24T09:29:04.549Z",
+  "generatedAt": "2026-11-24T09:32:10.699Z",
   "from": "2026-01-01",
-  "scanStart": "2026-10-09",
+  "scanStart": "2026-10-10",
   "lastSupplyIso": "2026-11-24",
   "products": 67,
-  "suppliesScanned": 117,
-  "invoicesScanned": 144,
+  "suppliesScanned": 112,
+  "invoicesScanned": 138,
   "invoiceErrors": 0,
   "nonItemDocuments": 3,
   "nonItemSuppliers": [
