@@ -83,9 +83,9 @@ jobs:
           raw=json.loads(Path("price-control/mix_receipts.json").read_text())
           data=json.loads(Path("price-control/mix_data.json").read_text())
           assert raw["schemaVersion"]==1 and raw["invoiceErrors"]==0
-          assert len(data["products"])==68 and len(data["groups"])==8
-          assert len({p["id"] for p in data["products"]})==68
-          assert data["stats"]["selectedProducts"]==68
+          assert len(data["products"])==71 and len(data["groups"])==8
+          assert len({p["id"] for p in data["products"]})==71
+          assert data["stats"]["selectedProducts"]==71
           groups={g["id"] for g in data["groups"]}
           assert "olives_black" in groups and "olives_green" in groups
           assert next(p for p in data["products"] if p["id"]=="black_olives")["group"]=="olives_black"
@@ -103,6 +103,14 @@ jobs:
           assert all(r["displayUnit"]=="кг" and r["displayFact"] is not None and "(210381)" in r["name"] for r in crystal["deliveries"])
           assert all(any(r["date"]==day for r in crystal["deliveries"]) for day in ("06.10.2026","14.10.2026","23.10.2026","02.11.2026","07.11.2026"))
           assert all(p["totalProducts"]==67 for p in data["index"]["points"])
+          for pid in ("honey","pork_neck","chicken_thigh"):
+              product=next(p for p in data["products"] if p["id"]==pid)
+              assert product["indexUnit"] is None and product["indexedDeliveries"]==0
+          honey=next(p for p in data["products"] if p["id"]=="honey")
+          neck=next(p for p in data["products"] if p["id"]=="pork_neck")
+          assert any(r["date"]=="16.10.2026" and r["displayUnit"]=="кг" and r["displayFact"]==339.4 for r in honey["deliveries"])
+          assert any(r["date"]=="09.10.2026" and r["displayUnit"]=="кг" and r["displayFact"]==517 for r in neck["deliveries"])
+          assert any("бедр" in r["name"].lower() for r in next(p for p in data["products"] if p["id"]=="chicken_fillet")["deliveries"])
           pea=next(p for p in data["products"] if p["id"]=="frozen_peas")
           latest=pea["deliveries"][0]
           assert latest["date"]=="19.11.2026" and latest["unit"]=="кг" and latest["qty"]==0.8

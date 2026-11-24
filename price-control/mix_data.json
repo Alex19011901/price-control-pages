@@ -1430,6 +1430,42 @@
       "indexedDeliveries": 39
     },
     {
+      "id": "chicken_thigh",
+      "label": "Курица — бедро",
+      "group": "meat",
+      "indexUnit": null,
+      "deliveries": [],
+      "count": 0,
+      "indexedDeliveries": 0
+    },
+    {
+      "id": "pork_neck",
+      "label": "Свинина — шея",
+      "group": "meat",
+      "indexUnit": null,
+      "deliveries": [
+        {
+          "productId": "pork_neck",
+          "date": "09.10.2026",
+          "dateIso": "2026-10-09",
+          "supplier": "ООО \"Торговый дом \"Глобал Фудс\" ***",
+          "invoice": "ТД0910/0400",
+          "qty": 8.7,
+          "sum": 4499.97,
+          "unit": "кг",
+          "fact": 517,
+          "name": "Свинина шейка б/к узкий обрез ~2,5 -3,5кг в/у Мираторг™ Россия (ПУ) (КОД 14375) (-18°С),кг (14375)",
+          "displayFact": 517,
+          "displayUnit": "кг",
+          "displayPack": null,
+          "indexUnit": "кг",
+          "indexQty": 8.704
+        }
+      ],
+      "count": 1,
+      "indexedDeliveries": 0
+    },
+    {
       "id": "chicken_wings",
       "label": "Курица — крылья",
       "group": "meat",
@@ -17405,6 +17441,67 @@
       "indexedDeliveries": 0
     },
     {
+      "id": "honey",
+      "label": "Мёд",
+      "group": "grocery",
+      "indexUnit": null,
+      "deliveries": [
+        {
+          "productId": "honey",
+          "date": "16.10.2026",
+          "dateIso": "2026-10-16",
+          "supplier": "ООО \"МЕТРО Кэш энд Керри\"",
+          "invoice": "9610798380119",
+          "qty": 5,
+          "sum": 1697,
+          "unit": "шт",
+          "fact": 339.4,
+          "name": "1КГ МЕД METRO CHEF НАТУРАЛЬНЫЙ ЦВЕТОЧНЫЙ,ШТ (61022)",
+          "displayFact": 339.4,
+          "displayUnit": "кг",
+          "displayPack": null,
+          "indexUnit": "кг",
+          "indexQty": 5
+        },
+        {
+          "productId": "honey",
+          "date": "21.07.2026",
+          "dateIso": "2026-07-21",
+          "supplier": "ООО \"Парадис Экзотика\"",
+          "invoice": "ПЭ-26536",
+          "qty": 4,
+          "sum": 1338.24,
+          "unit": "шт",
+          "fact": 334.56,
+          "name": "/Мед Гречишный ст/б 500 г,шт (00-00000978)",
+          "displayFact": 669.12,
+          "displayUnit": "кг",
+          "displayPack": null,
+          "indexUnit": "кг",
+          "indexQty": 2
+        },
+        {
+          "productId": "honey",
+          "date": "25.06.2026",
+          "dateIso": "2026-06-25",
+          "supplier": "ООО \"Парадис Экзотика\"",
+          "invoice": "ПЭ-23142",
+          "qty": 3,
+          "sum": 1359.18,
+          "unit": "шт",
+          "fact": 453.06,
+          "name": "/Мед Цветочный (ведро) 1 кг,шт (00-00000984)",
+          "displayFact": 453.06,
+          "displayUnit": "кг",
+          "displayPack": null,
+          "indexUnit": "кг",
+          "indexQty": 3
+        }
+      ],
+      "count": 3,
+      "indexedDeliveries": 0
+    },
+    {
       "id": "puff_pastry",
       "label": "Тесто слоёное",
       "group": "grocery",
@@ -21953,11 +22050,11 @@
     "ТЦ№ 19, ООО \"МЕТРО КЭШ ЭНД КЕРРИ\""
   ],
   "stats": {
-    "selectedProducts": 68,
-    "productsWithData": 67,
+    "selectedProducts": 71,
+    "productsWithData": 69,
     "indexedProducts": 66,
     "suppliers": 15,
-    "matchedDeliveries": 1248,
+    "matchedDeliveries": 1252,
     "matchedInvoices": 477,
     "rawMatchedInvoices": 522,
     "duplicateDocumentsRemoved": 45,

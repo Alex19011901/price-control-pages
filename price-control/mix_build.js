@@ -152,7 +152,7 @@ const entries=[...grouped.values()].map(x=>{
  const n=normalizeIndexQty({name,qty:x.qty,unit:x.unit},x.productId);
  // Flour and lump sugar: a package has an exact declared weight, so display
  // the actual price per kg. Butter is deliberately left per pack, as approved.
- const flourOrSugar=(x.productId==='wheat_flour'||x.productId==='cube_sugar'||x.productId==='aro_crystal_sugar')&&n?.u==='кг';
+ const flourOrSugar=(x.productId==='wheat_flour'||x.productId==='cube_sugar'||x.productId==='aro_crystal_sugar'||x.productId==='honey'||x.productId==='pork_neck'||x.productId==='chicken_thigh')&&n?.u==='кг';
  const normalizedDisplay=(x.productId==='chicken_egg'||x.productId==='quail_egg'||x.productId==='tiger_shrimp'||flourOrSugar)&&n&&n.qty>0;
  const mozzaPieces=x.productId==='mozzarella_125'&&['шт','штука','штуки'].includes(x.unit)?mozzarella125Pieces(name):null;
  const mozzaTotalPieces=mozzaPieces&&x.qty>0?x.qty*mozzaPieces:null;

@@ -15,6 +15,8 @@ const PRODUCTS=[
   {id:'chicken_legs',label:'Куриные окорочка',group:'meat',re:/окорочк/,exclude:/индюш|индейк|утин|утк|свин|свиной|говяж/},
   {id:'chicken_nuggets',label:'Курица — нагетсы',group:'meat',re:/наг[г]?етс|наг[г]?еттс|наг[г]?етт/,exclude:/рыбн|веган|растительн/},
   {id:'chicken_fillet',label:'Курица — филе',group:'meat',re:/(?:куриц|курин|цыплен|бройлер).{0,80}филе|филе.{0,80}(?:куриц|курин|цыплен|бройлер)/,exclude:/индюш|индейк|утк/},
+  {id:'chicken_thigh',label:'Курица — бедро',group:'meat',displayOnly:true,re:/(?:куриц|курин|цыплен|бройлер|(?:^|[^\p{L}])кур[аы](?=$|[^\p{L}])).{0,100}бедр|бедр.{0,100}(?:куриц|курин|цыплен|бройлер|кур[аы](?=$|[^\p{L}]))/u,exclude:/индюш|индейк|утк|утин|свин|говяж|окороч|крыл|грудк|наг[г]?ет|сосиск|ассорти|набор/},
+  {id:'pork_neck',label:'Свинина — шея',group:'meat',displayOnly:true,re:/(?:свин).{0,100}(?:шея|шеи|шею|шейк|шейн|оше[ей]к)|(?:шея|шеи|шею|шейк|шейн|оше[ей]к).{0,100}свин/,exclude:/копч|вялен|коппа|ветчин|прошут|колбас|сосиск|шашлык|буженин|карбонад|маринад/},
   {id:'chicken_wings',label:'Курица — крылья',group:'meat',re:/(?:куриц|курин|цыплен).{0,60}крыл|крыл.{0,60}(?:куриц|курин|цыплен)/,exclude:/утк|индейк|индюш/},
   {id:'beef_topside',label:'Говядина — оковалок',group:'meat',re:/оковалок/},
   {id:'beef_eye',label:'Говядина — глазной мускул',group:'meat',re:/глазн.{0,35}мускул/},
@@ -74,6 +76,7 @@ const PRODUCTS=[
 
   {id:'cube_sugar',label:'Сахар кусковой',group:'grocery',re:/сахар.{0,70}(?:кусков|рафинад)|рафинад.{0,70}сахар/},
   {id:'aro_crystal_sugar',label:'Сахар кристаллический ARO',group:'grocery',displayOnly:true,re:/\(\s*210381\s*\)$/,require:/сахар.*(?:aro|аро).*кристаллич/},
+  {id:'honey',label:'Мёд',group:'grocery',displayOnly:true,re:/^[!*/\s]*(?:\d+(?:[.,]\d+)?\s*(?:кг|гр|г)\s*)?мед(?=$|[^\p{L}])/u,exclude:/напиток|соус|горчиц|сироп|ароматиз|медовух/},
   {id:'puff_pastry',label:'Тесто слоёное',group:'grocery',re:/тест[оа].{0,55}слоен|слоен.{0,55}тест[оа]/},
   {id:'frozen_peas',label:'Горошек с/м',group:'grocery',re:/горош[е]к.{0,100}(?:с\/м|заморож|быстрозам|свежеморож)|(?:заморож|с\/м).{0,90}горош[е]к/},
   {id:'semola',label:'Мука семола / семолина',group:'grocery',re:/семол|semol|мук.{0,50}(?:тверд|тв[её]рд).{0,15}сорт/},
@@ -89,7 +92,9 @@ const PRODUCTS=[
 function norm(s){return String(s||'').toLowerCase().replace(/ё/g,'е').replace(/\u00a0/g,' ').replace(/\s+/g,' ').trim();}
 function classify(name){
   const n=norm(name);
-  const found=PRODUCTS.filter(p=>p.re.test(n)&&!(p.exclude&&p.exclude.test(n))&&(!p.require||p.require.test(n)));
+  let found=PRODUCTS.filter(p=>p.re.test(n)&&!(p.exclude&&p.exclude.test(n))&&(!p.require||p.require.test(n)));
+  // Preserve the established index for thigh fillets; their visible history is split in Mix.
+  if(found.some(p=>p.id==='chicken_fillet')&&found.some(p=>p.id==='chicken_thigh'))found=found.filter(p=>p.id!=='chicken_thigh');
   if(found.length>1)throw new Error('MIX_AMBIGUOUS_PRODUCT: '+name+' => '+found.map(p=>p.id).join(','));
   return found[0]||null;
 }
@@ -99,8 +104,8 @@ function unit(s){return norm(s).replace(/[.]/g,'');}
 module.exports={GROUPS,PRODUCTS,klassify:classify,classify,iso,round2,unit,norm};
 if(require.main===module){
   const assert=require('node:assert/strict');
-  assert.equal(PRODUCTS.length,68);
-  assert.equal(new Set(PRODUCTS.map(p=>p.id)).size,68);
+  assert.equal(PRODUCTS.length,71);
+  assert.equal(new Set(PRODUCTS.map(p=>p.id)).size,71);
   const yes=[
     ['Яйцо Мытое С1 (дезинфицированное),шт','chicken_egg'],
     ['Яйцо перепелиное 20 шт/уп,упак','quail_egg'],
@@ -128,6 +133,12 @@ if(require.main===module){
     ['Куриные наггетсы,кг','chicken_nuggets'],
     ['Масло кунжутное 0,5л,шт','sesame_oil'],
     ['Сахар кусковой 1кг,шт','cube_sugar'],
+    ['Куриное бедро,кг','chicken_thigh'],
+    ['Куриное бедро (филе) б/к без кожи 2,5кг в/у МясКо,шт (46936)','chicken_fillet'],
+    ['Филе бедра куриное на подложке вес ПФ,кг','chicken_fillet'],
+    ['Свинина шейка б/к узкий обрез ~2,5 -3,5кг в/у Мираторг,кг (14375)','pork_neck'],
+    ['1КГ МЕД METRO CHEF НАТУРАЛЬНЫЙ ЦВЕТОЧНЫЙ,ШТ (61022)','honey'],
+    ['/Мед Гречишный ст/б 500 г,шт (00-00000978)','honey'],
     ['5КГ САХАР ARO БЕЛЫЙ КРИСТАЛЛИЧЕСКИЙ ТС2,шт (210381)','aro_crystal_sugar'],
     ['1КГ САХАР ARO БЕЛЫЙ КУСКОВОЙ,ШТ (248021)','cube_sugar'],
     ['Тесто слоеное бездрожжевое 500г,шт','puff_pastry'],
@@ -176,7 +187,7 @@ if(require.main===module){
     ["1,6КГ АРТИШОКИ METRO CHEF ЧЕТВЕРТИНКИ В МАСЛЕ,ШТ (110836)",'artichokes']
   ];
   for(const [name,id] of yes)assert.equal(classify(name)?.id,id,name);
-  for(const name of ['Щеки свиные замороженные,кг','Куриные щечки,кг','Макароны Петушиные Гребешки 450г,шт','Печень трески 120 г,шт','900Г ОЛИВКОВОЕ МАСЛО,шт','Масло сливочное 200г,шт','Авокадо Хаас,кг','Сметана 20%,шт','Тунец свежемороженный,кг','Сыр моцарелла 200 г,шт','900Г ПРОДУКТ МОЛОКОСОД 20% АЛЬПИЙСКАЯ КОРОВКА,ШТ (659926)','Ср-во моющ. дезинфицирующее 5л (подходит для яиц),шт','*Икра сельди Масаго Красная Тобико 500г,шт'])
+  for(const name of ['Коппа (шейка свиная сыровяленая),кг','Дыня Медовая Стандарт,кг','Соус медовый,шт','Щеки свиные замороженные,кг','Куриные щечки,кг','Макароны Петушиные Гребешки 450г,шт','Печень трески 120 г,шт','900Г ОЛИВКОВОЕ МАСЛО,шт','Масло сливочное 200г,шт','Авокадо Хаас,кг','Сметана 20%,шт','Тунец свежемороженный,кг','Сыр моцарелла 200 г,шт','900Г ПРОДУКТ МОЛОКОСОД 20% АЛЬПИЙСКАЯ КОРОВКА,ШТ (659926)','Ср-во моющ. дезинфицирующее 5л (подходит для яиц),шт','*Икра сельди Масаго Красная Тобико 500г,шт'])
     assert.equal(classify(name),null,name);
   console.log('MIX_CATALOG_OK',PRODUCTS.length,yes.length);
 }
