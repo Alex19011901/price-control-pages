@@ -32,6 +32,13 @@ function tableProducts(){
      const remaining=p.deliveries.filter(row=>!duckSkinOther(row));
      return remaining.length?[{...p,deliveries:remaining}]:[];
    }
+   if(p.id==='cube_sugar'){
+     // Display only the user-selected ARO sugar SKU, never mixing brands
+     // or their separate pack sizes in the visible purchase history.
+     // All original DocsInBox receipts and the exact-SKU index are preserved.
+     const aro=p.deliveries.filter(r=>/\bARO\b/i.test(String(r.name||'')));
+     return [{...p,label:'Сахар кусковой ARO',deliveries:aro,count:aro.length}];
+   }
    return [p];
  });
 }
@@ -101,7 +108,7 @@ function install(){
  '<div class="mix-table-scroll"><table class="mix-table"><thead><tr>'+
  '<th>Товар</th><th>Последняя закупка</th><th>Пред. 1</th><th>Пред. 2</th><th>Пред. 3</th><th>Пред. 4</th><th>Пред. 5</th>'+
  '</tr></thead><tbody id="mixRows"><tr><td colspan="7">Загрузка истории…</td></tr></tbody></table></div>'+
- '<div class="mix-note">История закупок DocsInBox по всем поставщикам. В каждом столбце дата, фактическая цена и поставщик; номер накладной и полное название видны при наведении. Несколько строк одного товара в одной накладной объединяются по сумме и количеству. Яйца показываются по цене за 1 шт; креветки и коробки с указанным весом — за 1 кг. Варианты филе утки на коже собраны в одну строку, а для остальных товаров сохраняется единица накладной.</div>';
+ '<div class="mix-note">История закупок DocsInBox по всем поставщикам. В каждом столбце дата, фактическая цена и поставщик; номер накладной и полное название видны при наведении. Несколько строк одного товара в одной накладной объединяются по сумме и количеству. Яйца показываются по цене за 1 шт; креветки и коробки с указанным весом — за 1 кг. Варианты филе утки на коже собраны в одну строку, а для остальных товаров сохраняется единица накладной. Для кускового сахара показываются только закупки ARO, цена за 1 кг.</div>';
  const b=document.createElement('section');b.id='mixIndexCard';b.className='card mix-index-card';
  b.innerHTML=
  '<div class="mix-title"><h2>Индекс Микс</h2><span class="mix-muted">База 100</span></div>'+
