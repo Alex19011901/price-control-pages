@@ -70,7 +70,34 @@ for(const d of data.invoices){
    (sourceVersion(d)===sourceVersion(prev)&&detailScore(d)>detailScore(prev)))
       uniqueInvoices.set(key,d);
 }
-const distinctInvoices=[...uniqueInvoices.values()];
+// DocsInBox can expose the same Aish Garden invoice as "3367" and
+// "УТАГ0003367". Collapse these aliases ONLY if date, supplier and every
+// line (SKU, quantity and sum) are identical. Different contents are separate.
+function aishInvoiceNumber(d){
+ if(!norm(d.supplier).includes('айш гарден'))return null;
+ const m=String(d.invoice||'').toUpperCase().replace(/\s/g,'').match(/^(?:УТАГ)?0*(\d+)$/);
+ return m?m[1]:null;
+}
+function invoiceItemsSignature(d){
+ return JSON.stringify((d.items||[]).map(x=>[
+   Number(x.line),x.productId,norm(x.name),unit(x.unit),Number(x.qty),round2(Number(x.sum))
+ ]).sort((a,b)=>a[0]-b[0]||String(a[1]).localeCompare(String(b[1]))));
+}
+const distinctInvoices=[];
+const identicalAishInvoices=new Map();
+for(const doc of uniqueInvoices.values()){
+ const n=aishInvoiceNumber(doc);
+ if(n===null){distinctInvoices.push(doc);continue;}
+ const key=[iso(doc.date),supplierIdentity(doc.supplier),n,invoiceItemsSignature(doc)].join('\u0000');
+ if(!identicalAishInvoices.has(key)){
+   identicalAishInvoices.set(key,distinctInvoices.length);
+   distinctInvoices.push(doc);
+ }else{
+   const idx=identicalAishInvoices.get(key);
+   if(String(doc.invoice).length>String(distinctInvoices[idx].invoice).length)
+     distinctInvoices[idx]=doc;
+ }
+}
 const duplicateDocumentsRemoved=data.invoices.length-distinctInvoices.length;
 for(const invoice of distinctInvoices){
  const date=String(invoice.date||''),dateIso=iso(date),supplier=String(invoice.supplier||'').trim(),number=String(invoice.invoice||'').trim();
