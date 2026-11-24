@@ -37,12 +37,9 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  deploy:
+  build:
     if: github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success'
     runs-on: ubuntu-latest
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -241,9 +238,32 @@ jobs:
         with:
           path: public-site
 
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
       - name: Deploy Pages
         id: deployment
         uses: actions/deploy-pages@v4
+
+      - name: Checkout repository for verification
+        uses: actions/checkout@v4
+
+      - name: Download and unpack exactly the built Pages artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: github-pages
+          path: pages-package
+
+      - name: Unpack the published Pages site for byte-for-byte comparison
+        run: |
+          mkdir -p public-site
+          tar -xf pages-package/artifact.tar -C public-site
+          test -f public-site/deployment.json
+          test -f public-site/mix_data.json
 
       - name: Verify live Pages and preserved data
         run: |
