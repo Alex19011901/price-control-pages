@@ -79,9 +79,11 @@ function aishInvoiceNumber(d){
  return m?m[1]:null;
 }
 function invoiceItemsSignature(d){
+ // Row numbers can differ between DocsInBox representations of the same
+ // supplier invoice. Compare the complete selected SKU/quantity/total instead.
  return JSON.stringify((d.items||[]).map(x=>[
-   Number(x.line),x.productId,norm(x.name),unit(x.unit),Number(x.qty),round2(Number(x.sum))
- ]).sort((a,b)=>a[0]-b[0]||String(a[1]).localeCompare(String(b[1]))));
+   x.productId,norm(x.name),unit(x.unit),Number(x.qty),round2(Number(x.sum))
+ ]).sort((a,b)=>JSON.stringify(a).localeCompare(JSON.stringify(b))));
 }
 const distinctInvoices=[];
 const identicalAishInvoices=new Map();
