@@ -1,20 +1,20 @@
 {
   "schemaVersion": 1,
   "catalogRevision": 5,
-  "generatedAt": "2026-11-23T22:04:18.977Z",
+  "generatedAt": "2026-11-24T09:29:04.549Z",
   "from": "2026-01-01",
-  "scanStart": "2026-10-07",
-  "lastSupplyIso": "2026-11-23",
+  "scanStart": "2026-10-09",
+  "lastSupplyIso": "2026-11-24",
   "products": 67,
-  "suppliesScanned": 121,
-  "invoicesScanned": 147,
+  "suppliesScanned": 117,
+  "invoicesScanned": 144,
   "invoiceErrors": 0,
   "nonItemDocuments": 3,
   "nonItemSuppliers": [
     "АКЦИОНЕРНОЕ ОБЩЕСТВО \"МОСВОДОКАНАЛ\"",
     "ООО \"УК Система\""
   ],
-  "matchedInvoices": 520,
+  "matchedInvoices": 522,
   "invoices": [
     {
       "date": "11.01.2026",
@@ -15115,6 +15115,22 @@
     {
       "date": "23.11.2026",
       "supplier": "ООО \"АЙШ ГАРДЕН\"",
+      "invoice": "3391",
+      "version": 1,
+      "items": [
+        {
+          "line": 10,
+          "productId": "quail_egg",
+          "name": "Яйцо перепелиное (20 шт.),яч. (00000000862)",
+          "unit": "яч.",
+          "qty": 1,
+          "sum": 177.8
+        }
+      ]
+    },
+    {
+      "date": "23.11.2026",
+      "supplier": "ООО \"АЙШ ГАРДЕН\"",
       "invoice": "УТАГ0003391",
       "version": 1,
       "items": [
@@ -15197,6 +15213,54 @@
           "unit": "ШТ",
           "qty": 24,
           "sum": 10536
+        }
+      ]
+    },
+    {
+      "date": "24.11.2026",
+      "supplier": "ООО \"Арктика\"",
+      "invoice": "АР-00007406",
+      "version": 1,
+      "items": [
+        {
+          "line": 2,
+          "productId": "beef_topside",
+          "name": "Оковалок говяжий ГОСТ вес Союз-М Россия,кг (00000006848)",
+          "unit": "кг",
+          "qty": 17.96,
+          "sum": 13200.6
+        },
+        {
+          "line": 3,
+          "productId": "veal_cheeks",
+          "name": "Щеки говяжьи вес Флагман,кг (00000011011)",
+          "unit": "кг",
+          "qty": 11.2,
+          "sum": 8836.8
+        },
+        {
+          "line": 4,
+          "productId": "chicken_fillet",
+          "name": "Филе грудки куриное на подложке вес Приосколье,кг (00000011342)",
+          "unit": "кг",
+          "qty": 15.2,
+          "sum": 8512
+        },
+        {
+          "line": 5,
+          "productId": "tuna_fillet_1_10",
+          "name": "филе Тунца б/шк АА 1/10 Вьетнам,кг (00000008206)",
+          "unit": "кг",
+          "qty": 4.9,
+          "sum": 5424.3
+        },
+        {
+          "line": 6,
+          "productId": "flounder",
+          "name": "Камбала б/г 300-500 шт/зам 1/10 Мурман Сифуд,кг (00000009148)",
+          "unit": "кг",
+          "qty": 10,
+          "sum": 4040
         }
       ]
     }
