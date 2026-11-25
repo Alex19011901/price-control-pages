@@ -278,7 +278,7 @@ def slice_period_date(src, *, date_ru, key, label, start, end, price_date):
 # October periods use confirmed invoice slices only.
 # Preserve every closed period and its calculations instead of rebuilding them.
 _candidate = load_json(PC / "current.json")
-if _candidate["week"]["key"] in {"2026-10-04", "2026-10-08", "2026-10-14", "2026-10-16", "2026-10-19", "2026-10-22", "2026-10-23", "2026-10-27", "2026-10-30", "2026-10-31", "2026-11-05", "2026-11-10", "2026-11-13", "2026-11-14", "2026-11-16", "2026-11-18", "2026-11-19"}:
+if _candidate["week"]["key"] in {"2026-10-04", "2026-10-08", "2026-10-14", "2026-10-16", "2026-10-19", "2026-10-22", "2026-10-23", "2026-10-27", "2026-10-30", "2026-10-31", "2026-11-05", "2026-11-10", "2026-11-13", "2026-11-14", "2026-11-16", "2026-11-18", "2026-11-19", "2026-11-25"}:
     _current = _candidate["week"]
     validate_period(_current)
     _full = load_json(PC / "full.json")
@@ -300,6 +300,7 @@ if _candidate["week"]["key"] in {"2026-10-04", "2026-10-08", "2026-10-14", "2026
         "2026-11-16": "2026-11-14",
         "2026-11-18": "2026-11-16",
         "2026-11-19": "2026-11-18",
+        "2026-11-25": "2026-11-19",
     }[_current["key"]]
     _allowed_current_keys = {_previous_key, _current["key"]}
     if _current["key"] == "2026-10-23":
@@ -412,6 +413,32 @@ if _candidate["week"]["key"] in {"2026-10-04", "2026-10-08", "2026-10-14", "2026
             **({"noComparableProducts": True} if factor is None else {}),
         })
         aish_index["previousCommonProducts"] = None
+        aish_index["commonProducts"] = common
+        aish_index["current"] = value
+        aish_index["prevChange"] = round((factor - 1) * 100, 1) if factor is not None else None
+        aish_index["periodChange"] = round(value - 100, 1) if value is not None else None
+        _full["indexGroups"]["aish_garden"] = aish_index
+    elif _current["key"] == "2026-11-25":
+        # Aish only: retain the closed 18 and 19 November points verbatim.
+        # 19 November has no comparable prices; continue from the last
+        # numeric baseline, as the combined produce index already does.
+        aish_index = _full["indexGroups"]["aish_garden"]
+        assert aish_index["baseKey"] == "2026-11-18"
+        closed = [p for p in aish_index["points"] if p["key"] != _current["key"]]
+        assert [p["key"] for p in closed] == ["2026-11-18", "2026-11-19"]
+        baseline = next(p for p in reversed(closed) if p["value"] is not None)
+        prev_aish = next(p for p in _old if p["key"] == baseline["key"])
+        factor, common = _weighted_index_change(prev_aish, _current)
+        value = round(baseline["value"] * factor, 1) if factor is not None else None
+        aish_index["points"] = closed + [{
+            "key": _current["key"],
+            "label": "25.11",
+            "value": value,
+            "commonProducts": common,
+            "includedProducts": len(_fresh_produce_price_qty_map(_current)),
+            **({"noComparableProducts": True} if factor is None else {"comparisonBaseKey": baseline["key"]}),
+        }]
+        aish_index["previousCommonProducts"] = baseline.get("commonProducts")
         aish_index["commonProducts"] = common
         aish_index["current"] = value
         aish_index["prevChange"] = round((factor - 1) * 100, 1) if factor is not None else None

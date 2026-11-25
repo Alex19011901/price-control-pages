@@ -110,7 +110,25 @@ function loadInvoicePriceSlices() {
 
 (async () => {
   const todayMoscow = new Date(Date.now() + 3 * 60 * 60 * 1000).toISOString().slice(0, 10);
-  const cfg = todayMoscow >= '2026-11-19' ? {
+  const cfg = todayMoscow >= '2026-11-25' ? {
+    // 24 November price list: no Aish Garden receipts on 24 November.
+    priceFile: null,
+    weekKey: '2026-11-25',
+    startIso: '2026-11-24',
+    endIso: '2026-11-25',
+    startRu: '25.11.2026',
+    endRu: '25.11.2026',
+    label: 'Поставка 25.11',
+    priceDocumentDate: '24.11.2026',
+    displayPriceDocumentDate: '24.11.2026',
+    validFrom: '24.11.2026',
+    supplierNeedle: 'айш гарден',
+    supplierLabel: 'Айш Гарден',
+    indexGroup: 'aish_garden',
+    requiredInvoice: 'УТАГ0003421',
+    requireInvoiceSlices: true,
+    sumPositiveRowImpacts: true
+  } : todayMoscow >= '2026-11-19' ? {
     priceFile: null,
     weekKey: '2026-11-19',
     startIso: '2026-11-19',

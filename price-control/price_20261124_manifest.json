@@ -1,0 +1,41 @@
+{
+  "supplier": "Айш Гарден",
+  "sourceFile": "24.11.xlsx",
+  "documentDate": "24.11.2026",
+  "validFrom": "24.11.2026",
+  "rows": 761,
+  "sourceXlsxSha256": "2eea96f87fd5d10fd2e1a8f40c4f852dd415e635b2673fff22620b5207c2b756",
+  "format": "base64(bzip2(UTF-8 TSV: source row, name, unit, price))",
+  "compressedSha256": "d83e0ce36e2a131ed23d6a7dad4e333a6319c3b3ca0ba70cb73ad19b349574f4",
+  "tsvSha256": "d9d30f8ac3f3a72bd9086d464166d39b3a0a4726dfc396824f22f37366b7c397",
+  "parts": [
+    "00",
+    "01",
+    "02",
+    "03"
+  ],
+  "audit": {
+    "from": "24.11.2026",
+    "to": "25.11.2026",
+    "workflowRunId": 45613251616,
+    "receipts": [
+      {
+        "date": "24.11.2026",
+        "supplier": "ООО \"Арктика\"",
+        "invoice": "АР-00007406",
+        "rows": 7,
+        "sum": 48685.9,
+        "comparison": "Different supplier; excluded from Aish price comparison."
+      },
+      {
+        "date": "25.11.2026",
+        "supplier": "ООО \"АЙШ ГАРДЕН\"",
+        "invoice": "УТАГ0003421",
+        "rows": 14,
+        "sum": 7314.13,
+        "matched": 10,
+        "unmatched": 4
+      }
+    ]
+  }
+}

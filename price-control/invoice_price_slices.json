@@ -4530,6 +4530,128 @@
           "unmatched": true
         }
       ]
+    },
+    {
+      "invoice": "УТАГ0003421",
+      "supplyDate": "25.11.2026",
+      "source": "24.11.xlsx",
+      "sourceValidDate": "24.11.2026",
+      "rows": [
+        {
+          "name": "Базилик зеленый",
+          "unit": "кг.",
+          "price": 2349.5,
+          "priceSourceName": "Базилик зеленый",
+          "sourceRow": 85,
+          "sourceUnit": "кг",
+          "matchMethod": "exact"
+        },
+        {
+          "name": "Брокколи свежие",
+          "unit": "кг.",
+          "price": 317.5,
+          "priceSourceName": "Капуста брокколи",
+          "sourceRow": 23,
+          "sourceUnit": "кг",
+          "matchMethod": "previously confirmed explicit alias"
+        },
+        {
+          "name": "Кинза",
+          "unit": "кг.",
+          "price": 698.5,
+          "priceSourceName": "Кинза",
+          "sourceRow": 13,
+          "sourceUnit": "кг",
+          "matchMethod": "exact"
+        },
+        {
+          "name": "Петрушка листовая",
+          "unit": "кг.",
+          "price": 355.6,
+          "priceSourceName": "Петрушка листовая",
+          "sourceRow": 15,
+          "sourceUnit": "кг",
+          "matchMethod": "exact"
+        },
+        {
+          "name": "Печенье <Юбилейное> 112 гр.",
+          "unit": "шт.",
+          "unmatched": true,
+          "reason": "Печенье Юбилейное 112 г отсутствует; другие виды печенья не сопоставляются."
+        },
+        {
+          "name": "Розмарин",
+          "unit": "кг.",
+          "price": 1397,
+          "priceSourceName": "Розмарин",
+          "sourceRow": 91,
+          "sourceUnit": "кг",
+          "matchMethod": "exact"
+        },
+        {
+          "name": "Свекла",
+          "unit": "кг.",
+          "price": 40.64,
+          "priceSourceName": "Свекла",
+          "sourceRow": 56,
+          "sourceUnit": "кг",
+          "matchMethod": "exact"
+        },
+        {
+          "name": "Соль поваренная <Экстра> 1 кг (Полесье)",
+          "unit": "шт",
+          "price": 33.02,
+          "priceSourceName": "Соль поваренная Экстра 1 кг Полесье",
+          "sourceRow": 358,
+          "sourceUnit": "шт",
+          "matchMethod": "identical name after punctuation normalization"
+        },
+        {
+          "name": "Укроп свежий",
+          "unit": "кг.",
+          "price": 355.6,
+          "priceSourceName": "Укроп",
+          "sourceRow": 17,
+          "sourceUnit": "кг",
+          "matchMethod": "previously confirmed explicit alias"
+        },
+        {
+          "name": "Хлеб <Дарницкий> 650 гр.",
+          "unit": "шт.",
+          "price": 48.26,
+          "priceSourceName": "Хлеб Дарницкий 650 гр",
+          "sourceRow": 333,
+          "sourceUnit": "шт",
+          "matchMethod": "identical name after punctuation normalization"
+        },
+        {
+          "name": "Шпинат свежий",
+          "unit": "кг.",
+          "price": 482.6,
+          "priceSourceName": "Шпинат",
+          "sourceRow": 74,
+          "sourceUnit": "кг",
+          "matchMethod": "explicit fresh spinach alias; frozen spinach excluded"
+        },
+        {
+          "name": "Колбаса <Докторская>",
+          "unit": "кг.",
+          "unmatched": true,
+          "reason": "Колбаса вареная без уточнения сорта не является точным совпадением с Докторской."
+        },
+        {
+          "name": "Сыр <Гауда> 45%",
+          "unit": "кг.",
+          "unmatched": true,
+          "reason": "В прайсе Гауда 48%, в накладной 45%; разные позиции."
+        },
+        {
+          "name": "Горох стручковый 100 гр.",
+          "unit": "шт.",
+          "unmatched": true,
+          "reason": "Горох стручковый 100 г отсутствует; не заменять консервированным или замороженным горошком."
+        }
+      ]
     }
   ]
 }

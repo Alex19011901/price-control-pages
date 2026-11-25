@@ -10,6 +10,9 @@ on:
       - "price-control/current.json"
       - "price-control/full.json"
       - "price-control/build_full_history.py"
+      - "price-control/price_20261124.parts/**"
+      - "price-control/verify_price_20261124.py"
+      - "price-control/invoice_price_slices.json"
       - "price-control/fresh_produce_scope.py"
       - "price-control/test_fresh_produce_scope.py"
       - "price-control/purchase_history.json"
@@ -53,6 +56,7 @@ jobs:
         run: |
           python -m py_compile price-control/build_full_history.py price-control/fresh_produce_scope.py
           python price-control/test_fresh_produce_scope.py
+          python price-control/verify_price_20261124.py
           python - <<'PY'
           import json
           import subprocess
