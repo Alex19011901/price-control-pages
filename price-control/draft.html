@@ -161,6 +161,7 @@ tbody tr:hover{background:#ffffff05}
 .axis-label{font-size:11px}
 .index-x-label{font-size:10px}
 .index-line{fill:none;stroke:var(--purple);stroke-width:2.5;stroke-linejoin:round;stroke-linecap:round}
+.index-gap-line{fill:none;stroke:var(--purple);stroke-width:2.5;stroke-dasharray:5 5;stroke-linecap:round;opacity:.8}
 .index-point{fill:#0d1825;stroke:#8d74ff;stroke-width:2}
 .index-point-label{fill:#f5f7fb;font-size:10px;font-weight:700}
 .index-note{font-size:11px;color:var(--muted);line-height:1.35;margin-top:4px}
@@ -267,16 +268,17 @@ tbody tr:hover{background:#ffffff05}
           <line id="index100Line" x1="46" y1="140" x2="742" y2="140" class="gridline"/>
           <text id="index100Label" x="8" y="144" class="axis-label">100</text>
           <path id="indexLine" class="index-line" d=""/>
+          <path id="indexGapLine" class="index-gap-line" d=""><title>Между подтверждёнными точками: за промежуточный период нет сопоставимых товаров.</title></path>
           <g id="indexPoints"></g>
           </svg>
         </div>
-        <div class="index-note">Только свежие фрукты, овощи, ягоды, грибы, зелень и листовые салаты. Бакалея, сыры, заморозка, соленья и консервация исключены. Исторический индекс Интерфуд + Парадис: база 20.05 = 100, май → июнь исключается только слово «Стандарт». Для «Айш Гарден» отдельный индекс с базой 18.11 = 100. Данные разных поставщиков не сравниваются друг с другом; далее применяется точное название + единица.</div>
+        <div class="index-note">Только свежие фрукты, овощи, ягоды, грибы, зелень и листовые салаты. Бакалея, сыры, заморозка, соленья и консервация исключены. Исторический индекс Интерфуд + Парадис: база 20.05 = 100, май → июнь исключается только слово «Стандарт». Для «Айш Гарден» отдельный индекс с базой 18.11 = 100. Данные разных поставщиков не сравниваются друг с другом; далее применяется точное название + единица. Пунктир соединяет подтверждённые значения через период без данных; «н/д» не является рассчитанной точкой.</div>
         <div class="index-legend"><span class="dot"></span><span id="indexLegend">—</span></div>
       </div>
       <div class="index-stats">
         <div class="index-stat"><div class="label">Текущий индекс</div><div class="index-value" id="currentIndex">—</div><div class="hint" id="currentIndexHint">—</div></div>
-        <div class="index-stat"><div class="label">К предыдущему периоду</div><div class="index-value green" id="prevChange">—</div><div class="hint">К предыдущему прайсу</div></div>
-        <div class="index-stat"><div class="label">С начала периода</div><div class="index-value green" id="periodChange">—</div><div class="hint">От 20.05.2026</div></div>
+        <div class="index-stat"><div class="label">К предыдущему периоду</div><div class="index-value green" id="prevChange">—</div><div class="hint" id="prevIndexHint">К предыдущему прайсу</div></div>
+        <div class="index-stat"><div class="label">С начала периода</div><div class="index-value green" id="periodChange">—</div><div class="hint" id="baseIndexHint">—</div></div>
       </div>
     </div>
   </section>
@@ -350,7 +352,10 @@ tbody tr:hover{background:#ffffff05}
     const g=(model.indexGroups||{})[w.indexGroup]||null;
     if(!g){
       id('indexLine').setAttribute('d','');
+      id('indexGapLine').setAttribute('d','');
       id('indexPoints').innerHTML='';
+      id('prevIndexHint').textContent='—';
+      id('baseIndexHint').textContent='—';
       id('currentIndex').textContent=id('prevChange').textContent=id('periodChange').textContent='—';
       id('indexLegend').textContent='—';
       id('currentIndexHint').textContent='—';
@@ -360,14 +365,19 @@ tbody tr:hover{background:#ffffff05}
     id('currentIndex').textContent=g.current==null?'—':fmt(g.current);
     id('prevChange').textContent=pct(g.prevChange);
     id('periodChange').textContent=pct(g.periodChange);
-    id('indexLegend').textContent=(g.baseLabel||'База')+' = 100';
+    id('indexLegend').textContent=(g.supplier?g.supplier+' · ':'')+(g.baseLabel||'База')+' = 100';
     const lastPoint=pts[pts.length-1]||{};
+    const baseDate=String(g.baseKey||'').split('-').reverse().join('.');
+    const comparison=lastPoint.comparisonBaseKey?pts.find(p=>p.key===lastPoint.comparisonBaseKey):null;
+    id('baseIndexHint').textContent=baseDate?'От '+baseDate:'—';
+    id('prevIndexHint').textContent=comparison?'К '+comparison.label:'К предыдущему прайсу';
     id('currentIndexHint').textContent=(lastPoint.label||'—')+
       (lastPoint.noComparableProducts?' · нет общих товаров для сравнения':
-       g.commonProducts==null?'':' · общих товаров: '+g.commonProducts);
+       g.commonProducts==null?'':' · общих товаров: '+g.commonProducts)+(comparison?' · сравнение с '+comparison.label:'');
     const chart=id('indexChart');
     if(!pts.length){
       id('indexLine').setAttribute('d','');
+      id('indexGapLine').setAttribute('d','');
       id('indexPoints').innerHTML='';
       return;
     }
@@ -396,13 +406,19 @@ tbody tr:hover{background:#ffffff05}
       y:p.value==null?null:y(Number(p.value)),
       p
     }));
-    let linePath='',connected=false;
+    let linePath='',gapPath='',previous=null,gap=false;
+    const coord=o=>o.x.toFixed(1)+','+o.y.toFixed(1);
     for(const o of xy){
-      if(o.y==null){connected=false;continue;}
-      linePath+=(connected?' L':' M')+o.x.toFixed(1)+','+o.y.toFixed(1);
-      connected=true;
+      if(o.y==null||!Number.isFinite(o.y)){if(previous)gap=true;continue;}
+      if(!previous){linePath+=' M'+coord(o);}
+      else if(gap){
+        gapPath+=' M'+coord(previous)+' L'+coord(o);
+        linePath+=' M'+coord(o);
+      }else{linePath+=' L'+coord(o);}
+      previous=o;gap=false;
     }
     id('indexLine').setAttribute('d',linePath.trim());
+    id('indexGapLine').setAttribute('d',gapPath.trim());
 
     // Labels are thinned adaptively; every point remains, with an exact tooltip.
     const last=xy.length-1;
@@ -413,8 +429,8 @@ tbody tr:hover{background:#ffffff05}
       const x=o.x.toFixed(1),ypos=o.y==null?'':o.y.toFixed(1);
       const missing=o.y==null;
       const details=o.p.label+(missing?' · нет общих товаров для сравнения':
-        ' · '+fmt(o.p.value)+(o.p.commonProducts==null?'':' · общих товаров: '+o.p.commonProducts));
-      const dot=missing?'':'<circle class="index-point" cx="'+x+'" cy="'+ypos+'" r="4"><title>'+esc(details)+'</title></circle>';
+        ' · '+fmt(o.p.value)+(o.p.commonProducts==null?'':' · общих товаров: '+o.p.commonProducts)+(o.p.comparisonBaseKey?' · сравнение с '+o.p.comparisonBaseKey.split('-').reverse().join('.') :''));
+      const dot=missing?'<g><title>'+esc(details)+'</title><rect x="'+(o.x-14).toFixed(1)+'" y="130" width="28" height="18" fill="transparent"/></g>':'<circle class="index-point" cx="'+x+'" cy="'+ypos+'" r="4"><title>'+esc(details)+'</title></circle>';
       const value=missing?
         '<text class="index-point-label" x="'+x+'" y="144" text-anchor="middle">н/д</text>':
         isLabel(i,valueEvery,60)?
