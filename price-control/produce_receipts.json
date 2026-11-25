@@ -1,15 +1,15 @@
 {
   "schemaVersion": 1,
   "catalogRevision": 1,
-  "generatedAt": "2026-11-25T12:19:37.520Z",
+  "generatedAt": "2026-11-25T19:59:42.150Z",
   "from": "2026-01-01",
-  "scanStart": "2026-01-01",
+  "scanStart": "2026-10-11",
   "lastSupplyIso": "2026-11-25",
   "products": 96,
-  "suppliesScanned": 939,
-  "invoicesScanned": 1065,
+  "suppliesScanned": 111,
+  "invoicesScanned": 137,
   "invoiceErrors": 0,
-  "nonItemDocuments": 10,
+  "nonItemDocuments": 3,
   "nonItemSuppliers": [
     "АКЦИОНЕРНОЕ ОБЩЕСТВО \"МОСВОДОКАНАЛ\"",
     "ООО \"УК Система\""
