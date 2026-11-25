@@ -1,20 +1,17 @@
 {
   "schemaVersion": 1,
   "catalogRevision": 6,
-  "generatedAt": "2026-11-24T13:34:59.119Z",
+  "generatedAt": "2026-11-25T12:09:04.0308322Z",
   "from": "2026-01-01",
-  "scanStart": "2026-01-01",
-  "lastSupplyIso": "2026-11-24",
+  "scanStart": "2026-11-25",
+  "lastSupplyIso": "2026-11-25",
   "products": 71,
-  "suppliesScanned": 938,
-  "invoicesScanned": 1064,
+  "suppliesScanned": 1,
+  "invoicesScanned": 1,
   "invoiceErrors": 0,
-  "nonItemDocuments": 10,
-  "nonItemSuppliers": [
-    "АКЦИОНЕРНОЕ ОБЩЕСТВО \"МОСВОДОКАНАЛ\"",
-    "ООО \"УК Система\""
-  ],
-  "matchedInvoices": 526,
+  "nonItemDocuments": 0,
+  "nonItemSuppliers": [],
+  "matchedInvoices": 527,
   "invoices": [
     {
       "date": "11.01.2026",
@@ -15797,6 +15794,22 @@
           "unit": "кг",
           "qty": 10,
           "sum": 4040
+        }
+      ]
+    },
+    {
+      "date": "25.11.2026",
+      "supplier": "ООО \"АЙШ ГАРДЕН\"",
+      "invoice": "УТАГ0003421",
+      "version": 1,
+      "items": [
+        {
+          "line": 13,
+          "productId": "gouda",
+          "name": "Сыр <Гауда> 45%,кг. (00000001194)",
+          "unit": "кг.",
+          "qty": 0.73,
+          "sum": 582.18
         }
       ]
     }

@@ -190,7 +190,7 @@
   for(const d of history?.invoices||[])put({...d,supplier:d.supplier||history.supplier},2);
   for(const d of scanned?.invoices||[])put(d,3);
   const products=new Map();
-  const stats={docs:0,deliveries:0,unknownWeight:0,suppliers:0,from:null,to:null,scanComplete:scanned?.schemaVersion===1&&scanned?.catalogRevision===1&&scanned?.invoiceErrors===0&&!!scanned.lastSupplyIso,scanThrough:scanned?.lastSupplyIso||null,scanGeneratedAt:scanned?.generatedAt||null,archiveOnly:0};
+  const stats={docs:0,deliveries:0,unknownWeight:0,suppliers:0,from:null,to:null,scanComplete:scanned?.schemaVersion===1&&scanned?.catalogRevision===1&&scanned?.completeHistory!==false&&scanned?.invoiceErrors===0&&!!scanned.lastSupplyIso,scanThrough:scanned?.lastSupplyIso||null,scanGeneratedAt:scanned?.generatedAt||null,archiveOnly:0};
   const suppliers=new Set(), dates=[];
   for(const d of docs.values()){
    const lines=new Map();

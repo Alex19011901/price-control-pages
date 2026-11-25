@@ -16,7 +16,7 @@ const old=fs.existsSync(OUT)?JSON.parse(fs.readFileSync(OUT,'utf8')):null;
 function pastDays(isoDate,days){
   return new Date(Date.parse(isoDate+'T12:00:00Z')-days*86400000).toISOString().slice(0,10);
 }
-const START=(old?.catalogRevision===CATALOG_REVISION&&old?.lastSupplyIso)?([MIN_DATE,pastDays(old.lastSupplyIso,RECHECK_DAYS)].sort().at(-1)):MIN_DATE;
+const START=(old?.catalogRevision===CATALOG_REVISION&&old?.completeHistory!==false&&old?.lastSupplyIso)?([MIN_DATE,pastDays(old.lastSupplyIso,RECHECK_DAYS)].sort().at(-1)):MIN_DATE;
 function versionOrder(a,b){
   const av=Number.isFinite(a.version)?a.version:-1;
   const bv=Number.isFinite(b.version)?b.version:-1;
@@ -31,7 +31,7 @@ function num(s){
 (async()=>{
   const browser=await chromium.launch({
     headless:true,
-    ...(process.env.MIX_CHROME_EXECUTABLE?{executablePath:process.env.PRODUCE_CHROME_EXECUTABLE}:{})
+    ...(process.env.MIX_CHROME_EXECUTABLE?{executablePath:process.env.MIX_CHROME_EXECUTABLE}:{})
   });
   const context=await browser.newContext({storageState:AUTH});
   try{

@@ -1,0 +1,90 @@
+{
+  "schemaVersion": 1,
+  "catalogRevision": 1,
+  "completeHistory": false,
+  "generatedAt": "2026-11-25T12:09:04.0308322Z",
+  "from": "2026-01-01",
+  "scanStart": "2026-11-25",
+  "lastSupplyIso": "2026-11-25",
+  "products": 96,
+  "suppliesScanned": 1,
+  "invoicesScanned": 1,
+  "invoiceErrors": 0,
+  "nonItemDocuments": 0,
+  "nonItemSuppliers": [],
+  "matchedInvoices": 1,
+  "invoices": [
+    {
+      "date": "25.11.2026",
+      "supplier": "ООО \"АЙШ ГАРДЕН\"",
+      "invoice": "УТАГ0003421",
+      "version": 1,
+      "items": [
+        {
+          "line": 1,
+          "productId": "green:базилик зеленый",
+          "name": "Базилик зеленый,кг. (00000002426)",
+          "unit": "кг.",
+          "qty": 0.3,
+          "sum": 704.85
+        },
+        {
+          "line": 2,
+          "productId": "veg:брокколи",
+          "name": "Брокколи свежие,кг. (00000002433)",
+          "unit": "кг.",
+          "qty": 2.37,
+          "sum": 752.48
+        },
+        {
+          "line": 3,
+          "productId": "green:кинза",
+          "name": "Кинза,кг. (00000002500)",
+          "unit": "кг.",
+          "qty": 0.3,
+          "sum": 209.55
+        },
+        {
+          "line": 4,
+          "productId": "green:петрушка листовая",
+          "name": "Петрушка листовая,кг. (00000002597)",
+          "unit": "кг.",
+          "qty": 0.5,
+          "sum": 177.8
+        },
+        {
+          "line": 6,
+          "productId": "green:розмарин",
+          "name": "Розмарин,кг. (00000002611)",
+          "unit": "кг.",
+          "qty": 0.25,
+          "sum": 349.25
+        },
+        {
+          "line": 7,
+          "productId": "veg:свекла",
+          "name": "Свекла,кг. (00000002653)",
+          "unit": "кг.",
+          "qty": 3,
+          "sum": 121.92
+        },
+        {
+          "line": 9,
+          "productId": "green:укроп",
+          "name": "Укроп свежий,кг. (00000002698)",
+          "unit": "кг.",
+          "qty": 0.75,
+          "sum": 266.7
+        },
+        {
+          "line": 11,
+          "productId": "salad:шпинат",
+          "name": "Шпинат свежий,кг. (00000002730)",
+          "unit": "кг.",
+          "qty": 2,
+          "sum": 965.2
+        }
+      ]
+    }
+  ]
+}

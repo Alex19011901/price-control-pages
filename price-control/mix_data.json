@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-24T13:34:59.119Z",
+  "generatedAt": "2026-11-25T12:09:04.0308322Z",
   "source": "DocsInBox",
   "start": "2026-01-01",
   "methodology": "Индекс Микс: база 100, равный вес каждой из выбранных товарных групп. Индекс изменяется только при повторной закупке одной и той же номенклатуры у того же поставщика в сопоставимой единице. Разные сорта, бренды, упаковки и поставщики не сравниваются между собой для расчёта изменения цены. При отсутствии повторной закупки предыдущее значение сохраняется, новые позиции включаются без скачка. История показывает все найденные товары и поставщиков.",
@@ -7546,6 +7546,23 @@
       "deliveries": [
         {
           "productId": "gouda",
+          "date": "25.11.2026",
+          "dateIso": "2026-11-25",
+          "supplier": "ООО \"АЙШ ГАРДЕН\"",
+          "invoice": "УТАГ0003421",
+          "qty": 0.73,
+          "sum": 582.18,
+          "unit": "кг",
+          "fact": 797.51,
+          "name": "Сыр <Гауда> 45%,кг. (00000001194)",
+          "displayFact": null,
+          "displayUnit": null,
+          "displayPack": null,
+          "indexUnit": "кг",
+          "indexQty": 0.73
+        },
+        {
+          "productId": "gouda",
           "date": "18.11.2026",
           "dateIso": "2026-11-18",
           "supplier": "ТЦ№ 19, ООО \"МЕТРО КЭШ ЭНД КЕРРИ\"",
@@ -7749,8 +7766,8 @@
           "indexQty": 3.208
         }
       ],
-      "count": 12,
-      "indexedDeliveries": 12
+      "count": 13,
+      "indexedDeliveries": 13
     },
     {
       "id": "feta",
@@ -22888,12 +22905,12 @@
     "productsWithData": 70,
     "indexedProducts": 66,
     "suppliers": 15,
-    "matchedDeliveries": 1301,
-    "matchedInvoices": 481,
-    "rawMatchedInvoices": 526,
+    "matchedDeliveries": 1302,
+    "matchedInvoices": 482,
+    "rawMatchedInvoices": 527,
     "duplicateDocumentsRemoved": 45,
-    "lastSupplyIso": "2026-11-24",
-    "scanStart": "2026-01-01"
+    "lastSupplyIso": "2026-11-25",
+    "scanStart": "2026-11-25"
   },
   "index": {
     "baseDate": "11.01.2026",
@@ -25454,6 +25471,17 @@
         "comparedProducts": 2,
         "newProducts": 0,
         "newSkus": 3,
+        "totalProducts": 67
+      },
+      {
+        "date": "25.11.2026",
+        "dateIso": "2026-11-25",
+        "value": 109.25,
+        "coverage": 66,
+        "compared": 0,
+        "comparedProducts": 0,
+        "newProducts": 0,
+        "newSkus": 1,
         "totalProducts": 67
       }
     ]
