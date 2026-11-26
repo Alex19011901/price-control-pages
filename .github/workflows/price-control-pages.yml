@@ -89,13 +89,32 @@ jobs:
           assert all(p.get("includedProducts", 0) >= p.get("commonProducts", 0)
                      for p in index["points"][1:]), "Invalid produce count metadata"
           expected_keys = sorted(p["key"] for p in old_periods if p.get("indexGroup") in {"paradis", "interfood"})
-          # The new Aish Garden supplier has its own base and must not be
-          # inserted into the historical Paradis/Interfood index.
+          # Preserve the archived standalone supplier series internally;
+          # the visible continuous index is validated separately below.
           independent = [p for p in old_periods if p.get("indexGroup") == "aish_garden"]
           if independent:
               separate_index = original["indexGroups"]["aish_garden"]
               assert [p["key"] for p in separate_index["points"]] == sorted(p["key"] for p in independent)
               assert separate_index["baseKey"] == min(p["key"] for p in independent), "Independent supplier index must start at the earliest date"
+          unified = original["indexGroups"]["unified_produce"]
+          assert unified["baseKey"] == "2026-05-20"
+          assert unified["points"][:len(index["points"])] == index["points"], "Historical index points changed"
+          assert [p["key"] for p in unified["points"]] == sorted(p["key"] for p in old_periods)
+          assert unified["current"] == unified["points"][-1]["value"]
+          if independent:
+              bridge = unified["transition"]
+              assert bridge["key"] == min(p["key"] for p in independent)
+              assert bridge["previousKey"] == "2026-11-16"
+              assert bridge["before"] == 137.4 and bridge["after"] == 121.9
+              assert bridge["changePct"] == -11.3 and bridge["commonProducts"] == 5
+              assert {m["name"] for m in bridge["matches"]} == {
+                  "базилик зеленый", "лайм", "лук репчатый", "редис красный", "розмарин"
+              }
+              assert all(bridge["windowStart"] <= m["oldDate"] <= bridge["windowEnd"] for m in bridge["matches"])
+              by_key = {p["key"]: p for p in unified["points"]}
+              assert by_key["2026-11-19"]["value"] is None
+              if "2026-11-25" in by_key:
+                  assert by_key["2026-11-25"]["value"] == 123.5
           keys = [p["key"] for p in index["points"]]
           assert keys == expected_keys, "Missing or duplicate index period"
           assert index["current"] == index["points"][-1]["value"]

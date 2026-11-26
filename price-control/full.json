@@ -25633,6 +25633,307 @@
       "periodChange": 1.3,
       "commonProducts": 4,
       "previousCommonProducts": null
+    },
+    "unified_produce": {
+      "supplier": "Интерфуд / Парадис Экзотика / Айш Гарден",
+      "scope": "fresh_produce",
+      "scopeLabel": "Фрукты / овощи / салаты",
+      "baseKey": "2026-05-20",
+      "baseLabel": "20.05–26.05",
+      "points": [
+        {
+          "key": "2026-05-20",
+          "label": "20.05–26.05",
+          "value": 100,
+          "includedProducts": 47
+        },
+        {
+          "key": "2026-06-26",
+          "label": "26.06",
+          "value": 105.8,
+          "commonProducts": 15,
+          "includedProducts": 48
+        },
+        {
+          "key": "2026-07-24",
+          "label": "24.07",
+          "value": 106.5,
+          "commonProducts": 33,
+          "includedProducts": 53
+        },
+        {
+          "key": "2026-07-30",
+          "label": "30.07",
+          "value": 111,
+          "commonProducts": 37,
+          "includedProducts": 55
+        },
+        {
+          "key": "2026-08-26",
+          "label": "26.08",
+          "value": 120,
+          "commonProducts": 38,
+          "includedProducts": 63
+        },
+        {
+          "key": "2026-09-03",
+          "label": "03.09",
+          "value": 115.3,
+          "commonProducts": 36,
+          "includedProducts": 54
+        },
+        {
+          "key": "2026-09-11",
+          "label": "11.09",
+          "value": 111.7,
+          "commonProducts": 12,
+          "includedProducts": 18
+        },
+        {
+          "key": "2026-09-12",
+          "label": "12.09",
+          "value": 111.7,
+          "commonProducts": 3,
+          "includedProducts": 11
+        },
+        {
+          "key": "2026-09-15",
+          "label": "15.09",
+          "value": 111.7,
+          "commonProducts": 1,
+          "includedProducts": 15
+        },
+        {
+          "key": "2026-09-16",
+          "label": "16.09",
+          "value": 111.7,
+          "commonProducts": 1,
+          "includedProducts": 13
+        },
+        {
+          "key": "2026-09-18",
+          "label": "18.09",
+          "value": 115.5,
+          "commonProducts": 8,
+          "includedProducts": 54
+        },
+        {
+          "key": "2026-09-25",
+          "label": "25.09",
+          "value": 118.9,
+          "commonProducts": 35,
+          "includedProducts": 52
+        },
+        {
+          "key": "2026-10-01",
+          "label": "01.10",
+          "value": 122.1,
+          "commonProducts": 25,
+          "includedProducts": 36
+        },
+        {
+          "key": "2026-10-04",
+          "label": "04.10",
+          "value": 124,
+          "commonProducts": 14,
+          "includedProducts": 32
+        },
+        {
+          "key": "2026-10-08",
+          "label": "08.10",
+          "value": 125.5,
+          "commonProducts": 25,
+          "includedProducts": 51
+        },
+        {
+          "key": "2026-10-14",
+          "label": "14.10",
+          "value": 117.6,
+          "commonProducts": 19,
+          "includedProducts": 25
+        },
+        {
+          "key": "2026-10-16",
+          "label": "16.10",
+          "value": 116.8,
+          "commonProducts": 7,
+          "includedProducts": 29
+        },
+        {
+          "key": "2026-10-19",
+          "label": "19.10",
+          "value": 116.8,
+          "commonProducts": 5,
+          "includedProducts": 23
+        },
+        {
+          "key": "2026-10-22",
+          "label": "22.10",
+          "value": 126.7,
+          "commonProducts": 9,
+          "includedProducts": 24
+        },
+        {
+          "key": "2026-10-23",
+          "label": "23.10",
+          "value": 128.2,
+          "commonProducts": 6,
+          "includedProducts": 22
+        },
+        {
+          "key": "2026-10-30",
+          "label": "30.10",
+          "value": 129,
+          "commonProducts": 6,
+          "includedProducts": 12
+        },
+        {
+          "key": "2026-10-31",
+          "label": "31.10",
+          "value": 117.3,
+          "commonProducts": 6,
+          "includedProducts": 32
+        },
+        {
+          "key": "2026-11-05",
+          "label": "05.11",
+          "value": 133.4,
+          "commonProducts": 16,
+          "includedProducts": 39
+        },
+        {
+          "key": "2026-11-10",
+          "label": "10.11",
+          "value": 137.9,
+          "commonProducts": 8,
+          "includedProducts": 12
+        },
+        {
+          "key": "2026-11-13",
+          "label": "13.11",
+          "value": 131,
+          "commonProducts": 4,
+          "includedProducts": 15
+        },
+        {
+          "key": "2026-11-14",
+          "label": "14.11",
+          "value": null,
+          "commonProducts": 0,
+          "includedProducts": 13,
+          "noComparableProducts": true
+        },
+        {
+          "key": "2026-11-16",
+          "label": "16.11",
+          "value": 137.4,
+          "commonProducts": 4,
+          "includedProducts": 12
+        },
+        {
+          "key": "2026-11-18",
+          "label": "18.11",
+          "value": 121.9,
+          "commonProducts": 5,
+          "includedProducts": 17,
+          "comparisonBaseKey": "2026-11-16",
+          "supplierTransition": true
+        },
+        {
+          "key": "2026-11-19",
+          "label": "19.11",
+          "value": null,
+          "commonProducts": 0,
+          "includedProducts": 3,
+          "noComparableProducts": true
+        },
+        {
+          "key": "2026-11-25",
+          "label": "25.11",
+          "value": 123.5,
+          "commonProducts": 4,
+          "includedProducts": 7,
+          "comparisonBaseKey": "2026-11-18"
+        }
+      ],
+      "current": 123.5,
+      "prevChange": 1.3,
+      "periodChange": 23.5,
+      "commonProducts": 4,
+      "previousCommonProducts": 5,
+      "transition": {
+        "key": "2026-11-18",
+        "previousKey": "2026-11-16",
+        "windowStart": "2026-10-19",
+        "windowEnd": "2026-11-17",
+        "before": 137.4,
+        "after": 121.9,
+        "changePct": -11.3,
+        "commonProducts": 5,
+        "matches": [
+          {
+            "name": "базилик зеленый",
+            "unit": "кг",
+            "oldName": "базилик зеленый стандарт",
+            "oldPrice": 2955.94,
+            "oldDate": "2026-11-16",
+            "oldPeriodKey": "2026-11-16",
+            "newName": "базилик зеленый",
+            "newPrice": 2286,
+            "newDate": "2026-11-18",
+            "qty": 0.3
+          },
+          {
+            "name": "лайм",
+            "unit": "кг",
+            "oldName": "лайм стандарт",
+            "oldPrice": 1239.59,
+            "oldDate": "2026-11-07",
+            "oldPeriodKey": "2026-11-05",
+            "newName": "лайм",
+            "newPrice": 889,
+            "newDate": "2026-11-18",
+            "qty": 0.4
+          },
+          {
+            "name": "лук репчатый",
+            "unit": "кг",
+            "oldName": "лук репчатый стандарт",
+            "oldPrice": 47.65,
+            "oldDate": "2026-11-07",
+            "oldPeriodKey": "2026-11-05",
+            "newName": "лук репчатый",
+            "newPrice": 46.99,
+            "newDate": "2026-11-18",
+            "qty": 33
+          },
+          {
+            "name": "редис красный",
+            "unit": "кг",
+            "oldName": "редис красный стандарт",
+            "oldPrice": 229.51,
+            "oldDate": "2026-11-14",
+            "oldPeriodKey": "2026-11-14",
+            "newName": "редис красный",
+            "newPrice": 190.5,
+            "newDate": "2026-11-18",
+            "qty": 1.6
+          },
+          {
+            "name": "розмарин",
+            "unit": "кг",
+            "oldName": "розмарин стандарт",
+            "oldPrice": 1358.22,
+            "oldDate": "2026-11-06",
+            "oldPeriodKey": "2026-11-05",
+            "newName": "розмарин",
+            "newPrice": 1397,
+            "newDate": "2026-11-18",
+            "qty": 0.26
+          }
+        ]
+      },
+      "sinceSupplierChange": -10.1
     }
   }
 }

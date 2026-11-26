@@ -162,6 +162,8 @@ tbody tr:hover{background:#ffffff05}
 .index-x-label{font-size:10px}
 .index-line{fill:none;stroke:var(--purple);stroke-width:2.5;stroke-linejoin:round;stroke-linecap:round}
 .index-gap-line{fill:none;stroke:var(--purple);stroke-width:2.5;stroke-dasharray:5 5;stroke-linecap:round;opacity:.8}
+.index-transition-line{stroke:#aebdd0;stroke-width:1;stroke-dasharray:3 4;opacity:.8}
+.index-transition-note{color:var(--text);font-size:11px;line-height:1.45;margin-top:7px;font-weight:600}
 .index-point{fill:#0d1825;stroke:#8d74ff;stroke-width:2}
 .index-point-label{fill:#f5f7fb;font-size:10px;font-weight:700}
 .index-note{font-size:11px;color:var(--muted);line-height:1.35;margin-top:4px}
@@ -267,12 +269,14 @@ tbody tr:hover{background:#ffffff05}
           <svg id="indexChart" viewBox="0 0 760 184" role="img" aria-label="Индекс фрукты/овощи/салаты">
           <line id="index100Line" x1="46" y1="140" x2="742" y2="140" class="gridline"/>
           <text id="index100Label" x="8" y="144" class="axis-label">100</text>
+          <g id="indexTransitionMark"></g>
           <path id="indexLine" class="index-line" d=""/>
           <path id="indexGapLine" class="index-gap-line" d=""><title>Между подтверждёнными точками: за промежуточный период нет сопоставимых товаров.</title></path>
           <g id="indexPoints"></g>
           </svg>
         </div>
-        <div class="index-note">Только свежие фрукты, овощи, ягоды, грибы, зелень и листовые салаты. Бакалея, сыры, заморозка, соленья и консервация исключены. Исторический индекс Интерфуд + Парадис: база 20.05 = 100, май → июнь исключается только слово «Стандарт». Для «Айш Гарден» отдельный индекс с базой 18.11 = 100. Данные разных поставщиков не сравниваются друг с другом; далее применяется точное название + единица. Пунктир соединяет подтверждённые значения через период без данных; «н/д» не является рассчитанной точкой.</div>
+        <div id="indexTransitionNote" class="index-transition-note"></div>
+        <div class="index-note">Единый индекс свежих фруктов, овощей, ягод, грибов, зелени и листовых салатов с 20.05.2026 = 100. Интерфуд → Парадис → Айш Гарден. При переходе на Айш сопоставляются последние подтверждённые цены прайсов за 30 дней до смены поставщика и цены первой поставки Айш, с весами по её количествам. Для перехода исключается только конечное слово «Стандарт» и точка в единице измерения; сорта и фасовки не объединяются. Остальной расчёт сохраняет прежнее правило: точное название + единица. Пунктир через «н/д» соединяет подтверждённые значения, не подставляя вымышленную цену.</div>
         <div class="index-legend"><span class="dot"></span><span id="indexLegend">—</span></div>
       </div>
       <div class="index-stats">
@@ -349,7 +353,10 @@ tbody tr:hover{background:#ffffff05}
   }
 
   function renderIndex(w){
-    const g=(model.indexGroups||{})[w.indexGroup]||null;
+    const groups=model.indexGroups||{};
+    const g=groups.unified_produce||groups.paradis||groups.interfood||null;
+    id('indexTransitionMark').innerHTML='';
+    id('indexTransitionNote').textContent='';
     if(!g){
       id('indexLine').setAttribute('d','');
       id('indexGapLine').setAttribute('d','');
@@ -367,6 +374,11 @@ tbody tr:hover{background:#ffffff05}
     id('periodChange').textContent=pct(g.periodChange);
     id('indexLegend').textContent=(g.supplier?g.supplier+' · ':'')+(g.baseLabel||'База')+' = 100';
     const lastPoint=pts[pts.length-1]||{};
+    const transition=g.transition;
+    if(transition){
+      const tDate=transition.key.split('-').reverse().join('.');
+      id('indexTransitionNote').textContent='Переход на Айш Гарден '+tDate+': '+fmt(transition.before)+' → '+fmt(transition.after)+' ('+pct(transition.changePct)+', сопоставлено '+transition.commonProducts+' товаров). '+(g.sinceSupplierChange==null?'Изменение к последней точке Парадиса пока не рассчитано.':'Текущий индекс к последней точке Парадиса: '+pct(g.sinceSupplierChange)+'.');
+    }
     const baseDate=String(g.baseKey||'').split('-').reverse().join('.');
     const comparison=lastPoint.comparisonBaseKey?pts.find(p=>p.key===lastPoint.comparisonBaseKey):null;
     id('baseIndexHint').textContent=baseDate?'От '+baseDate:'—';
@@ -406,6 +418,13 @@ tbody tr:hover{background:#ffffff05}
       y:p.value==null?null:y(Number(p.value)),
       p
     }));
+    if(transition){
+      const mark=xy.find(o=>o.p.key===transition.key);
+      if(mark){
+        const xx=mark.x.toFixed(1);
+        id('indexTransitionMark').innerHTML='<line class="index-transition-line" x1="'+xx+'" x2="'+xx+'" y1="'+yTop+'" y2="155"><title>'+esc('18.11 — переход на Айш Гарден: '+fmt(transition.before)+' → '+fmt(transition.after)+'; '+pct(transition.changePct))+'</title></line>';
+      }
+    }
     let linePath='',gapPath='',previous=null,gap=false;
     const coord=o=>o.x.toFixed(1)+','+o.y.toFixed(1);
     for(const o of xy){
@@ -428,7 +447,7 @@ tbody tr:hover{background:#ffffff05}
     id('indexPoints').innerHTML=xy.map((o,i)=>{
       const x=o.x.toFixed(1),ypos=o.y==null?'':o.y.toFixed(1);
       const missing=o.y==null;
-      const details=o.p.label+(missing?' · нет общих товаров для сравнения':
+      const details=o.p.label+(o.p.supplierTransition?' · переход на Айш Гарден':'')+(missing?' · нет общих товаров для сравнения':
         ' · '+fmt(o.p.value)+(o.p.commonProducts==null?'':' · общих товаров: '+o.p.commonProducts)+(o.p.comparisonBaseKey?' · сравнение с '+o.p.comparisonBaseKey.split('-').reverse().join('.') :''));
       const dot=missing?'<g><title>'+esc(details)+'</title><rect x="'+(o.x-14).toFixed(1)+'" y="130" width="28" height="18" fill="transparent"/></g>':'<circle class="index-point" cx="'+x+'" cy="'+ypos+'" r="4"><title>'+esc(details)+'</title></circle>';
       const value=missing?

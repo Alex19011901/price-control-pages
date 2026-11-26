@@ -226,6 +226,138 @@ def build_combined_price_index(periods):
     return index
 
 
+def _aish_transition_price_map(periods, start, end):
+    """Latest unambiguous matched price for the same produce name/unit.
+
+    Only a terminal 'Стандарт' and a unit's trailing dot are normalized
+    for the supplier transition. Never merge different varieties or sizes.
+    Prices come from verified receipt rows' matched price-list column.
+    """
+    from datetime import datetime
+    by_day = {}
+    for period in periods:
+        for row in period.get("rowsData", []):
+            if row[5] is None:
+                continue
+            try:
+                price, qty = float(row[5]), float(row[3])
+                day = datetime.strptime(row[1], "%d.%m.%Y").date().isoformat()
+            except (TypeError, ValueError):
+                continue
+            if not (price > 0 and qty > 0 and start <= day <= end):
+                continue
+            name = _norm(_core_name(row[0], row[4]))
+            unit = _norm(row[4])
+            if not is_fresh_produce(name):
+                continue
+            canonical = (name.removesuffix(" стандарт"), unit.rstrip("."))
+            key = (canonical, day)
+            old = by_day.get(key)
+            if old is None:
+                by_day[key] = {
+                    "name": name, "unit": unit, "price": price, "qty": qty,
+                    "date": day, "periodKey": period["key"], "ambiguous": False,
+                }
+            elif (old["name"], old["unit"], old["price"]) != (name, unit, price):
+                old["ambiguous"] = True
+            else:
+                old["qty"] += qty
+    result = {}
+    for (key, day), row in by_day.items():
+        if key not in result or day > result[key]["date"]:
+            result[key] = row
+    # Do not fall back to a stale price if the latest match is ambiguous.
+    return {k: v for k, v in result.items() if not v["ambiguous"]}
+
+
+def build_unified_produce_index(periods, historic):
+    """Continue the entire May index through the Aish supplier transition.
+
+    Keep every earlier index point intact. Bridge the first Aish period
+    to the last valid historic index using the latest matched Paradis /
+    Interfood price per exactly comparable product within 30 calendar days.
+    Use the first Aish delivery quantities as weights. Thereafter apply
+    the existing strict period-to-period calculation, skipping unavailable
+    periods as numeric baselines without inventing any index value.
+    """
+    import copy
+    from datetime import date, timedelta
+    result = copy.deepcopy(historic)
+    aish = sorted(
+        (p for p in periods if p.get("indexGroup") == "aish_garden"),
+        key=lambda p: p["key"],
+    )
+    if not aish:
+        return result
+    result["supplier"] = "Интерфуд / Парадис Экзотика / Айш Гарден"
+    first = aish[0]
+    before = next(p for p in reversed(historic["points"]) if p["value"] is not None)
+    old = [p for p in periods if p.get("indexGroup") in {"paradis", "interfood"} and p["key"] < first["key"]]
+    transition_date = date.fromisoformat(first["key"])
+    start = (transition_date - timedelta(days=30)).isoformat()
+    end = (transition_date - timedelta(days=1)).isoformat()
+    old_map = _aish_transition_price_map(old, start, end)
+    current_map = _aish_transition_price_map(
+        [first], first["key"], date.fromisoformat("-".join(reversed(first["end"].split(".")))).isoformat()
+    )
+    matches = []
+    for key in sorted(set(old_map) & set(current_map)):
+        prior, cur = old_map[key], current_map[key]
+        matches.append({
+            "name": key[0], "unit": key[1], "oldName": prior["name"],
+            "oldPrice": prior["price"], "oldDate": prior["date"],
+            "oldPeriodKey": prior["periodKey"], "newName": cur["name"],
+            "newPrice": cur["price"], "newDate": cur["date"], "qty": cur["qty"],
+        })
+    numerator = sum(x["newPrice"] * x["qty"] for x in matches)
+    denominator = sum(x["oldPrice"] * x["qty"] for x in matches)
+    factor = numerator / denominator if matches and denominator > 0 else None
+    value = round(before["value"] * factor, 1) if factor is not None else None
+    common = len(matches)
+    result["transition"] = {
+        "key": first["key"], "previousKey": before["key"],
+        "windowStart": start, "windowEnd": end,
+        "before": before["value"], "after": value,
+        "changePct": round((factor - 1) * 100, 1) if factor is not None else None,
+        "commonProducts": common, "matches": matches,
+    }
+    result["points"].append({
+        "key": first["key"], "label": first["start"][:5], "value": value,
+        "commonProducts": common,
+        "includedProducts": len(_fresh_produce_price_qty_map(first)),
+        "comparisonBaseKey": before["key"], "supplierTransition": True,
+        **({"noComparableProducts": True} if value is None else {}),
+    })
+    result.update(
+        current=value, prevChange=round((value / before["value"] - 1) * 100, 1) if value is not None else None,
+        periodChange=round(value - 100, 1) if value is not None else None,
+        commonProducts=common, previousCommonProducts=before.get("commonProducts"),
+    )
+    previous, previous_value, previous_common = first, value, common
+    for period in aish[1:]:
+        factor, common = _weighted_index_change(previous, period)
+        value = round(previous_value * factor, 1) if factor is not None and previous_value is not None else None
+        result["points"].append({
+            "key": period["key"], "label": period["start"][:5], "value": value,
+            "commonProducts": common,
+            "includedProducts": len(_fresh_produce_price_qty_map(period)),
+            **({"noComparableProducts": True} if factor is None else
+               {"comparisonBaseKey": previous["key"]}),
+        })
+        result.update(
+            current=value, prevChange=round((value / previous_value - 1) * 100, 1) if value is not None else None,
+            periodChange=round(value - 100, 1) if value is not None else None,
+            commonProducts=common, previousCommonProducts=previous_common,
+        )
+        if value is not None:
+            previous, previous_value, previous_common = period, value, common
+    result["sinceSupplierChange"] = (
+        round((result["current"] / before["value"] - 1) * 100, 1)
+        if result["current"] is not None else None
+    )
+    return result
+
+
 def validate_period(p):
     assert len(p["rowsData"]) == int(p["rows"]), (p["key"], len(p["rowsData"]), p["rows"])
     assert int(p["rows"]) == (
@@ -444,6 +576,7 @@ if _candidate["week"]["key"] in {"2026-10-04", "2026-10-08", "2026-10-14", "2026
         aish_index["prevChange"] = round((factor - 1) * 100, 1) if factor is not None else None
         aish_index["periodChange"] = round(value - 100, 1) if value is not None else None
         _full["indexGroups"]["aish_garden"] = aish_index
+    _full["indexGroups"]["unified_produce"] = build_unified_produce_index(_full["periods"], _combined_index)
     (PC / "full.json").write_text(json.dumps(_full, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     print("FULL_DATA_OK", json.dumps({"currentKey": _current["key"], "rows": _current["rows"], "overpay": _current["overpay"], "preservedPeriods": len(_old)}, ensure_ascii=False))
     raise SystemExit(0)
@@ -870,6 +1003,7 @@ full = {
     "indexGroups": {
         "paradis": combined_index,
         "interfood": combined_index,
+        "unified_produce": build_unified_produce_index(periods, combined_index),
     },
 }
 
