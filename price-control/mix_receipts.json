@@ -1,13 +1,13 @@
 {
   "schemaVersion": 1,
   "catalogRevision": 6,
-  "generatedAt": "2026-11-25T19:58:03.503Z",
+  "generatedAt": "2026-11-26T19:38:37.622Z",
   "from": "2026-01-01",
   "scanStart": "2026-10-11",
-  "lastSupplyIso": "2026-11-25",
+  "lastSupplyIso": "2026-11-26",
   "products": 71,
-  "suppliesScanned": 111,
-  "invoicesScanned": 137,
+  "suppliesScanned": 113,
+  "invoicesScanned": 139,
   "invoiceErrors": 0,
   "nonItemDocuments": 3,
   "nonItemSuppliers": [
@@ -15803,7 +15803,7 @@
     {
       "date": "25.11.2026",
       "supplier": "ООО \"АЙШ ГАРДЕН\"",
-      "invoice": "УТАГ0003421",
+      "invoice": "3421",
       "version": 1,
       "items": [
         {
