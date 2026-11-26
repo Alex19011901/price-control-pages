@@ -1,20 +1,20 @@
 {
   "schemaVersion": 1,
   "catalogRevision": 1,
-  "generatedAt": "2026-11-25T19:59:42.150Z",
+  "generatedAt": "2026-11-26T19:40:17.756Z",
   "from": "2026-01-01",
   "scanStart": "2026-10-11",
-  "lastSupplyIso": "2026-11-25",
+  "lastSupplyIso": "2026-11-26",
   "products": 96,
-  "suppliesScanned": 111,
-  "invoicesScanned": 137,
+  "suppliesScanned": 113,
+  "invoicesScanned": 139,
   "invoiceErrors": 0,
   "nonItemDocuments": 3,
   "nonItemSuppliers": [
     "АКЦИОНЕРНОЕ ОБЩЕСТВО \"МОСВОДОКАНАЛ\"",
     "ООО \"УК Система\""
   ],
-  "matchedInvoices": 318,
+  "matchedInvoices": 319,
   "invoices": [
     {
       "date": "11.01.2026",
@@ -37411,7 +37411,7 @@
     {
       "date": "25.11.2026",
       "supplier": "ООО \"АЙШ ГАРДЕН\"",
-      "invoice": "УТАГ0003421",
+      "invoice": "3421",
       "version": 1,
       "items": [
         {
@@ -37477,6 +37477,46 @@
           "unit": "кг.",
           "qty": 2,
           "sum": 965.2
+        }
+      ]
+    },
+    {
+      "date": "26.11.2026",
+      "supplier": "ООО \"АЙШ ГАРДЕН\"",
+      "invoice": "УТАГ0003432",
+      "version": 1,
+      "items": [
+        {
+          "line": 2,
+          "productId": "veg:картофель",
+          "name": "Картофель,кг. (00000002489)",
+          "unit": "кг.",
+          "qty": 26.7,
+          "sum": 1119
+        },
+        {
+          "line": 3,
+          "productId": "fruit:мандарины",
+          "name": "Мандарины,кг. (00000002545)",
+          "unit": "кг.",
+          "qty": 2.15,
+          "sum": 546.1
+        },
+        {
+          "line": 4,
+          "productId": "veg:фенхель",
+          "name": "Фенхель,кг. (00000002704)",
+          "unit": "кг.",
+          "qty": 0.65,
+          "sum": 454.03
+        },
+        {
+          "line": 7,
+          "productId": "mushroom:шампиньоны",
+          "name": "Шампиньоны,кг. (00000002726)",
+          "unit": "кг.",
+          "qty": 6,
+          "sum": 1676.4
         }
       ]
     }
