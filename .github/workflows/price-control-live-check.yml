@@ -1,0 +1,65 @@
+name: Price Control Live Browser Check
+on:
+  push:
+    paths:
+      - ".github/workflows/price-control-live-check.yml"
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  check:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+      - name: Install browser test dependency
+        run: |
+          npm init -y >/dev/null 2>&1
+          npm install playwright@1.55.0 >/dev/null 2>&1
+          CHROME_BIN="$(command -v google-chrome || command -v google-chrome-stable || true)"
+          if [ -n "$CHROME_BIN" ]; then
+            echo "PROBE_CHROME=$CHROME_BIN" >> "$GITHUB_ENV"
+          else
+            npx playwright install chromium
+          fi
+      - name: Check actual dashboard rendering and default URL
+        run: |
+          node - <<'JS'
+          const {chromium}=require('playwright');
+          const base='https://alex19011901.github.io/price-control-pages/';
+          (async()=>{
+            const browser=await chromium.launch({headless:true,...(process.env.PROBE_CHROME?{executablePath:process.env.PROBE_CHROME}:{})});
+            try{
+              for(const suffix of ['', 'index.html', 'price-control-draft.html', '?verify=live-browser-check']){
+                const page=await browser.newPage({viewport:{width:390,height:844},isMobile:true,deviceScaleFactor:2});
+                const errors=[],requests=[];
+                page.on('pageerror',e=>errors.push(e.message));
+                page.on('response',r=>{
+                  if(r.url().startsWith(base)&&(r.url().includes('full.json')||r.request().resourceType()==='document'))
+                    requests.push({url:r.url(),status:r.status(),cache:r.headers()['cache-control'],etag:r.headers()['etag']});
+                });
+                try {
+                  const response=await page.goto(base+suffix,{waitUntil:'domcontentloaded',timeout:20000});
+                  await page.waitForFunction(()=>document.getElementById('currentIndex')?.textContent.trim()!=='—'&&document.getElementById('indexPoints')?.innerHTML.length>0,undefined,{timeout:12000}).catch(()=>{});
+                  const info=await page.evaluate(()=>{
+                    const id=k=>document.getElementById(k);
+                    const t=k=>id(k)?.textContent?.trim()||null;
+                    return {title:document.title,period:t('periodTitle'),current:t('currentIndex'),legend:t('indexLegend'),transition:t('indexTransitionNote'),base:t('baseIndexHint'),pointCount:id('indexPoints')?.querySelectorAll('circle').length,dates:Array.from(id('indexPoints')?.querySelectorAll('.index-x-label')||[],x=>x.textContent),line:id('indexLine')?.getAttribute('d'),gap:id('indexGapLine')?.getAttribute('d'),svgWidth:id('indexChart')?.getBoundingClientRect().width,hasUnifiedCode:document.documentElement.outerHTML.includes('groups.unified_produce')};
+                  });
+                  console.log('LIVE_BROWSER_PROBE '+JSON.stringify({suffix,status:response?.status(),url:page.url(),info,errors,requests}));
+                } catch(e){console.log('LIVE_BROWSER_ERROR '+JSON.stringify({suffix,error:e.message,errors,requests}));}
+                await page.close();
+              }
+              for(const suffix of ['deployment.json','full.json','full.json?verify=live-browser-check']){
+                try{
+                  const r=await fetch(base+suffix);
+                  if(!r.ok){console.log('LIVE_DATA_ERROR '+JSON.stringify({suffix,status:r.status}));continue;}
+                  const j=await r.json();
+                  console.log('LIVE_DATA_PROBE '+JSON.stringify({suffix,status:r.status,commit:j.commit,currentKey:j.currentKey,unified:j.indexGroups?.unified_produce&&{base:j.indexGroups.unified_produce.baseKey,value:j.indexGroups.unified_produce.current,points:j.indexGroups.unified_produce.points.length},etag:r.headers.get('etag'),cache:r.headers.get('cache-control')}));
+                }catch(e){console.log('LIVE_DATA_ERROR '+JSON.stringify({suffix,error:e.message}));}
+              }
+            }finally{await browser.close();}
+          })().catch(e=>{console.error(e);process.exit(1)});
+          JS
