@@ -1,5 +1,5 @@
-2026-11-25 recheck all deliveries on 24 and 25 November for 24.11 price list; read only
+2026-11-27 audit all 26–27 November deliveries; read only
 supplier=all
-targetIso=2026-11-25
-startIso=2026-11-24
-endIso=2026-11-25
+targetIso=2026-11-27
+startIso=2026-11-26
+endIso=2026-11-27
