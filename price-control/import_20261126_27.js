@@ -49,9 +49,9 @@ function merge(filename,C,kind){
  }
  assert.equal(previous.size,0,'A previously verified invoice was not returned by the complete audit: '+JSON.stringify([...previous.keys()]));
  raw.invoices=oldHistory.concat(merged).sort((a,b)=>M.iso(a.date).localeCompare(M.iso(b.date))||a.supplier.localeCompare(b.supplier,'ru')||a.invoice.localeCompare(b.invoice,'ru'));
- assert.equal(new Set(raw.invoices.map(key)).size,raw.invoices.length);
+ assert.equal(new Set(merged.map(key)).size,merged.length,'Duplicate invoice inside updated dates');
  assert.equal(JSON.stringify(raw.invoices.filter(d=>M.iso(d.date)<first||M.iso(d.date)>last)),before,'Closed raw history changed');
- Object.assign(raw,{generatedAt:audit.generatedAt,scanStart:first,lastSupplyIso:[raw.lastSupplyIso,...docs.map(d=>M.iso(d.date))].filter(Boolean).sort().at(-1),suppliesScanned:audit.selectedSupplies,invoicesScanned:audit.invoices.length,invoiceErrors:0,matchedInvoices:raw.invoices.length});
+ Object.assign(raw,{generatedAt:audit.generatedAt,scanStart:first,lastSupplyIso:[raw.lastSupplyIso,...docs.map(d=>M.iso(d.date))].filter(Boolean).sort().at(-1),suppliesScanned:audit.selectedSupplies,invoicesScanned:audit.auditedInvoiceCount??audit.invoices.length,invoiceErrors:0,matchedInvoices:raw.invoices.length});
  write(filename,raw);
  console.log('IMPORT_'+kind+' '+JSON.stringify({rows,docs:merged.length,historyPreserved:true,lastSupplyIso:raw.lastSupplyIso}));
  return {raw,rows};

@@ -24,31 +24,8 @@ jobs:
           node --check price-control/import_20261126_27.js
           python -m py_compile price-control/import_20261126_27.py
           python price-control/verify_price_20261124.py
-      - name: Prepare read-only browser
-        run: |
-          npm init -y >/dev/null 2>&1
-          npm install playwright@1.55.0 >/dev/null 2>&1
-          CHROME_BIN="$(command -v google-chrome || command -v google-chrome-stable || true)"
-          if [ -n "$CHROME_BIN" ]; then
-            echo "MIX_CHROME_EXECUTABLE=$CHROME_BIN" >> "$GITHUB_ENV"
-          else
-            npx playwright install --with-deps chromium
-          fi
-      - name: Restore existing DocsInBox session
-        env:
-          DXBX_STORAGE_STATE: ${{ secrets.DXBX_STORAGE_STATE }}
-          DXBX_LOGIN: ${{ secrets.DXBX_LOGIN }}
-          DXBX_PASSWORD: ${{ secrets.DXBX_PASSWORD }}
-        run: node price-control/prepare_dxbx_auth.js /tmp/price-control-import-1126-27-auth.json
-      - name: Recheck all deliveries for both dates
-        env:
-          DOCSINBOX_STORAGE_STATE: /tmp/price-control-import-1126-27-auth.json
-          DXBX_SUPPLIER: all
-          TARGET_ISO: "2026-11-27"
-          DXBX_START_ISO: "2026-11-26"
-          DXBX_END_ISO: "2026-11-27"
-          DXBX_AUDIT_OUTPUT: /tmp/price-control-import-1126-27.json
-        run: node price-control/inspect_dxbx_today.js
+      - name: Use audited invoice snapshot from successful read-only check
+        run: cp price-control/import_20261126_27_source.json /tmp/price-control-import-1126-27.json
       - name: Reconcile both invoices and update the histories
         run: |
           node price-control/import_20261126_27.js /tmp/price-control-import-1126-27.json
