@@ -15,7 +15,7 @@ function ruToIso(s) {
 
 (async () => {
   if (!AUTH || !fs.existsSync(AUTH)) throw new Error('DOCSINBOX_AUTH_MISSING');
-  const browser = await chromium.launch({ headless: true });
+  const browser = await chromium.launch({ headless: true, ...(process.env.MIX_CHROME_EXECUTABLE ? {executablePath:process.env.MIX_CHROME_EXECUTABLE} : {}) });
   const context = await browser.newContext({ storageState: AUTH });
   const page = await context.newPage();
   await page.goto('https://dxbx.ru/fe/supplies?offset=0', { waitUntil: 'domcontentloaded', timeout: 60000 });
@@ -50,7 +50,7 @@ function ruToIso(s) {
     }));
   }, { supplierNeedle: SUPPLIER, startIso: START_ISO, endIso: END_ISO });
 
-  const docs = [];
+  const docs = [], errors = [];
   for (const supply of selected) {
     for (const inv of (supply.invoices || [])) {
       try {
@@ -93,9 +93,11 @@ function ruToIso(s) {
         }
         return { title: clean(heading?.textContent), items };
       });
+      if (!detail.items.length) throw new Error('INVOICE_ROWS_NOT_FOUND');
       const vm = detail.title.match(/\(вер\.(\d+)\)/i);
       docs.push({ date: supply.date, supplier: supply.supplier, number: inv.number || supply.number, publicId: inv.publicId, version: vm ? Number(vm[1]) : null, title: detail.title, items: detail.items });
       } catch (err) {
+        errors.push({supplier:supply.supplier,number:inv.number||supply.number});
         console.log('DXBX_TODAY_UNREADABLE supplier=' + supply.supplier + ' number=' + (inv.number || supply.number) + ' reason=' + String(err?.message || err).split('\n')[0].slice(0,100));
       }
     }
@@ -126,7 +128,13 @@ function ruToIso(s) {
   for (const [supplier, data] of bySupplier) {
     console.log('DXBX_DAY_SUPPLIER supplier=' + supplier + ' invoices=' + data.invoices + ' rows=' + data.rows + ' amount=' + data.amount.toFixed(2));
   }
-  const result = { targetIso: TARGET_ISO, startIso: START_ISO, endIso: END_ISO, supplier: SUPPLIER || 'ALL', selectedSupplies: selected.length, invoices };
+  const result = { targetIso: TARGET_ISO, startIso: START_ISO, endIso: END_ISO, supplier: SUPPLIER || 'ALL', selectedSupplies: selected.length, invoices, generatedAt:new Date().toISOString(), unreadable:errors.length };
+  if(process.env.DXBX_AUDIT_OUTPUT){
+    if(errors.length)throw Error('INCOMPLETE_RECEIPT_AUDIT:'+errors.length);
+    fs.writeFileSync(process.env.DXBX_AUDIT_OUTPUT, JSON.stringify(result));
+    console.log('DXBX_AUDIT_OUTPUT_OK invoices='+invoices.length);
+    return;
+  }
   console.log('DXBX_AUDIT_RANGE start=' + START_ISO + ' end=' + END_ISO + ' supplier=' + (SUPPLIER || 'ALL') + ' selected=' + selected.length + ' invoices=' + invoices.length);
   for (const item of invoices) console.log('DXBX_AUDIT_INVOICE date=' + item.date + ' number=' + item.number + ' rows=' + item.items.length + ' supplier=' + item.supplier);
   console.log('DXBX_AUDIT_B64=' + Buffer.from(JSON.stringify(result)).toString('base64'));
