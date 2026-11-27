@@ -4,7 +4,7 @@
  const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
  const fmt=(v,d=2)=>v==null||!Number.isFinite(Number(v))?'—':Number(v).toLocaleString('ru-RU',{maximumFractionDigits:d});
  const urls=['./purchase_history.json','./full.json','./produce_receipts.json'];
- let state=null,visible=[];
+ let state=null,visible=[],initialRecent=true;
  function date(s){return String(s||'').split('-').reverse().join('.')}
  function install(){
   if(id('produceCard'))return;
@@ -24,6 +24,8 @@
    '.produce-table th,.produce-table td{padding:8px;border-bottom:1px solid var(--line2);text-align:right;vertical-align:top}',
    '.produce-table th{background:#101b2a;color:#aebdd0;font-weight:700}',
    '.produce-table th:first-child,.produce-table td:first-child{width:224px;text-align:left}',
+   '.produce-table th:nth-child(2),.produce-table td:nth-child(2){width:136px}',
+   '.produce-table th,.produce-table td{box-sizing:border-box}',
    '.produce-group td{background:#182838;color:#dce8f5;font-weight:800;text-align:left!important}',
    '.produce-table tbody tr:last-child td{border-bottom:0}',
    '.produce-name,.produce-price{font-weight:700;color:var(--text)}',
@@ -39,7 +41,7 @@
    '.produce-detail{margin-top:9px;padding:9px 11px;border:1px solid var(--line2);border-radius:8px;font-size:11px;line-height:1.6}',
    '.produce-detail[hidden]{display:none}',
    '.produce-empty{color:var(--muted);text-align:center!important}',
-   '@media(max-width:600px){.produce-card{padding:10px}.produce-tools{gap:7px}.produce-tools input,.produce-tools select{min-width:110px}}'
+   '@media(max-width:600px){.produce-card{padding:10px}.produce-tools{gap:7px}.produce-tools input,.produce-tools select{min-width:110px}.produce-table th:first-child,.produce-table td:first-child{width:132px}.produce-table th:nth-child(2),.produce-table td:nth-child(2){width:128px;text-align:left}.produce-table td:nth-child(2) .produce-entry{text-align:left}.produce-table th,.produce-table td{padding:6px}.produce-table th:first-child,.produce-table td:first-child{overflow-wrap:anywhere}}'
   ].join('\n');
   document.head.appendChild(css);
   const s=document.createElement('section');s.id='produceCard';s.className='card produce-card';
@@ -82,14 +84,23 @@
   const g=id('produceGroup').value,s=id('produceSupplier').value,q=ProduceCore.norm(id('produceSearch').value);
   visible=state.products.filter(p=>!g||p.group===g).map(p=>({...p,deliveries:p.deliveries.filter(r=>!s||r.supplier===s)}))
    .filter(p=>p.deliveries.length&&(!q||ProduceCore.norm(p.label).includes(q)||p.deliveries.some(r=>ProduceCore.norm(r.name).includes(q))));
-  const today=ProduceCore.moscowTodayIso(),recent=id('produceRecent').value;
+  const today=ProduceCore.moscowTodayIso();
+  // Open the newest purchases first when they exist; retain the full history under "Все даты".
+  if(initialRecent){
+   id('produceRecent').value=visible.some(p=>ProduceCore.recentDateClass(p.deliveries[0].dateIso,today))?'recent':'';
+   initialRecent=false;
+  }
+  const recent=id('produceRecent').value;
   const counts={'today':0,'yesterday':0,'before-yesterday':0};
   for(const p of visible){
    const key=ProduceCore.recentDateClass(p.deliveries[0].dateIso,today);
    if(key)counts[key]++;
   }
   id('produceRecentMeta').innerHTML='<span>Последние закупки (МСК):</span>'+
-   [['today','Сегодня'],['yesterday','Вчера'],['before-yesterday','Позавчера']].map(([key,label])=>'<span class="produce-date '+key+'">'+label+' · '+counts[key]+'</span>').join('');
+   [['today','Сегодня'],['yesterday','Вчера'],['before-yesterday','Позавчера']].map(([key,label],i)=>{
+    const dateIso=new Date(Date.parse(today+'T00:00:00Z')-i*86400000).toISOString().slice(0,10);
+    return '<span class="produce-date '+key+'">'+label+' '+date(dateIso).slice(0,5)+' · '+counts[key]+'</span>';
+   }).join('');
   if(recent)visible=visible.filter(p=>{
    const key=ProduceCore.recentDateClass(p.deliveries[0].dateIso,today);
    return recent==='recent'?!!key:key===recent;
@@ -99,7 +110,7 @@
   id('produceHead').innerHTML='<tr><th>Товар</th><th>Последняя закупка</th>'+Array.from({length:limit-1},(_,i)=>'<th>Пред. '+(i+1)+'</th>').join('')+'</tr>';
   let html='';
   for(const group of state.groups){
-   const rows=visible.filter(p=>p.group===group.id);if(!rows.length)continue;
+   const rows=visible.filter(p=>p.group===group.id).sort((a,b)=>b.deliveries[0].dateIso.localeCompare(a.deliveries[0].dateIso)||a.label.localeCompare(b.label,'ru'));if(!rows.length)continue;
    html+='<tr class="produce-group"><td colspan="'+(limit+1)+'">'+esc(group.label)+' · '+rows.length+'</td></tr>';
    for(const p of rows){
     const pi=visible.indexOf(p);

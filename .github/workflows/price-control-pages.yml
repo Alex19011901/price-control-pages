@@ -23,6 +23,7 @@ on:
       - "price-control/mix-widget.js"
       - "price-control/produce-core.js"
       - "price-control/produce-widget.js"
+      - "price-control/produce_live_test.js"
       - "price-control/produce_receipts.json"
       - "price-control/produce_test.js"
   workflow_run:
@@ -371,3 +372,15 @@ jobs:
           summary = {k: week[k] for k in ("key", "docs", "rows", "above", "below", "equal", "unmatched", "overpay")}
           print("LIVE_PAGES_VERIFIED", json.dumps({"files": checked, "current": summary}))
           PY
+
+      - name: Verify the live produce widget on a mobile browser
+        run: |
+          npm init -y >/dev/null 2>&1
+          npm install playwright@1.55.0 >/dev/null 2>&1
+          CHROME_BIN="$(command -v google-chrome || command -v google-chrome-stable || true)"
+          if [ -n "$CHROME_BIN" ]; then
+            export PROBE_CHROME="$CHROME_BIN"
+          else
+            npx playwright install chromium
+          fi
+          node price-control/produce_live_test.js
