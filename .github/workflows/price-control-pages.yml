@@ -3,29 +3,11 @@ name: Price Control Pages
 
 on:
   push:
+    branches:
+      - main
     paths:
       - ".github/workflows/price-control-pages.yml"
-      - "price-control/draft.html"
-      - "price-control/trigger.html"
-      - "price-control/current.json"
-      - "price-control/full.json"
-      - "price-control/build_full_history.py"
-      - "price-control/price_20261124.parts/**"
-      - "price-control/verify_price_20261124.py"
-      - "price-control/invoice_price_slices.json"
-      - "price-control/fresh_produce_scope.py"
-      - "price-control/test_fresh_produce_scope.py"
-      - "price-control/purchase_history.json"
-      - "price-control/tracked_products.json"
-      - "price-control/tracked-products-widget.js"
-      - "price-control/purchase-history-widget.js"
-      - "price-control/mix_data.json"
-      - "price-control/mix-widget.js"
-      - "price-control/produce-core.js"
-      - "price-control/produce-widget.js"
-      - "price-control/produce_live_test.js"
-      - "price-control/produce_receipts.json"
-      - "price-control/produce_test.js"
+      - "price-control/**"
   workflow_run:
     workflows:
       - Price Control Public Refresh
@@ -49,22 +31,36 @@ jobs:
   build:
     if: github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success'
     runs-on: ubuntu-latest
+    outputs:
+      source_commit: ${{ steps.source.outputs.commit }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          # workflow_run publishes current main, never the triggering run's old SHA.
+          ref: main
+          fetch-depth: 1
+
+      - name: Record the exact checked-out publication source
+        id: source
+        run: |
+          PRICE_SOURCE_COMMIT="$(git rev-parse HEAD)"
+          printf 'PRICE_CONTROL_SOURCE_COMMIT=%s\n' "$PRICE_SOURCE_COMMIT" >> "$GITHUB_ENV"
+          printf 'commit=%s\n' "$PRICE_SOURCE_COMMIT" >> "$GITHUB_OUTPUT"
 
       - name: Verify unified price index and protected receipt data
         run: |
-          python -m py_compile price-control/build_full_history.py price-control/fresh_produce_scope.py
+          python -m py_compile price-control/build_sync_manifest.py price-control/fresh_produce_scope.py
+          python -m unittest discover -s price-control -p test_sync_manifest.py
           python price-control/test_fresh_produce_scope.py
           python price-control/verify_price_20261124.py
           python - <<'PY'
           import json
-          import subprocess
           from pathlib import Path
 
           path = Path("price-control/full.json")
-          original = json.loads(path.read_text(encoding="utf-8"))
+          original_bytes = path.read_bytes()
+          original = json.loads(original_bytes)
           old_periods = original["periods"]
           assert len(old_periods) >= 19
           all_invoices = set()
@@ -137,18 +133,9 @@ jobs:
                                  sl["source"] == "24.11.xlsx" and sl["sourceValidDate"] == "24.11.2026" for sl in slices)
               print("NOV_26_27_RECEIPTS_VERIFIED", json.dumps({k: p["rows"] for k, p in recent.items()}))
 
-          before = json.dumps(old_periods, sort_keys=True, ensure_ascii=False)
-          subprocess.run(["python", "price-control/build_full_history.py"], check=True)
-          rebuilt = json.loads(path.read_text(encoding="utf-8"))
-          differences = [name for name in original if original.get(name) != rebuilt.get(name)]
-          assert not differences, ("Index is not reproducible from receipts", differences,
-                                   [(p["key"], q["key"], p["label"], q["label"])
-                                    for p, q in zip(original["periods"], rebuilt["periods"])
-                                    if p != q][:10],
-                                   original["indexGroups"]["paradis"]["points"][-5:],
-                                   rebuilt["indexGroups"]["paradis"]["points"][-5:])
-          after = json.dumps(rebuilt["periods"], sort_keys=True, ensure_ascii=False)
-          assert before == after, "Historical receipt data changed"
+          # Publishing verifies stored facts only. Importers/builders belong to
+          # their explicit workflows; closed periods are never recalculated here.
+          assert path.read_bytes() == original_bytes, "Historical receipt bytes changed"
           print("UNIFIED_PRICE_INDEX_VERIFIED", json.dumps({
               "periods": len(keys), "current": index["current"],
               "base": index["baseKey"], "shared": index["commonProducts"],
@@ -165,18 +152,16 @@ jobs:
           cp price-control/full.json public-site/full.json
           cp price-control/purchase_history.json public-site/purchase_history.json
           cp price-control/tracked_products.json public-site/tracked_products.json
+          cp price-control/aish_price_aliases.json public-site/aish_price_aliases.json
+          cp price-control/invoice_price_slices.json public-site/invoice_price_slices.json
           cp price-control/tracked-products-widget.js public-site/tracked-products-widget.js
           cp price-control/purchase-history-widget.js public-site/purchase-history-widget.js
           cp price-control/mix-widget.js public-site/mix-widget.js
           cp price-control/produce-core.js public-site/produce-core.js
           cp price-control/produce-widget.js public-site/produce-widget.js
-          if [ -f price-control/produce_receipts.json ]; then
-            cp price-control/produce_receipts.json public-site/produce_receipts.json
-          fi
+          cp price-control/produce_receipts.json public-site/produce_receipts.json
           node price-control/produce_test.js
-          if [ -f price-control/mix_data.json ]; then
-            cp price-control/mix_data.json public-site/mix_data.json
-          fi
+          cp price-control/mix_data.json public-site/mix_data.json
           cp price-control/trigger.html public-site/price-control-trigger.html
           python - <<'PY'
           import json
@@ -186,7 +171,7 @@ jobs:
           from html.parser import HTMLParser
 
           workflow_url = "https://github.com/Alex19011901/price-control-pages/actions/workflows/price-control-public.yml"
-          version = os.environ["GITHUB_SHA"]
+          version = os.environ["PRICE_CONTROL_SOURCE_COMMIT"]
           widget_scripts = [
               f'<script src="./purchase-history-widget.js?v={version[:12]}"></script>',
           ]
@@ -245,11 +230,8 @@ jobs:
               if path.is_file() and forbidden.search(path.read_text(encoding="utf-8")):
                   raise SystemExit(f"Credential or client-side dispatch marker in {path.name}")
 
-          payload_names = ["current.json", "full.json", "purchase_history.json", "tracked_products.json"]
-          if Path("public-site/mix_data.json").exists():
-              payload_names.append("mix_data.json")
-          if Path("public-site/produce_receipts.json").exists():
-              payload_names.append("produce_receipts.json")
+          payload_names = ["current.json", "full.json", "purchase_history.json", "tracked_products.json",
+                           "mix_data.json", "produce_receipts.json", "aish_price_aliases.json", "invoice_price_slices.json"]
           for name in payload_names:
               original = Path("price-control", name).read_bytes()
               if original != Path("public-site", name).read_bytes():
@@ -285,6 +267,12 @@ jobs:
           print("PUBLIC_JAVASCRIPT_SYNTAX_OK")
           PY
 
+      - name: Describe the complete verified snapshot for VPS synchronization
+        run: |
+          python price-control/build_sync_manifest.py \
+            --site public-site --source-data price-control \
+            --commit "$PRICE_CONTROL_SOURCE_COMMIT"
+
       - name: Configure Pages
         uses: actions/configure-pages@v5
 
@@ -306,6 +294,9 @@ jobs:
 
       - name: Checkout repository for verification
         uses: actions/checkout@v4
+        with:
+          ref: ${{ needs.build.outputs.source_commit }}
+          fetch-depth: 1
 
       - name: Download and unpack exactly the built Pages artifact
         uses: actions/download-artifact@v4
@@ -321,8 +312,11 @@ jobs:
           test -f public-site/mix_data.json
 
       - name: Verify live Pages and preserved data
+        env:
+          PRICE_CONTROL_SOURCE_COMMIT: ${{ needs.build.outputs.source_commit }}
         run: |
           python - <<'PY'
+          import hashlib
           import json
           import os
           import re
@@ -331,7 +325,7 @@ jobs:
           from pathlib import Path
 
           base = "https://alex19011901.github.io/price-control-pages/"
-          revision = os.environ["GITHUB_SHA"]
+          revision = os.environ["PRICE_CONTROL_SOURCE_COMMIT"]
 
           def read_public(name, suffix=""):
               request = urllib.request.Request(
@@ -352,21 +346,31 @@ jobs:
                   raise SystemExit("Live Pages still serves an older deployment")
               time.sleep(5)
 
+          ready_before = read_public("sync-ready.json")
+          ready = json.loads(ready_before)
+          snapshot_raw = read_public("sync-manifest.json")
+          snapshot = json.loads(snapshot_raw)
+          assert ready["schema"] == "price-control-sync-ready-v1" and ready["commit"] == revision
+          assert ready["manifestSha256"] == hashlib.sha256(snapshot_raw).hexdigest()
+          assert snapshot["schema"] == "price-control-sync-manifest-v1" and snapshot["commit"] == revision
+
           forbidden = re.compile(
               r"PUBLIC_REFRESH_TOKEN|DXBX_(?:LOGIN|PASSWORD|STORAGE_STATE)|"
               r"github_pat_[A-Za-z0-9_]{20,}|gh[pousr]_[A-Za-z0-9]{20,}|"
               r"Authorization|/dispatches"
           )
           checked = 0
-          for path in sorted(Path("public-site").iterdir()):
+          for path in sorted(Path("public-site").rglob("*")):
               if not path.is_file():
                   continue
-              actual = read_public(path.name)
+              name = path.relative_to("public-site").as_posix()
+              actual = read_public(name)
               if actual != path.read_bytes():
-                  raise SystemExit(f"Live content mismatch: {path.name}")
+                  raise SystemExit(f"Live content mismatch: {name}")
               if forbidden.search(actual.decode("utf-8")):
                   raise SystemExit(f"Unsafe marker in live content: {path.name}")
               checked += 1
+          assert read_public("sync-ready.json", "-after") == ready_before, "Live snapshot generation changed during verification"
           current = json.loads(Path("public-site/current.json").read_text(encoding="utf-8"))
           week = current["week"]
           summary = {k: week[k] for k in ("key", "docs", "rows", "above", "below", "equal", "unmatched", "overpay")}
