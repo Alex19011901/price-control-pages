@@ -4652,6 +4652,272 @@
           "reason": "Горох стручковый 100 г отсутствует; не заменять консервированным или замороженным горошком."
         }
       ]
+    },
+    {
+      "invoice": "3432",
+      "supplyDate": "26.11.2026",
+      "source": "24.11.xlsx",
+      "sourceValidDate": "24.11.2026",
+      "rows": [
+        {
+          "name": "Горошек консервированный 400 гр.",
+          "unit": "шт",
+          "unmatched": true,
+          "reason": "Нет однозначного точного совпадения названия и единицы в прайсе 24.11; ранее подтверждённый вариант также не найден."
+        },
+        {
+          "name": "Картофель",
+          "unit": "кг.",
+          "price": 41.91,
+          "priceSourceName": "Картофель",
+          "sourceRow": 26,
+          "sourceUnit": "кг",
+          "matchMethod": "exact normalized name + unit"
+        },
+        {
+          "name": "Мандарины",
+          "unit": "кг.",
+          "unmatched": true,
+          "reason": "Нет однозначного точного совпадения названия и единицы в прайсе 24.11; ранее подтверждённый вариант также не найден."
+        },
+        {
+          "name": "Фенхель",
+          "unit": "кг.",
+          "price": 698.5,
+          "priceSourceName": "Фенхель",
+          "sourceRow": 58,
+          "sourceUnit": "кг",
+          "matchMethod": "exact normalized name + unit"
+        },
+        {
+          "name": "Печенье <Юбилейное> 112 гр.",
+          "unit": "шт.",
+          "unmatched": true,
+          "reason": "Нет однозначного точного совпадения названия и единицы в прайсе 24.11; ранее подтверждённый вариант также не найден."
+        },
+        {
+          "name": "Хлеб пшеничный <Американский сэндвич> 470 гр.",
+          "unit": "шт.",
+          "unmatched": true,
+          "reason": "Нет однозначного точного совпадения названия и единицы в прайсе 24.11; ранее подтверждённый вариант также не найден."
+        },
+        {
+          "name": "Шампиньоны",
+          "unit": "кг.",
+          "price": 279.4,
+          "priceSourceName": "Грибы шампиньоны",
+          "sourceRow": 10,
+          "sourceUnit": "кг",
+          "matchMethod": "previously documented exact alias"
+        }
+      ]
+    },
+    {
+      "invoice": "УТАГ0003443",
+      "supplyDate": "27.11.2026",
+      "source": "24.11.xlsx",
+      "sourceValidDate": "24.11.2026",
+      "rows": [
+        {
+          "name": "Апельсины",
+          "unit": "кг.",
+          "unmatched": true,
+          "reason": "Нет однозначного точного совпадения названия и единицы в прайсе 24.11; ранее подтверждённый вариант также не найден."
+        },
+        {
+          "name": "Базилик зеленый",
+          "unit": "кг.",
+          "price": 2349.5,
+          "priceSourceName": "Базилик зеленый",
+          "sourceRow": 85,
+          "sourceUnit": "кг",
+          "matchMethod": "exact normalized name + unit"
+        },
+        {
+          "name": "Виноград красный <Ред Глоб>",
+          "unit": "кг.",
+          "price": 381.0,
+          "priceSourceName": "Виноград Ред Глоб",
+          "sourceRow": 119,
+          "sourceUnit": "кг",
+          "matchMethod": "previously documented exact alias"
+        },
+        {
+          "name": "Грейпфруты",
+          "unit": "кг.",
+          "unmatched": true,
+          "reason": "Нет однозначного точного совпадения названия и единицы в прайсе 24.11; ранее подтверждённый вариант также не найден."
+        },
+        {
+          "name": "Грецкий орех очищенный в/с (половинки)",
+          "unit": "кг.",
+          "unmatched": true,
+          "reason": "Нет однозначного точного совпадения названия и единицы в прайсе 24.11; ранее подтверждённый вариант также не найден."
+        },
+        {
+          "name": "Капуста квашенная",
+          "unit": "кг.",
+          "price": 101.6,
+          "priceSourceName": "Капуста квашенная",
+          "sourceRow": 76,
+          "sourceUnit": "кг",
+          "matchMethod": "exact normalized name + unit"
+        },
+        {
+          "name": "Картофель мини",
+          "unit": "кг.",
+          "price": 101.6,
+          "priceSourceName": "Картофель мини",
+          "sourceRow": 27,
+          "sourceUnit": "кг",
+          "matchMethod": "exact normalized name + unit"
+        },
+        {
+          "name": "Кинза",
+          "unit": "кг.",
+          "price": 698.5,
+          "priceSourceName": "Кинза",
+          "sourceRow": 13,
+          "sourceUnit": "кг",
+          "matchMethod": "exact normalized name + unit"
+        },
+        {
+          "name": "Лук порей",
+          "unit": "кг.",
+          "price": 317.5,
+          "priceSourceName": "Лук порей",
+          "sourceRow": 32,
+          "sourceUnit": "кг",
+          "matchMethod": "exact normalized name + unit"
+        },
+        {
+          "name": "Огурцы миринда",
+          "unit": "кг.",
+          "price": 419.1,
+          "priceSourceName": "Огурцы Миринда",
+          "sourceRow": 40,
+          "sourceUnit": "кг",
+          "matchMethod": "exact normalized name + unit"
+        },
+        {
+          "name": "Огурцы соленые",
+          "unit": "кг.",
+          "price": 228.6,
+          "priceSourceName": "Огурцы соленые",
+          "sourceRow": 78,
+          "sourceUnit": "кг",
+          "matchMethod": "exact normalized name + unit"
+        },
+        {
+          "name": "Оливки целые, без косточки, ж/б, 300 мл. / 280 гр.",
+          "unit": "шт",
+          "unmatched": true,
+          "reason": "Нет однозначного точного совпадения названия и единицы в прайсе 24.11; ранее подтверждённый вариант также не найден."
+        },
+        {
+          "name": "Печенье <Савоярди> 400 гр.",
+          "unit": "уп.",
+          "unmatched": true,
+          "reason": "Нет однозначного точного совпадения названия и единицы в прайсе 24.11; ранее подтверждённый вариант также не найден."
+        },
+        {
+          "name": "Руккола 125 гр.",
+          "unit": "шт.",
+          "price": 206.38,
+          "priceSourceName": "Салат руккола  125 гр",
+          "sourceRow": 72,
+          "sourceUnit": "кг",
+          "matchMethod": "previously documented exact package weight",
+          "sourcePrice": 1651.0,
+          "formula": "1651 ₽/кг × 0.125 кг"
+        },
+        {
+          "name": "Салат микс 125 гр.",
+          "unit": "шт.",
+          "price": 210.0,
+          "priceSourceName": "Салат микс 125 гр",
+          "sourceRow": 63,
+          "sourceUnit": "шт",
+          "matchMethod": "exact normalized name + unit"
+        },
+        {
+          "name": "Томаты на ветке",
+          "unit": "кг.",
+          "unmatched": true,
+          "reason": "Нет однозначного точного совпадения названия и единицы в прайсе 24.11; ранее подтверждённый вариант также не найден."
+        },
+        {
+          "name": "Томаты розовые",
+          "unit": "кг.",
+          "unmatched": true,
+          "reason": "Нет однозначного точного совпадения названия и единицы в прайсе 24.11; ранее подтверждённый вариант также не найден."
+        },
+        {
+          "name": "Томаты черри (красные) 250 гр.",
+          "unit": "шт.",
+          "price": 142.88,
+          "priceSourceName": "Помидоры Черри красные 250 гр",
+          "sourceRow": 51,
+          "sourceUnit": "кг",
+          "matchMethod": "previously documented exact package weight",
+          "sourcePrice": 571.5,
+          "formula": "571.5 ₽/кг × 0.25 кг"
+        },
+        {
+          "name": "Тыква круглая",
+          "unit": "кг.",
+          "price": 69.85,
+          "priceSourceName": "Тыква (круглая)",
+          "sourceRow": 7,
+          "sourceUnit": "кг",
+          "matchMethod": "exact normalized name + unit"
+        },
+        {
+          "name": "Черемша маринованная",
+          "unit": "кг.",
+          "price": 508.0,
+          "priceSourceName": "Черемша маринованная",
+          "sourceRow": 81,
+          "sourceUnit": "кг",
+          "matchMethod": "exact normalized name + unit"
+        },
+        {
+          "name": "Шпинат свежий",
+          "unit": "кг.",
+          "price": 482.6,
+          "priceSourceName": "Шпинат",
+          "sourceRow": 74,
+          "sourceUnit": "кг",
+          "matchMethod": "previously documented exact alias"
+        },
+        {
+          "name": "Вешенки",
+          "unit": "кг.",
+          "unmatched": true,
+          "reason": "Нет однозначного точного совпадения названия и единицы в прайсе 24.11; ранее подтверждённый вариант также не найден."
+        },
+        {
+          "name": "Петрушка кудрявая",
+          "unit": "кг.",
+          "unmatched": true,
+          "reason": "Нет однозначного точного совпадения названия и единицы в прайсе 24.11; ранее подтверждённый вариант также не найден."
+        },
+        {
+          "name": "Помидоры соленые (зелёные)",
+          "unit": "кг.",
+          "price": 228.6,
+          "priceSourceName": "Помидоры соленые зеленые",
+          "sourceRow": 80,
+          "sourceUnit": "кг",
+          "matchMethod": "exact normalized name + unit"
+        },
+        {
+          "name": "Малина свежемороженая 300 гр.",
+          "unit": "шт.",
+          "unmatched": true,
+          "reason": "Нет однозначного точного совпадения названия и единицы в прайсе 24.11; ранее подтверждённый вариант также не найден."
+        }
+      ]
     }
   ]
 }

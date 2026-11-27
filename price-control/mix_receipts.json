@@ -1,20 +1,20 @@
 {
   "schemaVersion": 1,
   "catalogRevision": 6,
-  "generatedAt": "2026-11-26T19:38:37.622Z",
+  "generatedAt": "2026-11-27T10:56:25.0381749Z",
   "from": "2026-01-01",
-  "scanStart": "2026-10-11",
-  "lastSupplyIso": "2026-11-26",
+  "scanStart": "2026-11-26",
+  "lastSupplyIso": "2026-11-27",
   "products": 71,
-  "suppliesScanned": 113,
-  "invoicesScanned": 139,
+  "suppliesScanned": 4,
+  "invoicesScanned": 6,
   "invoiceErrors": 0,
   "nonItemDocuments": 3,
   "nonItemSuppliers": [
     "АКЦИОНЕРНОЕ ОБЩЕСТВО \"МОСВОДОКАНАЛ\"",
     "ООО \"УК Система\""
   ],
-  "matchedInvoices": 527,
+  "matchedInvoices": 528,
   "invoices": [
     {
       "date": "11.01.2026",
@@ -15813,6 +15813,30 @@
           "unit": "кг.",
           "qty": 0.73,
           "sum": 582.18
+        }
+      ]
+    },
+    {
+      "date": "27.11.2026",
+      "supplier": "ООО \"АЙШ ГАРДЕН\"",
+      "invoice": "УТАГ0003443",
+      "version": 1,
+      "items": [
+        {
+          "line": 5,
+          "productId": "walnut",
+          "name": "Грецкий орех очищенный в/с (половинки),кг. (00000003651)",
+          "unit": "кг.",
+          "qty": 0.88,
+          "sum": 782.32
+        },
+        {
+          "line": 12,
+          "productId": "green_olives",
+          "name": "Оливки целые, без косточки, ж/б, 300 мл. / 280 гр.,шт (00000000178)",
+          "unit": "шт",
+          "qty": 5,
+          "sum": 539.75
         }
       ]
     }

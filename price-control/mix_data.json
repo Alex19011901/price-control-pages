@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-26T19:38:37.622Z",
+  "generatedAt": "2026-11-27T10:56:25.0381749Z",
   "source": "DocsInBox",
   "start": "2026-01-01",
   "methodology": "Индекс Микс: база 100, равный вес каждой из выбранных товарных групп. Индекс изменяется только при повторной закупке одной и той же номенклатуры у того же поставщика в сопоставимой единице. Разные сорта, бренды, упаковки и поставщики не сравниваются между собой для расчёта изменения цены. При отсутствии повторной закупки предыдущее значение сохраняется, новые позиции включаются без скачка. История показывает все найденные товары и поставщиков.",
@@ -21337,6 +21337,23 @@
       "deliveries": [
         {
           "productId": "green_olives",
+          "date": "27.11.2026",
+          "dateIso": "2026-11-27",
+          "supplier": "ООО \"АЙШ ГАРДЕН\"",
+          "invoice": "УТАГ0003443",
+          "qty": 5,
+          "sum": 539.75,
+          "unit": "шт",
+          "fact": 107.95,
+          "name": "Оливки целые, без косточки, ж/б, 300 мл. / 280 гр.,шт (00000000178)",
+          "displayFact": null,
+          "displayUnit": null,
+          "displayPack": null,
+          "indexUnit": "шт",
+          "indexQty": 5
+        },
+        {
+          "productId": "green_olives",
           "date": "02.11.2026",
           "dateIso": "2026-11-02",
           "supplier": "ООО \"МЕТРО Кэш энд Керри\"",
@@ -21846,7 +21863,7 @@
           "indexQty": 1.9
         }
       ],
-      "count": 30,
+      "count": 31,
       "indexedDeliveries": 21
     },
     {
@@ -22222,6 +22239,23 @@
       "group": "grocery",
       "indexUnit": "кг",
       "deliveries": [
+        {
+          "productId": "walnut",
+          "date": "27.11.2026",
+          "dateIso": "2026-11-27",
+          "supplier": "ООО \"АЙШ ГАРДЕН\"",
+          "invoice": "УТАГ0003443",
+          "qty": 0.88,
+          "sum": 782.32,
+          "unit": "кг",
+          "fact": 889,
+          "name": "Грецкий орех очищенный в/с (половинки),кг. (00000003651)",
+          "displayFact": null,
+          "displayUnit": null,
+          "displayPack": null,
+          "indexUnit": "кг",
+          "indexQty": 0.88
+        },
         {
           "productId": "walnut",
           "date": "26.10.2026",
@@ -22733,8 +22767,8 @@
           "indexQty": 1.06
         }
       ],
-      "count": 30,
-      "indexedDeliveries": 30
+      "count": 31,
+      "indexedDeliveries": 31
     },
     {
       "id": "artichokes",
@@ -22905,12 +22939,12 @@
     "productsWithData": 70,
     "indexedProducts": 66,
     "suppliers": 15,
-    "matchedDeliveries": 1302,
-    "matchedInvoices": 482,
-    "rawMatchedInvoices": 527,
+    "matchedDeliveries": 1304,
+    "matchedInvoices": 483,
+    "rawMatchedInvoices": 528,
     "duplicateDocumentsRemoved": 45,
-    "lastSupplyIso": "2026-11-26",
-    "scanStart": "2026-10-11"
+    "lastSupplyIso": "2026-11-27",
+    "scanStart": "2026-11-26"
   },
   "index": {
     "baseDate": "11.01.2026",
@@ -25476,6 +25510,17 @@
       {
         "date": "25.11.2026",
         "dateIso": "2026-11-25",
+        "value": 109.25,
+        "coverage": 66,
+        "compared": 0,
+        "comparedProducts": 0,
+        "newProducts": 0,
+        "newSkus": 1,
+        "totalProducts": 67
+      },
+      {
+        "date": "27.11.2026",
+        "dateIso": "2026-11-27",
         "value": 109.25,
         "coverage": 66,
         "compared": 0,
