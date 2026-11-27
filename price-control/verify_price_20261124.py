@@ -48,8 +48,7 @@ for rule in rules.values():
         assert unit == "уп" and rule["priceUnit"] == "шт" and rule["unitsPerReceipt"] == 1
     else:
         assert unit == rule["priceUnit"]
-current_slice = next((s for s in slices if s["invoice"] == "УТАГ0003443" and s["supplyDate"] == "27.11.2026"), None)
-if current_slice:
+for current_slice in [s for s in slices if (s["invoice"], s["supplyDate"]) in {("3432", "26.11.2026"), ("УТАГ0003443", "27.11.2026")}]:
     assert current_slice["source"] == "24.11.xlsx"
     for r in current_slice["rows"]:
         rule = rules.get((r["name"], r["unit"].rstrip(".")))

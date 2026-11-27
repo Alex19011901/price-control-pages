@@ -67,7 +67,7 @@
       "receiptUnit": "кг.",
       "priceName": "Мандарин",
       "priceUnit": "кг",
-      "confirmation": "verified exact product and package"
+      "confirmation": "user-confirmed 27.11.2026"
     },
     {
       "receiptName": "Хлеб пшеничный <Американский сэндвич> 470 гр.",
@@ -89,6 +89,13 @@
       "priceName": "Петрушка",
       "priceUnit": "кг",
       "confirmation": "user-confirmed 27.11.2026"
+    },
+    {
+      "receiptName": "Горошек консервированный 400 гр.",
+      "receiptUnit": "шт",
+      "priceName": "Горошек консерв. (чист. вес 200 г) 400 г",
+      "priceUnit": "шт",
+      "confirmation": "user-confirmed 27.11.2026; generic 400 g can, not Bonduelle"
     }
   ]
 }
