@@ -7,7 +7,15 @@ const root=__dirname,read=p=>JSON.parse(fs.readFileSync(path.join(root,p),'utf8'
 const audit=JSON.parse(fs.readFileSync(process.argv[2],'utf8'));
 assert.equal(audit.startIso,'2026-11-26');assert.equal(audit.endIso,'2026-11-27');assert.equal(audit.supplier,'ALL');assert.equal(audit.unreadable,0);
 const first='2026-11-26',last='2026-11-27';
-const key=d=>[M.iso(d.date),M.norm(d.supplier),String(d.invoice||d.number).trim()].join('\0');
+function invoiceKey(d){
+ const n=String(d.invoice||d.number).trim();
+ if(M.norm(d.supplier).includes('айш гарден')){
+  const m=n.match(/^(?:УТАГ)?0*(\d+)$/i);
+  if(m)return 'УТАГ'+m[1];
+ }
+ return n;
+}
+const key=d=>[M.iso(d.date),M.norm(d.supplier),invoiceKey(d)].join('\0');
 const selected=new Map();
 for(const d of audit.invoices){
  assert.ok(M.iso(d.date)>=first&&M.iso(d.date)<=last);
@@ -35,7 +43,7 @@ function merge(filename,C,kind){
   if(old)assert.ok(d.version>=Number(old.version),'Older invoice in audit '+d.number);
   const items=d.items.flatMap(i=>{const p=C.classify(i.name);return p?[{line:i.line,productId:p.id,name:i.name,unit:i.unit,qty:i.count,sum:M.round2(i.sum)}]:[]});
   if(!items.length)continue;
-  const receipt={date:d.date,supplier:String(d.supplier).trim().replace(/\s+/g,' '),invoice:String(d.number),version:d.version,items};
+  const receipt={date:d.date,supplier:String(d.supplier).trim().replace(/\s+/g,' '),invoice:old?String(old.invoice):String(d.number),version:d.version,items};
   merged.push(receipt);
   rows.push(...items.map(i=>({date:receipt.date,invoice:receipt.invoice,id:i.productId,name:i.name,qty:i.qty,unit:i.unit,sum:i.sum})));
  }
