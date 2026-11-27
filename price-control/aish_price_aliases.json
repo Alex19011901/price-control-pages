@@ -75,6 +75,20 @@
       "priceName": "Хлеб Американский Сэндвич пшен. 470 г",
       "priceUnit": "шт",
       "confirmation": "verified exact product and package"
+    },
+    {
+      "receiptName": "Грецкий орех очищенный в/с (половинки)",
+      "receiptUnit": "кг.",
+      "priceName": "Грецкие орехи половинки",
+      "priceUnit": "кг",
+      "confirmation": "user-confirmed 27.11.2026"
+    },
+    {
+      "receiptName": "Петрушка кудрявая",
+      "receiptUnit": "кг.",
+      "priceName": "Петрушка",
+      "priceUnit": "кг",
+      "confirmation": "user-confirmed 27.11.2026"
     }
   ]
 }
