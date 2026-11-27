@@ -100,6 +100,15 @@ for sl in original_slices:
             else: continue
         aliases[a].add((price_name(r["priceSourceName"]),u,weight))
 
+# Exact supplier-specific mappings, reusable with new Aish price lists.
+confirmed_aliases = {}
+registry = read("aish_price_aliases.json")
+assert registry["supplier"] == manifest["supplier"]
+for rule in registry["aliases"]:
+    k = key(rule["receiptName"], rule["receiptUnit"])
+    assert k not in confirmed_aliases
+    confirmed_aliases[k] = rule
+
 def match(name, unit):
     k = key(name,unit)
     direct = unique_price(k)
@@ -107,6 +116,19 @@ def match(name, unit):
         return direct, direct["sourcePrice"], "exact normalized name + unit", None
     # If the literal key has conflicting prices, do not bypass ambiguity.
     if lookup.get(k): return None
+    rule = confirmed_aliases.get(k)
+    if rule:
+        p = unique_price(key(rule["priceName"], rule["priceUnit"]))
+        if p is None:
+            return None
+        weight = dec(rule["packageWeightKg"]) if "packageWeightKg" in rule else None
+        if weight is not None:
+            assert normalized_unit(unit) == "шт" and normalized_unit(p["sourceUnit"]) == "кг" and weight > 0
+            return p, dec(round2(p["sourcePrice"] * weight)), "user-confirmed exact alias and package weight", weight
+        if normalized_unit(unit) != normalized_unit(p["sourceUnit"]):
+            assert normalized_unit(unit) == "уп" and p["sourceUnit"] == "шт" and rule.get("unitsPerReceipt") == 1
+            return p, p["sourcePrice"], "user-confirmed identical package", None
+        return p, p["sourcePrice"], "confirmed exact alias", None
     found = {}
     for alias_name, alias_unit, weight in aliases.get(k, ()):
         p = unique_price((alias_name,alias_unit))
@@ -152,6 +174,8 @@ for day in ("26.11.2026","27.11.2026"):
                 overpay+=max(Decimal(0),impact)
                 status="ABOVE" if delta>0 else "BELOW" if delta<0 else "EQUAL"
                 sr={"name":name,"unit":i["unit"],"price":price,"priceSourceName":p["priceSourceName"],"sourceRow":p["sourceRow"],"sourceUnit":p["sourceUnit"],"matchMethod":method}
+                if method == "user-confirmed identical package":
+                    sr["unitsPerReceipt"] = 1
                 if weight is not None:
                     sr["sourcePrice"]=float(p["sourcePrice"])
                     sr["formula"]=f"{p['sourcePrice']} ₽/кг × {weight} кг"
@@ -189,10 +213,21 @@ for sl in slices["slices"][len(original_slices):]:
         assert p["priceSourceName"]==r["priceSourceName"] and p["sourceUnit"]==r["sourceUnit"]
         if "formula" in r:
             assert r["sourcePrice"]==float(p["sourcePrice"])
-            w=Decimal("0.125") if key(r["name"],r["unit"])==key("Руккола 125 гр.","шт.") else Decimal("0.25")
+            rule = confirmed_aliases.get(key(r["name"], r["unit"]))
+            if rule and "packageWeightKg" in rule:
+                w = dec(rule["packageWeightKg"])
+            elif key(r["name"],r["unit"]) == key("Руккола 125 гр.","шт."):
+                w = Decimal("0.125")
+            else:
+                assert key(r["name"],r["unit"]) == key("Томаты черри (красные) 250 гр.","шт.")
+                w = Decimal("0.25")
             assert round2(p["sourcePrice"]*w)==r["price"]
         else:
-            assert normalized_unit(r["unit"])==p["sourceUnit"] and round2(p["sourcePrice"])==r["price"]
+            assert round2(p["sourcePrice"])==r["price"]
+            if normalized_unit(r["unit"]) != p["sourceUnit"]:
+                rule = confirmed_aliases.get(key(r["name"], r["unit"]))
+                assert rule and rule.get("unitsPerReceipt") == r.get("unitsPerReceipt") == 1
+                assert normalized_unit(r["unit"]) == "уп" and p["sourceUnit"] == "шт"
 
 # Prevent an ordinary refresh from reverting the newest published period to 25.11.
 refresh=(PC/"refresh_dxbx.js").read_text(encoding="utf-8")

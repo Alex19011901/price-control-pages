@@ -32,3 +32,32 @@ for r in matched:
     assert r["unit"].rstrip(".") == unit
 assert sum(bool(r.get("unmatched")) for r in sl["rows"]) == 4
 print("PRICE_20261124_VERIFIED", len(prices), "rows;", len(matched), "confirmed matches")
+
+# Verify explicit aliases against the archived source, never the invoice price.
+registry = json.loads((PC / "aish_price_aliases.json").read_text(encoding="utf-8"))
+assert registry["supplier"] == "Айш Гарден"
+rules = {(r["receiptName"], r["receiptUnit"].rstrip(".")): r for r in registry["aliases"]}
+assert len(rules) == len(registry["aliases"])
+for rule in rules.values():
+    matches = [p for p in prices.values() if p[0] == rule["priceName"] and p[1] == rule["priceUnit"]]
+    assert len(matches) == 1, rule
+    unit = rule["receiptUnit"].rstrip(".")
+    if "packageWeightKg" in rule:
+        assert unit == "шт" and rule["priceUnit"] == "кг" and Decimal(str(rule["packageWeightKg"])) > 0
+    elif "unitsPerReceipt" in rule:
+        assert unit == "уп" and rule["priceUnit"] == "шт" and rule["unitsPerReceipt"] == 1
+    else:
+        assert unit == rule["priceUnit"]
+current_slice = next((s for s in slices if s["invoice"] == "УТАГ0003443" and s["supplyDate"] == "27.11.2026"), None)
+if current_slice:
+    assert current_slice["source"] == "24.11.xlsx"
+    for r in current_slice["rows"]:
+        rule = rules.get((r["name"], r["unit"].rstrip(".")))
+        if not rule:
+            continue
+        assert not r.get("unmatched"), r
+        name, unit, price = prices[r["sourceRow"]]
+        assert (name, unit) == (rule["priceName"], rule["priceUnit"]) == (r["priceSourceName"], r["sourceUnit"])
+        expected = price * Decimal(str(rule.get("packageWeightKg", 1)))
+        assert Decimal(str(r["price"])) == expected, r
+    print("AISH_CONFIRMED_ALIASES_VERIFIED", len(rules))

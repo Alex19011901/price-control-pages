@@ -1,0 +1,80 @@
+{
+  "supplier": "Айш Гарден",
+  "verifiedAgainst": "24.11.xlsx",
+  "verifiedDate": "24.11.2026",
+  "description": "Exact supplier-specific aliases. Match the target name and unit in the applicable price list; never use the receipt price to choose the target. Preserve package weight and product type. Closed receipts are not rewritten.",
+  "aliases": [
+    {
+      "receiptName": "Апельсины",
+      "receiptUnit": "кг.",
+      "priceName": "Апельсины для сока",
+      "priceUnit": "кг",
+      "confirmation": "user-confirmed 27.11.2026"
+    },
+    {
+      "receiptName": "Грейпфруты",
+      "receiptUnit": "кг.",
+      "priceName": "Грейпфрут",
+      "priceUnit": "кг",
+      "confirmation": "user-confirmed 27.11.2026"
+    },
+    {
+      "receiptName": "Оливки целые, без косточки, ж/б, 300 мл. / 280 гр.",
+      "receiptUnit": "шт",
+      "priceName": "Оливки Слер б/к 280гр",
+      "priceUnit": "шт",
+      "confirmation": "user-confirmed 27.11.2026"
+    },
+    {
+      "receiptName": "Печенье <Савоярди> 400 гр.",
+      "receiptUnit": "уп.",
+      "priceName": "Печенье савоярди Forno Bonomi  400 г",
+      "priceUnit": "шт",
+      "confirmation": "user-confirmed 27.11.2026",
+      "unitsPerReceipt": 1
+    },
+    {
+      "receiptName": "Томаты на ветке",
+      "receiptUnit": "кг.",
+      "priceName": "Помидоры",
+      "priceUnit": "кг",
+      "confirmation": "user-confirmed 27.11.2026"
+    },
+    {
+      "receiptName": "Томаты розовые",
+      "receiptUnit": "кг.",
+      "priceName": "Помидоры Розовые",
+      "priceUnit": "кг",
+      "confirmation": "user-confirmed 27.11.2026"
+    },
+    {
+      "receiptName": "Вешенки",
+      "receiptUnit": "кг.",
+      "priceName": "Грибы вешенки",
+      "priceUnit": "кг",
+      "confirmation": "user-confirmed 27.11.2026"
+    },
+    {
+      "receiptName": "Малина свежемороженая 300 гр.",
+      "receiptUnit": "шт.",
+      "priceName": "Малина (Класс 1) с/м",
+      "priceUnit": "кг",
+      "confirmation": "user-confirmed 27.11.2026",
+      "packageWeightKg": 0.3
+    },
+    {
+      "receiptName": "Мандарины",
+      "receiptUnit": "кг.",
+      "priceName": "Мандарин",
+      "priceUnit": "кг",
+      "confirmation": "verified exact product and package"
+    },
+    {
+      "receiptName": "Хлеб пшеничный <Американский сэндвич> 470 гр.",
+      "receiptUnit": "шт.",
+      "priceName": "Хлеб Американский Сэндвич пшен. 470 г",
+      "priceUnit": "шт",
+      "confirmation": "verified exact product and package"
+    }
+  ]
+}

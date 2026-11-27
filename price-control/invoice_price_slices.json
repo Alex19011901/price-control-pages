@@ -4721,8 +4721,11 @@
         {
           "name": "Апельсины",
           "unit": "кг.",
-          "unmatched": true,
-          "reason": "Нет однозначного точного совпадения названия и единицы в прайсе 24.11; ранее подтверждённый вариант также не найден."
+          "price": 165.1,
+          "priceSourceName": "Апельсины для сока",
+          "sourceRow": 101,
+          "sourceUnit": "кг",
+          "matchMethod": "user-confirmed exact alias"
         },
         {
           "name": "Базилик зеленый",
@@ -4736,7 +4739,7 @@
         {
           "name": "Виноград красный <Ред Глоб>",
           "unit": "кг.",
-          "price": 381.0,
+          "price": 381,
           "priceSourceName": "Виноград Ред Глоб",
           "sourceRow": 119,
           "sourceUnit": "кг",
@@ -4745,8 +4748,11 @@
         {
           "name": "Грейпфруты",
           "unit": "кг.",
-          "unmatched": true,
-          "reason": "Нет однозначного точного совпадения названия и единицы в прайсе 24.11; ранее подтверждённый вариант также не найден."
+          "price": 304.8,
+          "priceSourceName": "Грейпфрут",
+          "sourceRow": 104,
+          "sourceUnit": "кг",
+          "matchMethod": "user-confirmed exact alias"
         },
         {
           "name": "Грецкий орех очищенный в/с (половинки)",
@@ -4811,14 +4817,21 @@
         {
           "name": "Оливки целые, без косточки, ж/б, 300 мл. / 280 гр.",
           "unit": "шт",
-          "unmatched": true,
-          "reason": "Нет однозначного точного совпадения названия и единицы в прайсе 24.11; ранее подтверждённый вариант также не найден."
+          "price": 107.95,
+          "priceSourceName": "Оливки Слер б/к 280гр",
+          "sourceRow": 165,
+          "sourceUnit": "шт",
+          "matchMethod": "user-confirmed exact alias"
         },
         {
           "name": "Печенье <Савоярди> 400 гр.",
           "unit": "уп.",
-          "unmatched": true,
-          "reason": "Нет однозначного точного совпадения названия и единицы в прайсе 24.11; ранее подтверждённый вариант также не найден."
+          "price": 381,
+          "priceSourceName": "Печенье савоярди Forno Bonomi  400 г",
+          "sourceRow": 139,
+          "sourceUnit": "шт",
+          "matchMethod": "user-confirmed identical package",
+          "unitsPerReceipt": 1
         },
         {
           "name": "Руккола 125 гр.",
@@ -4828,13 +4841,13 @@
           "sourceRow": 72,
           "sourceUnit": "кг",
           "matchMethod": "previously documented exact package weight",
-          "sourcePrice": 1651.0,
+          "sourcePrice": 1651,
           "formula": "1651 ₽/кг × 0.125 кг"
         },
         {
           "name": "Салат микс 125 гр.",
           "unit": "шт.",
-          "price": 210.0,
+          "price": 210,
           "priceSourceName": "Салат микс 125 гр",
           "sourceRow": 63,
           "sourceUnit": "шт",
@@ -4843,14 +4856,20 @@
         {
           "name": "Томаты на ветке",
           "unit": "кг.",
-          "unmatched": true,
-          "reason": "Нет однозначного точного совпадения названия и единицы в прайсе 24.11; ранее подтверждённый вариант также не найден."
+          "price": 228.6,
+          "priceSourceName": "Помидоры",
+          "sourceRow": 46,
+          "sourceUnit": "кг",
+          "matchMethod": "user-confirmed exact alias"
         },
         {
           "name": "Томаты розовые",
           "unit": "кг.",
-          "unmatched": true,
-          "reason": "Нет однозначного точного совпадения названия и единицы в прайсе 24.11; ранее подтверждённый вариант также не найден."
+          "price": 381,
+          "priceSourceName": "Помидоры Розовые",
+          "sourceRow": 47,
+          "sourceUnit": "кг",
+          "matchMethod": "user-confirmed exact alias"
         },
         {
           "name": "Томаты черри (красные) 250 гр.",
@@ -4875,7 +4894,7 @@
         {
           "name": "Черемша маринованная",
           "unit": "кг.",
-          "price": 508.0,
+          "price": 508,
           "priceSourceName": "Черемша маринованная",
           "sourceRow": 81,
           "sourceUnit": "кг",
@@ -4893,8 +4912,11 @@
         {
           "name": "Вешенки",
           "unit": "кг.",
-          "unmatched": true,
-          "reason": "Нет однозначного точного совпадения названия и единицы в прайсе 24.11; ранее подтверждённый вариант также не найден."
+          "price": 675,
+          "priceSourceName": "Грибы вешенки",
+          "sourceRow": 11,
+          "sourceUnit": "кг",
+          "matchMethod": "user-confirmed exact alias"
         },
         {
           "name": "Петрушка кудрявая",
@@ -4914,8 +4936,13 @@
         {
           "name": "Малина свежемороженая 300 гр.",
           "unit": "шт.",
-          "unmatched": true,
-          "reason": "Нет однозначного точного совпадения названия и единицы в прайсе 24.11; ранее подтверждённый вариант также не найден."
+          "price": 228.6,
+          "priceSourceName": "Малина (Класс 1) с/м",
+          "sourceRow": 543,
+          "sourceUnit": "кг",
+          "matchMethod": "user-confirmed exact alias and package weight",
+          "sourcePrice": 762,
+          "formula": "762 ₽/кг × 0.3 кг"
         }
       ]
     }
