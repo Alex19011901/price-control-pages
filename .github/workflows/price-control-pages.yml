@@ -124,6 +124,18 @@ jobs:
               and index["points"][-1].get("noComparableProducts") is True
           ), "Index without exact common products must not imply a price movement"
 
+          # November 26–27: preserve verified source dates and receipt slices.
+          if original["currentKey"] >= "2026-11-27":
+              recent = {p["key"]: p for p in old_periods if p["key"] in {"2026-11-26", "2026-11-27"}}
+              assert set(recent) == {"2026-11-26", "2026-11-27"}
+              slices = json.loads(Path("price-control/invoice_price_slices.json").read_text(encoding="utf-8"))["slices"]
+              for p in recent.values():
+                  assert p["supplier"] == "Айш Гарден" and p["priceDocumentDate"] == "24.11.2026"
+                  for invoice in {row[2] for row in p["rowsData"]}:
+                      assert any(sl["invoice"] == invoice and sl["supplyDate"] == p["start"] and
+                                 sl["source"] == "24.11.xlsx" and sl["sourceValidDate"] == "24.11.2026" for sl in slices)
+              print("NOV_26_27_RECEIPTS_VERIFIED", json.dumps({k: p["rows"] for k, p in recent.items()}))
+
           before = json.dumps(old_periods, sort_keys=True, ensure_ascii=False)
           subprocess.run(["python", "price-control/build_full_history.py"], check=True)
           rebuilt = json.loads(path.read_text(encoding="utf-8"))
