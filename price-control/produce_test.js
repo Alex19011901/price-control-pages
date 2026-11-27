@@ -22,6 +22,13 @@ assert.equal(C.weightPerUnit('Томаты черри (красные) 250 гр.
 assert.equal(C.weightPerUnit('Руккола 125,шт (00-00000087)','шт'),.125);
 assert.equal(C.weightPerUnit('Руккола 125,шт (12345)','шт'),null);
 assert.equal(C.weightPerUnit('Голубика 125г/шт,кг (00-00000360)','кг'),1);
+assert.equal(C.moscowTodayIso(new Date('2026-11-26T21:15:00Z')),'2026-11-27');
+assert.equal(C.recentDateClass('2026-11-27','2026-11-27'),'today');
+assert.equal(C.recentDateClass('2026-11-26','2026-11-27'),'yesterday');
+assert.equal(C.recentDateClass('2026-11-25','2026-11-27'),'before-yesterday');
+assert.equal(C.recentDateClass('2026-11-24','2026-11-27'),'');
+assert.equal(C.recentDateClass('2026-11-28','2026-11-27'),'');
+assert.equal(C.recentDateClass('','2026-11-27'),'');
 const h=JSON.parse(fs.readFileSync(path.join(root,'purchase_history.json'),'utf8'));
 const f=JSON.parse(fs.readFileSync(path.join(root,'full.json'),'utf8'));
 const rawPath=path.join(root,'produce_receipts.json');
@@ -45,4 +52,15 @@ const t=v.products.find(p=>p.label==='Томаты черри красные');
 assert.ok(t.deliveries.some(r=>r.date==='19.11.2026'&&r.supplier==='Айш Гарден'&&r.price===635&&r.kg===1));
 assert.ok(v.products.find(p=>p.label==='Томаты на ветке').deliveries.some(r=>r.date==='19.11.2026'&&r.price===190.5));
 for(const p of v.products)for(const r of p.deliveries)assert.ok(C.classify(r.name),r.name);
+// Verify recent audited invoices are actually rendered in the merged data.
+if(f.periods.some(p=>p.key==='2026-11-27')){
+ const recent=v.products.flatMap(p=>p.deliveries.filter(r=>r.supplier==='Айш Гарден'&&((r.dateIso==='2026-11-27'&&/3443$/.test(r.invoice))||(r.dateIso==='2026-11-26'&&/3432$/.test(r.invoice)))).map(r=>({label:p.label,date:r.dateIso,price:r.price})));
+ assert.equal(recent.filter(r=>r.date==='2026-11-27').length,17);
+ assert.equal(recent.filter(r=>r.date==='2026-11-26').length,4);
+ assert.ok(recent.some(r=>r.label==='Мандарины'&&r.price===254));
+ assert.ok(recent.some(r=>r.label==='Петрушка кудрявая'&&r.price===900));
+ assert.ok(recent.some(r=>r.label==='Томаты на ветке'&&r.price===228.6));
+ assert.ok(recent.some(r=>r.label==='Вешенки'&&r.price===675));
+ console.log('PRODUCE_RECENT_VERIFIED',JSON.stringify(recent));
+}
 console.log('PRODUCE_HISTORY_OK',JSON.stringify(v.stats));

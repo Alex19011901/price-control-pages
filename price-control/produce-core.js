@@ -167,6 +167,16 @@
   return n;
  }
  function invoiceKey(d){return [iso(d.date),supplierKey(d.supplier),invoiceNumber(d.invoice,d.supplier)].join('\0')}
+ function moscowTodayIso(now=new Date()){
+  const parts=new Intl.DateTimeFormat('en-US',{timeZone:'Europe/Moscow',year:'numeric',month:'2-digit',day:'2-digit'}).formatToParts(now);
+  const get=kind=>parts.find(p=>p.type===kind)?.value;
+  return get('year')+'-'+get('month')+'-'+get('day');
+ }
+ function recentDateClass(iso,today){
+  if(!/^\d{4}-\d{2}-\d{2}$/.test(String(iso||'')))return '';
+  const dayDiff=Math.round((Date.parse(today+'T00:00:00Z')-Date.parse(iso+'T00:00:00Z'))/86400000);
+  return dayDiff===0?'today':dayDiff===1?'yesterday':dayDiff===2?'before-yesterday':'';
+ }
  function buildHistory(history,full,scanned){
   const docs=new Map();
   function put(d,priority){
@@ -220,5 +230,5 @@
   dates.sort();stats.from=dates[0]||null;stats.to=dates.at(-1)||null;stats.suppliers=suppliers.size;stats.products=result.length;
   return {groups:GROUPS,products:result,suppliers:[...suppliers].sort((a,b)=>a.localeCompare(b,'ru')),stats};
  }
- return {GROUPS,PRODUCTS:rules,classify,weightPerUnit,buildHistory,norm,iso,round2};
+ return {GROUPS,PRODUCTS:rules,classify,weightPerUnit,buildHistory,norm,iso,round2,moscowTodayIso,recentDateClass};
 });
